@@ -41,7 +41,7 @@
                              @endif
                              </div>
                               @if($myquote->status == 3)
-                             <a  href="{{route('quotes.download',$myquote->id)}}" class="btn btn-primary btn-sm btn-block">Download</a>
+                             <a target="_blank" href="{{route('quotes.download',$myquote->id)}}" class="btn btn-primary btn-sm btn-block">Download</a>
                              @endif
 
                             </div>
