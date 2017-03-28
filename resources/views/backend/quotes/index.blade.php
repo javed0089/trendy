@@ -54,7 +54,7 @@
 										<td>{{$quote->User->first_name}} {{$quote->User->last_name}}</td>
 										<td>{{ date('M j, Y H:i',strtotime($quote->created_at))}}</td>
 										<td>{{isset($quote->AssignedTo)?$quote->AssignedTo->first_name:''}} {{isset($quote->AssignedTo)?$quote->AssignedTo->last_name:''}}</td>
-										<td>{{$quote->Status->status}}</td>
+										<td>{{$quote->Status->status_en}}</td>
 										<td>
 											<a href="{{ route('quote-requests.show',$quote->id) }}" class="btn btn-block btn-default">View</a>
 										</td>

@@ -2,43 +2,19 @@
 
 namespace App\Http\Controllers\Backend\User;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Sentinel;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Sentinel;
 
 class UserController extends Controller
 {
     
     public function index()
     {
-        $superAdminRole=Sentinel::findRoleBySlug(['super-admin']);
-        $adminRole=Sentinel::findRoleBySlug(['admin']);
-        $supervisorRole=Sentinel::findRoleBySlug(['supervisor']);
-        $salesRepRole=Sentinel::findRoleBySlug(['sales-rep']);
-        
-        $allUsers=new Collection;
-        if($superAdminRole){
-            $superAdminUsers = $superAdminRole->users()->with('roles')->get();
-            $allUsers=$allUsers->merge($superAdminUsers);    
-        }
-
-        if($adminRole){
-            $adminUsers = $adminRole->users()->with('roles')->get();
-            $allUsers=$allUsers->merge($adminUsers);
-        }
-        
-        if($supervisorRole){
-            $supervisorUsers = $supervisorRole->users()->with('roles')->get();
-            $allUsers=$allUsers->merge($supervisorUsers);
-        }
-
-        if($salesRepRole){
-            $salesRepUsers = $salesRepRole->users()->with('roles')->get();
-            $allUsers=$allUsers->merge($salesRepUsers);
-        }
-        
-        return view('backend.authentication.users')->with('allUsers',$allUsers);
+        $backendUsers = User::where('backend_user', '=' , '1')->get();
+        return view('backend.authentication.users')->with('backendUsers',$backendUsers);
     }
 
     public function edit($id){

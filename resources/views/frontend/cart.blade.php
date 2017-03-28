@@ -45,8 +45,9 @@
  																<h4>Quantity</h4>
  																<input style="width: 60px" type="number" name="quantity" required="" min="1" value="{{ $item['quantity']}}">
  																<select name="unit">
- 																	<option>tonne(s)</option>
- 																	<option>kg(s)</option>
+ 																@foreach($units as $unit)
+ 																	<option {{$item['unit']==$unit->name_en ?'Selected':''}} value="{{$unit->name_en}}">{{$unit->name_en}}</option>
+ 																@endforeach
  																</select>
  															</div>
  															<div class="col-md-4">
@@ -57,18 +58,18 @@
  															<div class="col-md-4">
  																<h4>Delivery Terms</h4>
  																<select class="form-control" name="delivery_terms">
- 																	<option {{$item['delivery_terms']=="ExWorks"?'Selected':''}} value="ExWorks">ExWorks</option>
- 																	<option {{$item['delivery_terms']=="FOB"?'Selected':''}} value="FOB">FOB</option>
- 																	<option {{$item['delivery_terms']=="CNF"?'Selected':''}} value="CNF">CNF</option>
- 																	<option {{$item['delivery_terms']=="CIF"?'Selected':''}} value="CIF">CIF</option>
+ 																@foreach($delivery_terms as $delivery_term)
+ 																	<option {{$item['delivery_terms']==$delivery_term->name_en ?'Selected':''}} value="{{$delivery_term->name_en}}">{{$delivery_term->name_en}}</option>
+ 																@endforeach	
  																</select>
  															</div>
  															<div class="col-md-4">
  																<h4>Payment Method</h4>
  																<select class="form-control" name="payment_method">
- 																	<option {{$item['payment_method']=="LC"?'Selected':''}} value="LC">LC</option>
- 																	<option {{$item['payment_method']=="TT"?'Selected':''}} value="TT">TT</option>
- 																	<option {{$item['payment_method']=="CAD"?'Selected':''}} value="CAD">CAD</option>
+ 																@foreach($payment_methods as $payment_method)
+ 																	<option {{$item['payment_method']==$payment_method->name_en ?'Selected':''}} value="{{$payment_method->name_en}}">{{$payment_method->name_en}}</option>
+ 																	
+ 																@endforeach	
  																</select>
  															</div>
  															<div class="col-md-4">

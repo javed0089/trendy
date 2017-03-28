@@ -18,19 +18,20 @@
         <li class="header">MAIN NAVIGATION </li>
         <li><a href="{{ url('backoffice/') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
        
- 
-        <li class="treeview {{ Request::is('backoffice/user/*')?'active':'' }}">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>User Management</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li {{ Request::is('backoffice/user/users')?"class=active":'' }}{{ Request::is('backoffice/user/*')?"class=active":'' }}><a href="{{ route('users.index') }}"><i class="fa fa-circle-o"></i>Users</a></li>
-            <li {{ Request::is('backoffice/user/register')?"class=active":'' }}><a href="{{ url('backoffice/user/register') }}"><i class="fa fa-circle-o"></i>Create User</a></li>
-          </ul>
-        </li>
+        @if(User::isSuperAdmin())
+          <li class="treeview {{ Request::is('backoffice/user/*')?'active':'' }}">
+            <a href="#">
+              <i class="fa fa-user"></i> <span>User Management</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li {{ Request::is('backoffice/user/users')?"class=active":'' }}{{ Request::is('backoffice/user/*')?"class=active":'' }}><a href="{{ route('users.index') }}"><i class="fa fa-circle-o"></i>Users</a></li>
+              <li {{ Request::is('backoffice/user/register')?"class=active":'' }}><a href="{{ url('backoffice/user/register') }}"><i class="fa fa-circle-o"></i>Create User</a></li>
+            </ul>
+          </li>
+
 
          <li class="treeview {{ Request::is('backoffice/catalog/*')?'active':'' }}">
           <a href="#">
@@ -45,6 +46,7 @@
             <li {{ Request::is('backoffice/catalog/brands/*')?"class=active":'' }}{{ Request::is('backoffice/catalog/brands')?"class=active":'' }}><a href="{{route('brands.index')}}"><i class="fa fa-circle-o"></i>Brands</a></li>
           </ul>
         </li>
+       
 
         <li class="treeview {{ Request::is('backoffice/module/*')?'active':'' }}">
           <a href="#">
@@ -376,7 +378,7 @@
 
         </li>
 
-
+ 
          <li class="treeview {{ Request::is('backoffice/blog/*')?'active':'' }}">
           <a href="#">
             <i class="fa fa-newspaper-o"></i> <span>Blog</span>
@@ -406,7 +408,7 @@
            
           </ul>
         </li>
-
+@endif
         <li class="treeview {{ Request::is('backoffice/quotes/*')?'active':'' }}">
           <a href="#">
             <i class="fa fa-newspaper-o"></i> <span>Quote</span>
@@ -416,6 +418,20 @@
           </a>
           <ul class="treeview-menu">
             <li {{ Request::is('backoffice/quotes/quote-requests/*')?"class=active":'' }}{{ Request::is('backoffice/quotes/quote-requests')?"class=active":'' }}><a href="{{ route('quote-requests.index') }}"><i class="fa fa-circle-o"></i>Quote Requests</a></li>
+           
+           
+           
+          </ul>
+        </li>
+        <li class="treeview {{ Request::is('backoffice/orders/*')?'active':'' }}">
+          <a href="#">
+            <i class="fa fa-newspaper-o"></i> <span>Orders</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li {{ Request::is('backoffice/orders/*')?"class=active":'' }}{{ Request::is('backoffice/orders')?"class=active":'' }}><a href="{{ route('orders.index') }}"><i class="fa fa-circle-o"></i>Orders</a></li>
            
            
            

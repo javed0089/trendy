@@ -126,7 +126,7 @@
 
 										<div class="form-group">
 											<label for="name_ar">Name</label>
-											<input type="text" class="form-control" name="name_ar" id="name_ar" placeholder="Name (Ar)" value="{{$category->name_ar}}">
+											<input type="text" class="form-control" name="name_ar" id="name_ar" placeholder="Name (Ar)" required value="{{$category->name_ar}}">
 										</div>
 
 

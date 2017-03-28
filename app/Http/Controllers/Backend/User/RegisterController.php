@@ -31,8 +31,10 @@ class RegisterController extends Controller
         ]);
 
     	$reqUser=$request->all();
-        //dd($reqUser['role']);
-    	$user=Sentinel::registerAndActivate($reqUser);
+        $reqUser=array_add($reqUser,'backend_user','1');
+        $reqUser=array_add($reqUser,'ip_address',\Request::ip());
+        
+        $user=Sentinel::registerAndActivate($reqUser);
 
         $userRole=$reqUser['role'];
         $role = Sentinel::findRoleBySlug($userRole);

@@ -5346,6 +5346,22 @@ a.btn.btn-xs {
     background: #ffffff;
     padding: 15px;
 }
+
+.panel-div .content .success{
+    padding : 8px;
+    font-weight: bold;
+    background: #dff0d8;
+    color: #3c763d;
+}
+
+.panel-div .content .danger{
+    padding : 8px;
+    font-weight: bold;
+    background: #f2dede;
+    color: #b84442;
+    
+}
+
 .panel-div table thead{
     background: #f4f5f8;
     color: #6e727b;
@@ -5354,4 +5370,20 @@ a.btn.btn-xs {
 .not-active {
  pointer-events: none;
  cursor: default;
+}
+
+.comments-single i {
+    position: absolute;
+    left: -39px;
+    border: 1px solid #bbd4e6;
+    padding: 4px;
+    border-radius: 50%;
+    background: #fff;
+    color: #034694;
+    font-size: 60px;
+
+}
+
+.inline {
+    display:inline-block;
 }

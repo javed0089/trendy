@@ -18,7 +18,7 @@ class rolesTableSeeder extends Seeder
     		['id'=>'1','slug'=>'super-admin','name'=>'Super Admin'],
     		['id'=>'2','slug'=>'admin','name'=>'Admin'],
     		['id'=>'3','slug'=>'supervisor','name'=>'Supervisor'],
-    		['id'=>'4','slug'=>'sales-rep','name'=>'Sales Representative'],
+    		['id'=>'4','slug'=>'sales-executive','name'=>'Sales Executive'],
     		['id'=>'5','slug'=>'subscriber','name'=>'Subscriber'],
     		
     		

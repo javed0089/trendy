@@ -21,7 +21,7 @@
             <ul class="dropdown-menu">
               <li><a href="{{route('frontend.myaccount')}}">My Account</a></li>
               <li><a href="{{route('quotes.index')}}">My Quote Requests</a></li>
-              <li><a href="#">My Orders</a></li>
+              <li><a href="{{route('myorders.index')}}">My Orders</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#" onclick="document.getElementById('logout-form').submit()" >{{__('Logout')}}</a>
               </li>

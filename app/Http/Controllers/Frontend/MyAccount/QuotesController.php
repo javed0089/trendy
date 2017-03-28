@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Frontend\MyAccount;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Sentinel;
-use App\User;
+use App\Models\Location\Location;
 use App\Models\Quotation\Quote;
+use App\Models\Quotation\QuoteComment;
+use App\User;
+use Illuminate\Http\Request;
+use PDF;
+use Sentinel;
 
 class QuotesController extends Controller
 {
@@ -51,8 +54,9 @@ class QuotesController extends Controller
      */
     public function show($id)
     {
-        $myquote = Quote::find($id);
-       // dd($myquote->QuoteDetails()->get());
+        $myquote=[];
+        $user=User::getUser();
+        $myquote=$user->Quotes()->find($id);
         return view('frontend.account.quote-detail')->with('myquote',$myquote);
     }
 
@@ -64,7 +68,9 @@ class QuotesController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+      
+       
     }
 
     /**
@@ -76,7 +82,20 @@ class QuotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $submitReq = $request->submit;
+
+        if($submitReq =="addComment"){
+            $quoteComment = new QuoteComment;
+            $quoteComment->comment_type = '1';
+            $quoteComment->quote_id = $id;
+            $quoteComment->user_id = User::getId();
+            $quoteComment->comment = $request->comment;
+
+            $quoteComment->save();
+
+            return redirect()->route('quotes.show',$id)->with('success','Comment added successfully!');
+        }
     }
 
     /**
@@ -89,4 +108,26 @@ class QuotesController extends Controller
     {
         //
     }
+
+    public function downloadPdf($id)
+    {
+        $myquote=[];
+        $user=User::getUser();
+        $myquote=$user->Quotes()->find($id);
+        $quoteProducts = $myquote->QuoteDetails->where('status','=','3');
+       $location = Location::first();
+
+        
+        $data['myquote'] = $myquote;
+        $data['quoteProducts'] = $quoteProducts;
+        $data['location'] = $location;
+
+        $totalSum = $myquote->QuoteDetails()->where('status','=','3')->selectRaw('SUM(price * quantity) as total')->pluck('total');
+        $data['total'] = $totalSum[0];
+
+
+        $pdf = PDF::loadView('frontend.account.pdf',$data);
+        return $pdf->stream('Gap-Quotation-'.$id.'.pdf');
+    }
+
 }

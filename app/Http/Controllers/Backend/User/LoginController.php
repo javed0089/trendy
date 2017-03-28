@@ -21,7 +21,7 @@ class LoginController extends Controller
             $rememberMe=isset($request->remember);
             $user=Sentinel::authenticate($request->all(),$rememberMe?true:false);
             if($user)
-                if(!($user->inRole('super-admin')) && !($user->inRole('admin')))
+                if($user->inRole('subscriber'))
                     return redirect()->back()->with(['error' => 'Restriced for admins only']);
             
         	if(Sentinel::check()){

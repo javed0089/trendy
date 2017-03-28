@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Backend\Department;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Department\Department;
+use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {

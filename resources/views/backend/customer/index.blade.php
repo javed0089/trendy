@@ -39,6 +39,8 @@
 										
 										<th>Customer</th>
 										<th>Email</th>
+										<th>Address</th>
+										<th>IP Address</th>
 										<th>Activation Status</th>
 										<th>Created</th>
 										
@@ -54,11 +56,15 @@
 										<td>{{$customer->email}}
 
 										</td>
+										<td>{{$customer->address}}<br>
+											{{$customer->city}} {{$customer->country? ','.$customer->country : ''}}
+										</td>
+										<td>{{$customer->ip_address}}	</td>
 										<td>
 											{!!Activation::completed($customer)?'<span class="label label-success">Activated</span>':'<span class="label label-danger">Not-Activated</span>'!!}
 										</td>
 										<td>{{ date('M j, Y H:i',strtotime($customer->created_at))}}</td>
-									
+										<td><a href="{{ route('customers.show',$customer->id) }}" class="btn btn-block btn-default">View</a></td>
 									</tr>
 									@endforeach
 

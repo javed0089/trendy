@@ -18,7 +18,7 @@ class BackendMiddleware
     {
 
         if (Sentinel::check()){
-            if(Sentinel::getUser()->inRole('super-admin') || Sentinel::getUser()->inRole('admin'))
+            if(!Sentinel::getUser()->inRole('subscriber'))
                 return $next($request);
             else
                 return redirect('backoffice/login')->with(['error' => 'Restriced for admins only']);;    

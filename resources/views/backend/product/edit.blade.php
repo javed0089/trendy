@@ -108,7 +108,7 @@
 									<div class="box-body">
 										<div class="form-group">
 											<label for="name_ar">Name</label>
-											<input type="text" class="form-control" name="name_ar" id="name_ar" placeholder="Name (Ar)" value="{{$product->name_ar}}" >
+											<input type="text" class="form-control" name="name_ar" id="name_ar" placeholder="Name (Ar)" required value="{{$product->name_ar}}" >
 										</div>
 										<div class="form-group">
 											<label for="desc_ar">Description</label>

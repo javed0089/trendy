@@ -19,8 +19,6 @@ class CustomerController extends Controller
     {
         $customerRole=Sentinel::findRoleBySlug(['subscriber']);
         $customers = $customerRole->users()->with('roles')->get();
-       // $act=Activation::completed($customers->first());
-        //dd( $act);
         return view('backend.customer.index')->with('customers',$customers);
     }
 
@@ -53,7 +51,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = User::find($id);
+        
+        return view('backend.customer.show')->with('customer',$customer);
     }
 
     /**

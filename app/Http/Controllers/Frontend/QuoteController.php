@@ -7,23 +7,29 @@ use App\Models\Product\Product;
 use App\Models\Quotation\Cart;
 use App\Models\Quotation\Quote;
 use App\Models\Quotation\QuoteDetail;
+use App\Models\Quotation\QuoteOption;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Sentinel;
 use Session;
-use App\User;
 class QuoteController extends Controller
 {
     public function index(Request $request)
     {
         //$this->confirmCart('1');
+
+        $delivery_terms =QuoteOption::where('option_type','=','1')->get();
+        $payment_methods =QuoteOption::where('option_type','=','2')->get();
+        $units =QuoteOption::where('option_type','=','3')->get();
+       
         if(Session::has('cart')){
             $cart = Session::has('cart')? Session::get('cart') : null;
-    		return view('frontend.cart')->with('cart',$cart->items)->with('step',$cart->step);
+    		return view('frontend.cart')->with('cart',$cart->items)->with('delivery_terms',$delivery_terms)->with('payment_methods',$payment_methods)->with('units',$units)->with('step',$cart->step);
         }
         else{
             $cart =[];
-            return view('frontend.cart')->with('cart',$cart)->with('step','1');
+            return view('frontend.cart')->with('cart',$cart)->with('delivery_terms',$delivery_terms)->with('payment_methods',$payment_methods)->with('units',$units)->with('step','1');
         }
 
     }

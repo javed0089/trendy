@@ -3,10 +3,10 @@
 
 <head>
 
-   <!-- header Section -->
-   @include('partials._headers')
-   @yield('styles')
-   <!-- header Section -->
+ <!-- header Section -->
+ @include('partials._headers')
+ @yield('styles')
+ <!-- header Section -->
 
 </head>
 
@@ -44,10 +44,23 @@
 
     <!-- Scripts Section -->
     @include('partials._scripts')
+    <script type="text/javascript">
+        
+        (function(){
+         
+            window.setTimeout(function() {
+                $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                    $(this).remove(); 
+                });
+            }, 4000);
+            
+        }());
+    </script>
+
     @yield('scripts')
     <!-- Scripts Section -->
 
-   
+    
 </body>
 
 </html>

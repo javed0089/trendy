@@ -87,20 +87,22 @@
 		Route::get('/result', function(){
 			return view('frontend.message');
 		})->name('message');
+
+
+		/*---Customer Account Middleware routes--*/
 		
 		Route::group(['middleware' =>'customer'], function(){
-		
-		Route::get('/my-account', 'Frontend\MyAccountController@index')->name('frontend.myaccount');
-			
-		Route::resource('myaccount/quotes','Frontend\MyAccount\QuotesController'
-				);
+			Route::get('/my-account', 'Frontend\MyAccountController@index')->name('frontend.myaccount');
+			Route::resource('myaccount/quotes','Frontend\MyAccount\QuotesController');
+			Route::get('myaccount/quotes/download/{id}','Frontend\MyAccount\QuotesController@downloadPdf')->name('quotes.download');
+			Route::resource('myaccount/myorders','Frontend\MyAccount\OrderController');
+			Route::post('myaccount/makeOrder/{id}','Frontend\MyAccount\OrderController@createOrder')->name('myorders.makeOrder');
+			Route::get('myaccount/myorders/orderfile/{fileid}/{file}','Frontend\MyAccount\OrderController@getOrderFile')->name('myorders.orderfile');
 			
 			
 		});
 
-		
-
-		});
+});
 
 
 
@@ -123,69 +125,83 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 	///////*****Dashboard********//////
 	Route::get('/','Backend\DashboardController@index');
 
-	///////*****User Management********//////
-	Route::get('user/register', 'Backend\User\RegisterController@index');
-	Route::post('user/register', 'Backend\User\RegisterController@postRegister');
-	Route::get('user/users', 'Backend\User\UserController@index')->name('users.index');
-	Route::get('user/edit/{id}', 'Backend\User\UserController@edit')->name('users.edit');
-	Route::post('user/update/{id}', 'Backend\User\UserController@update')->name('users.update');
+	Route::group(['middleware' =>'super-admin'], function(){
+		///////*****User Management********//////
+		Route::get('user/register', 'Backend\User\RegisterController@index');
+		Route::post('user/register', 'Backend\User\RegisterController@postRegister');
+		Route::get('user/users', 'Backend\User\UserController@index')->name('users.index');
+		Route::get('user/edit/{id}', 'Backend\User\UserController@edit')->name('users.edit');
+		Route::post('user/update/{id}', 'Backend\User\UserController@update')->name('users.update');
+
+
+
+			///////*****Pages********//////
+		Route::resource('pages','Backend\Page\PageController');
+		Route::get('pages/create/{id}', 'Backend\Page\PageController@create')->name('pages.create');
+		Route::post('pages/store/{id}', 'Backend\Page\PageController@store')->name('pages.store');
+		Route::post('pages/status/{id}', 'Backend\Page\PageController@status')->name('pages.status');
+
+
+
+		///////*****Blog********//////
+		Route::resource('blog/posts','Backend\Blog\PostController');
+		Route::resource('blog/blogcategory','Backend\Blog\BlogCategoryController');
+		Route::resource('blog/tags','Backend\Blog\TagController');
+
+		///////*****Product********//////
+		Route::resource('catalog/products','Backend\Product\ProductController');
+		Route::post('products/discontinue/{id}','Backend\Product\ProductController@discontinue')->name('products.discontinue');
+		Route::post('products/featured/{id}','Backend\Product\ProductController@featured')->name('products.featured');
+		
+		Route::resource('catalog/brands','Backend\Product\BrandController');
+		Route::resource('catalog/categories','Backend\Product\CategoryController');
+		Route::resource('files','Backend\Product\FileController', ['only' => ['store','destroy']]);
+		Route::resource('images','Backend\Product\ImageController', ['only' => ['store','destroy']]);
 
 	
-	///////*****Pages********//////
-	Route::resource('pages','Backend\Page\PageController');
-	Route::get('pages/create/{id}', 'Backend\Page\PageController@create')->name('pages.create');
-	Route::post('pages/store/{id}', 'Backend\Page\PageController@store')->name('pages.store');
-	Route::post('pages/status/{id}', 'Backend\Page\PageController@status')->name('pages.status');
+		///////*****Department********//////
+		Route::resource('module/departments','Backend\Department\DepartmentController', ['except' => ['show','create']]);
 
+		///////*****Jobs********//////
+		Route::resource('module/jobs','Backend\Careers\JobController');
 
+		///////*****Testimonials********//////
+		Route::resource('module/testimonials','Backend\Testimonial\TestimonialController');
 
-	///////*****Blog********//////
-	Route::resource('blog/posts','Backend\Blog\PostController');
-	Route::resource('blog/blogcategory','Backend\Blog\BlogCategoryController');
-	Route::resource('blog/tags','Backend\Blog\TagController');
+		///////*****Team Members********//////
+		Route::resource('module/members','Backend\Team\MemberController');
 
-	///////*****Product********//////
-	Route::resource('catalog/products','Backend\Product\ProductController');
-	Route::post('products/discontinue/{id}','Backend\Product\ProductController@discontinue')->name('products.discontinue');
-	Route::post('products/featured/{id}','Backend\Product\ProductController@featured')->name('products.featured');
+		///////*****Blocks********//////
+		Route::resource('pages/blocks','Backend\Block\BlockController');
+
+		///////*****Customers********//////
+		Route::resource('customers/customers','Backend\Customer\CustomerController');
+
+		///////*****Services********//////
+		Route::resource('module/services','Backend\Services\ServiceController');
+
+		///////*****News********//////
+		Route::resource('module/news','Backend\News\NewsController');
+
+		///////*****Photos********//////
+		Route::resource('photos','Backend\News\PhotoController', ['only' => ['store','destroy']]);
+
+		///////*****Contact********//////
+		Route::resource('module/locations','Backend\Location\LocationController');
+		
+	});
+
 	
-	Route::resource('catalog/brands','Backend\Product\BrandController');
-	Route::resource('catalog/categories','Backend\Product\CategoryController');
-	Route::resource('files','Backend\Product\FileController', ['only' => ['store','destroy']]);
-	Route::resource('images','Backend\Product\ImageController', ['only' => ['store','destroy']]);
 
 	
-	///////*****Department********//////
-	Route::resource('module/departments','Backend\Department\DepartmentController', ['except' => ['show','create']]);
+	
 
-	///////*****Jobs********//////
-	Route::resource('module/jobs','Backend\Careers\JobController');
-
-	///////*****Testimonials********//////
-	Route::resource('module/testimonials','Backend\Testimonial\TestimonialController');
-
-	///////*****Team Members********//////
-	Route::resource('module/members','Backend\Team\MemberController');
-
-	///////*****Blocks********//////
-	Route::resource('pages/blocks','Backend\Block\BlockController');
-
-	///////*****Customers********//////
-	Route::resource('customers/customers','Backend\Customer\CustomerController');
-
-	///////*****Services********//////
-	Route::resource('module/services','Backend\Services\ServiceController');
-
-	///////*****News********//////
-	Route::resource('module/news','Backend\News\NewsController');
-
-	///////*****Photos********//////
-	Route::resource('photos','Backend\News\PhotoController', ['only' => ['store','destroy']]);
-
-	///////*****Contact********//////
-	Route::resource('module/locations','Backend\Location\LocationController');
-
-	///////*****Contact********//////
+	///////*****Quotes********//////
 	Route::resource('quotes/quote-requests','Backend\Quotes\QuoteController');
+
+	///////*****Orders********//////
+	Route::resource('orders','Backend\Order\OrderController');
+	Route::get('orders/orderfile/{fileid}/{file}','Backend\Order\OrderController@getOrderFile')->name('orders.orderfile');
+
 });
 

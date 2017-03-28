@@ -30,4 +30,15 @@ class Quote extends Model
         return $this->belongsTo('App\Models\Status\Status','status','id');
     }
 
+    public function QuoteComments()
+    {
+        return $this->hasMany('App\Models\Quotation\QuoteComment','quote_id','id');
+    }
+
+    public function Order()
+    {
+        return $this->hasOne('App\Models\Order\Order','quote_id','id');
+    }
+
+
 }

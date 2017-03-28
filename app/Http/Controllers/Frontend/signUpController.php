@@ -34,6 +34,7 @@ class signUpController extends Controller
         ]);
 
     	$reqUser=$request->all();
+        $reqUser=array_add($reqUser,'ip_address',\Request::ip());
     	$user=Sentinel::register($reqUser);
 
         $activation = Activation::create($user);

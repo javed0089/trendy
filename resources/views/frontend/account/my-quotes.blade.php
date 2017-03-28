@@ -34,7 +34,7 @@
               <td>{{$quote->id}}</td>
               <td>{{date('M j, Y H:i',strtotime($quote->created_at))}}</td>
               <td>{{isset($quote->quote_validity)?date('M j, Y H:i',strtotime($quote->quote_validity)):''}}</td>
-              <td>{{$quote->Status->status}}</td>
+              <td>{{$quote->Status->status_en}}</td>
               <td><a href="{{route('quotes.show',$quote->id)}}" class="btn btn-xs btn-default">View</a></td>
             </tr>
             @endforeach
