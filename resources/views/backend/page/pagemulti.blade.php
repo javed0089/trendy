@@ -76,7 +76,7 @@
 								@endif
 
 								@if($pageContent->has_content)
-									<td>{!!str_limit($sections->content_en,40)!!}</td>
+									<td>{{str_limit($sections->content_en,40)}}</td>
 								@endif
 								
 								
