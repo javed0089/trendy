@@ -12,7 +12,7 @@ class Quote extends Model
 
     public function QuoteDetails()
     {
-    	return $this->hasMany('App\Models\Quotation\Quotedetail','quote_id','id');
+    	return $this->hasMany('App\Models\Quotation\QuoteDetail','quote_id','id');
     }
 
     public function User()
