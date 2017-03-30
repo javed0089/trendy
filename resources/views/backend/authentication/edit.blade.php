@@ -20,7 +20,6 @@
 				<!-- Custom Tabs -->
 				@if (count($errors) > 0)
 				<div class="alert alert-danger">
-					<strong>Whoops!</strong> There were some problems with your input.<br><br>
 					<ul>
 						@foreach ($errors->all() as $error)
 						<li>{{ $error }}</li>
@@ -34,7 +33,7 @@
 					<strong>{{ $message }}</strong>
 				</div>
 				@endif
-				<form role="form"  method="Post" action="{{ route('users.update',$user->id) }}">
+				<form role="form"  method="Post" action="{{ route('users.update',$user->id) }}" data-parsley-validate>
 								{{csrf_field()}}
 					<div class="nav-tabs-custom">
 						<ul class="nav nav-tabs">

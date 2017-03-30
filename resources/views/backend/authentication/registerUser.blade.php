@@ -17,7 +17,6 @@
       <p class="login-box-msg">Create a New User</p>
       @if (count($errors) > 0)
         <div class="alert alert-danger">
-          <strong>Whoops!</strong> There were some problems with your input.<br><br>
           <ul>
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -25,7 +24,7 @@
           </ul>
         </div>
         @endif
-      <form action="register" method="post">
+      <form action="register" method="post" data-parsley-validate>
         {{csrf_field()}}
         <div class="form-group has-feedback">
         <input type="text" name="first_name" class="form-control" placeholder="First Name" required value="{{old('first_name')}}">
@@ -41,12 +40,12 @@
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
-          <input type="password" name="password" class="form-control" placeholder="Password" required>
+          <input type="password" name="password" id="password" class="form-control" minlength="6" placeholder="Password" required>
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
-          <input type="password" name="confirmPassword" class="form-control" placeholder="Retype password" required>
-          <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+          <input type="password" name="confirmPassword" class="form-control" minlength="6" placeholder="Retype password" required data-parsley-equalto="#password">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
           <div class="form-group has-feedback">
            <select name="role" class="form-control" required>

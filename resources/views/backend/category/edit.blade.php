@@ -34,7 +34,7 @@
 					<strong>{{ $message }}</strong>
 				</div>
 				@endif
-				<form role="form"  method="Post" enctype="multipart/form-data" action="{{ route('categories.update',$category->id) }}">
+				<form role="form"  method="Post" enctype="multipart/form-data" action="{{ route('categories.update',$category->id) }}" data-parsley-validate>
 								{{csrf_field()}}
 								{{ method_field('PATCH') }}
 					<div class="nav-tabs-custom">

@@ -34,7 +34,7 @@
 					<strong>{{ $message }}</strong>
 				</div>
 				@endif
-				<form role="form"  method="Post" enctype="multipart/form-data" action="{{ route('categories.store') }}">
+				<form role="form"  method="Post" enctype="multipart/form-data" action="{{ route('categories.store') }}" data-parsley-validate>
 								{{csrf_field()}}
 					<div class="nav-tabs-custom">
 						<ul class="nav nav-tabs">
@@ -131,14 +131,19 @@
 	</section>
 
 	@endsection
-
+@section('scripts')
 	@section('scripts')
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-	<script>tinymce.init({
+	<script>
+
+	tinymce.init({
 		selector:'textarea',
 		plugins: 'code preview lists link image',
 		menubar:false,
 		toolbar: 'undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code preview',
 
 	});
+
 	</script>
+
+	@endsection

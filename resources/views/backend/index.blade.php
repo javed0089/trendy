@@ -5,7 +5,10 @@
 @section('styles')
 <!-- Morris chart -->
   <link rel="stylesheet" href="{{ asset('backend/plugins/morris/morris.css')}}">
- 
+    <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{{ asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="{{ asset('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">
 @endsection
 
 @section('content')
@@ -526,4 +529,15 @@
 
 <!-- backendLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('backend/dist/js/pages/dashboard.js')}}"></script>
+<!-- Sparkline -->
+<script src="{{ asset('backend/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+
+
+<!-- jvectormap -->
+<script src="{{ asset('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
+<script src="{{ asset('backend/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{{ asset('backend/plugins/knob/jquery.knob.js')}}"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{{ asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 @endsection

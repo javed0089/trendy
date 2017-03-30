@@ -135,12 +135,14 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 
 
+
 			///////*****Pages********//////
 		Route::resource('pages','Backend\Page\PageController');
 		Route::get('pages/create/{id}', 'Backend\Page\PageController@create')->name('pages.create');
 		Route::post('pages/store/{id}', 'Backend\Page\PageController@store')->name('pages.store');
 		Route::post('pages/status/{id}', 'Backend\Page\PageController@status')->name('pages.status');
-
+		/*Route::post('pages/delete/{id}', 'Backend\Page\PageController@destroy')->name('pages.delete');
+*/
 
 
 		///////*****Blog********//////

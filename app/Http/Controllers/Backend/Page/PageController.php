@@ -189,7 +189,9 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pageContent = PageSection::find($id);
+        $pageContent->delete();
+        return back()->with('success','Record deleted successfully!');
     }
 
     public function status($id)

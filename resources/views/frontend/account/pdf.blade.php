@@ -248,7 +248,8 @@ table tfoot tr td:first-child {
     <div id="client" class="col-xs-4">
       <div class="to">TO:</div>
       <h2 class="name">{{$myquote->User->first_name}} {{$myquote->User->last_name}}</h2>
-      <div class="address">796 Silver Harbour, TX 79273, US</div>
+      <div class="address">{{$myquote->User->address}}</div>
+      <div class="address">{{$myquote->User->city}},{{$myquote->User->country}}</div>
       <div class="email"><a href="mailto:john@example.com">{{$myquote->User->email}}</a></div>
     </div>
     <div class="col-xs-4 text-center">

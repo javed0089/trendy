@@ -39,6 +39,7 @@
         <link href="{{asset('css/style.css')}}" rel="stylesheet">
     @endif
     <link href="{{asset('css/build.css')}}" rel="stylesheet">
+   
     <script type="text/javascript">
         function init() {
             var hasActive = $('#menu-item-1505').children('.sub-menu')
