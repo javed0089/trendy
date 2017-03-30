@@ -17,7 +17,7 @@ class ActivationController extends Controller
     	$sentinelUser = Sentinel::findById($user->id);
 
     	if(Activation::complete($sentinelUser,$activationCode)){
-    		return redirect(route('frontend.login'));
+    		return redirect(route('frontend.login'))->with('success','Your account is activated!');
     	}
     	else{
             return redirect('/');

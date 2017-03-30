@@ -12,9 +12,7 @@ class RegisterController extends Controller
      public function index()
     {
 
-        $roles = Sentinel::getRoleRepository()->get();
-        //dd($roles);
-
+        $roles = Sentinel::getRoleRepository()->where('slug','!=','subscriber')->get();
     	return view('backend.authentication.registerUser')->with('allroles',$roles);
     }
 

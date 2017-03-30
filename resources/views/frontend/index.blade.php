@@ -147,7 +147,7 @@
                             <h2 class="company-title color-title"> {{$CompBlock?$CompBlock->{lang_col('title')}:'No data'}} </h2>
                             <h4 class="company-subtitle subtitle">{{$CompBlock?$CompBlock->{lang_col('heading1')}:'No data'}} </h4>
                             <p> {!!$CompBlock?$CompBlock->{lang_col('content')}:'No data'!!}</p>
-                            <a href="#" class="btn btn-primary" role="button"> {{__('READ OUR MISSION')}} </a>
+                            <a href="{{route('frontend.mission')}}" class="btn btn-primary" role="button"> {{__('READ OUR MISSION')}} </a>
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-12">

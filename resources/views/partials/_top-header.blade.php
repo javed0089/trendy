@@ -30,11 +30,11 @@
                 </div>
                 <div class="social" >
                     <ul class="social-icons pull-right">
-                        <li><a href="{{$social_blocks->get(0)->{lang_col('value')} }}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="{{$social_blocks->get(1)->{lang_col('value')} }}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="{{$social_blocks->get(2)->{lang_col('value')} }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                        <li><a href="{{$social_blocks->get(3)->{lang_col('value')} }}"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                        <li><a href="{{$social_blocks->get(4)->{lang_col('value')} }}"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="{{$social_blocks->get(0)->{lang_col('value')} }}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="{{$social_blocks->get(1)->{lang_col('value')} }}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="{{$social_blocks->get(2)->{lang_col('value')} }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="{{$social_blocks->get(3)->{lang_col('value')} }}"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="{{$social_blocks->get(4)->{lang_col('value')} }}"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                     </ul>
 
                   

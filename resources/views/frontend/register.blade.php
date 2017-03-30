@@ -134,7 +134,6 @@
                             <input name="email" placeholder="{{__('Email')}}" class="form-control" type="email" required value="{{old('email')}}">
                         </div>
 
-
                         <div class="form-group inline col-md-6">
                             <label>*{{__('Password')}}:</label>
                             <input name="password" id="password" minlength="6" type="password" placeholder="{{__('Password')}}" class="form-control" type="text" required>
