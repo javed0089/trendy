@@ -63,6 +63,7 @@
             <li {{ Request::is('backoffice/module/services/*')?"class=active":'' }}{{ Request::is('backoffice/module/services')?"class=active":'' }}><a href="{{route('services.index')}}"><i class="fa fa-circle-o"></i>Services</a></li>
             <li {{Request::is('backoffice/module/news/*')?"class=active":'' }}{{ Request::is('backoffice/module/news')?"class=active":''}}><a href="{{route('news.index')}}"><i class="fa fa-circle-o"></i>News</a></li>
             <li {{Request::is('backoffice/module/locations/*')?"class=active":'' }}{{ Request::is('backoffice/module/locations')?"class=active":''}}><a href="{{route('locations.index')}}"><i class="fa fa-circle-o"></i>Locations</a></li>
+            <li {{Request::is('backoffice/module/comments/*')?"class=active":'' }}{{ Request::is('backoffice/module/comments')?"class=active":''}}><a href="{{route('comments.index')}}"><i class="fa fa-circle-o"></i>Comments</a></li>
           </ul>
         </li>
 

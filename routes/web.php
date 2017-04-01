@@ -65,6 +65,8 @@
 
         /** Contact **/
         Route::get('/contact','Frontend\ContactController@show')->name('frontend.contact');
+
+        Route::post('/sendcomment','Frontend\CommentController@store')->name('frontend.comment');
 		
 		
 		Route::get('/register', 'Frontend\signUpController@index')->name('frontend.register');
@@ -190,6 +192,10 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 		///////*****Contact********//////
 		Route::resource('module/locations','Backend\Location\LocationController');
+
+		///////*****Comments********//////
+		Route::get('module/comments','Backend\Comments\CommentController@index')->name('comments.index');
+		Route::get('module/comments/{id}','Backend\Comments\CommentController@show')->name('comments.show');
 		
 	});
 
