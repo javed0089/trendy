@@ -25,6 +25,7 @@
 
         <!-- Main Content Section -->
         <main class="main">
+        
             @yield('content')
         </main>
         <!-- Main Content Section -->

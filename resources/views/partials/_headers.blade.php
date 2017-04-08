@@ -7,8 +7,9 @@
     <!-- Page Title -->
     <title> @yield('title') : GAP-Polymers </title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Favicon 
+    <link rel="icon" type="image/png" href="favicon.png">-->
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +29,7 @@
     <!-- Flex Slider -->
     <link rel="stylesheet" href="{{asset('css/flexslider.css')}}">
 
-    <!-- Owl Carousel -->
+       <!-- Owl Carousel -->
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.min.css')}}">
 

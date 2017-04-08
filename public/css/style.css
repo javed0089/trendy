@@ -3917,7 +3917,7 @@ ul.nav-tabs {
 
 
 /* Preloader */
- 
+
 .sk-cube-grid {
     width: 50px;
     height: 50px;
@@ -5137,14 +5137,14 @@ ul.nav-tabs {
     
 }                      
 .treeview li ul li > a{
-        padding-left: 30px;
-    }
+    padding-left: 30px;
+}
 .treeview li ul li ul li> a{
-        padding-left: 35px;
-    }
+    padding-left: 35px;
+}
 .treeview li ul li ul li ul li> a{
-        padding-left: 40px;
-    }
+    padding-left: 40px;
+}
 .treeview,.treeview li ul li{                                 
     padding: 0 !important;
 }                                 
@@ -5185,7 +5185,7 @@ ul.nav-tabs {
 
 
 
- 
+
 
 
 .tree, .tree ul {
@@ -5274,13 +5274,13 @@ ul.nav-tabs {
 .navbar {min-height:32px !important; background: #034694;}
 
 .navbar .divider-vertical {
-height: 18px;
-margin: 4px 2px;
-border-left: 1px solid #f2f2f2;
+    height: 18px;
+    margin: 4px 2px;
+    border-left: 1px solid #f2f2f2;
 }
 
 form.quote-form input{
-    
+
     border: 1px solid rgba(244, 244, 244, 0.8);
     background: #ffffff;
     box-shadow: 1px 1.7px 2px 0px rgba(0, 0, 0, 0.1);
@@ -5292,7 +5292,7 @@ form.quote-form input{
 }
 
 form.quote-form select{
-    
+
     border: 1px solid rgba(244, 244, 244, 0.8);
     background: #ffffff;
     box-shadow: 1px 1.7px 2px 0px rgba(0, 0, 0, 0.1);
@@ -5368,8 +5368,8 @@ a.btn.btn-xs {
 }
 
 .not-active {
- pointer-events: none;
- cursor: default;
+   pointer-events: none;
+   cursor: default;
 }
 
 .comments-single i {
@@ -5386,4 +5386,15 @@ a.btn.btn-xs {
 
 .inline {
     display:inline-block;
+}
+
+.userinfo h4{
+    display: block;
+    color: #76797f;
+    margin-bottom: 25px;
+}
+.userinfo h4 span{
+    display: block;
+    font-size: 16px;
+   color: #231f20;
 }

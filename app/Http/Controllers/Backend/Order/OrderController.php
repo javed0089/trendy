@@ -7,6 +7,9 @@ use App\Models\Order\DocumentType;
 use App\Models\Order\Order;
 use App\Models\Order\OrderComment;
 use App\Models\Order\OrderFile;
+use App\Models\Order\OrderShipment;
+use App\Models\Order\OrderShipmentFiles;
+use App\Models\Order\OrderShipmentStatus;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -67,6 +70,11 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $document_types = DocumentType::all();
+        $order_shipment_statuses = OrderShipmentStatus::whereNotIn('id',function($query) use($id){
+            $query->select('order_shipment_status_id')->from(with(new OrderShipment)->getTable())->where('order_id','=',$id );
+
+        })->get();
+
 
         $flag=false;
         if(User::isSalesExecutive()){
@@ -77,7 +85,7 @@ class OrderController extends Controller
 
             $role = Sentinel::findRoleById(4);
             $users = $role->users()->get();
-            return view('backend.orders.show')->with('order',$order)->with('users',$users)->with('document_types',$document_types);
+            return view('backend.orders.show')->with('order',$order)->with('users',$users)->with('document_types',$document_types)->with('order_shipment_statuses',$order_shipment_statuses);
         }
         else
             return redirect('backoffice/login');
@@ -103,9 +111,9 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-     $order = Order::find($id);
-     $submitReq = $request->submit;
-     if($submitReq =="assignSalesRep"){
+       $order = Order::find($id);
+       $submitReq = $request->submit;
+       if($submitReq =="assignSalesRep"){
         $this->validate($request, [
             'assign_to_id' =>   'required',
             ]);
@@ -134,13 +142,13 @@ class OrderController extends Controller
     elseif($submitReq =="uploadDocument"){
 
       $this->validate($request, [
-         'order_document' => 'required|mimes:pdf|max:10000',
-         'document_type' => 'required'
-         ]);
+       'order_document' => 'required|mimes:pdf|max:10000',
+       'document_type' => 'required'
+       ]);
 
       $file = $request->file('order_document');
       $filename = rand(1,100).time().'.'. 'pdf';
-      $location="order-docs/";
+      $location="order-docs/".$order->id.'/';
       if($file){
 
         Storage::disk('local')->put($location.$filename,  File::get($file));
@@ -156,14 +164,59 @@ class OrderController extends Controller
 
 
         return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
-        }    
-    }
-    elseif($submitReq == "confirmPi"){
-        $order->payment_status = '1';
-        $order->save();
-        return redirect()->route('orders.show',$id)->with('success','Payment confirmed!');
-    }
-    return back();
+    }    
+}
+elseif($submitReq == "confirmPi"){
+    $order->payment_status = '1';
+    $order->save();
+    return redirect()->route('orders.show',$id)->with('success','Payment confirmed!');
+}
+elseif($submitReq == "shipment"){
+    $order->status = '8';
+    $order->save();
+    return redirect()->route('orders.show',$id)->with('success','Order status shipment.');
+}
+elseif($submitReq == "addShippingstatus"){
+    $orderShipment = new OrderShipment;
+    $orderShipment->order_shipment_status_id = $request->order_shipment_status;
+    $order->OrderShipments()->save($orderShipment);
+    return redirect()->route('orders.show',$id)->with('success','Order status added.');
+}
+elseif($submitReq == "shipmentStatusImage"){
+        //dd($request);
+ $this->validate($request, [
+   'order_shipment_document' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:20000'
+   ]);
+
+ $file = $request->file('order_shipment_document');
+ $filename = rand(1,100).time().'.'. $file->getClientOriginalExtension();
+ $location="order-docs/".$order->id.'/';
+ if($file){
+
+    Storage::disk('local')->put($location.$filename,  File::get($file));
+
+    $orderShipmentFile = new OrderShipmentFiles;
+    $orderShipmentFile->filename=$filename;
+    $orderShipmentFile->mime=$file->getClientMimeType();
+    $orderShipmentFile->original_filename=$file->getClientOriginalName();
+
+    $OrderShipment =Ordershipment::find($request->order_shipment_id);
+
+    $OrderShipment->OrderShipmentFiles()->save($orderShipmentFile);
+
+
+    return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
+}    
+}
+
+elseif($submitReq == "shipmentTrackingUpdate"){
+    $order->shipping_tracking_id = $request->shipping_tracking_id;
+    $order->shipping_tracking_hyperlink = $request->shipping_tracking_hyperlink;
+    $order->save();
+    return redirect()->route('orders.show',$id)->with('success','Shipment tracking updated.');
+}
+
+return back();
 }
 
     /**
@@ -189,14 +242,39 @@ class OrderController extends Controller
             }
             if(User::isSupervisor() || $flag){
 
-                $location="order-docs/";
+                $location="order-docs/".$orderFile->Order->id.'/';
                 $file = Storage::disk('local')->get( $location.$filename);
                 $response = Response($file, 200);
-                $response->header("Content-Type", 'application/pdf');
+              //  $response->header("Content-Type", 'application/pdf');
                 return $response;
             }}
             else
                 return redirect('backoffice/login');
 
         }
-    }
+
+
+        public function getOrderShipmentFile($id)
+        {
+            $orderShipmentFile = OrderShipmentFiles::find($id);
+            if($orderShipmentFile){
+                $filename = $orderShipmentFile->filename;
+
+                $flag=false;
+                if(User::isSalesExecutive()){
+                    if(User::getId() == $orderShipmentFile->Ordershipment->Order->assign_to_id)
+                        $flag=true;
+                }
+                if(User::isSupervisor() || $flag){
+
+                    $location="order-docs/".$orderShipmentFile->Ordershipment->Order->id.'/';
+                    $file = Storage::disk('local')->get( $location.$filename);
+                    $response = Response($file, 200);
+                    $response->header("Content-Type", $orderShipmentFile->mime);
+                    return $response;
+                }}
+                else
+                    return redirect('backoffice/login');
+
+            }
+        }

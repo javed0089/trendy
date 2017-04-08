@@ -20,6 +20,7 @@ class StatusTableSeeder extends Seeder
         ['id' => '2', 'status_type' => '1', 'status_ar' => 'Approval', 'status_en' => 'Approval'],
         ['id' => '3', 'status_type' => '1', 'status_ar' => 'Submitted', 'status_en' => 'Submitted'],
         ['id' => '5', 'status_type' => '1', 'status_ar' => 'Completed', 'status_en' => 'Completed'],
+        ['id' => '8', 'status_type' => '1', 'status_ar' => 'Shipment', 'status_en' => 'Shipment'],
         
         //type 1 for sales rep changes
         ['id' => '4', 'status_type' => '2', 'status_ar' => 'In-process', 'status_en' => 'In-process'],

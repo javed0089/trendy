@@ -15,7 +15,10 @@ class LoginController extends Controller
     public function index(Request $request)
     {
 
-    	return view('frontend.login');
+        if(!Sentinel::check())
+    	   return view('frontend.login');
+        else
+            return redirect('/');
     }
 
     public function login(Request $request){

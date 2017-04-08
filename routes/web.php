@@ -100,6 +100,10 @@
 			Route::resource('myaccount/myorders','Frontend\MyAccount\OrderController');
 			Route::post('myaccount/makeOrder/{id}','Frontend\MyAccount\OrderController@createOrder')->name('myorders.makeOrder');
 			Route::get('myaccount/myorders/orderfile/{fileid}/{file}','Frontend\MyAccount\OrderController@getOrderFile')->name('myorders.orderfile');
+
+			Route::get('myaccount/myorders/orderShipmentfile/{fileid}/{file}','Frontend\MyAccount\OrderController@getOrderShipmentFile')->name('myorders.orderShipmentfile');
+
+			Route::resource('myaccount/user','Frontend\MyAccount\UserController', ['only' => ['show','update']]);
 			
 			
 		});
@@ -210,6 +214,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 	///////*****Orders********//////
 	Route::resource('orders','Backend\Order\OrderController');
 	Route::get('orders/orderfile/{fileid}/{file}','Backend\Order\OrderController@getOrderFile')->name('orders.orderfile');
+	Route::get('orders/orderShipmentfile/{fileid}/{file}','Backend\Order\OrderController@getOrderShipmentFile')->name('orders.orderShipmentfile');
 
 });
 

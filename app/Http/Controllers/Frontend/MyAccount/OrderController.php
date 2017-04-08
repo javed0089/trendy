@@ -8,6 +8,7 @@ use App\Models\Order\Order;
 use App\Models\Order\OrderComment;
 use App\Models\Order\OrderFile;
 use App\Models\Order\OrderProduct;
+use App\Models\Order\OrderShipmentFiles;
 use App\Models\Quotation\Quote;
 use App\User;
 use Illuminate\Http\Request;
@@ -90,8 +91,8 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $submitReq = $request->submit;
-       if($submitReq =="addComment"){
+     $submitReq = $request->submit;
+     if($submitReq =="addComment"){
         $orderComment = new OrderComment;
         $orderComment->comment_type = '1';
         $orderComment->order_id = $id;
@@ -105,13 +106,13 @@ class OrderController extends Controller
     elseif($submitReq =="uploadDocument"){
 
       $this->validate($request, [
-       'order_document' => 'required|mimes:pdf|max:10000',
-       'document_type' => 'required'
-       ]);
+         'order_document' => 'required|mimes:pdf|max:10000',
+         'document_type' => 'required'
+         ]);
       $order = Order::find($id);
       $file = $request->file('order_document');
       $filename = rand(1,100).time().'.'. 'pdf';
-      $location="order-docs/";
+      $location="order-docs/".$order->id.'/';
       if($file){
 
         Storage::disk('local')->put($location.$filename,  File::get($file));
@@ -136,6 +137,14 @@ elseif($submitReq == "confirmPi"){
     $order->save();
     return redirect()->route('myorders.show',$id)->with('success','You have confirmed Performa Invoice!');
 }
+
+elseif($submitReq == "confirmBl"){
+    $order = Order::find($id);
+    $order->bl_draft_confirmed = '1';
+    $order->save();
+    return redirect()->route('myorders.show',$id)->with('success','You have confirmed BL Draft!');
+}
+
 }
 
     /**
@@ -188,7 +197,7 @@ elseif($submitReq == "confirmPi"){
 
             if(Sentinel::check()->id ==$orderFile->Order->user_id){
 
-                $location="order-docs/";
+                $location="order-docs/".$orderFile->Order->id.'/';
                 $file = Storage::disk('local')->get( $location.$filename);
                 $response = Response($file, 200);
                 $response->header("Content-Type", 'application/pdf');
@@ -202,4 +211,28 @@ elseif($submitReq == "confirmPi"){
 
     }
 
+
+    public function getOrderShipmentFile($id)
+    {
+        $orderShipmentFile = OrderShipmentFiles::find($id);
+        if($orderShipmentFile){
+            $filename = $orderShipmentFile->filename;
+
+            if(Sentinel::check()->id ==$orderShipmentFile->Ordershipment->Order->user_id){
+
+                $location="order-docs/".$orderShipmentFile->Ordershipment->Order->id.'/';
+                $file = Storage::disk('local')->get( $location.$filename);
+                $response = Response($file, 200);
+                $response->header("Content-Type", $orderShipmentFile->mime);
+                return $response;
+            }
+            else
+                return redirect('backoffice/login');
+        }
+        else
+            return redirect('/login');
+
+    }
 }
+
+

@@ -1,7 +1,9 @@
  @extends('layouts.main')
 
  @section('title','Login')
-
+ @section('styles')
+ <link href="{{asset('css/parsley.css')}}" rel="stylesheet">
+ @endsection
 
  @section('content')
 
@@ -18,7 +20,7 @@
                             <div class="col-md-6 col-md-offset-3">
 
                                 <h2 class="title-2" style="text-align: center;"> {{__('Login to your account')}} </h2>
-                                <form id="contact_form" class="form well-form" action="{{route('frontend.login')}}" method="post">
+                                <form id="contact_form" class="form well-form" action="{{route('frontend.login')}}" method="post"  data-parsley-validate>
                                    {{csrf_field()}}
           
                                       @if(session('error'))
@@ -42,7 +44,7 @@
                                     </div>
                                     <!-- Password-->
                                     <div class="form-group">
-                                        <input name="password" placeholder="{{__('Password')}}" class="form-control" type="password" required title="Please enter your password" >
+                                        <input name="password" placeholder="{{__('Password')}}" class="form-control" type="password" required minlength="6" title="Please enter your password" >
                                     </div>
                                     <a href="{{route('frontend.forgot-password')}}">Forgot password?</a>
                                     <div class="checkbox pull-right">
@@ -76,6 +78,6 @@
 
 
 @section('scripts')
- 
-
+<!-- parsley JS -->
+<script src="{{asset('js/parsley.min.js')}}"></script>
 @endsection

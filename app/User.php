@@ -44,6 +44,7 @@ class User extends  Authenticatable
         return Sentinel::findById($id)->roles()->first()->name;
     }
 
+    
     public static function isSuperAdmin()
     {
         if (Sentinel::check()) {

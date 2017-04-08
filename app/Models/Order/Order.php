@@ -41,6 +41,11 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\Order\OrderFile','order_id','id');
     }
+
+    public function OrderShipments()
+    {
+        return $this->hasMany('App\Models\Order\OrderShipment','order_id','id');
+    }
     
     
 }
