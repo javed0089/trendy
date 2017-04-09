@@ -28,7 +28,7 @@
 
                     <div class="col-md-9 about-content">
 
-                        <div class="spacer-80"></div>
+                       
 
                         <section class="about-company">
 
