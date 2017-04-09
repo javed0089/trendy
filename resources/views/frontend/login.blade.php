@@ -48,7 +48,7 @@
                                     </div>
                                     <a href="{{route('frontend.forgot-password')}}">Forgot password?</a>
                                     <div class=" pull-right">
-                                        <label><input name="rememberMe"  type="checkbox"> Remeber me</label>
+                                        <label><input name="rememberMe" style="margin-top: .5px;" type="checkbox"> Remeber me</label>
                                     </div>
                                     
                                     <!-- Button -->
