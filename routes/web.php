@@ -22,6 +22,8 @@
         /** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
     	Route::get('/', 'Frontend\HomepageController@index');
 
+    	Route::post('/rateservice', 'Frontend\HomepageController@rateService')->name('frontend.rateservice');
+
     	/** Categories And Products **/
     	Route::get('/categories', 'Frontend\CategoryController@index')->name('frontend.categories');
     	Route::get('/category/{slug}', 'Frontend\CategoryController@productlist')->name('frontend.productlist');
@@ -104,7 +106,9 @@
 			Route::get('myaccount/myorders/orderShipmentfile/{fileid}/{file}','Frontend\MyAccount\OrderController@getOrderShipmentFile')->name('myorders.orderShipmentfile');
 
 			Route::resource('myaccount/user','Frontend\MyAccount\UserController', ['only' => ['show','update']]);
-			
+
+			Route::resource('myaccount/rating','Frontend\MyAccount\RatingsController', ['only' => ['show','update']]);
+			Route::post('myaccount/rating2/{rating}', 'Frontend\MyAccount\RatingsController@update2')->name('rating.update2');
 			
 		});
 

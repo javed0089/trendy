@@ -58,5 +58,10 @@ class HomepageController extends Controller
     
     }
 
+
+    public function rateService(Request $request)
+    {
+        dd($request);
+    }
     
 }

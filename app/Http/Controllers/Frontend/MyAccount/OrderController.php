@@ -10,6 +10,7 @@ use App\Models\Order\OrderFile;
 use App\Models\Order\OrderProduct;
 use App\Models\Order\OrderShipmentFiles;
 use App\Models\Quotation\Quote;
+use App\Models\Rating\Rating;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -66,9 +67,10 @@ class OrderController extends Controller
         $order=$user->Orders()->find($id);
         $document_types = DocumentType::all();
         $total = $order->OrderProducts()->selectRaw('SUM(price * quantity) as total')->pluck('total');
-        
+       
+        $rating = Rating::where('order_id','=',$id)->first();
 
-        return view('frontend.account.order.order')->with('document_types',$document_types)->with('order',$order)->with('total',$total[0]);
+        return view('frontend.account.order.order')->with('document_types',$document_types)->with('order',$order)->with('total',$total[0])->with('rating',$rating);
     }
 
     /**

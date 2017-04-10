@@ -4,6 +4,7 @@
 
  @section('styles')
  <link rel="stylesheet" href="{{asset('backend/dist/css/vertical-tab.css')}}">
+ <link href="{{asset('css/starrr.css')}}" rel="stylesheet">
  @endsection
 
  @section('content') 
@@ -37,6 +38,7 @@
           <div class="panel-title">Order #: {{$order->id}}</div>
           <div class="content">
             <div class="row">
+
               <div class="col-md-4">
                 <h4>Order # : <span >{{$order->id}}</span></h4>
                 <h4>Status : <span>{{$order->Status->status_en}}</span></h4>
@@ -44,6 +46,9 @@
               </div>
               <div class="col-md-4">
                 <h4>Dated : <span>{{date('M j, Y',strtotime($order->created_at))}}</span></h4>
+
+
+
               </div>
               <div class="col-md-4 text-right">
                 <h4>P. I. Status : {!!$order->pi_confirmed?'<span class="success small">Confirmed</span>' : '<span class="danger small">Not Confirmed</span>'!!} </h4>
@@ -93,6 +98,8 @@
             @endforeach
           </tbody>
         </table>
+
+
         <div class="col-md-4 pull-right text-right">
           <div class="spacer-10"></div>
           <h3>Grand Total: {{number_format($total,2)}}</h3>
@@ -238,7 +245,7 @@
                   </tbody>
                 </table>
                 
- <div class="spacer-30"></div>
+                <div class="spacer-30"></div>
 
                 @if($OrderShipment->order_shipment_status_id != 3)
 
@@ -269,7 +276,7 @@
               @endif
               @endif
               @endforeach
-             
+
               @endif
 
             </div>
@@ -305,7 +312,20 @@
 
 
 </div>
-
+<div class="col-md-12 text-center">
+ <form  role="form"  method="Post"  action="{{route('rating.update',$order->id)}}">
+  {{csrf_field()}}
+  {{ method_field('PATCH') }}
+  <h4>Rate our Service</h4>
+  <div id='star' class="star"></div>
+  <input id="rating" hidden type="text" value="{{count($rating)>0? $rating->rating:''}}"  name="rating" >
+  <div class="spacer-20"></div>
+  <div class="col-md-4 col-md-offset-4">
+    <button type="submit" class="btn btn-md btn-block btn-primary">RATE</button>
+  </div>
+</form>
+</div>
+<div class="spacer-10"></div>
 <div class="comment-box">
   <h2 class="title-2 text-center"> New Message </h2>
 
@@ -342,4 +362,20 @@
 
 
 
+@endsection
+@section('scripts')
+<script src="{{asset('js/stars.min.js')}}"></script>
+<script type="text/javascript">
+
+ $('#star').stars({
+  stars: 4,
+  value:$('#rating').val(),
+  text: ['Poor', 'Average', 'Good','Excellent'],
+  color: '#ffda44',
+  starClass  : 'star',
+  click: function(index) {
+    $('#rating').val(index);
+  }
+});
+</script>
 @endsection
