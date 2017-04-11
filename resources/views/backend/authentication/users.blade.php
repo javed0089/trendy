@@ -50,8 +50,8 @@
                   <td>{{$user->first_name}} {{$user->last_name}}</td>
                   <td>{{$user->email}}</td>
                   <td>{{User::UserRole($user->id)}}</td>
-                  <td>{{$user->last_login}}</td>
-                  <td>{{$user->created_at}}</td>
+                  <td>{{date('M j, Y H:i',strtotime($user->last_login))}}</td>
+                  <td>{{date('M j, Y H:i',strtotime($user->created_at))}}</td>
                   <td><a href="{{ route('users.edit',$user->id) }}" class="btn btn-block btn-default">Edit</a></td>
                 </tr>
                 @endforeach

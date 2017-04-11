@@ -220,5 +220,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 	Route::get('orders/orderfile/{fileid}/{file}','Backend\Order\OrderController@getOrderFile')->name('orders.orderfile');
 	Route::get('orders/orderShipmentfile/{fileid}/{file}','Backend\Order\OrderController@getOrderShipmentFile')->name('orders.orderShipmentfile');
 
+	Route::get('user/profile', 'Backend\User\UserController@show')->name('users.show');
+	Route::post('user/profile/changepasword', 'Backend\User\UserController@changePassword')->name('users.changepassword');
 });
 
