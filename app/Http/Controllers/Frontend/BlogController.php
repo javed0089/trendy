@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Page\Page;
-use App\Models\blog\BlogCategory;
-use App\Models\blog\Post;
-use App\Models\blog\Tag;
+use App\Models\Blog\BlogCategory;
+use App\Models\Blog\Post;
+use App\Models\Blog\Tag;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
