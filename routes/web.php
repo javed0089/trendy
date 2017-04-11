@@ -69,7 +69,8 @@
         Route::get('/contact','Frontend\ContactController@show')->name('frontend.contact');
 
         Route::post('/sendcomment','Frontend\CommentController@store')->name('frontend.comment');
-		
+
+
 		
 		Route::get('/register', 'Frontend\signUpController@index')->name('frontend.register');
 		Route::post('/register', 'Frontend\signUpController@postRegister')->name('frontend.signup');
@@ -204,6 +205,10 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		///////*****Comments********//////
 		Route::get('module/comments','Backend\Comments\CommentController@index')->name('comments.index');
 		Route::get('module/comments/{id}','Backend\Comments\CommentController@show')->name('comments.show');
+
+
+		 Route::get('module/ratings','Backend\Ratings\RatingController@index')->name('ratings.index');
+		
 		
 	});
 

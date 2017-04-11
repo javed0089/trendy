@@ -5,6 +5,17 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('backend/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{asset('backend/dist/css/vertical-tab.css')}}">
+  <style type="text/css">
+  	     .star{
+     	height: 30px;
+     }
+
+    .star i{
+    	font-size:20px;
+
+    }
+  </style>
+
 @endsection
 
 @section('content')
@@ -50,6 +61,9 @@
 								<h4>Customer : <span >{{$order->User->first_name}} {{$order->User->last_name}}</span></h4>
 								<h4>Email : <span >{{$order->User->email}}</span></h4>
 								<h4>Status : <span>{{$order->Status->status_en}}</span></h4>
+
+								<h4><div id='star' class="star">Rating : </div></h4>
+              <input id="rating" hidden 	 type="text"  name="rating" value="{{count($rating)>0? $rating->rating:''}}">
 							</div>
 							<div class="col-md-4">
 								<h4>Dated : <span>{{date('M j, Y',strtotime($order->created_at))}}</span></h4>
@@ -458,7 +472,7 @@
 	!-- DataTables -->
 	<script src="{{asset('backend/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 	<script src="{{asset('backend/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
-
+<script src="{{asset('js/stars.min.js')}}"></script>
 	<!-- page script -->
 	<script>
 		$(function () {
@@ -477,5 +491,16 @@
 
 		});
 
+$('#star').stars({
+  stars: 4,
+  value:$('#rating').val(),
+  text: ['Poor', 'Average', 'Good','Excellent'],
+  color: '#ffda44',
+  starClass  : 'star',
+  click: function(index) {
+  }
+});
 	</script>
+
+
 	@endsection

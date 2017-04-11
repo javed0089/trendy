@@ -19,9 +19,9 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{Sentinel::getUser()->first_name}} {{Sentinel::getUser()->last_name}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="{{route('user.show',User::getId())}}">My Account</a></li>
-              <li><a href="{{route('quotes.index')}}">My Quote Requests</a></li>
-              <li><a href="{{route('myorders.index')}}">My Orders</a></li>
+              <li><a href="{{route('user.show',User::getId())}}">{{__('My Account')}}</a></li>
+              <li><a href="{{route('quotes.index')}}">{{__('My Quote Requests')}}</a></li>
+              <li><a href="{{route('myorders.index')}}">{{__('My Orders')}}</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#" onclick="document.getElementById('logout-form').submit()" >{{__('Logout')}}</a>
               </li>

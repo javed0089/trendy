@@ -47,5 +47,10 @@ class Order extends Model
         return $this->hasMany('App\Models\Order\OrderShipment','order_id','id');
     }
     
+
+     public function Rating()
+    {
+        return $this->belongsTo('App\Models\Rating\Rating','order_id','id');
+    }
     
 }

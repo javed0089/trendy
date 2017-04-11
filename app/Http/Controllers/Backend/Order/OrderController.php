@@ -10,6 +10,7 @@ use App\Models\Order\OrderFile;
 use App\Models\Order\OrderShipment;
 use App\Models\Order\OrderShipmentFiles;
 use App\Models\Order\OrderShipmentStatus;
+use App\Models\Rating\Rating;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -69,13 +70,15 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::find($id);
+
         $document_types = DocumentType::all();
         $order_shipment_statuses = OrderShipmentStatus::whereNotIn('id',function($query) use($id){
             $query->select('order_shipment_status_id')->from(with(new OrderShipment)->getTable())->where('order_id','=',$id );
 
         })->get();
 
-
+        $rating = Rating::where('order_id','=',$id)->first();
+        
         $flag=false;
         if(User::isSalesExecutive()){
             if(User::getId() == $order->assign_to_id)
@@ -85,7 +88,7 @@ class OrderController extends Controller
 
             $role = Sentinel::findRoleById(4);
             $users = $role->users()->get();
-            return view('backend.orders.show')->with('order',$order)->with('users',$users)->with('document_types',$document_types)->with('order_shipment_statuses',$order_shipment_statuses);
+            return view('backend.orders.show')->with('order',$order)->with('users',$users)->with('document_types',$document_types)->with('order_shipment_statuses',$order_shipment_statuses)->with('rating',$rating);
         }
         else
             return redirect('backoffice/login');

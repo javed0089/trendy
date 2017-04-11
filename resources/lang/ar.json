@@ -100,7 +100,13 @@
 	"Last Name" : "الكنية",
 	"Email" : "البريد الإلكتروني",
 	"Password" : "كلمه السر",
-	"Confirm Password" : "تأكيد كلمة المرور"
+	"Confirm Password" : "تأكيد كلمة المرور",
+	"Cart" : "عربة التسوق",
+	"My Account" : "حسابي",
+	"My Quote Requests" : "طلباتي اقتباس",
+	"My Orders" : "طلباتي",
+	"Logout" : "الخروج"
+
 
 
 
