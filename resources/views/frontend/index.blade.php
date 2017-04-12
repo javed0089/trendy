@@ -189,24 +189,24 @@
             <div class="col-sm-6">
                 <div id="skills" class="process-bar">
                     <div class="skillbar-title"> Excellent </div>
-                    <div class="skillbar" data-percent="46%">
+                    <div class="skillbar" data-percent="{{$ratings->excellent()}}%">
                         <div class="skillbar-bar"> </div>
-                        <div class="skill-bar-percent">46%</div>
+                        <div class="skill-bar-percent">{{$ratings->excellent()}}%</div>
                     </div>
                     <div class="skillbar-title"> Good</div>
-                    <div class="skillbar" data-percent="78%">
+                    <div class="skillbar" data-percent="{{$ratings->good()}}%">
                         <div class="skillbar-bar"> </div>
-                        <div class="skill-bar-percent">78%</div>
+                        <div class="skill-bar-percent">{{$ratings->good()}}%</div>
                     </div>
                     <div class="skillbar-title"> Average </div>
-                    <div class="skillbar" data-percent="70%">
+                    <div class="skillbar" data-percent="{{$ratings->average()}}%">
                         <div class="skillbar-bar"> </div>
-                        <div class="skill-bar-percent">70%</div>
+                        <div class="skill-bar-percent">{{$ratings->average()}}%</div>
                     </div>
                     <div class="skillbar-title">Poor </div>
-                    <div class="skillbar" data-percent="80%">
+                    <div class="skillbar" data-percent="{{$ratings->poor()}}%">
                         <div class="skillbar-bar"> </div>
-                        <div class="skill-bar-percent">80%</div>
+                        <div class="skill-bar-percent">{{$ratings->poor()}}%</div>
                     </div>
                 </div>
             </div>
