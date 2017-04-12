@@ -214,10 +214,13 @@ public function sendQuote(Request $request)
 
 
 Session::forget('cart');
+$newReg = Session::get('newUser');
 Session::forget('newUser');
 Session::forget('oldUrl');
-
-return redirect()->route('message')->with('success', 'Your quote was send succesfully.');
+if($newReg)
+    return redirect()->route('message')->with('success', 'Your quote was send succesfully, but you must activate your account to have your request processed.');
+else
+    return redirect()->route('message')->with('success', 'Your quote was send succesfully.');
 }
 
 

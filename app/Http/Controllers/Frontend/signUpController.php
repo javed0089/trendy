@@ -52,6 +52,7 @@ class signUpController extends Controller
             Session::forget('oldUrl');
             Session::put('newUser',$user);
             return redirect()->to($oldUrl)->with('success','You have succesfully registered an account. Please activate the account from your email!');
+            
         }
 
     	return back()->with('success','You have succesfully registered an account. Please activate the account from your email!');
