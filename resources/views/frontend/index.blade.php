@@ -230,7 +230,7 @@
                         {{csrf_field()}}
                        
                             <div id='star' class="star"></div>
-                            <input id="rating" hidden type="text"  name="rating" value="">
+                            <input id="rating" hidden type="text" required  name="rating" value="">
                         </div>
                         <div class="spacer-60"></div>
                         <div class="col-md-4 col-md-offset-4">
