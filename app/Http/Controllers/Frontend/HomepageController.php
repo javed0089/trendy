@@ -85,6 +85,7 @@ class HomepageController extends Controller
         }
         else{
             return redirect()->route('frontend.login')->with('error',"You must login first!");
+            
         }
 
         }
