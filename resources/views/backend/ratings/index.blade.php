@@ -68,7 +68,7 @@
 											@endif 
 											</td>
 										<td>
- <div id='{{$loop->index}}star' class="star" style="font-size: 10px;">{{$rating->rating}}</div>
+ <div id='{{$loop->index}}star' class="star" ></div>
               <input id="{{$loop->index}}tb" hidden type="text"  name="rating" value="{{count($rating)>0? $rating->rating:''}}">
 
 										</td>
