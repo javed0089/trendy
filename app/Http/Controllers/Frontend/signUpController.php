@@ -14,6 +14,7 @@ class signUpController extends Controller
 {
      public function index()
     {
+
         $topImage = [];
         $topImage = Page::find(150)->PageSections()->first();
 
@@ -46,6 +47,7 @@ class signUpController extends Controller
         $this->sendEmail($user, $activation->code);
     	
         if(Session::has('oldUrl')){
+             
             $oldUrl=Session::get('oldUrl');
             Session::forget('oldUrl');
             Session::put('newUser',$user);

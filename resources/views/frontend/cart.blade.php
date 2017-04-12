@@ -138,7 +138,8 @@
  												<div class="panel-div"> 
  													<h4>Register or login</h4>
  													<div class="content">
- 														<form action="{{route('cart.step','2')}}" method="post">	
+ 														<form action="{{route('cart.step','2')}}" method="post">
+ 															
  															{{csrf_field()}}
  															<div class="radio">
  																<input type="radio" name="radio1" id="radio1" value="login" checked>

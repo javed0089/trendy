@@ -22,10 +22,10 @@ class QuoteController extends Controller
         $delivery_terms =QuoteOption::where('option_type','=','1')->get();
         $payment_methods =QuoteOption::where('option_type','=','2')->get();
         $units =QuoteOption::where('option_type','=','3')->get();
-       
+
         if(Session::has('cart')){
             $cart = Session::has('cart')? Session::get('cart') : null;
-    		return view('frontend.cart')->with('cart',$cart->items)->with('delivery_terms',$delivery_terms)->with('payment_methods',$payment_methods)->with('units',$units)->with('step',$cart->step);
+            return view('frontend.cart')->with('cart',$cart->items)->with('delivery_terms',$delivery_terms)->with('payment_methods',$payment_methods)->with('units',$units)->with('step',$cart->step);
         }
         else{
             $cart =[];
@@ -50,31 +50,52 @@ class QuoteController extends Controller
     	$product = Product::find($id);
     	$submitReq = $request->submit;
         if($submitReq =="btn-update"){
-	    	$oldCart = Session::has('cart')? Session::get('cart') : null;
-	        $cart = new cart($oldCart);
-	        $cart->update($product, $product->id, $request->quantity,$request->unit,$request->port_of_delivery,$request->delivery_terms,$request->payment_method,$request->invoice,$request->packing_list,$request->co,$request->others,$request->others_text);
-	        Session::put('cart', $cart);
-    	}
-    	elseif($submitReq =="btn-delete"){
-    		$oldCart = Session::has('cart')? Session::get('cart') : null;
-	        $cart = new cart($oldCart);
-	        $cart->delete($id);
+          $oldCart = Session::has('cart')? Session::get('cart') : null;
+          $cart = new cart($oldCart);
+          $cart->update($product, $product->id, $request->quantity,$request->unit,$request->port_of_delivery,$request->delivery_terms,$request->payment_method,$request->invoice,$request->packing_list,$request->co,$request->others,$request->others_text);
+          Session::put('cart', $cart);
+      }
+      elseif($submitReq =="btn-delete"){
+          $oldCart = Session::has('cart')? Session::get('cart') : null;
+          $cart = new cart($oldCart);
+          $cart->delete($id);
+          $cart->step='1';
+          Session::put('cart', $cart);
+      }
+
+      return redirect()->back();
+  }
+
+  public function confirmCart($id)
+  {
+
+    $cart = Session::has('cart')? Session::get('cart') : null;
+    $cart = new cart($cart);
+
+    if($cart){
+        if(count($cart->items)>0){
+            $cart->step='2';
+            if(Sentinel::check()){
+                $cart->step='3';
+                Session::put('cart', $cart);
+                return redirect()->route('cart');
+            }
+        }
+        else
             $cart->step='1';
-	        Session::put('cart', $cart);
-    	}
-
-         return redirect()->back();
     }
+    else
+        $cart->step='1';
 
-    public function confirmCart($id)
-    {
-        $cart = Session::has('cart')? Session::get('cart') : null;
-        $cart = new cart($cart);
+    Session::put('cart', $cart);
 
+    
+
+    if(Session::has('newUser')){
         if($cart){
             if(count($cart->items)>0){
                 $cart->step='2';
-                if(Sentinel::check()){
+                if(Sentinel::check() || Session::has('newUser')){
                     $cart->step='3';
                     Session::put('cart', $cart);
                     return redirect()->route('cart');
@@ -85,66 +106,62 @@ class QuoteController extends Controller
         }
         else
             $cart->step='1';
+    }
 
-        Session::put('cart', $cart);
-        if($id=='2'){
+    if($id=='2' && !Session::has('newUser')){
+
+        Session::put('oldUrl',URL::current());
+        return redirect()->route('frontend.login');
+    }
+
+
+    return redirect()->route('cart');
+}
+
+
+
+public function postConfirmCart(Request $request,$id)
+{
+    $cart = Session::has('cart')? Session::get('cart') : null;
+    $cart = new cart($cart);
+    if($cart){
+        if(count($cart->items)>0){
+            $cart->step='2';
+            if(Sentinel::check() || Session::has('newUser')){
+                $cart->step='3';
+                Session::put('cart', $cart);
+                return redirect()->route('cart');
+            }
+        }
+        else
+            $cart->step='1';
+    }
+    else
+        $cart->step='1';
+
+    Session::put('cart', $cart);
+
+    if($id=='2'){
+        if($request->radio1 == 'login'){
             Session::put('oldUrl',URL::current());
             return redirect()->route('frontend.login');
         }
-                
-        return redirect()->route('cart');
+        elseif($request->radio1 == 'register'){
+            Session::put('oldUrl',URL::current());
+            return redirect()->route('frontend.register'); 
+        }
     }
+    return redirect()->route('cart');
+}
 
-
-    public function postConfirmCart(Request $request,$id)
-    {
-        $cart = Session::has('cart')? Session::get('cart') : null;
-        $cart = new cart($cart);
-        if($cart){
-            if(count($cart->items)>0){
+public function sendQuote(Request $request)
+{
+    $cart = Session::has('cart')? Session::get('cart') : null;
+    $cart = new cart($cart);
+    if($cart){
+        if(count($cart->items)>0){
+            if(!Sentinel::check() && !Session::has('newUser')){
                 $cart->step='2';
-                if(Sentinel::check()){
-                    $cart->step='3';
-                    Session::put('cart', $cart);
-                    return redirect()->route('cart');
-                }
-            }
-            else
-                $cart->step='1';
-        }
-        else
-            $cart->step='1';
-
-        Session::put('cart', $cart);
-
-        if($id=='2'){
-            if($request->radio1 == 'login'){
-                Session::put('oldUrl',URL::current());
-                return redirect()->route('frontend.login');
-            }
-            elseif($request->radio1 == 'register'){
-                Session::put('oldUrl',URL::current());
-                return redirect()->route('frontend.register');
-            }
-        }
-        return redirect()->route('cart');
-    }
-
-    public function sendQuote(Request $request)
-    {
-        $cart = Session::has('cart')? Session::get('cart') : null;
-        $cart = new cart($cart);
-
-        if($cart){
-            if(count($cart->items)>0){
-                if(!Sentinel::check()){
-                    $cart->step='2';
-                    Session::put('cart', $cart);
-                    return redirect()->route('cart');
-                }
-            }
-            else{
-                $cart->step='1';
                 Session::put('cart', $cart);
                 return redirect()->route('cart');
             }
@@ -154,38 +171,56 @@ class QuoteController extends Controller
             Session::put('cart', $cart);
             return redirect()->route('cart');
         }
-
-
-        $quote = new Quote;
-        $quote->user_id = Sentinel::check()->id;
-        $quote->quote_validity = null;
-        $quote->status = 1;
-        $quote->save();
-
-        foreach ($cart->items as $key=>$item) {
-            $quoteDetail = new QuoteDetail;
-            $quoteDetail->product_id = $key;
-            $quoteDetail->quantity = $item['quantity'];
-            $quoteDetail->unit = $item['unit'];
-            $quoteDetail->port_of_delivery = $item['port_of_delivery'];
-            $quoteDetail->delivery_terms = $item['delivery_terms'];
-            $quoteDetail->payment_method = $item['payment_method'];
-            $quoteDetail->shipping_doc_invoice = $item['invoice'];
-            $quoteDetail->shipping_doc_packing_list = $item['packing_list'];
-            $quoteDetail->shipping_doc_co = $item['co'];
-            $quoteDetail->shipping_doc_others = $item['others'];
-            $quoteDetail->shipping_doc_others_text = $item['others_text'];
-            $quoteDetail->status = '1';
-            $quote->QuoteDetails()->save($quoteDetail);
-        }
-        
-
-        Session::forget('cart');
-
-        return redirect()->route('message')->with('success', 'Your quote was send succesfully.');
+    }
+    else{
+        $cart->step='1';
+        Session::put('cart', $cart);
+        return redirect()->route('cart');
     }
 
-    
-    
+
+    $quote = new Quote;
+    if(Session::has('newUser'))
+        $quote->user_id = Session::get('newUser')->id;
+    elseif(Sentinel::check())
+        $quote->user_id = Sentinel::check()->id;
+    else{
+       $cart->step='2';
+       Session::put('cart', $cart);
+       return redirect()->route('cart');
+   }
+
+
+   $quote->quote_validity = null;
+   $quote->status = 1;
+   $quote->save();
+
+   foreach ($cart->items as $key=>$item) {
+    $quoteDetail = new QuoteDetail;
+    $quoteDetail->product_id = $key;
+    $quoteDetail->quantity = $item['quantity'];
+    $quoteDetail->unit = $item['unit'];
+    $quoteDetail->port_of_delivery = $item['port_of_delivery'];
+    $quoteDetail->delivery_terms = $item['delivery_terms'];
+    $quoteDetail->payment_method = $item['payment_method'];
+    $quoteDetail->shipping_doc_invoice = $item['invoice'];
+    $quoteDetail->shipping_doc_packing_list = $item['packing_list'];
+    $quoteDetail->shipping_doc_co = $item['co'];
+    $quoteDetail->shipping_doc_others = $item['others'];
+    $quoteDetail->shipping_doc_others_text = $item['others_text'];
+    $quoteDetail->status = '1';
+    $quote->QuoteDetails()->save($quoteDetail);
+}
+
+
+Session::forget('cart');
+Session::forget('newUser');
+Session::forget('oldUrl');
+
+return redirect()->route('message')->with('success', 'Your quote was send succesfully.');
+}
+
+
+
 
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -99,6 +100,11 @@ class User extends  Authenticatable
         }
                 
          
+    }
+
+    public static function isActivated($id){
+
+       return Activation::completed(Sentinel::findById($id));
     }
 
 
