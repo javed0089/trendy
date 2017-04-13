@@ -64,7 +64,7 @@
 
                             <div class="comments">
 
-                                <h2 class="title-2 text-center"> 3 {{__('Comments')}}</h2>
+                                <h2 class="title-2 text-center">  {{__('Comments')}}</h2>
 
                               
                               
