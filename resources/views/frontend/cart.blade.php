@@ -1,7 +1,9 @@
  @extends('layouts.main')
 
  @section('title','My Account')
-
+@section('styles')
+ <link href="{{asset('css/parsley.css')}}" rel="stylesheet">
+ @endsection
  
  @section('content') 
 
@@ -35,24 +37,30 @@
  												@foreach($cart as $item)
  												<tr>
  													<td style="background: #f4f5f8;">
- 														<form class="quote-form" role="form"  method="Post" action="{{route('updateCart',$item['item']['id'])}}">
+ 														<form class="quote-form" role="form"  method="Post" action="{{route('updateCart',$item['item']['id'])}}" data-parsley-validate>
  															{{csrf_field()}}
  															<div class="col-md-4">
  																<h4>Product Name</h4>
- 																<p >{{$item['item']['name_en']}}</p>
+ 																<h3 >{{$item['item']['name_en']}}</h3>
  															</div>
- 															<div class="col-md-4">
+ 															<div class="col-md-4"> 
+ 															<div class="col-md-6 text-right">
  																<h4>Quantity</h4>
- 																<input style="width: 60px" type="number" name="quantity" required="" min="1" value="{{ $item['quantity']}}">
+ 																<input style="width: 60px" type="number" name="quantity" required min="16.5" data-parsley-error-message="Min. value 16.5" step=".5" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
+ 																</div>
+ 																<div class="col-md-6">
+ 																<h4>Units</h4>
  																<select name="unit">
  																@foreach($units as $unit)
  																	<option {{$item['unit']==$unit->name_en ?'Selected':''}} value="{{$unit->name_en}}">{{$unit->name_en}}</option>
  																@endforeach
  																</select>
+
+ 															</div>
  															</div>
  															<div class="col-md-4">
  																<h4>Port of Delivery</h4>
- 																<input class="form-control" type="text" name="port_of_delivery" value="{{ $item['port_of_delivery']}}">
+ 																<input class="form-control" type="text" name="port_of_delivery" required value="{{ $item['port_of_delivery']}}"  data-parsley-required-message="Required">
  															</div>
  															<div class="spacer-5"></div>
  															<div class="col-md-4">
@@ -225,5 +233,6 @@
 
  						});
  					</script>
-
+<!-- parsley JS -->
+<script src="{{asset('js/parsley.min.js')}}"></script>
  					@endsection

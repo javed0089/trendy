@@ -47,7 +47,7 @@
 
                             </div>
                         </section>
-                        
+                        <div class="spacer-20"></div> 
                         @if(isset($section2))
                                 @if($section2->first()->page->status)
                                     <section class="about-culture">
