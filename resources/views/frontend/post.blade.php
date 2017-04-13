@@ -66,26 +66,8 @@
 
                                 <h2 class="title-2 text-center"> 3 {{__('Comments')}}</h2>
 
-                                <div class="comments-single">
-                                    <img src="{{asset('images/comenter-1.jpg')}}" alt="comment image" />
-                                    <h3>Jeff Fashkin <span>3 days ago</span> </h3>
-                                    <p>Proactively underwhelm performance based products before functional expertise. Intrinsicly scale distinctive web services without client-centered benefits. Rapidiously mesh open-source customer service whereas process-centric opportunities. Professionally communicate enabled e-business with cooperative results. Seamlessly seize maintainable leadership after.</p>
-                                    <a href="#" class="reply-link"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
-
-                                </div>
-                                <div class="comments-single reply">
-                                    <img src="{{asset('images/comenter-2.jpg')}}" alt="comment image" />
-                                    <h3>Daniel Wood <span>3 days ago</span> </h3>
-                                    <p>Professionally communicate enabled e-business with cooperative results. Seamlessly seize maintainable leadership after.</p>
-                                    <a href="#" class="reply-link"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
-                                </div>
-
-                                <div class="comments-single">
-                                    <img src="{{asset('images/comenter-3.jpg')}}" alt="comment image" />
-                                    <h3>Brandon Cole <span>3 days ago</span> </h3>
-                                    <p>Rapidiously mesh open-source customer service whereas process-centric opportunities. Professionally communicate enabled e-business with cooperative results. Seamlessly seize maintainable leadership after.</p>
-                                    <a href="#" class="reply-link"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
-                                </div>
+                              
+                              
                             </div>
 
                             <div class="comment-box">
