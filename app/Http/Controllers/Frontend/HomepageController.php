@@ -10,11 +10,13 @@ use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\Product;
 use App\Models\Rating\Rating;
+use App\Models\Subscriber\Subscriber;
 use App\Models\Testimonials\Testimonial;
-use Illuminate\Http\Request;
+use Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Sentinel;
+use Input;
 
 class HomepageController extends Controller
 {
@@ -88,6 +90,43 @@ class HomepageController extends Controller
             
         }
 
-        }
-
     }
+
+
+    public function subscribe(Request $request)
+    {
+
+       $subscriber = new Subscriber;
+       $subscriber->email =$request->email;
+       $subscriber->ip_address =\Request::ip();
+       $subscriber->save();
+
+        return response()->json($subscriber);
+      //  $this->validate(Request::instance(), [
+        //    'email' =>'required|email|unique:users,email'
+       //     ]);
+/*$email = request('email');
+    $_token = request('_token');
+    dd($email);
+    //return Response::json($_token);
+
+        if($request::ajax()) {
+      $data = Input::all();
+      dd($data);
+    }
+
+
+      /* $this->validate($request, [
+        'email' =>'required|email|unique:users,email'
+        ]);
+
+       $subscriber = new Subscriber;
+       $subscriber->email =$request->email;
+       $subscriber->ip_address =\Request::ip();
+
+       $subscriber->save();
+       return redirect()->back()->with(['success' => "Thank you for subscribing with us!"]);*/
+   }
+
+}
+

@@ -21,6 +21,7 @@
 
         /** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
     	Route::get('/', 'Frontend\HomepageController@index');
+    	Route::post('/subscribe', 'Frontend\HomepageController@subscribe')->name('frontend.subscribe');
 
     	Route::post('/rateservice', 'Frontend\HomepageController@rateService')->name('frontend.rateservice');
 

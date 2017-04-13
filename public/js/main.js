@@ -128,4 +128,20 @@ Version: 1.0
     );
 });
 
+
+
+    //Subcribe
+
+    $('#js-subscribe-btn').on('click',function(){  
+    $.ajax({
+      method: "POST",
+      url: url,
+      data: {'email':$('#subscribeEmail').val(), '_token': $('#_token').val()},
+      success: function(data){
+        console.log(data);
+      }
+    }); 
+     return false;     
+  }); 
+
 })(jQuery);

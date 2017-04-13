@@ -22,16 +22,16 @@
                     <div class="container">
                         <h2> {!!$SliderBlock->{lang_col('title')} !!}</h2>
                         <p>
-                           {!!$SliderBlock->{lang_col('content')} !!}
-                       </p>
-                       <a class="btn primary-btn"> {{__('KNOW MORE')}} <i class="fa fa-angle-right"></i> </a>
-                   </div>
-               </div>
-           </li>
-           @endforeach   
+                         {!!$SliderBlock->{lang_col('content')} !!}
+                     </p>
+                     <a class="btn primary-btn"> {{__('KNOW MORE')}} <i class="fa fa-angle-right"></i> </a>
+                 </div>
+             </div>
+         </li>
+         @endforeach   
 
-           @if(!$SlidersBlock || count($SlidersBlock)<1)
-           <li class="has-overlay">
+         @if(!$SlidersBlock || count($SlidersBlock)<1)
+         <li class="has-overlay">
             <img src="images/slides/slide2.jpg" alt="Slider 2" />
             <div class="slider-content">
                 <div class="container">
@@ -162,16 +162,16 @@
 
                     </div>
                     <div class="img-right hover-effect">
-                       @if($CompBlock->{lang_col('image')})
-                       <img src="{{$CompBlock->{lang_col('image')} }}" alt="" />
-                       @else
-                       <img src="http://placehold.it/555x368" alt="" />
-                       @endif
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+                     @if($CompBlock->{lang_col('image')})
+                     <img src="{{$CompBlock->{lang_col('image')} }}" alt="" />
+                     @else
+                     <img src="http://placehold.it/555x368" alt="" />
+                     @endif
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
 </section>
 @endif
 
@@ -226,22 +226,22 @@
 
                         <div class="spacer-50"></div>
                         <div class="col-md-6 col-md-offset-3 text-center"> 
-                        <form  role="form"  method="Post"  action="{{route('frontend.rateservice')}}">
-                        {{csrf_field()}}
-                       
-                            <div id='star' class="star"></div>
-                            <input id="rating" hidden type="text" required  name="rating" value="">
-                        </div>
-                        <div class="spacer-60"></div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <button type="submit" class="btn btn-md btn-block btn-primary">RATE</button>
-                        </div>
-                    </form>
+                            <form  role="form"  method="Post"  action="{{route('frontend.rateservice')}}">
+                                {{csrf_field()}}
+
+                                <div id='star' class="star"></div>
+                                <input id="rating" hidden type="text" required  name="rating" value="">
+                            </div>
+                            <div class="spacer-60"></div>
+                            <div class="col-md-4 col-md-offset-4">
+                                <button type="submit" class="btn btn-md btn-block btn-primary">RATE</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endif
 @endif
@@ -417,29 +417,33 @@
                     <h2 class="ceo-title color-title">{{$CeoBlock?$CeoBlock->{lang_col('title')}:'No data'}}  </h2>
                     <h4 class="ceo-subtitle subtitle"> {{$CeoBlock?$CeoBlock->{lang_col('heading1')}:'No data'}} </h4>
                     <p>
-                       {!! $CeoBlock?$CeoBlock->{lang_col('content')}:'No data' !!}</p>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </section>
-   @endif
-   @endif
+                     {!! $CeoBlock?$CeoBlock->{lang_col('content')}:'No data' !!}</p>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
+ @endif
+ @endif
 
-   @endsection
-   @section('scripts')
+ @endsection
+ @section('scripts')
 
-   <script src="{{asset('js/stars.min.js')}}"></script>
-   <script type="text/javascript">
+ <script src="{{asset('js/stars.min.js')}}"></script>
+ <script type="text/javascript">
 
-     $('#star').stars({
+   $('#star').stars({
       stars: 4,
       text: ['Poor', 'Average', 'Good','Excellent'],
       color: '#ffda44',
       starClass  : 'star',
       click: function(index) {
         $('#rating').val(index);
-}
+    }
+
+
 });
+
+  var url = '{{route('frontend.subscribe')}}';
 </script>
 @endsection

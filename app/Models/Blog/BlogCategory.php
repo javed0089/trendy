@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\blog;
+namespace App\Models\Blog;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +9,6 @@ class BlogCategory extends Model
 {
     public function Posts()
     {
-    	return $this->hasMany('App\Models\blog\Post','blog_category_id','id');
+    	return $this->hasMany('App\Models\Blog\Post','blog_category_id','id');
     }
 }

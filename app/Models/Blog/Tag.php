@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\blog;
+namespace App\Models\Blog;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,5 +8,5 @@ class Tag extends Model
 {
     public function posts()
     {
-    	return $this->belongsToMany('App\Models\blog\Post');
+    	return $this->belongsToMany('App\Models\Blog\Post');
     }}

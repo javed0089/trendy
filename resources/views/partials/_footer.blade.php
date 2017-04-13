@@ -78,12 +78,12 @@
                         <h2 class="widget-title">{{__('Newsletter')}}</h2>
                         <p>{{__('Subscribe to our newsletters to receive latest news and updates.')}}</p>
                         <!-- ============= Mailchimp Subscribe Form ============= -->
-                        <form action="php/subscribe.php" id="subscribeform" method="post">
+                        <form action=""  method="post" data-parsley-validate>
+                         <input type="hidden" value="{{ csrf_token() }}" id="_token" name="_token" />
                             <div class="form-group">
-                                <input type="email" id="email" name="email" placeholder="{{__('Enter your email')}}" class="form-control" title="Please enter your email" data-msg-email="{{__('Please enter a valid email')}}">
+                                <input type="email" id="subscribeEmail" name="subscribeEmail" placeholder="{{__('Enter your email')}}" class="form-control" required data-parsley-required-message="Please enter your email address">
                             </div>
                             <button type="submit" class="btn btn-block" id="js-subscribe-btn"> {{__('Subscribe Now!')}} </button>
-                            <div id="js-subscribe-result" data-success-msg="Done. Subscribed" data-error-msg="Oops. Error!"></div>
                         </form>
                     </div>
                 </div>
@@ -106,3 +106,4 @@
     </div>
     <!-- Copyright -->
 </footer>
+
