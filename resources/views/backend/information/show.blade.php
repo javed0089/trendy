@@ -59,8 +59,6 @@
 				                <p>{{date('M j, Y H:i',strtotime($information->created_at))}}</p>
 				                <h4>Last updated at</h4>
 				                <p>{{date('M j, Y H:i',strtotime($information->updated_at))}}</p>
-				                <h4>Slug</h4>
-				                <p><a style="color: blue;" href="{{url($information->slug)}}">{{url($information->slug)}}</a></p>
 				                <h4>Status</h4>
 				                <p>{!!$information->status?'<span class="label label-success">Active</span>':'<span class="label label-warning">In-active</span>'!!}</p>
 			              </div>
