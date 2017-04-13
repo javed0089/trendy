@@ -20,6 +20,8 @@ class NewsController extends Controller
     public function show($id)
     {
     	$news = News::find($id);
-    	return view('frontend.newsdetail')->with('news',$news);
+        $topImage = [];
+        $topImage = Page::find(100)->PageSections()->first();
+    	return view('frontend.newsdetail')->with('news',$news)->with('topImage',$topImage);
     }
 }

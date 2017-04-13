@@ -23,7 +23,7 @@
                 <div class="container">
                     <span class="parent"> <i class="fa fa-home"></i> <a href="/"> {{__('Home')}} </a> </span>
                     <i class="fa fa-chevron-right"></i>
-                    <span class="child"> {{__('CATEGORIES')}} </span>
+                    <span class="child"> {{__('POLYMER PRODUCT CATEGORIES')}} </span>
                 </div>
             </div>
 

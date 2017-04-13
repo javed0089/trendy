@@ -7,12 +7,15 @@
 
 <main class="main">
  <!-- Page Title -->
- <div class="page-title text-center">
-  <h2 class="title"> {{$news->{lang_col('title')} }}  </h2>
-  <p class="description light"> Holisticly brand sustainable solutions rather than clicks-and-mortar applications.
-    <br> Phosfluorescently whiteboard fully tested initiatives. </p>
-  </div>
-  <!-- Page Title -->
+            @if(isset($topImage))
+                @if($topImage->page->status)
+                    <div class="page-title text-center" style="background: url({{isset($topImage->{lang_col('image')})?asset($topImage->{lang_col('image')}):'http://placehold.it/1600x268'}});">
+                        <h2 class="title"> {{$news->{lang_col('title')} }} </h2>
+                        <p class="description light"> {!!isset($topImage->{lang_col('content')})?$topImage->{lang_col('content')}:''!!} </p>
+                    </div>
+                @endif
+            @endif
+            <!-- Page Title -->
 
   <!-- Breadcrumbs -->
   <div class="breadcrumbs">

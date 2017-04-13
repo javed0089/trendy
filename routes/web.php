@@ -68,6 +68,9 @@
         /** Contact **/
         Route::get('/contact','Frontend\ContactController@show')->name('frontend.contact');
 
+        /** Information Pages **/
+        Route::get('/information/{slug}','Frontend\InformationController@show')->name('frontend.information');
+
         Route::post('/sendcomment','Frontend\CommentController@store')->name('frontend.comment');
 
 
@@ -195,6 +198,9 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 		///////*****News********//////
 		Route::resource('module/news','Backend\News\NewsController');
+
+		///////*****News********//////
+		Route::resource('module/informations','Backend\Information\InformationController');
 
 		///////*****Photos********//////
 		Route::resource('photos','Backend\News\PhotoController', ['only' => ['store','destroy']]);

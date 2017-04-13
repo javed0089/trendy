@@ -5,7 +5,7 @@
                 <ul id="menu-main-menu" class="menu">
                     <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500"><a href="/">{{__('Home')}} </a></li> 
                     <li id="menu-item-1505" class="mega-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1505">
-                        <a href="#">{{__('Products')}}</a>
+                        <a href="{{route('frontend.categories')}}">{{__('Products')}}</a>
                         <ul class="sub-menu">
                             @if(isset($menuParentCats))
                             @foreach($menuParentCats as $menuParentCat)
@@ -108,7 +108,7 @@
                         </ul>
                     </li>
                     <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500"><a href="{{route('frontend.careers')}}">{{__('Career')}}</a></li>
-                    <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500"><a href="{{route('frontend.news')}}">{{__('News')}}</a></li>
+                    <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500"><a href="{{route('frontend.news')}}">{{__('News & Media')}}</a></li>
                     <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500"><a href="{{route('frontend.blogs')}}">{{__('Blog')}}</a></li>
                     <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500"><a href="{{route('frontend.contact')}}">{{__('Contact')}}</a></li>
 

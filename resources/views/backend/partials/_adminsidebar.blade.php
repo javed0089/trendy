@@ -55,6 +55,7 @@
             <li {{Request::is('backoffice/module/locations/*')?"class=active":'' }}{{ Request::is('backoffice/module/locations')?"class=active":''}}><a href="{{route('locations.index')}}"><i class="fa fa-circle-o"></i>Locations</a></li>
             <li {{Request::is('backoffice/module/comments/*')?"class=active":'' }}{{ Request::is('backoffice/module/comments')?"class=active":''}}><a href="{{route('comments.index')}}"><i class="fa fa-circle-o"></i>Comments</a></li>
             <li {{Request::is('backoffice/module/ratings/*')?"class=active":'' }}{{ Request::is('backoffice/module/ratings')?"class=active":''}}><a href="{{route('ratings.index')}}"><i class="fa fa-circle-o"></i>Ratings</a></li>
+            <li {{Request::is('backoffice/module/informations/*')?"class=active":'' }}{{ Request::is('backoffice/module/informations')?"class=active":''}}><a href="{{route('informations.index')}}"><i class="fa fa-circle-o"></i>Informations</a></li>
           </ul>
         </li>
 
