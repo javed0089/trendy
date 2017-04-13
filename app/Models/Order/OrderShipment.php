@@ -15,7 +15,7 @@ class OrderShipment extends Model
 
     public function OrderShipmentStatus()
     {
-        return $this->belongsTo('App\Models\Order\OrderShipmentstatus','order_shipment_status_id','id');
+        return $this->belongsTo('App\Models\Order\OrderShipmentStatus','order_shipment_status_id','id');
     }
 
     public function OrderShipmentFiles()
