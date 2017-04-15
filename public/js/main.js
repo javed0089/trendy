@@ -147,12 +147,12 @@ Version: 1.0
                 email:$('#subscribeEmail').val()
             },
             beforeSend: function() {
-             $('#loader').show();
-         },
-         complete: function(){
-             $('#loader').hide();
-         },
-         success: function (data) {
+               $('#loader').show();
+           },
+           complete: function(){
+               $('#loader').hide();
+           },
+           success: function (data) {
             if(data.status=='success') {
                 $('#msg').removeClass();
                 $('#msg').addClass('ajax-success');
@@ -187,7 +187,7 @@ Version: 1.0
 
       //Subcribe post request
 
-      $('#addToQuote .quote').on('click',function(e){ 
+      $('#addToQuote a').on('click',function(e){ 
         e.preventDefault(); 
         var me = $(this),
         data = me.data('params');
@@ -196,18 +196,20 @@ Version: 1.0
         //$(this).next('img').show();
 
         $.ajax({
-
             type: "GET",
             url: getUrl,
             dataType: 'JSON',
-            beforeSend: function() {
-             me.children('img').show();
-         },
-         complete: function(){
-             me.children('img').hide().delay( 800 );
-         },
-         success: function (data) {
-            if(data.status=='success') {
+            beforeSend: function() 
+            {
+               me.children('img').show();
+           },
+           complete: function(){
+               me.children('img').hide().delay( 800 );
+           },
+           success: function (data) 
+           {
+            if(data.status=='success') 
+            {
                 $('#cartCount').text(data.count);
                 me.next('#alert').text(data.msg);
                 me.next('#alert').show(1000);
@@ -217,7 +219,8 @@ Version: 1.0
                 else
                     me.next('#alert').addClass('ajax-success');
             }
-            else{
+            else
+            {
                 me.next('#alert').removeClass();
                 me.next('#alert').addClass('ajax-danger');
                 me.next('#alert').text(data.msg);

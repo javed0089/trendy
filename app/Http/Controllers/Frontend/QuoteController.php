@@ -38,16 +38,24 @@ class QuoteController extends Controller
     {
         $product = Product::find($id);
         $oldCart = Session::has('cart')? Session::get('cart') : null;
-        if(!array_key_exists($id, $oldCart->items))
+        if($oldCart->items)
         {
+            if(!array_key_exists($id, $oldCart->items))
+            {
+                $cart = new cart($oldCart);
+                $cart->add($product, $product->id);
+                Session::put('cart', $cart);
+                $msg = 'Product added to quote!';
+            }
+            else  
+                $msg = 'Product already added!';
+        }
+        else{
             $cart = new cart($oldCart);
             $cart->add($product, $product->id);
             Session::put('cart', $cart);
             $msg = 'Product added to quote!';
         }
-        else  
-            $msg = 'Product already added!';
-        
         //return redirect()->back();
 
         if(Session::has('cart'))

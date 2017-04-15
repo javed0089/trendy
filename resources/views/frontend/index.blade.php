@@ -69,7 +69,7 @@
                 <div>{!!str_limit($product->{lang_col('desc')},350)!!}</div>
                 <input type="text" hidden value="{{route('addToCart',$product->id)}}" name=""> 
 
-                <a  data-params='{"prodId":"{{$product->id}}" }' class="btn btn-danger btn-sm quote" href="#"> {{__('Request A Quote')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></a>
+                <a  data-params='{"prodId":"{{$product->id}}" }' class="btn btn-danger btn-sm" href="#"> {{__('Request A Quote')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></a>
  <div id="alert" style="display: none; margin-top: 5px;" >
                             </div>
                                
