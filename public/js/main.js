@@ -187,7 +187,7 @@ Version: 1.0
 
       //Subcribe post request
 
-      $('#addToQuote a').on('click',function(e){ 
+      $('#addToQuote .quote').on('click',function(e){ 
         e.preventDefault(); 
         var me = $(this),
         data = me.data('params');
