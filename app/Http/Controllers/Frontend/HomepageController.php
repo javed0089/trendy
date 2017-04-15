@@ -12,11 +12,11 @@ use App\Models\Product\Product;
 use App\Models\Rating\Rating;
 use App\Models\Subscriber\Subscriber;
 use App\Models\Testimonials\Testimonial;
-use Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-use Sentinel;
 use Input;
+use Sentinel;
 
 class HomepageController extends Controller
 {
@@ -95,38 +95,32 @@ class HomepageController extends Controller
 
     public function subscribe(Request $request)
     {
+        $this->validate($request, [
+            'email' =>'required|email|unique:subscribers,email',
+            ]);
 
-       $subscriber = new Subscriber;
-       $subscriber->email =$request->email;
-       $subscriber->ip_address =\Request::ip();
-       $subscriber->save();
+        $subscriber = new Subscriber;
+        $subscriber->email =$request->email;
+        $subscriber->ip_address =\Request::ip();
+        $subscriber->save();
+        if($subscriber)
+        {
+            $response = array(
+              'status' => 'success',
+              'msg' => 'Thank you for subscribing!',
+              );
+        }
+        else
+        {
+            $response = array(
+              'status' => 'error',
+              'msg' => 'There was an error!',
+              );
+        }
 
-        return response()->json($subscriber);
-      //  $this->validate(Request::instance(), [
-        //    'email' =>'required|email|unique:users,email'
-       //     ]);
-/*$email = request('email');
-    $_token = request('_token');
-    dd($email);
-    //return Response::json($_token);
+        return response()->json($response);
 
-        if($request::ajax()) {
-      $data = Input::all();
-      dd($data);
     }
-
-
-      /* $this->validate($request, [
-        'email' =>'required|email|unique:users,email'
-        ]);
-
-       $subscriber = new Subscriber;
-       $subscriber->email =$request->email;
-       $subscriber->ip_address =\Request::ip();
-
-       $subscriber->save();
-       return redirect()->back()->with(['success' => "Thank you for subscribing with us!"]);*/
-   }
 
 }
 

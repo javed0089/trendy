@@ -56,7 +56,7 @@
         <div class="row services">
             @if(count($products)>0)
             @foreach($products as $product)
-            <div class="col-md-4">
+            <div id="addToQuote" class="col-md-4">
                 <div class="hover-effect">
                     @if(count($product->Images)>0)
                     <img src="{{asset($product->Images->first()->filename)}}" alt="" />
@@ -66,8 +66,13 @@
 
                 </div>
                 <h4 class="services-title-one subtitle"><a href="{{route('frontend.product',$product->slug)}}"> {{$product->{lang_col('name')} }}</a></h4>
-                <p>{!!str_limit($product->{lang_col('desc')},350)!!}</p>
-                <a class="btn btn-danger btn-sm" href="{{route('addToCart',$product->id)}}"> {{__('Add to Quote')}} </a>
+                <div>{!!str_limit($product->{lang_col('desc')},350)!!}</div>
+                <input type="text" hidden value="{{route('addToCart',$product->id)}}" name=""> 
+
+                <a  data-params='{"prodId":"{{$product->id}}" }' class="btn btn-danger btn-sm quote" href="#"> {{__('Request A Quote')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></a>
+ <div id="alert" style="display: none; margin-top: 5px;" >
+                            </div>
+                               
             </div>
             @endforeach
             @endif

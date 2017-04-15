@@ -13,7 +13,7 @@
        
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ route('cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{__('Cart')}} <span class="badge">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a></li>
+        <li><a href="{{ route('cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{__('Cart')}} <span id="cartCount" class="badge">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a></li>
          <li class="divider-vertical"></li>
         @if(Sentinel::check())
           <li class="dropdown">

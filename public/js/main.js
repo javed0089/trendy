@@ -6,7 +6,7 @@ URI: http://surjithctly.in/
 Version: 1.0
 
 */
- 
+
 (function($) {
     "use strict";
 
@@ -63,8 +63,8 @@ Version: 1.0
 
         $(window).on('scroll', function() {
             var winT = $(window).scrollTop(),
-                winH = $(window).height(),
-                skillsT = skillsDiv.offset().top;
+            winH = $(window).height(),
+            skillsT = skillsDiv.offset().top;
             if (winT + winH > skillsT) {
                 $('.skillbar').each(function() {
                     $(this).find('.skillbar-bar').animate({
@@ -116,32 +116,131 @@ Version: 1.0
 
 
     $(document).ready(function(){
-    $(".dropdown").hover(            
-        function() {
-            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
-            $(this).toggleClass('open');        
+        $(".dropdown").hover(            
+            function() {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+                $(this).toggleClass('open');        
+            },
+            function() {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+                $(this).toggleClass('open');       
+            }
+            );
+    });
+
+
+
+    //Subcribe post request
+
+    $('#js-subscribe-btn').on('click',function(e){ 
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var form_url = $('#subscribeUrl').val();
+        e.preventDefault(); 
+        $.ajax({
+
+            type: "POST",
+            url: form_url,
+            dataType: 'JSON',
+            data: { 
+                _token: CSRF_TOKEN,
+                email:$('#subscribeEmail').val()
+            },
+            beforeSend: function() {
+             $('#loader').show();
+         },
+         complete: function(){
+             $('#loader').hide();
+         },
+         success: function (data) {
+            if(data.status=='success') {
+                $('#msg').removeClass();
+                $('#msg').addClass('ajax-success');
+                $('#msg').text(data.msg);
+                $('#msg').slideDown(1000);
+                $('#subscribeEmail').val("");
+            }
+            else{
+                $('#msg').removeClass();
+                $('#msg').addClass('ajax-danger');
+                $('#msg').text(data.msg);
+                $('#msg').slideDown(1000);
+                $('#subscribeEmail').val("");
+
+
+            }
         },
-        function() {
-            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
-            $(this).toggleClass('open');       
+        error: function(jqXHR, json, errorThrown) {
+            $('#loader').hide();
+            var errors = jqXHR.responseJSON;
+            var errorsHtml= '';
+            $.each( errors, function( key, value ) {
+                errorsHtml += '<li>' + value[0] + '</li>'; 
+            });
+            $('#msg').removeClass();
+            $('#msg').addClass('ajax-danger');
+            $('#msg').html( errorsHtml);
+            $('#msg').slideDown(1000);
         }
-    );
-});
-
-
-
-    //Subcribe
-
-    $('#js-subscribe-btn').on('click',function(){  
-    $.ajax({
-      method: "POST",
-      url: url,
-      data: {'email':$('#subscribeEmail').val(), '_token': $('#_token').val()},
-      success: function(data){
-        console.log(data);
-      }
     }); 
-     return false;     
-  }); 
+    }); 
 
-})(jQuery);
+      //Subcribe post request
+
+      $('#addToQuote .quote').on('click',function(e){ 
+        e.preventDefault(); 
+        var me = $(this),
+        data = me.data('params');
+        var getUrl=$(this).prev('input').val();
+        //console.log( $(this).prev('input').val());
+        //$(this).next('img').show();
+
+        $.ajax({
+
+            type: "GET",
+            url: getUrl,
+            dataType: 'JSON',
+            beforeSend: function() {
+             me.children('img').show();
+         },
+         complete: function(){
+             me.children('img').hide().delay( 800 );
+         },
+         success: function (data) {
+            if(data.status=='success') {
+                $('#cartCount').text(data.count);
+                me.next('#alert').text(data.msg);
+                me.next('#alert').show(1000);
+                me.next('#alert').removeClass();
+                if(data.msg=='Product already added!')
+                    me.next('#alert').addClass('ajax-danger');
+                else
+                    me.next('#alert').addClass('ajax-success');
+            }
+            else{
+                me.next('#alert').removeClass();
+                me.next('#alert').addClass('ajax-danger');
+                me.next('#alert').text(data.msg);
+                me.next('#alert').slideDown(1000);
+                
+
+
+            }
+        },
+        error: function(jqXHR, json, errorThrown) {
+            $('#loader').hide();
+            var errors = jqXHR.responseJSON;
+            var errorsHtml= '';
+            $.each( errors, function( key, value ) {
+                errorsHtml += '<li>' + value[0] + '</li>'; 
+            });
+            me.next('#alert').removeClass();
+            me.next('#alert').addClass('ajax-danger');
+            me.next('#alert').html( errorsHtml);
+            me.next('#alert').slideDown(1000);
+        }
+    }); 
+
+    });
+
+  })(jQuery);

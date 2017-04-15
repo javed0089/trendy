@@ -62,11 +62,13 @@
             </ul>
           </div>
         </div>
-        <div class="col-md-6">
+        <div id="addToQuote" class="col-md-6">
           <h2 class="hood-title color-title"> {{$product->Category->{lang_col('name')} }}</h2>
           <h4 class="hood-subtitle subtitle"> {{$product->Brand->{lang_col('name')} }} - {{$product->{lang_col('name')} }} </h4>
-
-          <a class="btn btn-danger btn-md" href="{{route('addToCart',$product->id)}}"> {{__('Add to Quote')}} </a>
+           <input type="text" hidden value="{{route('addToCart',$product->id)}}" name="">
+          <a class="btn btn-danger btn-md quote" href="#"> {{__('Request A Quote')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></a>
+               <div id="alert" style="display: none; margin-top: 5px;" >
+               </div>
           <div class="spacer-40"></div> 
           @if($product->{lang_col('desc')})
           {!!$product->{lang_col('desc')}!!}

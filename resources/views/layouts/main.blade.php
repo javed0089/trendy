@@ -3,10 +3,10 @@
 
 <head>
 
- <!-- header Section -->
- @include('partials._headers')
- @yield('styles')
- <!-- header Section -->
+   <!-- header Section -->
+   @include('partials._headers')
+   @yield('styles')
+   <!-- header Section -->
 
 </head>
 
@@ -25,7 +25,7 @@
 
         <!-- Main Content Section -->
         <main class="main">
-        
+            
             @yield('content')
         </main>
         <!-- Main Content Section -->
@@ -48,7 +48,7 @@
     <script type="text/javascript">
         
         (function(){
-         
+           
             window.setTimeout(function() {
                 $(".alert").fadeTo(500, 0).slideUp(500, function(){
                     $(this).remove(); 
@@ -57,11 +57,26 @@
             
         }());
     </script>
-
-    @yield('scripts')
-    <!-- Scripts Section -->
-
     
+    <div id="fb-root"></div>
+
+    <script>(function(d, s, id) {
+
+      var js, fjs = d.getElementsByTagName(s)[0];
+
+      if (d.getElementById(id)) return;
+
+      js = d.createElement(s); js.id = id;
+
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+
+      fjs.parentNode.insertBefore(js, fjs);
+
+  }(document, 'script', 'facebook-jssdk'));</script>
+  @yield('scripts')
+  <!-- Scripts Section -->
+
+  
 </body>
 
 </html>

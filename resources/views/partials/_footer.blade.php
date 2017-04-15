@@ -64,26 +64,32 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="our-services widget">
                         <h2 class="widget-title">OUR SERVICES</h2>
-                        <ul>
-                            <li> <a href="#"> Chemicals &amp; Commercial Fuels </a> </li>
-                            <li> <a href="#"> Aviation Fuels &amp; Marine Fuels </a> </li>
-                            <li> <a href="#"> Lubricants Services </a> </li>
-                            <li> <a href="#"> Liquified Petrolium Gas </a> </li>
-                            <li> <a href="#"> Shell Sulphur, Trading &amp; Supply </a> </li>
-                        </ul>
+                        
+
+                        <div class="fb-page" data-href="https://www.facebook.com/gappolymer/" data-tabs="timeline" data-width="280" data-height="220" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/gappolymer/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/gappolymer/">GAP Polymers</a></blockquote></div>
+
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
+
                     <div class="newsletter widget">
                         <h2 class="widget-title">{{__('Newsletter')}}</h2>
                         <p>{{__('Subscribe to our newsletters to receive latest news and updates.')}}</p>
-                        <!-- ============= Mailchimp Subscribe Form ============= -->
+                        <!-- provide the csrf token -->
+                        <meta name="csrf-token" content="{{ csrf_token() }}" />
+
                         <form action=""  method="post" data-parsley-validate>
-                         <input type="hidden" value="{{ csrf_token() }}" id="_token" name="_token" />
-                            <div class="form-group">
+                            <input type="text" hidden name="subscribeUrl" value="{{route('frontend.subscribe')}}" id="subscribeUrl">
+                            <div class="form-group">    
                                 <input type="email" id="subscribeEmail" name="subscribeEmail" placeholder="{{__('Enter your email')}}" class="form-control" required data-parsley-required-message="Please enter your email address">
                             </div>
-                            <button type="submit" class="btn btn-block" id="js-subscribe-btn"> {{__('Subscribe Now!')}} </button>
+                            <div id="msg" style="display: none; margin-bottom: 5px;" >
+                            </div>
+
+                            
+                            <button type="submit" class="btn btn-block" id="js-subscribe-btn"> <span>{{__('Subscribe Now!')}} <img id="loader" class="pull-right" width="45" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading">
+                                </span>
+</button>
                         </form>
                     </div>
                 </div>

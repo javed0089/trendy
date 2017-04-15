@@ -5400,3 +5400,24 @@ a.btn.btn-xs {
 .inline {
     display:inline-block;
 }
+
+.userinfo h4{
+    display: block;
+    color: #76797f;
+    margin-bottom: 25px;
+}
+.userinfo h4 span{
+    display: block;
+    font-size: 16px;
+   color: #231f20;
+}
+
+.ajax-success{
+    color: green;
+    font-style: italic;
+}
+
+.ajax-danger{
+    color: red;
+    font-style: italic;
+}

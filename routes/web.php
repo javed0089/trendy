@@ -216,6 +216,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 		 Route::get('module/ratings','Backend\Ratings\RatingController@index')->name('ratings.index');
 		
+		Route::get('module/subscribers','Backend\Newsletter\SubscriberController@index')->name('subscribers.index');
 		
 	});
 

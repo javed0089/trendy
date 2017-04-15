@@ -5398,3 +5398,13 @@ a.btn.btn-xs {
     font-size: 16px;
    color: #231f20;
 }
+
+.ajax-success{
+    color: green;
+    font-style: italic;
+}
+
+.ajax-danger{
+    color: red;
+    font-style: italic;
+}
