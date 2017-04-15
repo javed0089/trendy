@@ -38,8 +38,9 @@ class QuoteController extends Controller
     {
         $product = Product::find($id);
         $oldCart = Session::has('cart')? Session::get('cart') : null;
-        if($oldCart->items)
+        if($oldCart)
         {
+
             if(!array_key_exists($id, $oldCart->items))
             {
                 $cart = new cart($oldCart);
@@ -50,7 +51,9 @@ class QuoteController extends Controller
             else  
                 $msg = 'Product already added!';
         }
-        else{
+        else
+        {
+
             $cart = new cart($oldCart);
             $cart->add($product, $product->id);
             Session::put('cart', $cart);
@@ -79,27 +82,27 @@ class QuoteController extends Controller
 
     public function updateCart(Request $request, $id)
     {
-       $product = Product::find($id);
-       $submitReq = $request->submit;
-       if($submitReq =="btn-update"){
-          $oldCart = Session::has('cart')? Session::get('cart') : null;
-          $cart = new cart($oldCart);
-          $cart->update($product, $product->id, $request->quantity,$request->unit,$request->port_of_delivery,$request->delivery_terms,$request->payment_method,$request->invoice,$request->packing_list,$request->co,$request->others,$request->others_text);
-          Session::put('cart', $cart);
-      }
-      elseif($submitReq =="btn-delete"){
-          $oldCart = Session::has('cart')? Session::get('cart') : null;
-          $cart = new cart($oldCart);
-          $cart->delete($id);
-          $cart->step='1';
-          Session::put('cart', $cart);
-      }
-
-      return redirect()->back();
+     $product = Product::find($id);
+     $submitReq = $request->submit;
+     if($submitReq =="btn-update"){
+      $oldCart = Session::has('cart')? Session::get('cart') : null;
+      $cart = new cart($oldCart);
+      $cart->update($product, $product->id, $request->quantity,$request->unit,$request->port_of_delivery,$request->delivery_terms,$request->payment_method,$request->invoice,$request->packing_list,$request->co,$request->others,$request->others_text);
+      Session::put('cart', $cart);
+  }
+  elseif($submitReq =="btn-delete"){
+      $oldCart = Session::has('cart')? Session::get('cart') : null;
+      $cart = new cart($oldCart);
+      $cart->delete($id);
+      $cart->step='1';
+      Session::put('cart', $cart);
   }
 
-  public function confirmCart($id)
-  {
+  return redirect()->back();
+}
+
+public function confirmCart($id)
+{
 
     $cart = Session::has('cart')? Session::get('cart') : null;
     $cart = new cart($cart);
@@ -217,17 +220,17 @@ public function sendQuote(Request $request)
     elseif(Sentinel::check())
         $quote->user_id = Sentinel::check()->id;
     else{
-     $cart->step='2';
-     Session::put('cart', $cart);
-     return redirect()->route('cart');
- }
+       $cart->step='2';
+       Session::put('cart', $cart);
+       return redirect()->route('cart');
+   }
 
 
- $quote->quote_validity = null;
- $quote->status = 1;
- $quote->save();
+   $quote->quote_validity = null;
+   $quote->status = 1;
+   $quote->save();
 
- foreach ($cart->items as $key=>$item) {
+   foreach ($cart->items as $key=>$item) {
     $quoteDetail = new QuoteDetail;
     $quoteDetail->product_id = $key;
     $quoteDetail->quantity = $item['quantity'];
