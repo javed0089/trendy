@@ -137,6 +137,7 @@ Version: 1.0
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         var form_url = $('#subscribeUrl').val();
         e.preventDefault(); 
+        alert(form_url);
         $.ajax({
 
             type: "POST",
