@@ -73,7 +73,7 @@
           @if($product->{lang_col('desc')})
           {!!$product->{lang_col('desc')}!!}
           @endif 
-          <h4 class="hood-subtitle subtitle-2">{{__('Technical Data Sheets')}} </h4>
+          <h4 class="hood-subtitle subtitle-2">{{__('Product Data Sheets')}} </h4>
           <div class="row styled-list">
             <ul class="list-unstyled">
               @foreach($product->Files as $file)
@@ -84,9 +84,12 @@
 
         </div>
         <div class="spacer-50"></div>
+         <div class="col-md-6">
+          
+         </div>
         @if(!empty($product->{lang_col('specs')}))
-        <div class="col-md-12">
-          <h4 class="hood-subtitle subtitle-2">{{__('Specifications')}}</h4>
+        <div class="col-md-6">
+          <h4 class="hood-subtitle subtitle-2">{{__('Product Applications')}}</h4>
           {!!$product->{lang_col('specs')}!!}
         </div>
         @endif

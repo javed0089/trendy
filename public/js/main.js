@@ -295,7 +295,7 @@ Version: 1.0
       $(window).scroll(function(){
        var height = $(this).scrollTop();
        var brand = $("#smallLogo");
-       if (height > 125){
+       if (height > 120){
          brand.show('slow');  
          $('.main-header').addClass('shrink') ;
      }

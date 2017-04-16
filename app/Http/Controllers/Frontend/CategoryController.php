@@ -40,6 +40,9 @@ class CategoryController extends Controller
         $product=Product::where('slug','=',$slug)->first();
         $topImage = Page::find(130)->PageSections()->first();
 
+        $relatedProds = Product::where('category_id','=',$product->category->id)->inRandomOrder()->take(3)->get();
+        //dd($relatedProds);
+
         if($product)
             return view('frontend.product')->with('product',$product)->with('topImage',$topImage);
         else
