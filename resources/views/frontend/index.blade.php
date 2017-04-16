@@ -365,7 +365,7 @@
                 </div>
                 <div class="blog-content">
                     <h3><a href="{{route('frontend.post',$post->slug)}}"> {{$post->title_en}} </a> </h3>
-                    
+                    <p>{{__('By')}} <a href="#">{{$post->{lang_col('author')} }}</a> {{__('in')}} {{isset($post->BlogCategory)?$post->BlogCategory->{lang_col('name')}:''}} </p>
                 </div>
             </div>
             @endforeach

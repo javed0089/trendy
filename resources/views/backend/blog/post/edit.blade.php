@@ -65,8 +65,8 @@
 									
 									<div class="form-group">
 									<label for="blog_category_id">Category</label>
-										 <select name="blog_category_id" class="form-control">
-								            <option value="0">Select Category</option>
+										 <select name="blog_category_id" class="form-control" required>
+								            <option value="">Select Category</option>
 								            @foreach($blogCategories as $blogCategory)
 								              <option {{$post->blog_category_id==$blogCategory->id?'Selected':''}} value="{{$blogCategory->id}}">{{$blogCategory->name_en}}</option>
 								            @endforeach
