@@ -54,7 +54,7 @@
 							<div class="callout ">
 								
 								<h4>Category</h4>
-				                <p>{{$post->BlogCategory->name_en}}</p>
+				               
 			        	        <h4>Created at</h4>
 				                <p>{{date('M j, Y H:i',strtotime($post->created_at))}}</p>
 				                <h4>Last updated at</h4>
