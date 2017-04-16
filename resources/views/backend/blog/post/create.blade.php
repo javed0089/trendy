@@ -55,7 +55,7 @@
 
 									<div class="form-group">
 										<label for="title_en">Title</label>
-										<input type="text" class="form-control" name="title_en" id="title_en" placeholder="Title (En)"  value="{{old('title_en')}}">
+										<input type="text" class="form-control" name="title_en" id="title_en" placeholder="Title (En)"  value="{{old('title_en')}}" required>
 									</div>
 
 									<div class="form-group">
@@ -119,7 +119,7 @@
 
 									<div class="form-group">
 										<label for="title_ar">Title</label>
-										<input type="text" class="form-control"  name="title_ar" id="title_ar" placeholder="Title (Ar)" value="{{old('title_ar')}}">
+										<input type="text" class="form-control"  name="title_ar" id="title_ar" placeholder="Title (Ar)" value="{{old('title_ar')}}" required>
 									</div>
 
 									<div class="form-group">
