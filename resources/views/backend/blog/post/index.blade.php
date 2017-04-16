@@ -45,7 +45,7 @@
 							@foreach($posts as $post)
 							<tr>
 								<td>{{str_limit($post->title_en,30)}}</td>
-								<td>{{$post->BlogCategory->name_en}}</td>
+								<td></td>
 								<td>{{ date('M j, Y H:i',strtotime($post->created_at))}}</td>
 								<td>{{date('M j, Y H:i',strtotime($post->updated_at))}}</td>
 								<td>
