@@ -2,7 +2,7 @@
     <div class="header-area">
 	
 		 <!-- Top fixed nav bar -->
-        @include('partials._top-navbar')
+     
          <!-- Top fixed nav bar -->
 
         <!-- Top header Info -->

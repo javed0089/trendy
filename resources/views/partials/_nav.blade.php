@@ -1,7 +1,37 @@
-  <div class="main-header container-fluid main-menu">
+  <style type="text/css">
+  .main-header.affix-top {
+  /* position: absolute;
+   top:0;
+   left:0;
+   z-index:10;
+   height:54px;
+   background-color:transparent;
+   border:0;*/
+}
+
+.main-header.affix {
+   position: fixed;
+   width: 100%;
+   top: 0;
+   z-index:10;
+   -webkit-transition: all .6s ease-in-out;
+}</style>
+
+  <div class="main-header container-fluid main-menu" style="z-index: 1000">
+   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only"> Main Menu </span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
     <div class="row mobile--relative">
         <div class="container">
+        <div id="smallLogo" class="small-logo">
+            <a  class="" href="/"><img src="{{asset('images/logo2.png')}}" width="130" height="45" alt="Gap-Polymers Logo" /></a>
+            </div>
             <nav class="nav--primary">
+            
                 <ul id="menu-main-menu" class="menu">
                     <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500"><a href="/">{{__('Home')}} </a></li> 
                     <li id="menu-item-1505" class="mega-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1505">
@@ -145,3 +175,4 @@
 
     </div>
 </div>
+

@@ -5421,3 +5421,10 @@ a.btn.btn-xs {
     color: red;
     font-style: italic;
 }
+
+.small-logo{
+    display: none;
+    position: relative;
+    right: 0;
+    float:right; 
+}

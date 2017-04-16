@@ -10,7 +10,7 @@
 
 </head>
 
-<body style="padding-top: 25px;" {!! LaravelLocalization::getCurrentLocale()=='ar'?' dir="rtl" lang="ar"':''!!} class="homepage">
+<body  {!! LaravelLocalization::getCurrentLocale()=='ar'?' dir="rtl" lang="ar"':''!!} class="homepage">
 
     <!-- Preloader -->
     @include('partials._preloader')

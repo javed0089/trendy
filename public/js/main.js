@@ -185,16 +185,14 @@ Version: 1.0
     }); 
     }); 
 
-      //Subcribe post request
+      //Add to quote request
 
       $('#addToQuote .quote').on('click',function(e){ 
         e.preventDefault(); 
         var me = $(this),
         data = me.data('params');
         var getUrl=$(this).prev('input').val();
-        //console.log( $(this).prev('input').val());
-        //$(this).next('img').show();
-
+   
         $.ajax({
             type: "GET",
             url: getUrl,
@@ -245,5 +243,24 @@ Version: 1.0
     }); 
 
     });
+
+         $('.main-header').affix({
+  offset: {
+    top: 120
+  }
+});
+
+
+         $(window).scroll(function(){
+       var height = $(this).scrollTop();
+       var brand = $("#smallLogo");
+       if (height > 125){
+         brand.show('slow');   
+       }
+       else{
+          brand.hide();
+       }
+    });
+
 
   })(jQuery);
