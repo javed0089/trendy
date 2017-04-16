@@ -1,23 +1,4 @@
-  <style type="text/css">
-  .main-header.affix-top {
-  /* position: absolute;
-   top:0;
-   left:0;
-   z-index:10;
-   height:54px;
-   background-color:transparent;
-   border:0;*/
-}
-
-.main-header.affix {
-   position: fixed;
-   width: 100%;
-   top: 0;
-   z-index:10;
-   -webkit-transition: all .6s ease-in-out;
-}</style>
-
-  <div class="main-header container-fluid main-menu" style="z-index: 1000">
+<div class="main-header container-fluid main-menu" style="z-index: 1000">
    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
                 <span class="sr-only"> Main Menu </span>
                 <span class="icon-bar"></span>

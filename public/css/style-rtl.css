@@ -5428,3 +5428,10 @@ a.btn.btn-xs {
     right: 0;
     float:right; 
 }
+
+.shrink {
+  min-height: 40px;
+}
+.shrink .nav--primary{
+  font-size: 16px !important;
+}

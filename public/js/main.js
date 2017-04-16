@@ -147,12 +147,12 @@ Version: 1.0
                 email:$('#subscribeEmail').val()
             },
             beforeSend: function() {
-               $('#loader').show();
-           },
-           complete: function(){
-               $('#loader').hide();
-           },
-           success: function (data) {
+             $('#loader').show();
+         },
+         complete: function(){
+             $('#loader').hide();
+         },
+         success: function (data) {
             if(data.status=='success') {
                 $('#msg').removeClass();
                 $('#msg').addClass('ajax-success');
@@ -192,20 +192,20 @@ Version: 1.0
         var me = $(this),
         data = me.data('params');
         var getUrl=$(this).prev('input').val();
-   
+        
         $.ajax({
             type: "GET",
             url: getUrl,
             dataType: 'JSON',
             beforeSend: function() 
             {
-               me.children('img').show();
-           },
-           complete: function(){
-               me.children('img').hide().delay( 800 );
-           },
-           success: function (data) 
-           {
+             me.children('img').show();
+         },
+         complete: function(){
+             me.children('img').hide().delay( 800 );
+         },
+         success: function (data) 
+         {
             if(data.status=='success') 
             {
                 $('#cartCount').text(data.count);
@@ -244,23 +244,25 @@ Version: 1.0
 
     });
 
-         $('.main-header').affix({
-  offset: {
-    top: 120
-  }
-});
+      $('.main-header').affix({
+          offset: {
+            top: 120
+        }
+    });
 
 
-         $(window).scroll(function(){
-       var height = $(this).scrollTop();
-       var brand = $("#smallLogo");
-       if (height > 125){
-         brand.show('slow');   
+      $(window).scroll(function(){
+         var height = $(this).scrollTop();
+         var brand = $("#smallLogo");
+         if (height > 125){
+           brand.show('slow');  
+           $('.main-header').addClass('shrink') ;
        }
        else{
           brand.hide();
-       }
-    });
+          $('.main-header').removeClass('shrink') ;
+      }
+  });
 
 
   })(jQuery);
