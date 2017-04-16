@@ -1,6 +1,7 @@
 <div class="main-header container-fluid main-menu" style="z-index: 1000">
-   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" style="z-index: 1001">
                 <span class="sr-only"> Main Menu </span>
+                <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
