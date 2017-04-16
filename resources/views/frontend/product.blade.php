@@ -85,7 +85,23 @@
         </div>
         <div class="spacer-50"></div>
          <div class="col-md-6">
+         <h4 class="hood-subtitle subtitle-2">{{__('Related Products')}} </h4>
+          @foreach($relatedProds as $relatedProd)
+            <div class="col-md-4 col-sm-4">
+           <a href="{{route('frontend.product',$relatedProd->slug)}}" class="hover-effect">
+             @if($relatedProd->Images && count($relatedProd->Images))
+             <img src="{{asset($relatedProd->Images->first()->filename)}}" alt="{{$relatedProd->{lang_col('name')} }}" />
+             @else
+             <img src="http://placehold.it/350x260" alt="{{$relatedProd->{lang_col('name')} }}" />
+             @endif
+           </a>
+           <h5 class="subtitle services-title-one"><a href="{{route('frontend.product',$relatedProd->slug)}}"> {{$relatedProd->{lang_col('name')} }}</a></h5>
           
+          
+          
+          
+         </div>
+          @endforeach
          </div>
         @if(!empty($product->{lang_col('specs')}))
         <div class="col-md-6">

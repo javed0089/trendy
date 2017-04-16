@@ -15,7 +15,7 @@ class CategoryController extends Controller
     	$categories=Category::all();
         $topImage = Page::find(110)->PageSections()->first();
 
-    	return view('frontend.categories')->with('categories',$categories)->with('topImage',$topImage);
+        return view('frontend.categories')->with('categories',$categories)->with('topImage',$topImage);
     }
 
     public function productlist($slug)
@@ -26,25 +26,28 @@ class CategoryController extends Controller
 
         $subCategories = Category::where('parent_id','=',$category->id)->get();
         //dd($subCategories);
-    	$products=Product::where('category_id','=',$category->id)->get();
+        $products=Product::where('category_id','=',$category->id)->get();
     	//dd($products);
 
         $topImage = Page::find(120)->PageSections()->first();
 
-    	return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories);
+        return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories);
     }
 
     public function product($slug)
     {
- 
+
         $product=Product::where('slug','=',$slug)->first();
         $topImage = Page::find(130)->PageSections()->first();
 
-        $relatedProds = Product::where('category_id','=',$product->category->id)->inRandomOrder()->take(3)->get();
-        //dd($relatedProds);
+        $relatedProds = Product::where([['category_id','=',$product->category->id],['id','!=',$product->id]])->inRandomOrder()->take(3)->get();
+        if(!count($relatedProds) >0 )
+        {
+            $relatedProds = Product::where([['id','!=',$product->id]])->inRandomOrder()->take(3)->get();
+        }
 
         if($product)
-            return view('frontend.product')->with('product',$product)->with('topImage',$topImage);
+            return view('frontend.product')->with('product',$product)->with('topImage',$topImage)->with('relatedProds',$relatedProds);
         else
             abort(403, 'Unauthorized action.');
     }
