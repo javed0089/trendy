@@ -22,14 +22,16 @@ class CategoryController extends Controller
     {
     	$categories=Category::where('parent_id','=','0')->get();
     	//$categories=Category::all();
-        $category=Category::where('slug','=',$slug)->get();
-        //dd($category);
-    	$products=Product::where('category_id','=',$category->first()->id)->get();
+        $category=Category::where('slug','=',$slug)->first();
+
+        $subCategories = Category::where('parent_id','=',$category->id)->get();
+        //dd($subCategories);
+    	$products=Product::where('category_id','=',$category->id)->get();
     	//dd($products);
 
         $topImage = Page::find(120)->PageSections()->first();
 
-    	return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage);
+    	return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories);
     }
 
     public function product($slug)

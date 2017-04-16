@@ -129,6 +129,47 @@ Version: 1.0
     });
 
 
+    //Product List Side bar
+    $(document).ready(function() {                                                               
+        jQuery("#tree ul").hide();                                                       
+
+        jQuery("#tree li").each(function() {                                                  
+          var handleSpan = jQuery("<span></span>");
+          handleSpan.addClass("handle");                                       
+          handleSpan.prependTo(this);                                          
+
+          if(jQuery(this).has("ul").size() > 0) {                              
+            handleSpan.addClass("collapsed");                        
+            handleSpan.click(function() {                            
+              var clicked = jQuery(this);                  
+              clicked.toggleClass("collapsed expanded");   
+              clicked.siblings("ul").toggle();             
+          });                                                      
+        }                                                                    
+    });     
+
+        var li = $('#tree li.active');
+
+        li.parents("ul").show();
+        li.parents().siblings("span").toggleClass("collapsed expanded");
+
+        jQuery("#tree li").each(function() 
+        {
+          if(jQuery(this).hasClass('active'))
+          {
+            var active = jQuery(this); 
+            if(active.has("ul").size() > 0)
+            {
+               active.children('span').toggleClass("collapsed expanded");
+               active.children("ul").toggle();
+           }
+       }
+   });
+
+
+    });                                                                                            
+
+
 
     //Subcribe post request
 
@@ -147,12 +188,12 @@ Version: 1.0
                 email:$('#subscribeEmail').val()
             },
             beforeSend: function() {
-             $('#loader').show();
-         },
-         complete: function(){
-             $('#loader').hide();
-         },
-         success: function (data) {
+               $('#loader').show();
+           },
+           complete: function(){
+               $('#loader').hide();
+           },
+           success: function (data) {
             if(data.status=='success') {
                 $('#msg').removeClass();
                 $('#msg').addClass('ajax-success');
@@ -199,13 +240,13 @@ Version: 1.0
             dataType: 'JSON',
             beforeSend: function() 
             {
-             me.children('img').show();
-         },
-         complete: function(){
-             me.children('img').hide().delay( 800 );
-         },
-         success: function (data) 
-         {
+               me.children('img').show();
+           },
+           complete: function(){
+               me.children('img').hide().delay( 800 );
+           },
+           success: function (data) 
+           {
             if(data.status=='success') 
             {
                 $('#cartCount').text(data.count);
@@ -252,17 +293,17 @@ Version: 1.0
 
 
       $(window).scroll(function(){
-         var height = $(this).scrollTop();
-         var brand = $("#smallLogo");
-         if (height > 125){
-           brand.show('slow');  
-           $('.main-header').addClass('shrink') ;
-       }
-       else{
-          brand.hide();
-          $('.main-header').removeClass('shrink') ;
-      }
-  });
+       var height = $(this).scrollTop();
+       var brand = $("#smallLogo");
+       if (height > 125){
+         brand.show('slow');  
+         $('.main-header').addClass('shrink') ;
+     }
+     else{
+      brand.hide();
+      $('.main-header').removeClass('shrink') ;
+  }
+});
 
 
   })(jQuery);
