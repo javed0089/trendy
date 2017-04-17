@@ -31,7 +31,7 @@
                 <div class="services-content">
                     <section class="services-company">
                         <div class="row service-list">
-                             @foreach($categories->chunk(3) as $categoryChunk)
+                             @foreach($categories->sortBy('sort_order')->chunk(3) as $categoryChunk)
                                 @foreach($categoryChunk as $category)
                                     <div class="col-md-4 col-sm-4">
                                         <a href="{{route('frontend.productlist',$category->slug)}}" class="hover-effect">
