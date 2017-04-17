@@ -40,6 +40,7 @@ class FileController extends Controller
     {
         $this->validate($request, [
         'product_file' => "required|mimes:pdf|max:10000",
+        'file_title' => "required",
         ]);
 
        
@@ -56,7 +57,7 @@ class FileController extends Controller
             $prodFile->filename=$location.$new_filename;
             $prodFile->mime=$file->getClientMimeType();
             $prodFile->original_filename=$file->getClientOriginalName();
-               
+            $prodFile->file_title = $request->file_title;
             $prodFile->save();
 
             $product=Product::find($product_id);
@@ -87,7 +88,7 @@ class FileController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -99,7 +100,10 @@ class FileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $file=\App\Models\Product\File::find($id);
+         $file->file_title = $request->file_title;
+         $file->save();
+         return back()->with('success','File updated successfully!');
     }
 
     /**

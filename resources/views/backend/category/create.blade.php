@@ -74,7 +74,10 @@
 											<small class="text-red">(Do not use enter key for new line. Use Shift+Enter for newline!)</small>
 											<textarea class="textarea" name="desc_en" id="desc_en" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{old('desc_en')}}</textarea>
 										</div>
-
+										<div class="form-group">
+										<label for="slug">Sort Order</label>
+											<input type="number" class="form-control"  name="sort_order" style="width: 100px;" required value="{{old('sort_order')}}" >
+										</div>
 										<div class="form-group">
 											<label for="image">Add Image</label>
 											<input type="file" id="image" name="image">

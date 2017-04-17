@@ -42,6 +42,7 @@
 									<tr>
 										
 										<th>Category</th>
+										<th>Sort Order</th>
 										<th>Created</th>
 										<th>Last Updated</th>
 										<th width="120"></th>
@@ -60,6 +61,7 @@
 												@endif
 											@endif
 										</td>
+										<td>{{$category->sort_order}}</td>
 										<td>{{ date('M j, Y H:i',strtotime($category->created_at))}}</td>
 										<td>{{date('M j, Y H:i',strtotime($category->updated_at))}}</td>
 										<td>

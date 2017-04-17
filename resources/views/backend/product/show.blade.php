@@ -4,14 +4,14 @@
 @section('content')
 
 <section class="content-header">
-<div class="box-header" style="padding: 5px 15px; height: 32px; "> 
-	<h1 class="box-title" style="line-height: 25px;" >
-		Product -{{$product->name_en}}
-	</h1>
-	<div style="width: 150px; " class="pull-right">
-		<a class="btn btn-primary bt-md" href="{{ route('products.edit',$product->id) }}">Edit Product</a>
+	<div class="box-header" style="padding: 5px 15px; height: 32px; "> 
+		<h1 class="box-title" style="line-height: 25px;" >
+			Product -{{$product->name_en}}
+		</h1>
+		<div style="width: 150px; " class="pull-right">
+			<a class="btn btn-primary bt-md" href="{{ route('products.edit',$product->id) }}">Edit Product</a>
+		</div>
 	</div>
-</div>
 </section>
 
 <!-- Main content -->
@@ -24,14 +24,13 @@
 	@endif
 
 	@if (count($errors) > 0)
-		<div class="alert alert-danger">
-			<strong>Whoops!</strong> There were some problems with your input.<br><br>
-			<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-			</ul>
-		</div>
+	<div class="alert alert-danger">
+		<ul>
+			@foreach ($errors->all() as $error)
+			<li>{{ $error }}</li>
+			@endforeach
+		</ul>
+	</div>
 	@endif
 
 
@@ -60,35 +59,37 @@
 							<div class="callout ">
 								
 								<h4>Category</h4>
-				                <p>{{isset($product->Category->name_en)?$product->Category->name_en:'n/a'}}</p>
-				                <h4>Brand</h4>
-				                <p>{{isset($product->Brand->name_en)?$product->Brand->name_en:'n/a'}}</p>
-			        	        <h4>Created at</h4>
-				                <p>{{date('M j, Y H:i',strtotime($product->created_at))}}</p>
-				                <h4>Last updated at</h4>
-				                <p>{{date('M j, Y H:i',strtotime($product->updated_at))}}</p>
-				                <h4>Slug</h4>
-				                <p><a style="color: blue;" href="{{url($product->slug)}}">{{url($product->slug)}}</a></p>
-				                <h4>Featured</h4>
-				                <p>{!!$product->featured?'<span class="label label-success">Yes</span>':'<span class="label label-warning">No</span>'!!}</p>
-				                <h4>Discontinued</h4>
-				                <p>{!!$product->discontinued?'<span class="label label-danger">Yes</span>':'<span class="label label-success">No</span>'!!}</p>
+								<p>{{isset($product->Category->name_en)?$product->Category->name_en:'n/a'}}</p>
+								<h4>Brand</h4>
+								<p>{{isset($product->Brand->name_en)?$product->Brand->name_en:'n/a'}}</p>
+								<h4>Sort Order</h4>
+								<p>{{$product->sort_order}}</p>
+								<h4>Created at</h4>
+								<p>{{date('M j, Y H:i',strtotime($product->created_at))}}</p>
+								<h4>Last updated at</h4>
+								<p>{{date('M j, Y H:i',strtotime($product->updated_at))}}</p>
+								<h4>Slug</h4>
+								<p><a style="color: blue;" href="{{url($product->slug)}}">{{url($product->slug)}}</a></p>
+								<h4>Featured</h4>
+								<p>{!!$product->featured?'<span class="label label-success">Yes</span>':'<span class="label label-warning">No</span>'!!}</p>
+								<h4>Discontinued</h4>
+								<p>{!!$product->discontinued?'<span class="label label-danger">Yes</span>':'<span class="label label-success">No</span>'!!}</p>
 
-				                <p>
+								<p>
 									<form role="form"  method="Post"  action="{{ route('products.featured',$product->id) }}">
 										{{csrf_field()}}
 										<button type="submit" class="btn btn-block {{$product->featured?'btn-danger':'btn-success'}}">{{$product->featured?'Undo Featured':'Make Featured'}}</button>
 									</form>
 								</p>
-				                <p>
+								<p>
 									<form role="form"  method="Post"  action="{{ route('products.discontinue',$product->id) }}">
 										{{csrf_field()}}
 										<button type="submit" class="btn btn-block {{$product->discontinued?'btn-success':'btn-danger'}}">{{$product->discontinued?'Activate':'Discontinue'}}</button>
 									</form>
 								</p>
-				                
-			              </div>
-		              </div>
+
+							</div>
+						</div>
 					</div>
 
 				</div>
@@ -130,9 +131,9 @@
 									<tr>
 										<td>
 											@if($image->filename)
-												@if(File::exists(public_path($image->filename)))
-													<img class="display-block" src="{{asset($image->filename)}}" width="150" height="80">
-												@endif
+											@if(File::exists(public_path($image->filename)))
+											<img class="display-block" src="{{asset($image->filename)}}" width="150" height="80">
+											@endif
 											@endif
 										</td>
 										<td>{{$image->mime}}</td>
@@ -163,16 +164,16 @@
 								<h4>Upload Image</h4>
 								<form role="form"  method="Post" enctype="multipart/form-data" action="{{ route('images.store') }}">
 									{{csrf_field()}}
-					                <div class="form-group">
+									<div class="form-group">
 										<label for="product_image">Add image</label>
 										<input type="file" id="product_image" name="product_image">
 										<input name="product_id" type="hidden" value="{{$product->id}}">
 									</div>
 									<button type="submit" class="btn btn-primary">Upload</button>
 								</form>
-				                
-			              </div>
-		              </div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -185,21 +186,24 @@
 							<table id="example2" class="table table-bordered table-hover">
 								<thead>
 									<tr>
-										
+										<th>File Title</th>
 										<th>File Name</th>
 										<th>Type</th>
 										<th>Uploaded</th>
-										<th width="80"></th>
-										<th width="80"></th>
+										<th ></th>
+										<th ></th>
+										<th ></th>
 									</tr>
 								</thead>
 								<tbody>
 
 									@foreach($product->Files as $file)
 									<tr>
+										<td>{{$file->file_title}}</td>
 										<td>{{$file->original_filename}}</td>
 										<td>{{$file->mime}}</td>
 										<td>{{ date('M j, Y H:i',strtotime($file->created_at))}}</td>
+										<td><button type="button" class="btn btn-md btn-primary pull-right" data-toggle="modal" data-target="#{{$file->id}}">Edit</button></td>
 										<td>
 											
 											<a href="{{asset($file->filename) }}" target="blank" class="btn btn-sm btn-default">Download</a>
@@ -216,6 +220,42 @@
 
 										</td>
 									</tr>
+
+
+									<div id="{{$file->id}}" class="modal fade" role="dialog">
+										<div class="modal-dialog">
+
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">{{$file->file_title}} </h4>
+												</div>
+
+
+
+												<form role="form" method="Post" enctype="multipart/form-data" action="{{ route('files.update',$file->id) }}" >
+													{{csrf_field()}}
+													{{ method_field('PATCH') }}
+													<div class="modal-body">
+														<div class="form-group" >
+															<label for="">File Title</label>
+															<input class="form-control" type="text" id="file_title" name="file_title" value="{{$file->file_title}}" required>
+														</div>
+
+
+
+													</div>
+
+													<div class="modal-footer">
+														<button type="button" class="btn btn-md " data-dismiss="modal">Cancel</button>
+														<button type="submit" name="submit" class="btn btn-md btn-primary" >Update</button>
+													</div>
+												</form>
+
+											</div>
+										</div>
+									</div>
 									@endforeach
 
 								</tbody>
@@ -230,16 +270,18 @@
 								<h4>File Uploads</h4>
 								<form role="form"  method="Post" enctype="multipart/form-data" action="{{ route('files.store') }}">
 									{{csrf_field()}}
-					                <div class="form-group">
+									<div class="form-group">
+										<label>File Title</label>
+										<input class="form-control" required type="text" name="file_title">
 										<label for="product_file">Add new file</label>
 										<input type="file" id="product_file" name="product_file">
 										<input name="product_id" type="hidden" value="{{$product->id}}">
 									</div>
 									<button type="submit" class="btn btn-primary">Upload</button>
 								</form>
-				                
-			              </div>
-		              </div>
+
+							</div>
+						</div>
 					</div>
 
 				</div>
@@ -253,13 +295,15 @@
 		</div>
 	</div>
 
+
+
 </section>
 @endsection
 
 @section('scripts')
-	<script>
-	    $("#delbutton").on("click", function(){
-	        return confirm("Are you sure, you want to delete it?");
-	    });
-	</script>
+<script>
+	$("#delbutton").on("click", function(){
+		return confirm("Are you sure, you want to delete it?");
+	});
+</script>
 @endsection

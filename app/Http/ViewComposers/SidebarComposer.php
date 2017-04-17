@@ -28,7 +28,7 @@ class SidebarComposer{
 
 		$menuParentCats= Category::where('parent_id','=','0')->get();
 		$menuSubCats= Category::where('parent_id','!=','0')->get();
-		$menuProducts= Product::all();
+		$menuProducts= Product::where('discontinued','=','0')->get();
 		$menuServices= Service::where('status','=','1')->get();
     	
 		$view->with('activeLink',$activeLink)->with('locale',$locale)->with('header_blocks',$header_blocks)->with('social_blocks',$social_blocks)->with('footer_blocks',$footer_blocks)->with('menuParentCats',$menuParentCats)->with('menuSubCats',$menuSubCats)->with('menuProducts',$menuProducts)->with('menuServices',$menuServices);

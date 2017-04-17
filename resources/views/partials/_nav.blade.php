@@ -1,3 +1,4 @@
+
 <div class="main-header container-fluid main-menu" style="z-index: 1000">
    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" style="z-index: 1001">
                 <span class="sr-only"> Main Menu </span>
@@ -20,13 +21,13 @@
                         <a href="{{route('frontend.categories')}}">{{__('Products')}}</a>
                         <ul class="sub-menu">
                             @if(isset($menuParentCats))
-                            @foreach($menuParentCats as $menuParentCat)
+                            @foreach($menuParentCats->sortBy('sort_order') as $menuParentCat)
                             <li id="menu-item-2987" class="menu-item menu-item-type-post_type menu-item-object-cat_industry menu-item-has-children menu-item-2987">
                                 <a href="{{route('frontend.productlist',$menuParentCat->slug)}}">{{$menuParentCat->{lang_col('name')} }}</a>
                                  <ul class="sub-menu">
                                     @if(isset($menuProducts))
                                         <?php $var = '0'; ?>
-                                        @foreach($menuProducts as $key=>$menuProduct)
+                                        @foreach($menuProducts->sortBy('sort_order') as $key=>$menuProduct)
                                             @if ( $menuProduct->category_id == $menuParentCat->id )
                                                 @if($var==0)
                                                    <li class="menu-item-type-custom menu-item-object-custom menu-item-2987-1">
@@ -44,13 +45,13 @@
                                     @endif    
                                     
                                     @if(isset($menuSubCats))
-                                    @foreach($menuSubCats as $menuSubCat)
+                                    @foreach($menuSubCats->sortBy('sort_order') as $menuSubCat)
                                          @if ( $menuSubCat->parent_id == $menuParentCat->id )
                                             <li class="menu-item-type-custom menu-item-object-custom menu-item-2987-1">
                                             <a href="{{route('frontend.productlist',$menuSubCat->slug)}}">{{$menuSubCat->{lang_col('name')} }}</a>
                                                 <ul class="sub-menu">
                                                      @if(isset($menuProducts))
-                                                        @foreach($menuProducts as $menuProduct)
+                                                        @foreach($menuProducts->sortBy('sort_order') as $menuProduct)
                                                             @if ( $menuProduct->category_id == $menuSubCat->id )
                                                                 <li id="menu-item-2" class="menu-item-2"><a href="{{route('frontend.product',$menuProduct->slug)}}">{{$menuProduct->{lang_col('name')} }}
 
@@ -61,13 +62,13 @@
                                                 </ul>
                                                 
                                                 <!--Level 3 -->
-                                                @foreach($menuSubCats as $menuSubCatLevel3)
+                                                @foreach($menuSubCats->sortBy('sort_order') as $menuSubCatLevel3)
                                                     @if ( $menuSubCatLevel3->parent_id == $menuSubCat->id )
                                                         <li style="padding-left: 30px;" class="menu-item-type-custom menu-item-object-custom menu-item-2987-1">
                                                             <a href="{{route('frontend.productlist',$menuSubCatLevel3->slug)}}">{{$menuSubCatLevel3->{lang_col('name')} }}</a>
                                                             <ul class="sub-menu">
                                                                 @if(isset($menuProducts))
-                                                                    @foreach($menuProducts as $menuProduct)
+                                                                    @foreach($menuProducts->sortBy('sort_order') as $menuProduct)
                                                                         @if ( $menuProduct->category_id == $menuSubCatLevel3->id )
                                                                             <li id="menu-item-2" class="menu-item-2">
                                                                                 <a href="{{route('frontend.product',$menuProduct->slug)}}">{{$menuProduct->{lang_col('name')} }}

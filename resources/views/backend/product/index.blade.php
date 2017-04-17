@@ -42,6 +42,7 @@
 									<th>Product Name</th>
 									<th>Category</th>
 									<th>Brand</th>
+									<th>Sort Order</th>
 									<th>Featured</th>
 									<th>Status</th>
 									<th>Created</th>
@@ -58,6 +59,7 @@
 									</td>
 									<td>{!!isset($product->Category->name_en)?$product->Category->name_en:'n/a'!!}</td>
 									<td>{!!isset($product->Brand->name_en)?$product->Brand->name_en:'n/a'!!}</td>
+									<td>{{$product->sort_order}}</td>
 									<td>{!!$product->featured?'<span class="label label-success">YES</span>':'<span class="label label-warning">NO</span>'!!}</td>
 									<td>{!!$product->discontinued?'<span class="label label-danger">Discontinued</span>':'<span class="label label-success">Active</span>'!!}</td>
 									<td>{{date('M j, Y H:i',strtotime($product->created_at))}}</td>

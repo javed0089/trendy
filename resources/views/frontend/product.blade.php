@@ -85,7 +85,7 @@
         <div class="row styled-list">
           <ul class="list-unstyled">
             @foreach($product->Files as $file)
-            <li> <a href="{{asset($file->filename)}}" target="blank">{{$file->original_filename}}</a></li>
+            <li><span>{{$file->file_title}}</span> <a class="btn btn-xs btn-primary pull-right" href="{{asset($file->filename)}}" target="blank">  Download</a></li>
             @endforeach
           </ul>
         </div>

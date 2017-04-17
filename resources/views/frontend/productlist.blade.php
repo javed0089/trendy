@@ -34,7 +34,7 @@
       <section class="services-company">
         <div class="row">
          @if (isset($products) && count($products) > 0)
-         @foreach($products->chunk(3) as $productsChunk)
+         @foreach($products->sortBy('sort_order')->chunk(3) as $productsChunk)
          @foreach($productsChunk as $product)
          <div id="addToQuote" class="col-md-4 col-sm-4">
            <a href="{{route('frontend.product',$product->slug)}}" class="hover-effect">
@@ -59,10 +59,10 @@
          
 
          @foreach($subCategories as $subCategory)
-         <h2 class="color-title">{{$subCategory->name_en}}</h2>
+         <h2 class="color-title" style="display: block;">{{$subCategory->name_en}}</h2>
          <hr>
          @if (count($subCategory->Products) > 0)
-         @foreach($subCategory->Products->chunk(3) as $productsChunk)
+         @foreach($subCategory->Products->sortBy('sort_order')->where('discontinued','=','0')->chunk(3) as $productsChunk)
          @foreach($productsChunk as $product)
          <div id="addToQuote" class="col-md-4 col-sm-4">
            <a href="{{route('frontend.product',$product->slug)}}" class="hover-effect">
@@ -108,7 +108,7 @@
 
     @if (isset($categories) && count($categories) > 0)
     <ul id="tree" class="treeview">
-     @foreach ($categories as $category)
+     @foreach ($categories->sortBy('sort_order') as $category)
      @include('frontend.category', $category)
      @endforeach
    </ul>

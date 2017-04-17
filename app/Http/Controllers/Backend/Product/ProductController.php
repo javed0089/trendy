@@ -60,6 +60,7 @@ class ProductController extends Controller
         $product->specs_en=$request->specs_en;
         $product->specs_ar=$request->specs_ar;
         $product->featured=(isset($request->featured)) ? 1 : 0;
+        $product->sort_order=$request->sort_order;
            
         $product->save();
         return redirect(route('products.index'))->with('success','Record saved successfully!');
@@ -118,7 +119,8 @@ class ProductController extends Controller
         $product->specs_en=$request->specs_en;
         $product->specs_ar=$request->specs_ar;
         $product->featured=(isset($request->featured)) ? 1 : 0;
-           
+        $product->sort_order=$request->sort_order;
+        
         $product->save();
         return redirect(route('products.show',$id))->with('success','Record saved successfully!');
     }

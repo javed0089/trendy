@@ -52,7 +52,7 @@ class HomepageController extends Controller
         $stats=Block::where('block_type','=','homepage-stats')->get();
 
         $testimonials=Testimonial::where('featured','=','1')->take(3)->get();
-        $posts=Post::where('featured','=','1')->get();
+        $posts=Post::where('featured','=','1')->take(3)->get();
         $brands=Brand::all();
 
         $ratings = new Rating();

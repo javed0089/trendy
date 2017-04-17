@@ -25,20 +25,20 @@ class CategoryController extends Controller
         return view('backend.category.index')->with('categories',$cat);
     }
 
-     private function getCategories($categories,&$cat,&$catString){
-        
-            foreach ($categories as $category) {
-                if($category->Parent){
-                    $catString= $this->categoryParent($category->Parent,$catString);
-                    $cat[]= (object)array('id'=>$category->id,'name_en'=>$catString.$category->name_en,'created_at'=>$category->created_at,'updated_at'=>$category->updated_at,'image'=>$category->image);
-                    $catString="";
-                }
-                else
-                    $cat[]= (object)array('id'=>$category->id,'name_en'=>$category->name_en,'created_at'=>$category->created_at,'updated_at'=>$category->updated_at,'image'=>$category->image);
-              if($category->Children)
+    private function getCategories($categories,&$cat,&$catString){
+
+        foreach ($categories as $category) {
+            if($category->Parent){
+                $catString= $this->categoryParent($category->Parent,$catString);
+                $cat[]= (object)array('id'=>$category->id,'name_en'=>$catString.$category->name_en,'created_at'=>$category->created_at,'updated_at'=>$category->updated_at,'image'=>$category->image,'sort_order'=>$category->sort_order);
+                $catString="";
+            }
+            else
+                $cat[]= (object)array('id'=>$category->id,'name_en'=>$category->name_en,'created_at'=>$category->created_at,'updated_at'=>$category->updated_at,'image'=>$category->image,'sort_order'=>$category->sort_order);
+            if($category->Children)
                 $this->getCategories($category->Children,$cat,$catString);
-         }
-         return $cat;  
+        }
+        return $cat;  
     }
 
 
@@ -70,14 +70,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        'name_en' =>'required|max:255|unique:categories,name_en',
-        'name_ar' =>'required|max:255|unique:categories,name_ar',
-        'slug' =>   'required|alpha_dash|min:3|max:255|unique:categories,slug',
-        
-        ]);
-      
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name_en' =>'required|max:255|unique:categories,name_en',
+            'name_ar' =>'required|max:255|unique:categories,name_ar',
+            'slug' =>   'required|alpha_dash|min:3|max:255|unique:categories,slug',
+
+            ]);
+
         $category = new Category;
         $category->parent_id=$request->parent_id;
         $category->name_en=$request->name_en;
@@ -85,8 +85,9 @@ class CategoryController extends Controller
         $category->slug=$request->slug;
         $category->desc_en=$request->desc_en;
         $category->desc_ar=$request->desc_ar;
-           
-     
+        $category->sort_order=$request->sort_order;
+
+
         if ($request->hasFile('image')){
             $image=$request->file('image');
             $category->image=$this->saveImage($image,'');
@@ -135,8 +136,8 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
         $category = Category::find($id);
         $submitReq = $request->submit;
@@ -170,9 +171,9 @@ class CategoryController extends Controller
         $category->slug=$request->slug;
         $category->desc_en=$request->desc_en;
         $category->desc_ar=$request->desc_ar;
+        $category->sort_order=$request->sort_order;
 
 
-      
         if ($request->hasFile('image')){
             $image=$request->file('image');
             if($category->image)
@@ -188,7 +189,7 @@ class CategoryController extends Controller
             else
                 $category->logo=$this->saveImage($image,'');
         }
-      
+
         $category->save();
         return redirect(route('categories.index'))->with('success','Record updated successfully!');
     }
@@ -207,20 +208,20 @@ class CategoryController extends Controller
 
     public function saveImage($image,$filename){
 
-     if($filename=="")
+       if($filename=="")
         $filename = rand(1,100).time().'.'.$image->getClientOriginalExtension();
-      else
+    else
         $filename = basename($filename);
 
-      $location='images/categories/';
-     
-      if (!file_exists(public_path($location))) 
+    $location='images/categories/';
+
+    if (!file_exists(public_path($location))) 
         File::makeDirectory(public_path($location));
 
-      Image::make($image)->save(public_path($location.$filename));
-      return $location.$filename;
+    Image::make($image)->save(public_path($location.$filename));
+    return $location.$filename;
 
-      /*---------For Shared Hosting----------*/
+    /*---------For Shared Hosting----------*/
       /*
        if(!is_dir(Storage::disk('cust_public')->getDriver()->getAdapter()->getPathPrefix().$location))
         Storage::makeDirectory($location);
@@ -229,5 +230,5 @@ class CategoryController extends Controller
        return $path;
         */
        /*---------For Shared Hosting----------*/
-    }
+   }
 }

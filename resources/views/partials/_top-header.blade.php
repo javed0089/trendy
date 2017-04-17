@@ -28,9 +28,9 @@
 -->
                         <ul class="center-block text-center list-inline" >
        
-        <li><a rel="alternate" hreflang="en" href="{{LaravelLocalization::getLocalizedURL('en') }}">English</a></li>
+        <li><a rel="alternate" hreflang="en" href="{{LaravelLocalization::getLocalizedURL('en') }}"><img src="{{asset('images/uk.png')}}"></a></li>
         <li class="divider-vertical">|</li>
-        <li><a rel="alternate" hreflang="ar" href="{{LaravelLocalization::getLocalizedURL('ar') }}">العربية</a></li>
+        <li><a rel="alternate" hreflang="ar" href="{{LaravelLocalization::getLocalizedURL('ar') }}"><img src="{{asset('images/sa.png')}}"></a></li>
         <li></li>
       </ul><br>
       <a class="center-block text-center small" href="{{ route('cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{__('Quote Requests')}} <span id="cartCount" class="badge">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a>

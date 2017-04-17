@@ -4078,6 +4078,7 @@ ul.nav-tabs {
 .nav--primary > .menu > .menu-item-has-children > a {
     position: relative;
     padding-left: : 20px;
+    float: right;
 }
 
 .home .nav--primary > .menu > .menu-item-has-children > a:before {

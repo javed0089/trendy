@@ -172,7 +172,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		
 		Route::resource('catalog/brands','Backend\Product\BrandController');
 		Route::resource('catalog/categories','Backend\Product\CategoryController');
-		Route::resource('files','Backend\Product\FileController', ['only' => ['store','destroy']]);
+		Route::resource('files','Backend\Product\FileController');
 		Route::resource('images','Backend\Product\ImageController', ['only' => ['store','destroy']]);
 
 	

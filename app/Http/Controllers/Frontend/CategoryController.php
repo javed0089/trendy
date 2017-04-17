@@ -26,7 +26,7 @@ class CategoryController extends Controller
 
         $subCategories = Category::where('parent_id','=',$category->id)->get();
         //dd($subCategories);
-        $products=Product::where('category_id','=',$category->id)->get();
+        $products=Product::where([['category_id','=',$category->id],['discontinued','=','0']])->get();
     	//dd($products);
 
         $topImage = Page::find(120)->PageSections()->first();

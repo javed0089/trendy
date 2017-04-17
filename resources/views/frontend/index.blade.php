@@ -55,7 +55,7 @@
     <div class="container">
         <div class="row services">
             @if(count($products)>0)
-            @foreach($products as $product)
+            @foreach($products->sortBy('sort_order') as $product)
             <div id="addToQuote" class="col-md-4">
                 <div class="hover-effect">
                     @if(count($product->Images)>0)
@@ -120,7 +120,7 @@
         </div>
         <div class="row services-other">
             @if(isset($categories))
-            @foreach($categories->chunk(3) as $categoryChunk)
+            @foreach($categories->sortBy('sort_order')->chunk(3) as $categoryChunk)
             @foreach($categoryChunk as $category)
             <div class="col-sm-4">
                 <div class="img-box">

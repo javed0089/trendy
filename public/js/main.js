@@ -292,18 +292,41 @@ Version: 1.0
     });
 
 
-      $(window).scroll(function(){
-       var height = $(this).scrollTop();
-       var brand = $("#smallLogo");
-       if (height > 120){
-         brand.show('slow');  
-         $('.main-header').addClass('shrink') ;
-     }
-     else{
-      brand.hide();
-      $('.main-header').removeClass('shrink') ;
-  }
+      $(window).scroll(function()
+      {
+       /*  var height = $(this).scrollTop();
+         var brand = $("#smallLogo");
+         if (height > 120)
+         {
+           brand.show('slow');  
+           $('.main-header').addClass('shrink');
+       }
+       else
+       {
+        brand.hide();
+        $('.main-header').removeClass('shrink') ;
+    }*/
 });
+
+
+      var lastTop = 120;
+      $(window).scroll( function (evt) {
+          var thisTop = $(this).scrollTop();
+
+          if (thisTop > lastTop) 
+          {
+            $("#smallLogo").show('slow',function(){
+                   $('.main-header').addClass('shrink');
+            });
+        }
+        else if(thisTop < lastTop)
+        {
+             $("#smallLogo").hide('fast',function(){
+                   $('.main-header').removeClass('shrink');
+            });
+       }
+
+   });
 
 
   })(jQuery);
