@@ -86,7 +86,7 @@
 								<form role="form"  method="Post" action="{{ route('quote-requests.update',$quote->id) }}">
 									{{csrf_field()}}
 									{{ method_field('PATCH') }}
-								@if(User::isSupervisor())
+									@if(User::isSupervisor())
 									<label for="assign_to_id">Assigned to:</label>
 									<select name="assign_to_id" class="form-control">
 										<option value="">-- None --</option>
@@ -96,10 +96,10 @@
 									</select>
 									<button type="submit" name="submit" class="btn btn-block btn-primary" value="assignSalesRep">Assign</button>
 									<button type="submit" name="submit" class="btn btn-block btn-success" value="sendQuote">Send Quote</button>
-								@endif
-								@if(User::isSalesExecutive())
+									@endif
+									@if(User::isSalesExecutive())
 									<button type="submit" name="submit" class="btn btn-block btn-success" value="quoteProcessed">Processed</button>
-								@endif
+									@endif
 								</form>
 							</div>
 						</div>
@@ -265,52 +265,52 @@
 							
 
 							<div class="box box-success">
-            <div class="box-header">
-              <i class="fa fa-comments-o"></i>
+								<div class="box-header">
+									<i class="fa fa-comments-o"></i>
 
-              <h3 class="box-title">Comments</h3>
-					              
-			<span class="pull-right text-muted"> {{ count($quote->QuoteComments) }} comments</span>
-				                  
-				             
-             
-            </div>
-            <div class="box-body chat" id="chat-box">
-             
-              <!-- chat item -->
-              @foreach($quote->QuoteComments as $quoteComment)
-              <div class="item">
-                <i class="fa fa-user" style="font-size: 35px; color: #3c8dbc;"></i>
+									<h3 class="box-title">Comments</h3>
+									
+									<span class="pull-right text-muted"> {{ count($quote->QuoteComments) }} comments</span>
+									
+									
+									
+								</div>
+								<div class="box-body chat" id="chat-box">
+									
+									<!-- chat item -->
+									@foreach($quote->QuoteComments as $quoteComment)
+									<div class="item">
+										<i class="fa fa-user" style="font-size: 35px; color: #3c8dbc;"></i>
 
-                <p class="message">
-                  <a href="#" class="name">
-                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{date('M j, Y H:i',strtotime($quoteComment->created_at))}}</small>
-                    {{$quoteComment->User->first_name}} {{$quoteComment->User->last_name}}
-                  </a>
-                 	{{$quoteComment->comment}}
-                </p>
-              </div>
-              @endforeach
-              <!-- /.item -->
-             
-            
-            </div>
-            <!-- /.chat -->
-            <div class="box-footer">
-            	<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}">
-					{{csrf_field()}}
-					{{ method_field('PATCH') }}
-	              <div class="input-group">
-	                <input class="form-control" name="comment" placeholder="Type message...">
+										<p class="message">
+											<a href="#" class="name">
+												<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{date('M j, Y H:i',strtotime($quoteComment->created_at))}}</small>
+												{{$quoteComment->User->first_name}} {{$quoteComment->User->last_name}}
+											</a>
+											{{$quoteComment->comment}}
+										</p>
+									</div>
+									@endforeach
+									<!-- /.item -->
+									
+									
+								</div>
+								<!-- /.chat -->
+								<div class="box-footer">
+									<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}">
+										{{csrf_field()}}
+										{{ method_field('PATCH') }}
+										<div class="input-group">
+											<input class="form-control" name="comment" placeholder="Type message...">
 
-	                <div class="input-group-btn">
-	                  <button type="submit" name="submit" value="addComment" class="btn btn-success"><i class="fa fa-plus"></i></button>
-	                </div>
-	              </div>
-              </form>
-            </div>
-          </div>
-          <!-- /.box (chat box) -->
+											<div class="input-group-btn">
+												<button type="submit" name="submit" value="addComment" class="btn btn-success"><i class="fa fa-plus"></i></button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<!-- /.box (chat box) -->
 						</div>
 					</div>
 				</div>
