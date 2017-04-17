@@ -83,13 +83,13 @@
 										<div class="form-group">
 											<label for="desc_en">Description</label>
 											<small class="text-red">(Do not use enter key for new line. Use Shift+Enter for newline!)</small>
-											<textarea class="textarea" name="desc_en" id="desc_en" style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{old('desc_en')}}</textarea>
+											<textarea class="textarea" name="desc_en" id="desc_en" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{old('desc_en')}}</textarea>
 										</div>
 
 										<div class="form-group">
 											<label for="specs_en">Specification</label>
 											<small class="text-red">(Do not use enter key for new line. Use Shift+Enter for newline!)</small>
-											<textarea class="textarea" name="specs_en" id="specs_en" style="width: 100%; height: 650px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('specs_en')}}</textarea>
+											<textarea class="textarea" name="specs_en" id="specs_en" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('specs_en')}}</textarea>
 										</div>
 
 
