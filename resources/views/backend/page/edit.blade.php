@@ -62,11 +62,17 @@
 										<input type="text" class="form-control" name="title_en" id="title_en" placeholder="Title (En)" value="{{$pageContent->title_en}}">
 									</div>
 									@endif
+									@if($pageContent->page->id == '14')
+										<div class="form-group">
+											<label for="link_en">Link</label>
+											<input type="text" class="form-control" name="link_en" id="link_en" placeholder="HyperLink (En)" value="{{$pageContent->link_en}}" >
+										</div>
+									@endif
 
 									@if($pageContent->page->has_heading1)
 									<div class="form-group">
 										<label for="heading1_en">Heading</label>
-										<input type="text" class="form-control"  name="heading1_en" id="heading1_en" placeholder="Heading (En)" value="{{$pageContent->heading1_en}}">
+										<input type="text" class="form-control"  name="heading1_en" id="heading1_en" placeholder="Heading (En)" value="{{$pageContent->link_en}}">
 									</div>
 									@endif
 
@@ -119,7 +125,12 @@
 										<input type="text" class="form-control"  name="title_ar" id="title_ar" placeholder="Title (Ar)" value="{{$pageContent->title_ar}}">
 									</div>
 									@endif
-
+									@if($pageContent->page->id == '14')
+										<div class="form-group">
+											<label for="link_ar">Link</label>
+											<input type="text" class="form-control" name="link_ar" id="link_ar" placeholder="HyperLink (Ar)" value="{{$pageContent->link_ar}}">
+										</div>
+									@endif
 									@if($pageContent->page->has_heading1)
 									<div class="form-group">
 										<label for="heading1_ar">Heading</label>

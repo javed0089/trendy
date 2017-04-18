@@ -11,7 +11,6 @@ class AboutController extends Controller
 {
     public function show()
     {
- 
         $topImage = [];
     	$topImage = Page::find(20)->PageSections()->first();
 

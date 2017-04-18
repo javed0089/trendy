@@ -214,6 +214,15 @@ public function sendQuote(Request $request)
     }
 
 
+    //Restrict user to 3 quotes a day
+    $user=User::getUser();
+    $userQuotes=$user->Quotes()->whereDate('created_at', '=', date('Y-m-d'))->get();
+    if(count($userQuotes)>=3)
+    {
+        return redirect()->route('message')->with('error', 'Sorry! Your can only send 3 quotes a day. Please try again tomorrow. Thank you!');
+    }
+
+
     $quote = new Quote;
     if(Session::has('newUser'))
         $quote->user_id = Session::get('newUser')->id;

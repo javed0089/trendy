@@ -55,11 +55,16 @@
 					              {{ Session::get('message')}}
 					             </div>
 									@endif
-
 									@if($pageContent->has_title)
 										<div class="form-group">
 											<label for="title_en">Title</label>
 											<input type="text" class="form-control" name="title_en" id="title_en" placeholder="Title (En)" >
+										</div>
+									@endif
+									@if($pageContent->id == '14')
+										<div class="form-group">
+											<label for="title_en">Link</label>
+											<input type="text" class="form-control" name="link_en" id="link_en" placeholder="HyperLink (En)" >
 										</div>
 									@endif
 
@@ -102,6 +107,12 @@
 										<div class="form-group">
 											<label for="title_ar">Title</label>
 											<input type="text" class="form-control"  name="title_ar" id="title_ar" placeholder="Title (Ar)">
+										</div>
+									@endif
+									@if($pageContent->id == '14')
+										<div class="form-group">
+											<label for="title_ar">Link</label>
+											<input type="text" class="form-control" name="link_ar" id="link_ar" placeholder="HyperLink (Ar)" >
 										</div>
 									@endif
 									

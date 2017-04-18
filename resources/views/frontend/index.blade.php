@@ -24,7 +24,7 @@
                         <p>
                          {!!$SliderBlock->{lang_col('content')} !!}
                      </p>
-                     <a class="btn primary-btn"> {{__('KNOW MORE')}} <i class="fa fa-angle-right"></i> </a>
+                     <a href="{{ $SliderBlock->{lang_col('link')} }}" class="btn primary-btn"> {{__('KNOW MORE')}} <i class="fa fa-angle-right"></i> </a>
                  </div>
              </div>
          </li>
@@ -91,13 +91,13 @@
                 <a href="{{route('frontend.categories')}}" class="btn btn-primary" role="button">{{__("PRODUCTS")}}</a>
             </div>
             <div class="col-md-2">
-                <a href="#" class="btn btn-primary" role="button">{{__('CONTACT')}}</a>
+                <a href="{{route('frontend.contact')}}" class="btn btn-primary" role="button">{{__('CONTACT')}}</a>
             </div>
             <div class="col-md-2">
-                <a href="#" class="btn btn-primary" role="button">{{__('SERVICES')}}</a>
+                <a href="{{route('frontend.mission')}}" class="btn btn-primary" role="button">{{__('OUR MISSIOn')}}</a>
             </div>
             <div class="col-md-2">
-                <a href="#" class="btn btn-primary" role="button">{{__('INDUSTRY')}}</a>
+                <a href="{{route('frontend.industry')}}" class="btn btn-primary" role="button">{{__('INDUSTRY')}}</a>
             </div>
             <div class="col-md-2">
                 <a href="{{route('frontend.news')}}" class="btn btn-primary" role="button">{{__('LATEST NEWS')}}</a>

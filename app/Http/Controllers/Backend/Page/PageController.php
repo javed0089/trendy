@@ -73,6 +73,8 @@ class PageController extends Controller
         $pageContent->image_ar=$this->saveImage($imageAr,$pageSectionName,'');
       }
 
+      $pageContent->link_en=$request->link_en;
+      $pageContent->link_ar=$request->link_ar;
 
       $pageContent->save();
       $activeLink=$this->getActiveLink($pageContent->Page);
@@ -174,6 +176,8 @@ class PageController extends Controller
           $pageContent->image_ar=$this->saveImage($image,$pageSectionName,'');
       }
       
+      $pageContent->link_en=$request->link_en;
+      $pageContent->link_ar=$request->link_ar;
 
       $pageContent->save();
       $activeLink=$this->getActiveLink($pageContent->Page);

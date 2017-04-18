@@ -61,7 +61,6 @@
             <th>D.T.</th>
             <th>P.M.</th>
             <th>S.D.</th>
-            <th>Validity</th>
             <th>Status</th>
 
           </tr>
@@ -84,7 +83,6 @@
               {{$quote->shipping_doc_others_text}}
 
             </td>
-            <td>{{isset($quote->quote_validity)?date('M j, Y H:i',strtotime($quote->quote_validity)):''}}</td>
             <td>{{$quote->Status->status_en}}</td>
           </tr>
           @endforeach

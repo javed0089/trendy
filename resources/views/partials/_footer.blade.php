@@ -39,11 +39,11 @@
                         <img src="{{asset('images/footer-logo.png')}}" alt="logo" />
                         <p>{!! isset($footer_blocks->get(3)->{lang_col('value')})?$footer_blocks->get(3)->{lang_col('value')}:'Not set' !!} </p>
                         <div class="widgets-social">
-                            <a href="{!! isset($social_blocks->get(0)->{lang_col('value')})?$social_blocks->get(0)->{lang_col('value')}:'#' !!}"> <i class="fa fa-facebook" aria-hidden="true"></i> </a>
-                            <a href="{!! isset($social_blocks->get(1)->{lang_col('value')})?$social_blocks->get(1)->{lang_col('value')}:'#' !!}"> <i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="{!! isset($social_blocks->get(2)->{lang_col('value')})?$social_blocks->get(2)->{lang_col('value')}:'#' !!}"> <i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            <a href="{!! isset($social_blocks->get(3)->{lang_col('value')})?$social_blocks->get(3)->{lang_col('value')}:'#' !!}"> <i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                            <a href="{!! isset($social_blocks->get(4)->{lang_col('value')})?$social_blocks->get(4)->{lang_col('value')}:'#' !!}"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a href="{!! isset($social_blocks->get(0)->{lang_col('value')})?$social_blocks->get(0)->{lang_col('value')}:'#' !!}" target="_blank"> <i class="fa fa-facebook" aria-hidden="true"></i> </a>
+                            <a href="{!! isset($social_blocks->get(1)->{lang_col('value')})?$social_blocks->get(1)->{lang_col('value')}:'#' !!}" target="_blank"> <i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="{!! isset($social_blocks->get(2)->{lang_col('value')})?$social_blocks->get(2)->{lang_col('value')}:'#' !!}" target="_blank"> <i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="{!! isset($social_blocks->get(3)->{lang_col('value')})?$social_blocks->get(3)->{lang_col('value')}:'#' !!}" target="_blank"> <i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                            <a href="{!! isset($social_blocks->get(4)->{lang_col('value')})?$social_blocks->get(4)->{lang_col('value')}:'#' !!}" target="_blank"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
 
                         </div>
                     </div>
@@ -52,21 +52,21 @@
                     <div class="quick-links widget">
                         <h2 class="widget-title">{{__("QUICK LINKS")}}</h2>
                         <ul>
-                            <li> <a href="#"> Products </a> </li>
-                            <li> <a href="#"> Contact </a> </li>
-                            <li> <a href="#"> Services </a> </li>
-                            <li> <a href="#"> Industry info </a> </li>
-                            <li> <a href="#"> Latest News </a> </li>
+                            <li> <a href="{{route('frontend.categories')}}"> Polymer Categories </a> </li>
+                            <li> <a href="{{route('frontend.contact')}}"> Contact </a> </li>
+                            <li> <a href="{{route('frontend.about')}}"> Who we are </a> </li>
+                            <li> <a href="{{route('frontend.industry')}}"> Industry info </a> </li>
+                            <li> <a href="{{route('frontend.news')}}"> Latest News </a> </li>
                         </ul>
                     </div>
                 </div>
                 <div class="spacer-50 visible-sm"></div>
                 <div class="col-md-3 col-sm-6">
                     <div class="our-services widget">
-                        <h2 class="widget-title">OUR SERVICES</h2>
+                        <h2 class="widget-title"></h2>
                         
 
-                        <div class="fb-page" data-href="https://www.facebook.com/gappolymer/" data-tabs="timeline" data-width="280" data-height="220" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/gappolymer/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/gappolymer/">GAP Polymers</a></blockquote></div>
+                        <div class="fb-page" data-href="https://www.facebook.com/gappolymer/" data-tabs="timeline" data-width="280" data-height="280" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/gappolymer/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/gappolymer/">GAP Polymers</a></blockquote></div>
 
                     </div>
                 </div>

@@ -47,7 +47,7 @@
     @include('partials._scripts')
     <script type="text/javascript">
         
-        (function(){
+      /*  (function(){
            
             window.setTimeout(function() {
                 $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -55,7 +55,7 @@
                 });
             }, 4000);
             
-        }());
+        }());*/
     </script>
     
     <div id="fb-root"></div>
