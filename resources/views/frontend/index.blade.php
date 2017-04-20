@@ -72,7 +72,7 @@
                 <a  data-params='{"prodId":"{{$product->id}}" }' class="btn btn-danger btn-sm quote" href="#"> {{__('Request A Quote')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></a>
                 <div id="alert" style="display: none; margin-top: 5px;" >
                 </div>
-                
+
             </div>
             @endforeach
             @endif
@@ -303,10 +303,10 @@
                 <div class="plubication-downloads">
                     <h2 class="publish">{{__('Our Profile & Contacts')}}</h2>
                     <div class="download-file">
-                        <a href="{{asset($company->company_profile)}}" target="_blank"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{__('Download Profile')}} </a>
+                    <a href="{{isset($company->company_profile)?asset($company->company_profile):''}}" target="_blank"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{__('Download Profile')}} </a>
                     </div>
                     <div class="download-file">
-                        
+
                         <a data-toggle="modal" href="#qrCode"><i class="fa fa-qrcode " data-toggle="modal" data-target="#qrCode" aria-hidden="true"></i> {{__('Contact QR Code')}} </a>
                     </div>
                     <div id="qrCode" class="modal fade" role="dialog">
