@@ -1834,6 +1834,8 @@ form.commentform .form-control {
 .career-box {
     padding: 30px 35px;
     background: #ffda44;
+    height: 120px;
+
 }
 
 .career-box i {
