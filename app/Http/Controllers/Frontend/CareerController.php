@@ -30,6 +30,8 @@ class CareerController extends Controller
     public function job($slug)
     {
     	$job=Job::where('slug','=',$slug)->get();
-    	return view('frontend.job')->with('job',$job->first());
+         $topImage = Page::find(70)->PageSections()->first();
+
+    	return view('frontend.job')->with('job',$job->first())->with('topImage',$topImage);
     }
 }
