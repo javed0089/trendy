@@ -176,6 +176,7 @@ elseif($submitReq == "confirmBl"){
             $orderProduct->quantity = $quoteProduct->quantity;
             $orderProduct->unit = $quoteProduct->unit;
             $orderProduct->price = $quoteProduct->price;
+            $orderProduct->currency = $quoteProduct->currency;
             $orderProduct->port_of_delivery = $quoteProduct->port_of_delivery;
             $orderProduct->delivery_terms = $quoteProduct->delivery_terms ;
             $orderProduct->payment_method =$quoteProduct->payment_method;

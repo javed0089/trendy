@@ -75,11 +75,12 @@ class QuoteController extends Controller
             $delivery_terms =QuoteOption::where('option_type','=','1')->get();
             $payment_methods =QuoteOption::where('option_type','=','2')->get();
             $units =QuoteOption::where('option_type','=','3')->get();
+            $currencies =QuoteOption::where('option_type','=','4')->get();
             $statuses =Status::where('status_type','=','2')->get();
 
             $role = Sentinel::findRoleById(4);
             $users = $role->users()->get();
-            return view('backend.quotes.show')->with('quote',$quote)->with('users',$users)->with('delivery_terms',$delivery_terms)->with('payment_methods',$payment_methods)->with('units',$units)->with('statuses',$statuses);
+            return view('backend.quotes.show')->with('quote',$quote)->with('users',$users)->with('delivery_terms',$delivery_terms)->with('payment_methods',$payment_methods)->with('units',$units)->with('statuses',$statuses)->with('currencies',$currencies);
         }
         else
             return redirect('backoffice/login');
@@ -132,6 +133,7 @@ class QuoteController extends Controller
             $quoteDetail->quantity = $request->quantity;
             $quoteDetail->unit = $request->unit;
             $quoteDetail->price = $request->price;
+            $quoteDetail->currency = $request->currency;
             $quoteDetail->port_of_delivery =$request->port_of_delivery;
             $quoteDetail->delivery_terms = $request->delivery_terms;
             $quoteDetail->payment_method = $request->payment_method;

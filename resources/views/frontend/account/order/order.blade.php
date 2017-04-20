@@ -66,6 +66,7 @@
               <th>Qty.</th>
               <th>Unit</th>
               <th>Price</th>
+              <th>Currency</th>
               <th>P.O.D.</th>
               <th>D.T.</th>
               <th>P.M.</th>
@@ -82,6 +83,7 @@
               <td>{{$product->quantity}}</td>
               <td>{{$product->unit}}</td>
               <td>{{number_format($product->price)}}</td>
+              <td>{{$product->currency}}</td>
               <td>{{$product->port_of_delivery}}</td>
               <td>{{$product->delivery_terms}}</td>
               <td>{{$product->payment_method}}</td>

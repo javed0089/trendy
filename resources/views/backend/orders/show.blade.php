@@ -101,6 +101,7 @@
 										<th>Qty.</th>
 										<th>Unit</th>
 										<th>Price</th>
+										<th>Currency</th>
 										<th>P.O.D.</th>
 										<th>D.T.</th>
 										<th>P.M.</th>
@@ -115,6 +116,7 @@
 										<td>{{$item->quantity}}</td>
 										<td>{{$item->unit}}</td>
 										<td>{{isset($item->price)?$item->price:'n/a'}}</td>
+										<td>{{$item->currency}}</td>
 										<td>{{$item->port_of_delivery}}</td>
 										<td>{{$item->delivery_terms}}</td>
 										<td>{{$item->payment_method}}</td>

@@ -22,16 +22,16 @@
                     <div class="container">
                         <h2> {!!$SliderBlock->{lang_col('title')} !!}</h2>
                         <p>
-                         {!!$SliderBlock->{lang_col('content')} !!}
-                     </p>
-                     <a href="{{ $SliderBlock->{lang_col('link')} }}" class="btn primary-btn"> {{__('KNOW MORE')}} <i class="fa fa-angle-right"></i> </a>
-                 </div>
-             </div>
-         </li>
-         @endforeach   
+                           {!!$SliderBlock->{lang_col('content')} !!}
+                       </p>
+                       <a href="{{ $SliderBlock->{lang_col('link')} }}" class="btn primary-btn"> {{__('KNOW MORE')}} <i class="fa fa-angle-right"></i> </a>
+                   </div>
+               </div>
+           </li>
+           @endforeach   
 
-         @if(!$SlidersBlock || count($SlidersBlock)<1)
-         <li class="has-overlay">
+           @if(!$SlidersBlock || count($SlidersBlock)<1)
+           <li class="has-overlay">
             <img src="images/slides/slide2.jpg" alt="Slider 2" />
             <div class="slider-content">
                 <div class="container">
@@ -70,9 +70,9 @@
                 <input type="text" hidden value="{{route('addToCart',$product->id)}}" name=""> 
 
                 <a  data-params='{"prodId":"{{$product->id}}" }' class="btn btn-danger btn-sm quote" href="#"> {{__('Request A Quote')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></a>
- <div id="alert" style="display: none; margin-top: 5px;" >
-                            </div>
-                               
+                <div id="alert" style="display: none; margin-top: 5px;" >
+                </div>
+                
             </div>
             @endforeach
             @endif
@@ -158,7 +158,7 @@
             </div>
             <div class="col-md-7 col-sm-12">
                 <div class="company-image">
-                    <div class="img-left hover-effect">
+                    <div class="img-left hover-effect visible-lg visible-md visible-sm">
                         @if($CompBlock->{lang_col('image')})
                         <img src="{{$CompBlock->{lang_col('image')} }}" alt="" />
                         @else
@@ -167,16 +167,16 @@
 
                     </div>
                     <div class="img-right hover-effect">
-                     @if($CompBlock->{lang_col('image')})
-                     <img src="{{$CompBlock->{lang_col('image')} }}" alt="" />
-                     @else
-                     <img src="http://placehold.it/555x368" alt="" />
-                     @endif
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
+                       @if($CompBlock->{lang_col('image')})
+                       <img src="{{$CompBlock->{lang_col('image')} }}" alt="" />
+                       @else
+                       <img src="http://placehold.it/555x368" alt="" />
+                       @endif
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
 </section>
 @endif
 
@@ -303,19 +303,36 @@
                 <div class="plubication-downloads">
                     <h2 class="publish">{{__('Our Profile & Contacts')}}</h2>
                     <div class="download-file">
-                        <a href="downloads/profile.pdf" target="_blank"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{__('Download PDF')}} <span>1.5 MB</span> </a>
+                        <a href="{{asset($company->company_profile)}}" target="_blank"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{__('Download Profile')}} </a>
                     </div>
                     <div class="download-file">
-                        <a href="#"> <i class="fa fa-qrcode " aria-hidden="true"></i> {{__('Sales Contact Details')}} </a>
+                        
+                        <a data-toggle="modal" href="#qrCode"><i class="fa fa-qrcode " data-toggle="modal" data-target="#qrCode" aria-hidden="true"></i> {{__('Contact QR Code')}} </a>
                     </div>
-                    <div class="contact-map">
-
+                    <div id="qrCode" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="panel-div">
+                                    <div class="panel-title">QR CODE
+                                        <span class="pull-right"><a class="btn btn-xs btn-primary" data-dismiss="modal">x</a></span>
+                                    </div>
+                                    <div class="content">
+                                      <div class="modal-body">
+                                        <img src="{{asset($company->company_qrcode)}}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 </section>
 @endif
 @endif
@@ -422,22 +439,22 @@
                     <h2 class="ceo-title color-title">{{$CeoBlock?$CeoBlock->{lang_col('title')}:'No data'}}  </h2>
                     <h4 class="ceo-subtitle subtitle"> {{$CeoBlock?$CeoBlock->{lang_col('heading1')}:'No data'}} </h4>
                     <p>
-                     {!! $CeoBlock?$CeoBlock->{lang_col('content')}:'No data' !!}</p>
-                 </div>
-             </div>
-         </div>
-     </div>
- </section>
- @endif
- @endif
+                       {!! $CeoBlock?$CeoBlock->{lang_col('content')}:'No data' !!}</p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+   @endif
+   @endif
 
- @endsection
- @section('scripts')
+   @endsection
+   @section('scripts')
 
- <script src="{{asset('js/stars.min.js')}}"></script>
- <script type="text/javascript">
+   <script src="{{asset('js/stars.min.js')}}"></script>
+   <script type="text/javascript">
 
-   $('#star').stars({
+     $('#star').stars({
       stars: 4,
       text: ['Poor', 'Average', 'Good','Excellent'],
       color: '#ffda44',
@@ -449,6 +466,6 @@
 
 });
 
-  var url = '{{route('frontend.subscribe')}}';
-</script>
-@endsection
+     var url = '{{route('frontend.subscribe')}}';
+ </script>
+ @endsection

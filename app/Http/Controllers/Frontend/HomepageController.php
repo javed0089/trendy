@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Block\Block;
 use App\Models\Blog\Post;
+use App\Models\Company\Company;
 use App\Models\Page\Page;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
@@ -57,7 +58,9 @@ class HomepageController extends Controller
 
         $ratings = new Rating();
 
-        return view('frontend.index')->with('CompBlock',$homepageCompBlock)->with('ServBlock',$homepageServBlock)->with('PubBlocks',$homepagePubBlock)->with('CeoBlock',$homepageCeoBlock)->with('SlidersBlock',$homepageSliders)->with('categories',$categories)->with('homepageCategoryText',$homepageCategoryText)->with('testimonials',$testimonials)->with('products',$products)->with('posts',$posts)->with('brands',$brands)->with('stats',$stats)->with('ratings',$ratings);
+        $company = Company::first();
+
+        return view('frontend.index')->with('CompBlock',$homepageCompBlock)->with('ServBlock',$homepageServBlock)->with('PubBlocks',$homepagePubBlock)->with('CeoBlock',$homepageCeoBlock)->with('SlidersBlock',$homepageSliders)->with('categories',$categories)->with('homepageCategoryText',$homepageCategoryText)->with('testimonials',$testimonials)->with('products',$products)->with('posts',$posts)->with('brands',$brands)->with('stats',$stats)->with('ratings',$ratings)->with('company',$company);
 
 
 

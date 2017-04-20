@@ -57,6 +57,7 @@
             <th>Qty.</th>
             <th>Unit</th>
             <th>Price</th>
+            <th>Curreny</th>
             <th>P.O.D.</th>
             <th>D.T.</th>
             <th>P.M.</th>
@@ -72,6 +73,7 @@
             <td>{{$quote->quantity}}</td>
             <td>{{$quote->unit}}</td>
             <td>{{isset($quote->price)?$quote->price:'n/a'}}</td>
+            <td>{{$quote->currency}}</td>
             <td>{{$quote->port_of_delivery}}</td>
             <td>{{$quote->delivery_terms}}</td>
             <td>{{$quote->payment_method}}</td>

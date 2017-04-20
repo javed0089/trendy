@@ -111,6 +111,7 @@
 										<th>Qty.</th>
 										<th>Unit</th>
 										<th>Price</th>
+										<th>Currency</th>
 										<th>P.O.D.</th>
 										<th>D.T.</th>
 										<th>P.M.</th>
@@ -127,6 +128,7 @@
 										<td>{{$item->quantity}}</td>
 										<td>{{$item->unit}}</td>
 										<td>{{isset($item->price)?$item->price:'n/a'}}</td>
+										<td>{{$item->currency}}</td>
 										<td>{{$item->port_of_delivery}}</td>
 										<td>{{$item->delivery_terms}}</td>
 										<td>{{$item->payment_method}}</td>
@@ -158,7 +160,7 @@
 															<div class="modal-body">
 																<div class="form-group" >
 																	<label for="quantity">Quantity</label>
-																	<input type="text" class="form-control" name="quantity" id="quantity" value="{{$item->quantity}}" >
+																	<input type="number" class="form-control"  name="quantity" id="quantity" step="any" value="{{$item->quantity}}" style="width: 80px;">
 																</div>
 																<div class="form-group" >
 																	<label for="unit">Unit</label>
@@ -170,11 +172,20 @@
 																</div>
 																<div class="form-group" >
 																	<label for="price">Price</label>
-																	<input type="number" step="0.01"  class="form-control" name="price" id="price" value="{{$item->price}}" >
+																	<input type="number"   class="form-control" name="price" id="price" step="any" value="{{$item->price}}" style="width: 120px;">
+																</div>
+																<div class="form-group" >
+																	<label for="currency">Currency</label>
+																	<select class="form-control"  name="currency">
+																		@foreach($currencies as $currency)
+																		<option {{$item->currency==$currency->name_en ?'Selected':''}} value="{{$currency->name_en}}">{{$currency->name_en}}</option>
+																		@endforeach	
+																	</select>
 																</div>
 																<div class="control-group">
 																	&nbsp;
 																</div>
+
 																<div class="form-group" style="display:block;">
 																	<label for="title_en">Port of delivery</label>
 																	<input type="text" style="display: block;width: 100%" class="form-control" name="port_of_delivery" id="port_of_delivery" value="{{$item->port_of_delivery}}" >

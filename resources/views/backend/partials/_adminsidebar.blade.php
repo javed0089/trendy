@@ -46,6 +46,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
+           <li {{ Request::is('backoffice/module/company/*')?"class=active":'' }}{{ Request::is('backoffice/module/company')?"class=active":'' }}><a href="{{route('company.index')}}"><i class="fa fa-circle-o"></i>Company</a></li>
             <li {{ Request::is('backoffice/module/departments/*')?"class=active":'' }}{{ Request::is('backoffice/module/departments')?"class=active":'' }}><a href="{{route('departments.index')}}"><i class="fa fa-circle-o"></i>Departments</a></li>
             <li {{ Request::is('backoffice/module/jobs/*')?"class=active":'' }}{{ Request::is('backoffice/module/jobs')?"class=active":'' }}><a href="{{route('jobs.index')}}"><i class="fa fa-circle-o"></i>Jobs</a></li>
             <li {{ Request::is('backoffice/module/testimonials/*')?"class=active":'' }}{{ Request::is('backoffice/module/testimonials')?"class=active":'' }}><a href="{{route('testimonials.index')}}"><i class="fa fa-circle-o"></i>Testimonials</a></li>

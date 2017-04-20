@@ -18,7 +18,7 @@ class StatusTableSeeder extends Seeder
         //type 1 for system only
     	['id' => '1', 'status_type' => '1', 'status_ar' => 'Pending', 'status_en' => 'Pending'],
         ['id' => '2', 'status_type' => '1', 'status_ar' => 'Approval', 'status_en' => 'Approval'],
-        ['id' => '3', 'status_type' => '1', 'status_ar' => 'Submitted', 'status_en' => 'Submitted'],
+        ['id' => '3', 'status_type' => '1', 'status_ar' => 'Submitted', 'status_en' => 'Quoted'],
         ['id' => '5', 'status_type' => '1', 'status_ar' => 'Completed', 'status_en' => 'Completed'],
         ['id' => '8', 'status_type' => '1', 'status_ar' => 'Shipment', 'status_en' => 'Shipment'],
         

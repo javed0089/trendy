@@ -149,7 +149,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		Route::post('user/update/{id}', 'Backend\User\UserController@update')->name('users.update');
 
 
-
+		
 
 			///////*****Pages********//////
 		Route::resource('pages','Backend\Page\PageController');
@@ -175,7 +175,10 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		Route::resource('files','Backend\Product\FileController');
 		Route::resource('images','Backend\Product\ImageController', ['only' => ['store','destroy']]);
 
-	
+		
+		///////*****Comapny********//////
+		Route::resource('module/company','Backend\Company\CompanyController');
+
 		///////*****Department********//////
 		Route::resource('module/departments','Backend\Department\DepartmentController', ['except' => ['show','create']]);
 
