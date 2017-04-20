@@ -32,7 +32,9 @@
 					<div class="box-header" style="padding: 5px 15px; height: 32px; "> 
 						<h3 class="box-title" style="line-height: 25px;" >Comapny</h3> 
 						<div style="width: 150px; " class="pull-right">
+							@if(count($companies)<=0)
 							<a href="{{ route('company.create') }}" class="btn btn-primary btn-block">Add Company</a>
+							@endif
 						</div>
 					</div>
 					<div class="box-body">
