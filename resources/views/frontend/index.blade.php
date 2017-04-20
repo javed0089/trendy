@@ -318,7 +318,7 @@
                                     </div>
                                     <div class="content">
                                       <div class="modal-body">
-                                        <img src="{{asset($company->company_qrcode)}}">
+                                        <img src="{{isset($company->company_qrcode)?asset($company->company_qrcode):''}}">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
