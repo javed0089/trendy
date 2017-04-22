@@ -53,9 +53,9 @@ class SidebarComposer{
 		}
 		$myquotes=[];
 		if(Sentinel::check()){
-			$user=User::find(Sentinel::check()->id);
+		/*	$user=User::find(Sentinel::check()->id);
 			if($user)
-				$myquotes = $user->Quotes()->get();
+				$myquotes = $user->Quotes()->get();*/
 		}
 
     	
