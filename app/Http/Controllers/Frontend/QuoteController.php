@@ -66,6 +66,7 @@ class QuoteController extends Controller
             $response = array(
               'status' => 'success',
               'count' => Session::has('cart')? count(Session::get('cart')->items):'',
+              'cartItem' => Session::has('cart')?Session::get('cart')->items[$product->id]:'',
               'msg' => $msg,
               );
         }

@@ -250,13 +250,20 @@ Version: 1.0
           if(data.status=='success') 
           {
             $('.cartCount').text(data.count);
+       
+           
             me.next('#alert').text(data.msg);
             me.next('#alert').show(1000);
             me.next('#alert').removeClass();
             if(data.msg=='Product already added!')
               me.next('#alert').addClass('ajax-danger');
-            else
+            else{
               me.next('#alert').addClass('ajax-success');
+               $('#side-cart-table > tbody:last-child').append(
+              '<tr><td><strong>'+ data.cartItem['item']['name_en'] +
+              '</strong></td><td>'+ data.cartItem['quantity'] + '</td><td>MTN</td></tr>');
+            }
+
           }
           else
           {

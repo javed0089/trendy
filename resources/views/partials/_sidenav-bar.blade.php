@@ -18,7 +18,7 @@
             </div>
             <div id="cart" class="panel-collapse collapse" aria-expanded="false">
               <div class="panel-body">
-               <table class="table table-striped">
+               <table class="table table-striped"  id="side-cart-table">
                 <thead>
                  <tr>
                   <th>Product</th>
