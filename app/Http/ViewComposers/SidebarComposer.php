@@ -61,6 +61,6 @@ class SidebarComposer{
 
 
     	
-		$view->with('activeLink',$activeLink)->with('locale',$locale)->with('header_blocks',$header_blocks)->with('social_blocks',$social_blocks)->with('footer_blocks',$footer_blocks)->with('menuParentCats',$menuParentCats)->with('menuSubCats',$menuSubCats)->with('menuProducts',$menuProducts)->with('menuServices',$menuServices)->with('cart',$cart->items)->with('units',$units)->with('orders',$orders)->with('myquotes',$myquotes);
+		$view->with('activeLink',$activeLink)->with('locale',$locale)->with('header_blocks',$header_blocks)->with('social_blocks',$social_blocks)->with('footer_blocks',$footer_blocks)->with('menuParentCats',$menuParentCats)->with('menuSubCats',$menuSubCats)->with('menuProducts',$menuProducts)->with('menuServices',$menuServices);
 	}
 }
