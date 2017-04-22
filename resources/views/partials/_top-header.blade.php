@@ -33,7 +33,7 @@
         <li><a rel="alternate" hreflang="ar" href="{{LaravelLocalization::getLocalizedURL('ar') }}"><img src="{{asset('images/sa.png')}}"></a></li>
         <li></li>
       </ul><br>
-      <a class="center-block text-center small" href="{{ route('cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{__('Quote Requests')}} <span id="cartCount" class="badge">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a>
+      <a class="center-block text-center small" href="{{ route('cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{__('Quote Requests')}} <span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a>
                     </div>
 
                 </div>

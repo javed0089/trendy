@@ -38,6 +38,11 @@
         <!-- back-to-top link -->
         <a href="#0" class="cd-top"> Top </a>
         <!-- back-to-top link -->
+
+       <!-- Side Nav bar -->
+        @include('partials._sidenav-bar')
+       <!-- Side Nav bar -->
+
         
     </div>
     <!-- Page Wrapper
