@@ -44,21 +44,21 @@ class SidebarComposer{
 
 		}
 		$units =QuoteOption::where('option_type','=','3')->get();
-      //  dd($cart);
 		$orders=[];
 		if(Sentinel::check()){
-			/*$user=User::find(Sentinel::check()->id);
+			$user=User::find(Sentinel::check()->id);
 			if($user)
-				$orders = $user->Orders()->get();*/
+				$orders = $user->Orders()->get();
 		}
 		$myquotes=[];
 		if(Sentinel::check()){
-		/*	$user=User::find(Sentinel::check()->id);
+			$user=User::find(Sentinel::check()->id);
 			if($user)
-				$myquotes = $user->Quotes()->get();*/
+				$myquotes = $user->Quotes()->get();
 		}
-
+if(count($cart)>0)
+	$cart=$cart->items;
     	
-		$view->with('activeLink',$activeLink)->with('locale',$locale)->with('header_blocks',$header_blocks)->with('social_blocks',$social_blocks)->with('footer_blocks',$footer_blocks)->with('menuParentCats',$menuParentCats)->with('menuSubCats',$menuSubCats)->with('menuProducts',$menuProducts)->with('menuServices',$menuServices)->with('cart',$cart->items)->with('units',$units)->with('orders',$orders)->with('myquotes',$myquotes);
+		$view->with('activeLink',$activeLink)->with('locale',$locale)->with('header_blocks',$header_blocks)->with('social_blocks',$social_blocks)->with('footer_blocks',$footer_blocks)->with('menuParentCats',$menuParentCats)->with('menuSubCats',$menuSubCats)->with('menuProducts',$menuProducts)->with('menuServices',$menuServices)->with('cart',$cart)->with('units',$units)->with('orders',$orders)->with('myquotes',$myquotes);
 	}
 }
