@@ -47,7 +47,10 @@
               </tbody>
             </table>
             @if(count($cart)<=0)
-            <span>No products added</span>
+            <div id="cartNoProducts" class="alert alert-danger">
+
+              No products added
+            </div>
             @else
             <div class="center-block text-center">
               <a class="btn btn-primary btn-sm " href="{{ route('cart')}}">Update Cart</a>
@@ -81,101 +84,101 @@
                     <strong><a href="{{route('quotes.show',$myquote->id)}}">{{$myquote->id}}</a> </strong>
                   </td>
                   <td>
-                 <a href="{{route('quotes.show',$myquote->id)}}">
+                   <a href="{{route('quotes.show',$myquote->id)}}">
                     {{date('M j, Y',strtotime($myquote->created_at))}}</a>
                   </td>
                   <td>
-                  <a href="{{route('quotes.show',$myquote->id)}}">
-                   {{$myquote->Status->status_en}}</a>
-                 </td>
-               </tr>
-               @endforeach
-             </tbody>
-           </table>  
-           @if(count($myquotes)<=0)
-           <span>No Quotes</span>
-           @else
+                    <a href="{{route('quotes.show',$myquote->id)}}">
+                     {{$myquote->Status->status_en}}</a>
+                   </td>
+                 </tr>
+                 @endforeach
+               </tbody>
+             </table>  
+             @if(count($myquotes)<=0)
+             <span>No Quotes</span>
+             @else
 
-           <div class="center-block text-center">
-            <a class="btn btn-primary btn-sm " href="{{ route('quotes.index')}}">My Quotes</a>
+             <div class="center-block text-center">
+              <a class="btn btn-primary btn-sm " href="{{ route('quotes.index')}}">My Quotes</a>
+            </div>
+            @endif
+
+            @else
+            <div class="center-block text-center">
+             <div class="alert alert-info">
+
+              You must login first
+            </div>
+
+            <a class="btn btn-primary btn-sm " href="{{ route('frontend.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{__('Login')}}</a>
           </div>
+
+
           @endif
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title" >
+          <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#orders" aria-expanded="false"><i class="fa fa-truck"></i> <span> My Orders</span></a> </h4>
+        </div>
+        <div id="orders" class="panel-collapse collapse" aria-expanded="false">
+          <div class="panel-body">
+           @if(Sentinel::check())
+           <table class="table table-striped">
+            <thead>
+             <tr>
+               <th>Order</th>
+               <th>Dated</th>
+               <th>Status</th>
+             </tr>
+           </thead>
+           <tbody>
+            @foreach($orders as $order)
+            <tr>
+              <td>
+                <a href="{{route('myorders.show',$order->id)}}">
+                  <strong>{{$order->id}}</strong></a>
+                </td>
+                <td>
+                  <a href="{{route('myorders.show',$order->id)}}">
+                    {{date('M j, Y',strtotime($order->created_at))}}
+                  </a>
+                </td>
+                <td>
+                  <a href="{{route('myorders.show',$order->id)}}">
+                   {{$order->Status->status_en}}
+                 </a>
+               </td>
+             </tr>
+             @endforeach
+           </tbody>
+         </table>  
+         @if(count($orders)<=0)
+         <span>No orders</span>
+         @else
 
-          @else
-          <div class="center-block text-center">
-           <div class="alert alert-info">
+         <div class="center-block text-center">
+          <a class="btn btn-primary btn-sm " href="{{ route('myorders.index')}}">My Orders</a>
+        </div>
+        @endif
 
-            You must login first
-          </div>
+        @else
+        <div class="center-block text-center">
+         <div class="alert alert-info">
 
-          <a class="btn btn-primary btn-sm " href="{{ route('frontend.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{__('Login')}}</a>
+          You must login first
         </div>
 
-
-        @endif
+        <a class="btn btn-primary btn-sm " href="{{ route('frontend.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{__('Login')}}</a>
       </div>
+
+
+      @endif
     </div>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title" >
-        <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#orders" aria-expanded="false"><i class="fa fa-truck"></i> <span> My Orders</span></a> </h4>
-      </div>
-      <div id="orders" class="panel-collapse collapse" aria-expanded="false">
-        <div class="panel-body">
-         @if(Sentinel::check())
-         <table class="table table-striped">
-          <thead>
-           <tr>
-           <th>Order</th>
-            <th>Dated</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($orders as $order)
-          <tr>
-            <td>
-            <a href="{{route('myorders.show',$order->id)}}">
-              <strong>{{$order->id}}</strong></a>
-            </td>
-            <td>
-            <a href="{{route('myorders.show',$order->id)}}">
-              {{date('M j, Y',strtotime($order->created_at))}}
-              </a>
-            </td>
-            <td>
-            <a href="{{route('myorders.show',$order->id)}}">
-             {{$order->Status->status_en}}
-             </a>
-           </td>
-         </tr>
-         @endforeach
-       </tbody>
-     </table>  
-     @if(count($orders)<=0)
-     <span>No orders</span>
-     @else
-
-     <div class="center-block text-center">
-      <a class="btn btn-primary btn-sm " href="{{ route('myorders.index')}}">My Orders</a>
-    </div>
-    @endif
-
-    @else
-    <div class="center-block text-center">
-     <div class="alert alert-info">
-
-      You must login first
-    </div>
-
-    <a class="btn btn-primary btn-sm " href="{{ route('frontend.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{__('Login')}}</a>
-  </div>
-
-
-  @endif
-</div>
-</div>
 </div>
 
 <div class="panel panel-default">

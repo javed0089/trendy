@@ -110,12 +110,23 @@ public function confirmCart($id)
 
     if($cart){
         if(count($cart->items)>0){
+            foreach ($cart->items as $item) {
+
+                if($item['port_of_delivery']=="")
+                {
+                   
+                    $cart->step='1';
+                    Session::put('cart', $cart);
+                    return redirect()->route('cart')->with('error',"Port of Delivery cannot be empty!");
+                }
+            }
             $cart->step='2';
             if(Sentinel::check()){
                 $cart->step='3';
                 Session::put('cart', $cart);
                 return redirect()->route('cart');
             }
+            
         }
         else
             $cart->step='1';
@@ -160,14 +171,26 @@ public function postConfirmCart(Request $request,$id)
 {
     $cart = Session::has('cart')? Session::get('cart') : null;
     $cart = new cart($cart);
+
     if($cart){
         if(count($cart->items)>0){
+            foreach ($cart->items as $item) {
+
+                if($item['port_of_delivery']=="")
+                {
+                    $cart->step='1';
+                    Session::put('cart', $cart);
+                    return redirect()->route('cart')->with('error',"Port of Delivery cannot be empty!");
+                }
+            }
+
             $cart->step='2';
             if(Sentinel::check() || Session::has('newUser')){
                 $cart->step='3';
                 Session::put('cart', $cart);
                 return redirect()->route('cart');
             }
+
         }
         else
             $cart->step='1';

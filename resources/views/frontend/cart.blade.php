@@ -1,7 +1,7 @@
  @extends('layouts.main')
 
  @section('title','My Account')
-@section('styles')
+ @section('styles')
  <link href="{{asset('css/parsley.css')}}" rel="stylesheet">
  @endsection
  
@@ -14,7 +14,7 @@
  		<div class="row">
  			<div class="col-md-12">
  				<h2 class="company-title color-title"></h2>
- 				<h4 class="hood-subtitle subtitle">Prepare your quote</h4>
+ 				<h4 class="hood-subtitle subtitle">Prepare your quote </h4>
  				<section class="about-accordion">
  					<div class="row publications">
  						<div class="panel-group" id="accordion">
@@ -30,10 +30,23 @@
  											<thead>
  												<tr>
  													<th><h3>Products</h3></th>
+ 													@if ($message = Session::get('success'))
+ 													<div class="alert alert-success alert-block">
+ 														<button type="button" class="close" data-dismiss="alert">×</button>
+ 														<strong>{{ $message }}</strong>
+ 													</div>
+ 													@endif
+ 													@if(session('error'))
+ 													<div class="alert alert-danger">
+
+ 														{{session('error')}}
+
+ 													</div>
+ 													@endif
  												</tr>
  											</thead>
  											<tbody>
- 											@if(count($cart)>0)
+ 												@if(count($cart)>0)
  												@foreach($cart as $item)
  												<tr>
  													<td style="background: #f4f5f8;">
@@ -44,19 +57,19 @@
  																<h3 >{{$item['item']['name_en']}}</h3>
  															</div>
  															<div class="col-md-4"> 
- 															<div class="col-md-6 text-right">
- 																<h4>Quantity</h4>
- 																<input style="width: 60px" type="number" name="quantity" required min="16.5" data-parsley-error-message="Min. value 16.5" step=".5" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
+ 																<div class="col-md-6 text-right">
+ 																	<h4>Quantity</h4>
+ 																	<input style="width: 60px" type="number" name="quantity" required min="16.5" data-parsley-error-message="Min. value 16.5" step=".5" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
  																</div>
  																<div class="col-md-6">
- 																<h4>Units</h4>
- 																<select name="unit">
- 																@foreach($units as $unit)
- 																	<option {{$item['unit']==$unit->name_en ?'Selected':''}} value="{{$unit->name_en}}">{{$unit->name_en}}</option>
- 																@endforeach
- 																</select>
+ 																	<h4>Units</h4>
+ 																	<select name="unit">
+ 																		@foreach($units as $unit)
+ 																		<option {{$item['unit']==$unit->name_en ?'Selected':''}} value="{{$unit->name_en}}">{{$unit->name_en}}</option>
+ 																		@endforeach
+ 																	</select>
 
- 															</div>
+ 																</div>
  															</div>
  															<div class="col-md-4">
  																<h4>Port of Delivery</h4>
@@ -66,18 +79,18 @@
  															<div class="col-md-4">
  																<h4>Delivery Terms</h4>
  																<select class="form-control" name="delivery_terms">
- 																@foreach($delivery_terms as $delivery_term)
+ 																	@foreach($delivery_terms as $delivery_term)
  																	<option {{$item['delivery_terms']==$delivery_term->name_en ?'Selected':''}} value="{{$delivery_term->name_en}}">{{$delivery_term->name_en}}</option>
- 																@endforeach	
+ 																	@endforeach	
  																</select>
  															</div>
  															<div class="col-md-4">
  																<h4>Payment Method</h4>
  																<select class="form-control" name="payment_method">
- 																@foreach($payment_methods as $payment_method)
+ 																	@foreach($payment_methods as $payment_method)
  																	<option {{$item['payment_method']==$payment_method->name_en ?'Selected':''}} value="{{$payment_method->name_en}}">{{$payment_method->name_en}}</option>
  																	
- 																@endforeach	
+ 																	@endforeach	
  																</select>
  															</div>
  															<div class="col-md-4">
@@ -120,14 +133,14 @@
  													</td>
  												</tr>
  												@endforeach  
- 											@else
- 											 <div class="alert alert-danger alert-dismissable">
-				                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-				                                    
-				                                </button>
-				                                Your cart is empty!
-				                            </div>
- 											@endif 
+ 												@else
+ 												<div class="alert alert-danger alert-dismissable">
+ 													<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+
+ 													</button>
+ 													Your cart is empty!
+ 												</div>
+ 												@endif 
 
  											</tbody>
  										</table>
@@ -173,10 +186,10 @@
  										</div>
  										<div id="3" class="panel-collapse collapse">
  											<div class="panel-body">
-												
-	 											<div class="col-md-12 text-center">
-													<a href="{{route('send.quote')}}" class="btn btn-success btn-lg">Send Quote</a>
-												</div>
+
+ 												<div class="col-md-12 text-center">
+ 													<a href="{{route('send.quote')}}" class="btn btn-success btn-lg">Send Quote</a>
+ 												</div>
  											</div>
  										</div>
  									</section>
@@ -195,7 +208,9 @@
  					<script>
  						$(function () {
  							var a= "{{ isset($step)?$step:'1' }}";
- 							$('a[data-toggle]').on('click', function(e) {
+ 							//$('a[data-toggle]').on('click', function(e) {
+ 							$('a[data-parent="#accordion"]').on('click', function(e) {
+
  								var target=$(this).attr('href');
  								var targetid = target.substr(target.length-1);
 
@@ -233,6 +248,6 @@
 
  						});
  					</script>
-<!-- parsley JS -->
-<script src="{{asset('js/parsley.min.js')}}"></script>
+ 					<!-- parsley JS -->
+ 					<script src="{{asset('js/parsley.min.js')}}"></script>
  					@endsection

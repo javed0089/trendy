@@ -250,8 +250,8 @@ Version: 1.0
           if(data.status=='success') 
           {
             $('.cartCount').text(data.count);
-       
-           
+
+
             me.next('#alert').text(data.msg);
             me.next('#alert').show(1000);
             me.next('#alert').removeClass();
@@ -259,11 +259,16 @@ Version: 1.0
               me.next('#alert').addClass('ajax-danger');
             else{
               me.next('#alert').addClass('ajax-success');
-               $('#side-cart-table > tbody:last-child').append(
-              '<tr><td><strong>'+ data.cartItem['item']['name_en'] +
-              '</strong></td><td>'+ data.cartItem['quantity'] + '</td><td>MTN</td></tr>');
-            }
 
+              $('#side-cart-table > tbody:last-child').append(
+                '<tr><td><strong>'+ data.cartItem['item']['name_en'] +
+                '</strong></td><td>'+ data.cartItem['quantity'] + '</td><td>MTN</td></tr>');
+
+              $('#cartNoProducts').hide();
+              if($('#updateCart').length==0)
+                $('#side-cart-table').parent().append('<div id=\"updateCart\" class=\"center-block text-center\">'+
+                  '<a class=\"btn btn-primary btn-sm\" href=\"cart\">Update Cart</a></div>');  
+            }
           }
           else
           {
