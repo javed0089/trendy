@@ -52,7 +52,7 @@
               No products added
             </div>
             @else
-            <div class="center-block text-center">
+            <div id="updateCart" class="center-block text-center">
               <a class="btn btn-primary btn-sm " href="{{ route('cart')}}">Update Cart</a>
             </div>
             @endif
