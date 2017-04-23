@@ -4070,7 +4070,8 @@ ul.nav-tabs {
 .nav--primary > .menu > .menu-item-has-children > a {
     position: relative;
     padding-right: 20px;
-    float: left;
+   /*float: left;*/
+
 }
 
 .home .nav--primary > .menu > .menu-item-has-children > a:before {
@@ -4087,6 +4088,7 @@ ul.nav-tabs {
     float: right;
     top: 30%;
     padding-left: 4px;
+
 }
 
 .nav--primary li {
@@ -4379,7 +4381,7 @@ ul.nav-tabs {
     .sub-menu-toggle {
         position: absolute;
         right: 0;
-        padding: 20px;
+        padding: 20px 30px;
         top: 0;
         color: white;
         cursor: pointer;
@@ -4455,6 +4457,9 @@ ul.nav-tabs {
 
     .nav--primary {
         top: 60px;
+        height: 450px;
+        overflow: scroll;
+        overflow-x: hidden;
     }
 
     .top-bar {
@@ -4547,6 +4552,7 @@ ul.nav-tabs {
     top: 100%;
     background: #f0f0f0;
     width: 250px;
+
 }
 
 .nav--primary .sub-menu li {
@@ -4774,6 +4780,7 @@ ul.nav-tabs {
         position: relative;
         width: 100%;
         background: #1e1e1e;
+          overflow-x: hidden;
     }
 
     .nav--primary .sub-menu li,

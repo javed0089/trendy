@@ -3700,6 +3700,7 @@ input.wpcf7-not-valid {
     .nav--primary > .menu > .menu-item-has-children > a {
         position: relative;
         padding-right: 35px;
+       
     }
 
   .home .nav--primary > .menu > .menu-item-has-children > a:before {
