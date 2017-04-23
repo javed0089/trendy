@@ -267,7 +267,7 @@ Version: 1.0
               $('#cartNoProducts').hide();
               if($('#updateCart').length==0)
                 $('#side-cart-table').parent().append('<div id=\"updateCart\" class=\"center-block text-center\">'+
-                  '<a class=\"btn btn-primary btn-sm\" href=\"cart\">Update Cart</a></div>');  
+                  '<a class=\"btn btn-primary btn-sm\" href=\"/cart\">Update Cart</a></div>');  
             }
           }
           else
@@ -302,23 +302,6 @@ Version: 1.0
           top: 120
         }
       });
-
-
-      $(window).scroll(function()
-      {
-       /*  var height = $(this).scrollTop();
-         var brand = $("#smallLogo");
-         if (height > 120)
-         {
-           brand.show('slow');  
-           $('.main-header').addClass('shrink');
-       }
-       else
-       {
-        brand.hide();
-        $('.main-header').removeClass('shrink') ;
-      }*/
-    });
 
 
       var lastTop = 120;
