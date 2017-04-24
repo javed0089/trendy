@@ -1022,7 +1022,7 @@ section.home-ceo {
 
 .row.ceo {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .row.ceo > div {
@@ -5641,4 +5641,9 @@ a.btn.btn-xs {
 .well-form1 {
     padding: 10px;
     background: #f4f5f8;
+}
+
+.prod-desc{
+    height: 140px;
+    overflow:hidden;
 }
