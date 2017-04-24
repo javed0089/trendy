@@ -40,7 +40,7 @@
              @endif
            </a>
            <h4 class="subtitle services-title-one"><a href="{{route('frontend.product',$product->slug)}}"> {{$product->{lang_col('name')} }}</a></h4>
-           <p>{{str_limit($product->{lang_col('desc')},180)}} </p>
+           <p>{!!str_limit($product->{lang_col('desc')},180)!!} </p>
            <!--  <a class="link" href="{{route('frontend.product',$product->slug)}}"> Read more </a>-->
            <input type="text" hidden value="{{route('addToCart',$product->id)}}" name="">
            <a  class="btn btn-danger btn-sm quote" href="#"> {{__('Request A Quote')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></a>
@@ -68,7 +68,7 @@
              @endif
            </a>
            <h4 class="subtitle services-title-one"><a href="{{route('frontend.product',$product->slug)}}"> {{$product->{lang_col('name')} }}</a></h4>
-           <p>{{str_limit($product->{lang_col('desc')},180)}} </p>
+           <p>{!!str_limit($product->{lang_col('desc')},180)!!} </p>
            <!--  <a class="link" href="{{route('frontend.product',$product->slug)}}"> Read more </a>-->
            <input type="text" hidden value="{{route('addToCart',$product->id)}}" name="">
            <a  class="btn btn-danger btn-sm quote" href="#"> {{__('Request A Quote')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></a>
