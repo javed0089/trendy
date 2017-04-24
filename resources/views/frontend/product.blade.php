@@ -66,7 +66,7 @@
         <div class="row">
         <div class="col-md-8">   
             <h2 class="hood-title color-title"> {{$product->Category->{lang_col('name')} }}</h2>
-            <h4 class="hood-subtitle subtitle"> {{$product->Brand->{lang_col('name')} }} - {{$product->{lang_col('name')} }} </h4>
+            <h4 class="hood-subtitle subtitle"> {{$product->{lang_col('name')} }} </h4>
           </div>
           <div class="col-md-4">
            <img src="{{asset($product->Brand->logo)}}" height="80" width="180" alt="{{$product->Brand->{lang_col('name')} }}">
