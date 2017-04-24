@@ -54,7 +54,7 @@
  															{{csrf_field()}}
  															<div class="col-md-4">
  																<h4>Product Name</h4>
- 																<h3 >{{$item['item']['name_en']}}</h3>
+ 																<h4 ><strong>{{$item['item']['name_en']}}</strong></h4>
  															</div>
  															<div class="col-md-4"> 
  																<div class="col-md-6 text-right">
