@@ -1463,7 +1463,7 @@ section.home-news {
     background: #034694;
     top: 12px;
     right: 12px;
-    z-index: 100;
+    z-index: 80;
 }
 
 .blog-img-box {
