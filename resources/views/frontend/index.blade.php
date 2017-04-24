@@ -59,9 +59,9 @@
             <div id="addToQuote" class="col-md-4">
                 <div class="hover-effect">
                     @if(count($product->Images)>0)
-                    <img src="{{asset($product->Images->first()->filename)}}" alt="" />
+                    <a href="{{route('frontend.product',$product->slug)}}"><img src="{{asset($product->Images->first()->filename)}}" alt="" /></a>
                     @else
-                    <img src="http://placehold.it/363x272" alt="" />
+                    <a href="{{route('frontend.product',$product->slug)}}"><img src="http://placehold.it/363x272" alt="" /></a>
                     @endif                                
 
                 </div>
