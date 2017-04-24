@@ -2725,6 +2725,9 @@ section.about-stats {
 
 .row.stats.stats-2 {
     background: #f4f5f8;
+    /* Bootstrap negative padding */
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .row.stats.stats-2 > div {
@@ -5433,7 +5436,9 @@ a.btn.btn-xs {
     left: 0;
     float:left; 
 }
-
+.small-logo img{
+    margin-top: 7px;
+}
 .shrink {
   min-height: 40px;
 }
@@ -5580,7 +5585,15 @@ a.btn.btn-xs {
     #wrapper.toggled-2 #sidebar-wrapper:hover {
         /*width: 250px;*/
     }
-
+    
+     .toggle-button{
+        padding-left: 15px;
+        color: #fff  !important;
+        width: 100%
+    }
+    .toggle-button:hover,active,focus {
+        color: #fff !important;
+    }
 
     .sidebar-nav .panel-heading h4{
         font-size: 16px;

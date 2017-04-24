@@ -2,9 +2,9 @@
 <div id="wrapper" class="toggled-2">
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
-    <div data-spy="affix" data-offset-top="300" style="height: 40px; background-color: #034694;  z-index: 3000; display: block; width: 100%" >
+    <div data-spy="affix" data-offset-top="300" class="toggle-button" style="height: 40px; width: 250px; background-color: #034694;  z-index: 3000; display: block; " >
 
-      <a href="#" style="padding-left: 35px; color: #fff; width: 100%" class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2">  <i class="fa fa-chevron-left"></i> </a>
+      <a href="#" class="navbar-toggle toggle-button collapse in" data-toggle="collapse" id="menu-toggle-2">  <i class="fa fa-chevron-left"></i> </a>
 
     </div>
     <div class="sidebar-nav" id="sidebar-container">

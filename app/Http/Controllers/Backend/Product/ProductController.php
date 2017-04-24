@@ -63,7 +63,7 @@ class ProductController extends Controller
         $product->sort_order=$request->sort_order;
            
         $product->save();
-        return redirect(route('products.index'))->with('success','Record saved successfully!');
+        return redirect(route('products.show',$product->id))->with('success','Record saved successfully!');
     }
 
     /**
@@ -122,7 +122,7 @@ class ProductController extends Controller
         $product->sort_order=$request->sort_order;
         
         $product->save();
-        return redirect(route('products.show',$id))->with('success','Record saved successfully!');
+        return redirect(route('products.edit',$id))->with('success','Record saved successfully!');
     }
 
     /**

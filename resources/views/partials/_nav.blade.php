@@ -11,7 +11,7 @@
 <div class="row mobile--relative">
     <div class="container">
         <div id="smallLogo" class="small-logo">
-            <a  class="" href="/"><img src="{{asset('images/logo2.png')}}" width="130" height="45" alt="Gap-Polymers Logo" /></a>
+            <a  class="" href="/"><img src="{{asset('images/logo2.png')}}" width="130" height="35" alt="Gap-Polymers Logo" /></a>
         </div>
         <nav class="nav--primary">
 
