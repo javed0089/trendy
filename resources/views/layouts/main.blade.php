@@ -29,7 +29,6 @@
             @yield('content')
         </main>
         <!-- Main Content Section -->
-
         <!-- Footer Section -->
         @include('partials._footer')
         <!-- Footer Section -->

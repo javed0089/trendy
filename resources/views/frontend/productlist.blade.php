@@ -1,22 +1,17 @@
- @extends('layouts.main')
+@extends('layouts.main')
+@section('title','Product List')
+@section('content')
 
- @section('title','Product List')
 
-
- @section('content')
-
- <main class="main">
-   <!-- Page Title -->
-   @if(isset($topImage))
-   @if($topImage->page->status)
-   <div class="page-title text-center" style="background: url({{isset($topImage->{lang_col('image')})?asset($topImage->{lang_col('image')}):'http://placehold.it/1600x268'}});">
+  @if(isset($topImage))
+  @if($topImage->page->status)
+  <div class="page-title text-center" style="background: url({{isset($topImage->{lang_col('image')})?asset($topImage->{lang_col('image')}):'http://placehold.it/1600x268'}});">
     <h2 class="title"> {{isset($topImage->{lang_col('title')})?$topImage->{lang_col('title')}:''}} </h2>
     <p class="description light"> {!!isset($topImage->{lang_col('content')})?$topImage->{lang_col('content')}:''!!} </p>
   </div>
   @endif
   @endif
-  <!-- Page Title -->
-
+ 
   <!-- Breadcrumbs -->
   <div class="breadcrumbs">
     <div class="container">
@@ -56,7 +51,7 @@
          <div class="clearfix spacer-50"></div>
          @endforeach
          @endif
-         
+
 
          @foreach($subCategories as $subCategory)
          <h2 class="color-title" style="display: block;">{{$subCategory->name_en}}</h2>
@@ -89,58 +84,44 @@
          @endif
 
          @endforeach
-         
-
-
-
-
-
-
-
        </div>
      </section>
 
    </div>
 
-   <div class="col-md-3 sidebar left">
-
-    <h3 class="sidebar-title">{{__('Categories')}}</h3>
-
+   <div class="col-md-3 sidebar left" >
     @if (isset($categories) && count($categories) > 0)
     <ul id="tree" class="treeview">
-     @foreach ($categories->sortBy('sort_order') as $category)
-     @include('frontend.category', $category)
-     @endforeach
-   </ul>
-   @else
-   <span>No categories</span>
-   @endif
+    <li style="font-weight: bold;
+    line-height: 28px;
+    background: #034694;
+    color: #fff;
+    font-size: 16px;
+    padding: 7px !important;">Categories</li>
+      @foreach ($categories->sortBy('sort_order') as $category)
+      @include('frontend.category', $category)
+      @endforeach
+      <li style="font-weight: bold;
+    line-height: 28px;
+    background: #034694;
+    color: #fff;
+    font-size: 16px;
+    padding: 7px !important;">Brands</li>
+      @foreach($brands as $brand)
+      <li {{ Request::is('*/brand/'.$brand->slug)?"class=active":'' }}><a href="{{route('frontend.productsByBrand',$brand->slug)}}">{{$brand->name_en}}</a></li>
+      @endforeach
+     
+   
+    </ul>
+    @else
+    <span>No categories</span>
+    @endif
 
+    
 
+  </div>
 
-
-
-
- </div>
 </div>
 </div>
 
-
-
-</div>
-<div class="spacer-50"></div>
-
-</main>
 @endsection
-
-@section('scripts')
-<script>                                                                               
-
-
-
-
-
-</script>       
-@endsection
-
-

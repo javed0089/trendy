@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Page\Page;
+use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
@@ -21,17 +22,30 @@ class CategoryController extends Controller
     public function productlist($slug)
     {
     	$categories=Category::where('parent_id','=','0')->get();
-    	//$categories=Category::all();
         $category=Category::where('slug','=',$slug)->first();
 
         $subCategories = Category::where('parent_id','=',$category->id)->get();
-        //dd($subCategories);
         $products=Product::where([['category_id','=',$category->id],['discontinued','=','0']])->get();
-    	//dd($products);
+
+        $brands = Brand::all();
 
         $topImage = Page::find(120)->PageSections()->first();
 
-        return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories);
+        return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories)->with('brands',$brands);
+    }
+
+    public function productsByBrand($slug)
+    {
+        $categories=Category::where('parent_id','=','0')->get();
+        $brand=Brand::where('slug','=',$slug)->first();
+        $subCategories=[];
+        $products=Product::where([['brand_id','=',$brand->id],['discontinued','=','0']])->get();
+
+        $brands = Brand::all();
+
+        $topImage = Page::find(120)->PageSections()->first();
+
+        return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories)->with('brands',$brands);
     }
 
     public function product($slug)

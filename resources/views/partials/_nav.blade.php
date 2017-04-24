@@ -100,7 +100,7 @@
             </li>
             @if(count($menuServices))
             <li id="menu-item-3499" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3499">
-                <a href="#">{{__('Service')}}</a>
+                <a href="#">{{__('Offers')}}</a>
                 <ul class="sub-menu">
                     @foreach($menuServices as $service)
                     <li id="menu-item-3522" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3522"><a href="{{route('frontend.services',$service->slug)}}">{{$service->{lang_col('name')} }}</a></li>

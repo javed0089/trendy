@@ -11,7 +11,7 @@
     <div class="flexslider">
         <ul class="slides">
             @foreach($SlidersBlock as $SliderBlock)
-            <li class="has-overlay">
+            <li class="has-overlay" style="z-index: 0 !important">
                 @if($SliderBlock->image_en)
                 <img src="{{$SliderBlock->{lang_col('image')} }}" alt="{{$SliderBlock->{lang_col('title')} }}" />
                 @else
@@ -76,6 +76,8 @@
             </div>
             @endforeach
             @endif
+            <div class="spacer-10"></div>
+            <a href="{{route('frontend.categories')}}" class="pull-right btn btn-default btn-sm">View all products <i class="fa fa-angle-double-right"></i></a>
         </div>
     </div>
 </section>
@@ -407,9 +409,9 @@
                 <div class="item">
                     <div class="partner-images">
                         @if($brand->logo)
-                        <img src="{{asset($brand->logo)}}" height="80" width="180" alt="{{$brand->{lang_col('name')} }}">
+                        <a href="{{route('frontend.productsByBrand',$brand->slug)}}"><img src="{{asset($brand->logo)}}" height="80" width="180" alt="{{$brand->{lang_col('name')} }}"></a>
                         @else
-                        <img src="http://placehold.it/180x80" height="80" width="180" alt="{{$brand->{lang_col('name')} }}">
+                        <a href="{{route('frontend.productsByBrand',$brand->slug)}}"><img src="http://placehold.it/180x80" height="80" width="180" alt="{{$brand->{lang_col('name')} }}"></a>
                         @endif
                     </div>
                 </div>

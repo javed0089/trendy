@@ -5109,7 +5109,7 @@ ul.nav-tabs {
 .treeview{
     background-color: #f4f5f8;
     padding: 15px 0px;
-    position: absolute;
+    /*position: absolute;*/
 }
 
 .treeview li{
