@@ -5648,3 +5648,20 @@ position: absolute;top:50%
 .login-links li{
 line-height: 25px;
 }
+
+.my-styled-list ol, .my-styled-list ul{
+    list-style-position: outside;
+    margin-left: 1em;
+    padding: 25px 0;
+}   
+
+.my-styled-list ol li, .my-styled-list ul li {
+    font-size:16px;
+    padding: 10px 0;
+    border-bottom: 2px solid #f4f5f8;
+    line-height: 1.5em;
+    color: #000;
+}
+.my-styled-list ul {
+    list-style-type: disc;
+}
