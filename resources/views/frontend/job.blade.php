@@ -14,7 +14,7 @@
     <div class="page-title text-center" style="background: url({{isset($topImage->{lang_col('image')})?asset($topImage->{lang_col('image')}):'http://placehold.it/1600x268'}});">
         <h2 class="title"> {{$job->{lang_col('title')} }} </h2>
         <p class="description light"> {{$job->Department->{lang_col('name')} }}
-            <br> {{$job->{lang_col('location')} }} </p>
+            , {{$job->{lang_col('location')} }} </p>
         </div>
         @endif
         @endif
