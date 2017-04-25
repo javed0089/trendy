@@ -5633,3 +5633,18 @@ a.btn.btn-xs {
     height: 140px;
     overflow:hidden;
 }
+
+.language-menu{
+    float: right !important;
+    position: relative;
+    height: 40px;
+    width: 120px;
+
+}
+.language-menu ul{
+position: absolute;top:50%
+}
+
+.login-links li{
+line-height: 25px;
+}
