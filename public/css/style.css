@@ -5652,7 +5652,7 @@ line-height: 25px;
 .my-styled-list ol, .my-styled-list ul{
     list-style-position: outside;
     margin-left: 1em;
-    padding: 25px 0;
+    padding: 15px 0;
 }   
 
 .my-styled-list ol li, .my-styled-list ul li {
