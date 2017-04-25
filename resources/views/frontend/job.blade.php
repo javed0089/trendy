@@ -73,7 +73,7 @@
             </section>
 
             <div class="row single-job">
-                <div class="col-md-9 job-info">
+                <div class="col-md-12 job-info">
 
                     <section class="career-single-job">
                         <h2 class="job-title title-2"> {{__('JOB DESCRIPTION')}}</h2>
