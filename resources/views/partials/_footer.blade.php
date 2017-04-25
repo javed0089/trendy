@@ -105,7 +105,7 @@
                     <p>{{__('Copyright')}} © {{Date('Y')}} {{__('GAP Polymers')}}. {{__('All rights reserved')}}.</p>
                 </div>
                 <div class="col-md-6 text-right">
-                    <p> <a href="{{route('frontend.information','terms-of-use')}}"> {{__('Disclaimer')}}</a> <a href="{{route('frontend.information','privacy-policy')}}">{{__('Privacy Policy')}}</a> <span> | </span>{{__('Powered By')}} : {{__('GAP Polymers')}} </p>
+                    <p> <a href="{{route('frontend.information','disclaimer')}}"> {{__('Disclaimer')}}</a> <a href="{{route('frontend.information','privacy-policy')}}">{{__('Privacy Policy')}}</a> <span> | </span>{{__('Powered By')}} : {{__('GAP Polymers')}} </p>
                 </div>
             </div>
         </div>
