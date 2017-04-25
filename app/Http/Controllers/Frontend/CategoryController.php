@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
         $topImage = Page::find(120)->PageSections()->first();
 
-        return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories)->with('brands',$brands);
+        return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories)->with('brands',$brands)->with('category',$category);
     }
 
     public function productsByBrand($slug)
@@ -45,7 +45,7 @@ class CategoryController extends Controller
 
         $topImage = Page::find(120)->PageSections()->first();
 
-        return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories)->with('brands',$brands);
+        return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories)->with('brands',$brands)->with('brand',$brand);
     }
 
     public function product($slug)

@@ -27,8 +27,14 @@
     <div class="col-md-9 services-content">
 
       <section class="services-company">
-        <div class="row">
+        <div class="row"> 
+
+        <h2 class="color-title" style="display: block;">{{isset($category)?$category->name_en:''}}</h2>
+        <h2 class="color-title" style="display: block;">{{isset($brand)?$brand->name_en:''}}</h2>
+
+         <hr>
          @if (isset($products) && count($products) > 0)
+
          @foreach($products->sortBy('sort_order')->chunk(3) as $productsChunk)
          @foreach($productsChunk as $product)
          <div id="addToQuote" class="col-md-4 col-sm-4">
@@ -49,6 +55,9 @@
          @endforeach 
          <div class="clearfix spacer-50"></div>
          @endforeach
+         @else
+         <div class="alert alert-info">{{isset($category)?'Stock not available for this product category. Visit again to view this page':''}}
+         {{isset($brand)?'Stock not available for this product brand. Visit again to view this page':''}}</div>
          @endif
 
 
@@ -77,7 +86,8 @@
          <div class="clearfix spacer-50"></div>
          @endforeach
          @else
-         <span>No Products</span>
+         <div class="alert alert-info">{{isset($category)?'Stock not available for this product category. Visit again to view this page':''}}
+         {{isset($brand)?'Stock not available for this product brand. Visit again to view this page':''}}</div>
          <div class="clearfix spacer-50"></div>
          @endif
 
