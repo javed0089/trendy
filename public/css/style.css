@@ -759,7 +759,7 @@ section.home-slider {
     left: 0;
     right: 0;
     content: " ";
-    background: rgba(0, 0, 0, 0.44);
+    background: rgba(0, 0, 0, 0.20);
 }
 
 .slider-content {

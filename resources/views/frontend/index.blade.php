@@ -11,7 +11,7 @@
     <div class="flexslider">
         <ul class="slides">
             @foreach($SlidersBlock as $SliderBlock)
-            <li class="has-overlay" style="z-index: 0 !important">
+            <li class="has-overlay">
                 @if($SliderBlock->image_en)
                 <img src="{{$SliderBlock->{lang_col('image')} }}" alt="{{$SliderBlock->{lang_col('title')} }}" />
                 @else
