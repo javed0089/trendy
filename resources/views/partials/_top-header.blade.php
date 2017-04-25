@@ -58,7 +58,7 @@
                 </ul>
                 </div>
   <div>
-                  <a class="center-block text-center" href="{{ route('cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{__('Quote Requests')}} <span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a>
+                  <a class="center-block text-center" href="{{ route('cart')}}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> {{__('My Quote Request')}} <span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a>
                 </div>
               </div> 
 

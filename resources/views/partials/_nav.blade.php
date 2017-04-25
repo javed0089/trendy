@@ -126,7 +126,7 @@
       <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500"><a href="{{route('frontend.contact')}}">{{__('Contact')}}</a></li>
 
 
-      <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500 hidden-lg hidden-md"><a href="{{ route('cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{__('Cart')}} <span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a></li>
+      <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500 hidden-lg hidden-md"><a href="{{ route('cart')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{__('My Quote Request')}} <span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a></li>
 
       @if(Sentinel::check())
       <li id="menu-item-3501" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3501 hidden-lg hidden-md">
@@ -155,7 +155,7 @@
 
  </nav>
 
- <div class="language-menu">
+ <div class="language-menu visible-lg visible-md" >
  <ul class="list-inline">
    <li><a rel="alternate" hreflang="en" href="{{LaravelLocalization::getLocalizedURL('en') }}">English</a></li> |
    <li><a rel="alternate" hreflang="ar" href="{{LaravelLocalization::getLocalizedURL('ar') }}">العربية</a></li>

@@ -14,7 +14,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#cart" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span> <span> My Cart </span>  </a> </h4>
+              <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#cart" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span> <span> My Quote Request </span>  </a> </h4>
             </div>
             <div id="cart" class="panel-collapse collapse" aria-expanded="false">
               <div class="panel-body">
