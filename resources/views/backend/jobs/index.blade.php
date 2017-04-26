@@ -43,6 +43,7 @@
 										<th>Job Title</th>
 										<th>Department</th>
 										<th>Status</th>
+										<th>Applications</th>
 										<th>Created</th>
 										<th width="80"></th>
 										<th width="80"></th>
@@ -58,6 +59,7 @@
 										</td>
 										<td>{{isset($job->Department->name_en)?$job->Department->name_en:'n/a'}}</td>
 										<td>{!!$job->job_status?'<span class="label label-success">Active</span>':'<span class="label label-danger">In-active</span>'!!}</td>
+										<td>{{count($job->JobApplications)}}</td>
 										<td>{{ date('M j, Y H:i',strtotime($job->created_at))}}</td>
 										<td>
 											<a href="{{ route('jobs.edit',$job->id) }}" class="btn btn-block btn-default">Edit</a>
