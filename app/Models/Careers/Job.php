@@ -11,5 +11,9 @@ class Job extends Model
     	return $this->belongsTo('App\Models\Department\Department','department_id');
     }
 
+    public function JobApplications()
+    {
+    	return $this->hasMany('App\Models\Careers\JobApplication');
+    }
     
 }

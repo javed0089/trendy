@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Backend\Careers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Careers\Job;
+use App\Models\Careers\JobApplication;
 use App\Models\Department\Department;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class JobController extends Controller
@@ -28,9 +30,9 @@ class JobController extends Controller
      */
     public function create()
     {
-         $departments=Department::all();
-         return view('backend.jobs.create')->with('departments',$departments);
-    }
+     $departments=Department::all();
+     return view('backend.jobs.create')->with('departments',$departments);
+ }
 
     /**
      * Store a newly created resource in storage.
@@ -136,5 +138,21 @@ class JobController extends Controller
         $job=Job::find($id);
         $job->delete();
         return back()->with('success','Record deleted succesfully!');
+    }
+
+
+    public function getResume($applicationId)
+    {
+        $jobApplication = JobApplication::find($applicationId);
+        if($jobApplication){
+            $filename = $jobApplication->resume;
+            $location="resumes/".$jobApplication->job_id.'/';
+            $file = Storage::disk('local')->get( $location.$filename);
+            $response = Response($file, 200);
+             $response->header("Content-Type", 'application/pdf');
+            return $response;
+        }
+
+
     }
 }

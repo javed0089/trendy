@@ -38,6 +38,8 @@
     	/** Careers **/
     	Route::get('/careers', 'Frontend\CareerController@index')->name('frontend.careers');
     	Route::get('/careers/{slug}', 'Frontend\CareerController@job')->name('frontend.job');
+    	Route::post('/careers/apply', 'Frontend\CareerController@postApplication')->name('frontend.applyjob');
+
 
     	/** Blog **/
        	Route::get('/blog','Frontend\BlogController@index')->name('frontend.blogs');
@@ -185,6 +187,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 		///////*****Jobs********//////
 		Route::resource('module/jobs','Backend\Careers\JobController');
+		Route::get('careers/resume/{applicationId}','Backend\Careers\JobController@getResume')->name('job.getresume');
 
 		///////*****Testimonials********//////
 		Route::resource('module/testimonials','Backend\Testimonial\TestimonialController');

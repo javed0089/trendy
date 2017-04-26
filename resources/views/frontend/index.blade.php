@@ -22,16 +22,16 @@
                     <div class="container">
                         <h2> {!!$SliderBlock->{lang_col('title')} !!}</h2>
                         <p>
-                           {!!$SliderBlock->{lang_col('content')} !!}
-                       </p>
-                       <a href="{{ $SliderBlock->{lang_col('link')} }}" class="btn primary-btn"> {{__('KNOW MORE')}} <i class="fa fa-angle-right"></i> </a>
-                   </div>
-               </div>
-           </li>
-           @endforeach   
+                         {!!$SliderBlock->{lang_col('content')} !!}
+                     </p>
+                     <a href="{{ $SliderBlock->{lang_col('link')} }}" class="btn primary-btn"> {{__('KNOW MORE')}} <i class="fa fa-angle-right"></i> </a>
+                 </div>
+             </div>
+         </li>
+         @endforeach   
 
-           @if(!$SlidersBlock || count($SlidersBlock)<1)
-           <li class="has-overlay">
+         @if(!$SlidersBlock || count($SlidersBlock)<1)
+         <li class="has-overlay">
             <img src="images/slides/slide2.jpg" alt="Slider 2" />
             <div class="slider-content">
                 <div class="container">
@@ -169,16 +169,16 @@
 
                     </div>
                     <div class="img-right hover-effect">
-                       @if($CompBlock->{lang_col('image')})
-                       <img src="{{$CompBlock->{lang_col('image')} }}" alt="" />
-                       @else
-                       <img src="http://placehold.it/555x368" alt="" />
-                       @endif
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+                     @if($CompBlock->{lang_col('image')})
+                     <img src="{{$CompBlock->{lang_col('image')} }}" alt="" />
+                     @else
+                     <img src="http://placehold.it/555x368" alt="" />
+                     @endif
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
 </section>
 @endif
 
@@ -305,7 +305,7 @@
                 <div class="plubication-downloads">
                     <h2 class="publish">{{__('Our Profile & Contacts')}}</h2>
                     <div class="download-file">
-                    <a href="{{isset($company->company_profile)?asset($company->company_profile):''}}" target="_blank"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{__('Download Profile')}} </a>
+                        <a href="{{isset($company->company_profile)?asset($company->company_profile):''}}" target="_blank"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{__('Download Profile')}} </a>
                     </div>
                     <div class="download-file">
 
@@ -441,22 +441,22 @@
                     <h2 class="ceo-title color-title">{{$CeoBlock?$CeoBlock->{lang_col('title')}:'No data'}}  </h2>
                     <h4 class="ceo-subtitle subtitle"> {{$CeoBlock?$CeoBlock->{lang_col('heading1')}:'No data'}} </h4>
                     <p>
-                       {!! $CeoBlock?$CeoBlock->{lang_col('content')}:'No data' !!}</p>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </section>
-   @endif
-   @endif
+                     {!! $CeoBlock?$CeoBlock->{lang_col('content')}:'No data' !!}</p>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
+ @endif
+ @endif
 
-   @endsection
-   @section('scripts')
+ @endsection
+ @section('scripts')
 
-   <script src="{{asset('js/stars.min.js')}}"></script>
-   <script type="text/javascript">
+ <script src="{{asset('js/stars.min.js')}}"></script>
+ <script type="text/javascript">
 
-     $('#star').stars({
+   $('#star').stars({
       stars: 4,
       text: ['Poor', 'Average', 'Good','Excellent'],
       color: '#ffda44',
@@ -468,6 +468,6 @@
 
 });
 
-     var url = '{{route('frontend.subscribe')}}';
- </script>
- @endsection
+   var url = '{{route('frontend.subscribe')}}';
+</script>
+@endsection
