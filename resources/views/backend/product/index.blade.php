@@ -5,15 +5,31 @@
 @section('styles')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('backend/plugins/datatables/dataTables.bootstrap.css')}}">
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
 
 @section('content')
 
 <section class="content-header">
-	<h1>
-		Products
-	</h1>
+	<div class="col-md-4" style="">
+		<h3>
+			Products
+		</h3>
+	</div>
+	<div class="col-md-4" >
+		
+		<label for="inputEmail3" class=" control-label text-right">Search Product</label>
+
+		<div class="input-group">
+
+			<input type="text" id="searchtxt" name="term" class="form-control" placeholder="Enter Product name">
+			<div class="input-group-btn">
+				<a  href="" id="prodlink" class="btn btn-primary">Go</a>
+			</div>
+
+		</div>
+	</div>
+
 </section>
 
 <!-- Main content -->
@@ -29,8 +45,11 @@
 				@endif
 				<div class="box box-success">
 					<div class="box-header" style="padding: 5px 15px; height: 32px; "> 
-						<h3 class="box-title" style="line-height: 25px;" >All Products</h3> 
-						<div style="width: 150px; " class="pull-right">
+						<div class="col-md-3">
+							<h3 class="box-title" style="line-height: 25px;" >All Products</h3> 
+						</div>
+						
+						<div  class="col-md-2 pull-right">
 							<a href="{{ route('products.create') }}" class="btn btn-primary btn-block">Add Product</a>
 						</div>
 					</div>
@@ -110,5 +129,27 @@
 				"order": [[ 5, "asc" ]]
 			});
 		});*/
+
+		$(function()
+		{
+			$( "#searchtxt" ).autocomplete({
+				source: "{{route('products.search')}}",
+
+				minLength: 2,
+				select: function(event, ui) {
+					$('#searchtxt').val(ui.item.value);
+					var id=ui.item.id;
+					var url ='{{ route('products.show',"id") }}';
+					url = url.replace('id', id);
+					$('#prodlink').attr('href',url );
+				}
+			});
+
+			$("#searchtxt").keyup(function(event){
+				if(event.keyCode == 13){
+					$('#prodlink')[0].click();
+				}
+			});
+		});
 	</script>
 	@endsection

@@ -172,6 +172,8 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		Route::resource('catalog/products','Backend\Product\ProductController');
 		Route::post('products/discontinue/{id}','Backend\Product\ProductController@discontinue')->name('products.discontinue');
 		Route::post('products/featured/{id}','Backend\Product\ProductController@featured')->name('products.featured');
+		Route::get('products/search','Backend\Product\ProductController@productSearch')->name('products.search');
+
 		
 		Route::resource('catalog/brands','Backend\Product\BrandController');
 		Route::resource('catalog/categories','Backend\Product\CategoryController');

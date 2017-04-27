@@ -18,10 +18,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-       $products=Product::paginate(15);
-       return view('backend.product.index')->with('products',$products);
+     $products=Product::paginate(15);
+     return view('backend.product.index')->with('products',$products);
 
-    }
+ }
 
     /**
      * Show the form for creating a new resource.
@@ -30,10 +30,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-       $categories=Category::all();
-       $brands=Brand::all();
-       return view('backend.product.create')->with('categories',$categories)->with('brands',$brands);
-    }
+     $categories=Category::all();
+     $brands=Brand::all();
+     return view('backend.product.create')->with('categories',$categories)->with('brands',$brands);
+ }
 
     /**
      * Store a newly created resource in storage.
@@ -44,11 +44,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-        'name_en' =>'required|max:255|unique:products,name_en',
-        'slug' =>   'required|alpha_dash|min:5|max:255|unique:products,slug',
-        
-        ]);
-      
+            'name_en' =>'required|max:255|unique:products,name_en',
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:products,slug',
+
+            ]);
+
         $product = new Product;
         $product->category_id=$request->category_id;
         $product->brand_id=$request->brand_id;
@@ -61,7 +61,7 @@ class ProductController extends Controller
         $product->specs_ar=$request->specs_ar;
         $product->featured=(isset($request->featured)) ? 1 : 0;
         $product->sort_order=$request->sort_order;
-           
+
         $product->save();
         return redirect(route('products.show',$product->id))->with('success','Record saved successfully!');
     }
@@ -74,9 +74,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-       $product=Product::find($id);
-       return view('backend.product.show')->with('product',$product);
-    }
+     $product=Product::find($id);
+     return view('backend.product.show')->with('product',$product);
+ }
 
     /**
      * Show the form for editing the specified resource.
@@ -86,11 +86,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-       $categories=Category::all();
-       $brands=Brand::all();
-       $product=Product::find($id);
-       return view('backend.product.edit')->with('product',$product)->with('categories',$categories)->with('brands',$brands);
-    }
+     $categories=Category::all();
+     $brands=Brand::all();
+     $product=Product::find($id);
+     return view('backend.product.edit')->with('product',$product)->with('categories',$categories)->with('brands',$brands);
+ }
 
     /**
      * Update the specified resource in storage.
@@ -102,12 +102,12 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-        'name_en' =>'required|max:255|unique:products,name_en,'.$id,
-        'name_ar' =>'required|max:255|unique:products,name_ar,'.$id,
-        'slug' =>   'required|alpha_dash|min:5|max:255|unique:products,slug,'.$id,
-        
-        ]);
-      
+            'name_en' =>'required|max:255|unique:products,name_en,'.$id,
+            'name_ar' =>'required|max:255|unique:products,name_ar,'.$id,
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:products,slug,'.$id,
+
+            ]);
+
         $product = Product::find($id);
         $product->category_id=$request->category_id;
         $product->brand_id=$request->brand_id;
@@ -153,5 +153,27 @@ class ProductController extends Controller
         $product->save();
         return redirect(route('products.show',$id))->with('success','Record saved successfully!');
         
+    }
+
+    public function productSearch(Request $request){
+       
+        $term = $request->term;
+//$term ="asdas";
+        $results = array();
+
+       /* $queries = DB::table('products')
+        ->where('name_en', 'LIKE', '%'.$term.'%')
+        ->orWhere('name_ar', 'LIKE', '%'.$term.'%')
+        ->take(5)->get();*/
+
+        $products = Product::where('name_en','like','%'.$term.'%')->get();
+
+       foreach ($products as $product)
+        {
+            $results[] = [ 'id' => $product->id, 'value' => $product->name_en];
+        }
+
+       // return Response::json($results);
+        return response()->json($results);
     }
 }
