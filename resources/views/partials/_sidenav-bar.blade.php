@@ -28,7 +28,7 @@
               </thead>
               <tbody>
                 @foreach($cart as $item)
-                <tr>
+                <tr id="{{ $item['item']['id']}}">
                   <td>
                     <strong>{{ $item['item']['name_en']}}</strong>
                   </td>

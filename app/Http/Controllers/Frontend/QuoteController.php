@@ -92,6 +92,7 @@ class QuoteController extends Controller
       Session::put('cart', $cart);
   }
   elseif($submitReq =="btn-delete"){
+
       $oldCart = Session::has('cart')? Session::get('cart') : null;
       $cart = new cart($oldCart);
       $cart->delete($id);
@@ -100,6 +101,75 @@ class QuoteController extends Controller
   }
 
   return redirect()->back();
+}
+
+public function removeCartItem(Request $request, $id)
+{
+
+  $oldCart = Session::has('cart')? Session::get('cart') : null;
+  $cart = new cart($oldCart);
+  $cart->delete($id);
+  $cart->step='1';
+  Session::put('cart', $cart);
+  $msg = 'Product removed from quote!';
+
+  if(Session::has('cart'))
+  {
+    $response = array(
+      'status' => 'success',
+      'prodId' => $id,
+      'count' => Session::has('cart')? count(Session::get('cart')->items):'',
+      'msg' => $msg,
+      );
+}
+else
+{
+    $response = array(
+      'status' => 'error',
+      'msg' => 'There was an error!',
+      );
+}
+
+return response()->json($response);
+}
+
+public function updateCartItem(Request $request,$id)
+{
+
+    $podNotReq = array('ExWorks','FOB');
+    if((!in_array($request['delivery_terms'],$podNotReq ) && $request['port_of_delivery']==""))
+    {
+        $this->validate($request, [
+            'port_of_delivery' =>'required',
+            'quantity' =>'required',
+            ],$messages = [
+            'port_of_delivery.required' => 'Port of delivery required!',
+            'quantity.required' => 'Quantity required!',
+            ]);
+    }
+
+    $product = Product::find($id);
+    $oldCart = Session::has('cart')? Session::get('cart') : null;
+    $cart = new cart($oldCart);
+    $cart->update($product, $product->id, $request->quantity,$request->unit,$request->port_of_delivery,$request->delivery_terms,$request->payment_method,$request->invoice,$request->packing_list,$request->co,$request->others,$request->others_text);
+    Session::put('cart', $cart);
+
+    if(Session::has('cart'))
+    {
+        $response = array(
+          'status' => 'success',
+          'msg' => "Quote item updated!",
+          );
+    }
+    else
+    {
+        $response = array(
+          'status' => 'error',
+          'msg' => 'There was an error!',
+          );
+    }
+
+    return response()->json($response);
 }
 
 public function confirmCart($id)
@@ -111,13 +181,13 @@ public function confirmCart($id)
     if($cart){
         if(count($cart->items)>0){
             foreach ($cart->items as $item) {
-
-                if($item['port_of_delivery']=="")
+                $podNotReq = array('Exworks','FOB');
+                if((!in_array($item['delivery_terms'],$podNotReq ) && $item['port_of_delivery']==""))
                 {
-                   
+
                     $cart->step='1';
                     Session::put('cart', $cart);
-                    return redirect()->route('cart')->with('error',"Port of Delivery cannot be empty!");
+                    return redirect()->route('cart')->with('error',"Port of Delivery cannot be empty!".$item['delivery_terms']);
                 }
             }
             $cart->step='2';
@@ -176,7 +246,8 @@ public function postConfirmCart(Request $request,$id)
         if(count($cart->items)>0){
             foreach ($cart->items as $item) {
 
-                if($item['port_of_delivery']=="")
+                $podNotReq = array('Exworks','FOB');
+                if((!in_array($item['delivery_terms'],$podNotReq ) && $item['port_of_delivery']==""))
                 {
                     $cart->step='1';
                     Session::put('cart', $cart);

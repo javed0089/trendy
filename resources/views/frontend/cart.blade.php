@@ -14,14 +14,14 @@
  		<div class="row">
  			<div class="col-md-12">
  				<h2 class="company-title color-title"></h2>
- 				<h4 class="hood-subtitle subtitle">Prepare your quote </h4>
+ 				<h4 class="hood-subtitle subtitle">Update your quote request</h4>
  				<section class="about-accordion">
  					<div class="row publications">
  						<div class="panel-group" id="accordion">
  							<div class="panel panel-default">
  								<div class="panel-heading">
  									<h4 class="panel-title">
- 										<a data-toggle="collapse" data-parent="#accordion" href="#1">1 - Cart Confirmation</a>
+ 										<a data-toggle="collapse" data-parent="#accordion" href="#1">1 - Quote Request Details</a>
  									</h4>
  								</div>
  								<div id="1" class="panel-collapse collapse in">
@@ -50,7 +50,8 @@
  												@foreach($cart as $item)
  												<tr>
  													<td style="background: #f4f5f8;">
- 														<form class="quote-form" role="form"  method="Post" action="{{route('updateCart',$item['item']['id'])}}" data-parsley-validate>
+ 														<meta name="csrf-token" content="{{ csrf_token() }}" />
+ 														<form class="quote-form" role="form"  method="Post" action="{{route('cart.updateCartItem',$item['item']['id'])}}" data-parsley-validate>
  															{{csrf_field()}}
  															<div class="col-md-4">
  																<h4>Product Name</h4>
@@ -59,7 +60,7 @@
  															<div class="col-md-4"> 
  																<div class="col-md-6 text-right">
  																	<h4>Quantity</h4>
- 																	<input style="width: 60px" type="number" name="quantity" required min="16.5" data-parsley-error-message="Min. value 16.5" step=".5" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
+ 																	<input style="width: 60px" type="number" name="quantity" required min="16.5" data-parsley-error-message="Min. value 16.5" step="any" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
  																</div>
  																<div class="col-md-6">
  																	<h4>Units</h4>
@@ -73,7 +74,7 @@
  															</div>
  															<div class="col-md-4">
  																<h4>Port of Delivery</h4>
- 																<input class="form-control" type="text" name="port_of_delivery" required value="{{ $item['port_of_delivery']}}"  data-parsley-required-message="Required">
+ 																<input class="form-control" type="text" name="port_of_delivery" value="{{ $item['port_of_delivery']}}"  data-parsley-required-message="Required">
  															</div>
  															<div class="spacer-5"></div>
  															<div class="col-md-4">
@@ -120,11 +121,19 @@
 
  															<div class="spacer-5"></div>
  															<div class="col-md-12">
- 																<div class="col-md-1 pull-right">
- 																	<button type="submit" name="submit" value="btn-delete" class="btn btn-danger btn-sm" >{{__('Remove')}}</button>
+ 																<div class="col-md-2 pull-right">
+
+ 																	<input type="text" hidden value="{{route('cart.removeCartItem',$item['item']['id'])}}" name=""> 
+ 																	<a  href=""  class="btn btn-danger btn-sm btn-block removeCartItem" >{{__('Remove')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></a>
  																</div>
- 																<div class="col-md-1 pull-right">
- 																	<button type="submit" name="submit" value="btn-update" class="btn btn-primary btn-sm" >{{__('Update')}}</button>
+ 																<div class="col-md-2 pull-right">
+ 																	
+ 																	<button type="submit" name="submit" value="btn-update" class="btn btn-primary btn-sm btn-block updateCartItem" >{{__('Update')}} <img id="loader" class="pull-right" width="35" style="display: none;" src="{{asset('images/ellipsis.gif')}}" alt="loading"></button>
+
+ 																</div>
+ 																<div class="pull-right col-md-3 text-right">
+ 																	<div id="msg"  style="display: none;" >
+ 																	</div>
  																</div>
  															</div>
 
@@ -148,6 +157,8 @@
  									</div>
  								</div>
  							</div>
+
+@if(!Sentinel::check())
  							<div class="panel panel-default">
  								<div class="panel-heading">
  									<h4 class="panel-title">
@@ -179,16 +190,19 @@
  										</div>
  									</div>
  								</div>
+
+@endif
+
  								<div class="panel panel-default">
  									<div class="panel-heading">
  										<h4 class="panel-title">
- 											<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#3">3 - Send Quote </a> </h4>
+ 											<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#3">3 - Send Quote Request</a> </h4>
  										</div>
  										<div id="3" class="panel-collapse collapse">
  											<div class="panel-body">
 
  												<div class="col-md-12 text-center">
- 													<a href="{{route('send.quote')}}" class="btn btn-success btn-lg">Send Quote</a>
+ 													<a href="{{route('send.quote')}}" class="btn btn-success btn-lg">Send Quote Request</a>
  												</div>
  											</div>
  										</div>
@@ -209,44 +223,64 @@
  						$(function () {
  							var a= "{{ isset($step)?$step:'1' }}";
  							//$('a[data-toggle]').on('click', function(e) {
- 							$('a[data-parent="#accordion"]').on('click', function(e) {
+ 								$('a[data-parent="#accordion"]').on('click', function(e) {
 
- 								var target=$(this).attr('href');
- 								var targetid = target.substr(target.length-1);
+ 									var target=$(this).attr('href');
+ 									var targetid = target.substr(target.length-1);
 
- 								if(targetid>a ){
- 									e.stopPropagation();
+ 									if(targetid>a ){
+ 										e.stopPropagation();
+ 									}
+
+ 								});
+
+ 								if(a == 1){
+ 									$("#1").collapse("show");
+ 									$("#2").collapse("hide");
+ 									$("#3").collapse("hide"); 
  								}
+ 								else if(a == 2){
+ 									$("#1").collapse("hide");
+ 									$("#2").collapse("show");
+ 									$("#3").collapse("hide"); 
+ 								}
+ 								else if(a == 3){
+ 									$("#1").collapse("hide");
+ 									$("#2").collapse("hide");
+ 									$("#3").collapse("show"); 
+ 								}
+
+ 								$('input[name=radio1]').change(function(){
+ 									var value = $( 'input[name=radio1]:checked' ).val();
+ 									if(value == "login"){
+ 										$('#login-register').attr('href',"{{route('frontend.login')}}");
+ 									}
+ 									else if(value == "register"){
+ 										$('#login-register').attr('href',"{{route('frontend.register')}}");
+ 									}
+ 								});
 
  							});
 
- 							if(a == 1){
- 								$("#1").collapse("show");
- 								$("#2").collapse("hide");
- 								$("#3").collapse("hide"); 
- 							}
- 							else if(a == 2){
- 								$("#1").collapse("hide");
- 								$("#2").collapse("show");
- 								$("#3").collapse("hide"); 
- 							}
- 							else if(a == 3){
- 								$("#1").collapse("hide");
- 								$("#2").collapse("hide");
- 								$("#3").collapse("show"); 
- 							}
 
- 							$('input[name=radio1]').change(function(){
- 								var value = $( 'input[name=radio1]:checked' ).val();
- 								if(value == "login"){
- 									$('#login-register').attr('href',"{{route('frontend.login')}}");
- 								}
- 								else if(value == "register"){
- 									$('#login-register').attr('href',"{{route('frontend.register')}}");
- 								}
- 							});
+ 						$("select[name=delivery_terms]").bind('change', function() {
 
+ 							if (($(this).val() != 'ExWorks') && ($(this).val() != 'FOB' )) {
+ 								$(this).closest('tr').find("input[name=port_of_delivery]")
+ 								.prop("disabled", false)
+ 								.attr('data-parsley-required', 'true')
+ 								.parsley();
+ 							} else {
+ 								$(this).closest('tr').find("input[name=port_of_delivery]")
+ 								.prop("disabled", true)
+ 								.removeAttr('data-parsley-required');
+ 								$(this).closest('tr').find("input[name=port_of_delivery]").val('');
+ 							}
  						});
+
+
+
+
  					</script>
  					<!-- parsley JS -->
  					<script src="{{asset('js/parsley.min.js')}}"></script>

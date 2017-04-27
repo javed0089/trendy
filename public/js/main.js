@@ -229,6 +229,7 @@ Version: 1.0
       //Add to quote request
 
       $('#addToQuote .quote').on('click',function(e){ 
+
         e.preventDefault(); 
         var me = $(this),
         data = me.data('params');
@@ -261,7 +262,7 @@ Version: 1.0
               me.next('#alert').addClass('ajax-success');
 
               $('#side-cart-table > tbody:last-child').append(
-                '<tr><td><strong>'+ data.cartItem['item']['name_en'] +
+                '<tr id='+ data.cartItem['item']['id'] +'><td><strong>'+ data.cartItem['item']['name_en'] +
                 '</strong></td><td>'+ data.cartItem['quantity'] + '</td><td>MTN</td></tr>');
 
               $('#cartNoProducts').hide();
@@ -297,31 +298,164 @@ Version: 1.0
 
       });
 
-      $('.main-header').affix({
-        offset: {
-          top: 120
-        }
-      });
 
 
-      var lastTop = 120;
-      $(window).scroll( function (evt) {
-        var thisTop = $(this).scrollTop();
+ //Remove Cart Item
 
-        if (thisTop > lastTop) 
-        {
-          $("#smallLogo").show('slow',function(){
-           $('.main-header').addClass('shrink');
-         });
-        }
-        else if(thisTop < lastTop)
-        {
-         $("#smallLogo").hide('fast',function(){
-           $('.main-header').removeClass('shrink');
-         });
-       }
+ $('.removeCartItem').on('click',function(e){ 
 
-     });
+  e.preventDefault(); 
+  var me = $(this);
+  var getUrl=$(this).prev('input').val();
+
+  $.ajax({
+    type: "GET",
+    url: getUrl,
+    dataType: 'JSON',
+    beforeSend: function() 
+    {
+     me.children('img').show();
+   },
+   complete: function(){
+     me.children('img').hide().delay( 800 );
+   },
+   success: function (data) 
+   {
+    if(data.status=='success') 
+    {
+
+     $('.cartCount').text(data.count);
+
+     if(me.closest('tbody').find('tr').length-1 === 0){
+       me.closest('tbody').html('<div class=\"alert alert-danger alert-dismissable\">' +
+        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">' +
+        '</button>Your cart is empty!</div>');
+       $('#updateCart').remove();
+       $('#side-cart-table').parent('.panel-body').html('<div id="cartNoProducts" class="alert alert-danger">' +
+        'No products added</div>');
+     }
+
+     me.closest('tr').remove();
+     $('#side-cart-table').find('#'+data.prodId).remove();
+
+
+   }
+   else
+   {
+    console.log("Item not deleted");
+
+
+
+  }
+},
+error: function(jqXHR, json, errorThrown) {
+  $('#loader').hide();
+  var errors = jqXHR.responseJSON;
+  var errorsHtml= '';
+  $.each( errors, function( key, value ) {
+    errorsHtml += '<li>' + value[0] + '</li>'; 
+  });
+
+  console.log("erros" + errorsHtml);
+}
+
+});
+
+});
+
+
+
+ //Update Cart Item
+
+ $('.quote-form').on('submit',function(e){ 
+
+  e.preventDefault(); 
+  var me = $(this);
+  me.find('#msg').slideUp(1000);
+  var getUrl=$(this).attr('action');
+  $.ajax({
+    type: "POST",
+    url: getUrl,
+    dataType: 'JSON',
+    data: $(this).serialize(),
+    beforeSend: function() 
+    {
+     me.find('.updateCartItem').children('img').show();
+   },
+   complete: function(){
+     me.find('.updateCartItem').children('img').hide().delay( 800 );
+   },
+   success: function (data) 
+   {
+     if(data.status=='success') {
+      me.find('#msg').removeClass();
+      me.find('#msg').addClass('ajax-success');
+      me.find('#msg').text(data.msg);
+      me.find('#msg').slideDown(1000);
+
+    }
+    else{
+      me.find('#msg').removeClass();
+      me.find('#msg').addClass('ajax-danger');
+      me.find('#msg').text(data.msg);
+      me.find('#msg').slideDown(1000);
+
+
+
+    }
+  },
+  error: function(jqXHR, json, errorThrown) {
+     me.find('.updateCartItem').children('img').hide();
+    var errors = jqXHR.responseJSON;
+    var errorsHtml= '';
+    $.each( errors, function( key, value ) {
+      errorsHtml += '<li>' + value[0] + '</li>'; 
+    });
+
+    
+    me.find('#msg').removeClass();
+    me.find('#msg').addClass('ajax-danger');
+    me.find('#msg').html( errorsHtml);
+    me.find('#msg').slideDown(1000);
+  }
+
+});
+
+});
+
+
+
+
+
+
+
+ $('.main-header').affix({
+  offset: {
+    top: 120
+  }
+});
+
+
+ var lastTop = 120;
+ $(window).scroll( function (evt) {
+  var thisTop = $(this).scrollTop();
+
+  if (thisTop > lastTop) 
+  {
+    $("#smallLogo").show('slow',function(){
+     $('.main-header').addClass('shrink');
+   });
+  }
+  else if(thisTop < lastTop)
+  {
+   $("#smallLogo").hide('fast',function(){
+     $('.main-header').removeClass('shrink');
+   });
+ }
+
+});
+
+
 
 
 
