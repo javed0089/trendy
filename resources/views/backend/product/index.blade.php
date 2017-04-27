@@ -19,7 +19,7 @@
 	<div class="col-md-4" >
 		
 		<label for="inputEmail3" class=" control-label text-right">Search Product</label>
-
+ <span id="searchmsg" class="text-red" style="margin-left: 10px; font-style: italic;"></span>
 		<div class="input-group">
 
 			<input type="text" id="searchtxt" name="term" class="form-control" placeholder="Enter Product name">
@@ -136,7 +136,15 @@
 				source: "{{route('products.search')}}",
 
 				minLength: 2,
+				response: function(event, ui) {
+					if (ui.content.length === 0) {
+						$('#searchmsg').text("No results found");
+					} else {
+						$('#searchmsg').empty();
+					}
+				},
 				select: function(event, ui) {
+					
 					$('#searchtxt').val(ui.item.value);
 					var id=ui.item.id;
 					var url ='{{ route('products.show',"id") }}';
@@ -144,10 +152,14 @@
 					$('#prodlink').attr('href',url );
 				}
 			});
+			
 
 			$("#searchtxt").keyup(function(event){
 				if(event.keyCode == 13){
 					$('#prodlink')[0].click();
+				}
+				if(!this.value){
+					$('#searchmsg').empty();
 				}
 			});
 		});

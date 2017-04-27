@@ -158,22 +158,13 @@ class ProductController extends Controller
     public function productSearch(Request $request){
        
         $term = $request->term;
-//$term ="asdas";
         $results = array();
-
-       /* $queries = DB::table('products')
-        ->where('name_en', 'LIKE', '%'.$term.'%')
-        ->orWhere('name_ar', 'LIKE', '%'.$term.'%')
-        ->take(5)->get();*/
-
-        $products = Product::where('name_en','like','%'.$term.'%')->get();
+        $products = Product::where('name_en','like','%'.$term.'%')->orWhere('name_ar','like','%'.$term.'%')->get();
 
        foreach ($products as $product)
         {
             $results[] = [ 'id' => $product->id, 'value' => $product->name_en];
         }
-
-       // return Response::json($results);
         return response()->json($results);
     }
 }
