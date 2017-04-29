@@ -27,6 +27,7 @@
                 </tr>
               </thead>
               <tbody>
+              @if($cart)
                 @foreach($cart as $item)
                 <tr id="{{ $item['item']['id']}}">
                   <td>
@@ -44,6 +45,7 @@
                   </td>
                 </tr>
                 @endforeach
+                @endif
               </tbody>
             </table>
             @if(count($cart)<=0)
