@@ -182,12 +182,12 @@ public function confirmCart($id)
         if(count($cart->items)>0){
             foreach ($cart->items as $item) {
                 $podNotReq = array('Exworks','FOB');
-                if((!in_array($item['delivery_terms'],$podNotReq ) && $item['port_of_delivery']==""))
+                if((in_array($item['delivery_terms'],$podNotReq )) && $item['port_of_delivery']=="")
                 {
 
                     $cart->step='1';
                     Session::put('cart', $cart);
-                    return redirect()->route('cart')->with('error',"Port of Delivery cannot be empty!".$item['delivery_terms']);
+                    return redirect()->route('cart')->with('error',"Port of Delivery cannot be empty11!".$item['delivery_terms']);
                 }
             }
             $cart->step='2';
@@ -247,7 +247,7 @@ public function postConfirmCart(Request $request,$id)
             foreach ($cart->items as $item) {
 
                 $podNotReq = array('Exworks','FOB');
-                if((!in_array($item['delivery_terms'],$podNotReq ) && $item['port_of_delivery']==""))
+                if((in_array($item['delivery_terms'],$podNotReq )) && $item['port_of_delivery']=="")
                 {
                     $cart->step='1';
                     Session::put('cart', $cart);
