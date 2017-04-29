@@ -83,7 +83,7 @@ class AddMetaCols extends Migration
             $table->string('meta_description_ar')->nullable();
         });
 
-        Schema::table('testimonials', function (Blueprint $table) {
+        Schema::table('tags', function (Blueprint $table) {
             $table->string('meta_title_en')->nullable();
             $table->string('meta_description_en')->nullable();
             $table->string('meta_title_ar')->nullable();
@@ -175,7 +175,7 @@ class AddMetaCols extends Migration
             $table->dropColumn('meta_description_ar');
         });
 
-        Schema::table('testimonials', function (Blueprint $table) {
+        Schema::table('tags', function (Blueprint $table) {
             $table->dropColumn('meta_title_en');
             $table->dropColumn('meta_description_en');
             $table->dropColumn('meta_title_ar');
@@ -188,5 +188,7 @@ class AddMetaCols extends Migration
             $table->dropColumn('meta_title_ar');
             $table->dropColumn('meta_description_ar');
         });
+
+        
     }
 }
