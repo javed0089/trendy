@@ -261,14 +261,14 @@ Version: 1.0
             else{
               me.next('#alert').addClass('ajax-success');
 
-              $('#side-cart-table > tbody:last-child').append(
+              /*$('#side-cart-table > tbody:last-child').append(
                 '<tr id='+ data.cartItem['item']['id'] +'><td><strong>'+ data.cartItem['item']['name_en'] +
                 '</strong></td><td>'+ data.cartItem['quantity'] + '</td><td>MTN</td></tr>');
 
               $('#cartNoProducts').hide();
               if($('#updateCart').length==0)
                 $('#side-cart-table').parent().append('<div id=\"updateCart\" class=\"center-block text-center\">'+
-                  '<a class=\"btn btn-primary btn-sm\" href=\"/cart\">Update Cart</a></div>');  
+                  '<a class=\"btn btn-primary btn-sm\" href=\"/cart\">Update Cart</a></div>'); */ 
             }
           }
           else
@@ -412,7 +412,7 @@ error: function(jqXHR, json, errorThrown) {
       errorsHtml += '<li>' + value[0] + '</li>'; 
     });
 
-    
+
     me.find('#msg').removeClass();
     me.find('#msg').addClass('ajax-danger');
     me.find('#msg').html( errorsHtml);
