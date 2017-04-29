@@ -265,8 +265,8 @@ Version: 1.0
                 '<tr id='+ data.cartItem['item']['id'] +'><td><strong>'+ data.cartItem['item']['name_en'] +
                 '</strong></td><td>'+ data.cartItem['quantity'] + '</td><td>MTN</td></tr>');
 
-              /* $('#cartNoProducts').hide();
-              if($('#updateCart').length==0)
+              $('#cartNoProducts').hide();
+              /* if($('#updateCart').length==0)
                 $('#side-cart-table').parent().append('<div id=\"updateCart\" class=\"center-block text-center\">'+
                   '<a class=\"btn btn-primary btn-sm\" href=\"/cart\">Update Cart</a></div>'); */ 
             }
