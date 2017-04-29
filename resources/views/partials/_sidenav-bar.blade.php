@@ -55,7 +55,7 @@
             </div>
             @else
             <div id="updateCart" class="center-block text-center">
-              <a class="btn btn-primary btn-sm " href="{{ route('cart')}}">Update Cart</a>
+              <a class="btn btn-primary btn-sm " href="{{ route('cart')}}">Update Quote Request</a>
             </div>
             @endif
 
