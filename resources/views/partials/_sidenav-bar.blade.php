@@ -36,11 +36,7 @@
                     {{ $item['quantity']}}
                   </td>
                   <td>
-                    <select disabled name="unit">
-                      @foreach($units as $unit)
-                      <option {{$item['unit']==$unit->name_en ?'Selected':''}} value="{{$unit->name_en}}">{{$unit->name_en}}</option>
-                      @endforeach
-                    </select>
+                   
                   </td>
                 </tr>
                 @endforeach
