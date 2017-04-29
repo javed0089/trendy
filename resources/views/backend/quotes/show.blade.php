@@ -40,7 +40,7 @@
 				<div class="box box-success">
 					<div class="box-header" style="padding: 5px 15px; "> 
 						<div class="col-md-4">
-							<h4>Quote # : <span >{{$quote->id}}</span></h4>
+							<h4>Quote # : <span >{{$quote->quote_no}}</span></h4>
 							<h4>Customer : <span >{{$quote->User->first_name}} {{$quote->User->last_name}}</span></h4>
 							<h4>Email : <span >{{$quote->User->email}}</span></h4>
 							<h4>Status : <span>{{$quote->Status->status_en}}</span></h4>

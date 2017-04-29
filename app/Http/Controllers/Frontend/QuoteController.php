@@ -334,6 +334,10 @@ public function sendQuote(Request $request)
    $quote->status = 1;
    $quote->save();
 
+   $quote->quote_no='SQ/GAP/'.date("Y").'/'.$quote->id;
+   $quote->save();
+
+
    foreach ($cart->items as $key=>$item) {
     $quoteDetail = new QuoteDetail;
     $quoteDetail->product_id = $key;

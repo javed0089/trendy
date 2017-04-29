@@ -21,7 +21,7 @@
           <div class="content">
             <div class="row">
               <div class="col-md-4">
-                <h4>Quote # : <span >{{$myquote->id}}</span></h4>
+                <h4>Quote # : <span >{{$myquote->quote_no}}</span></h4>
                 <h4>Status : <span>{{$myquote->Status->status_en}}</span></h4>
 
               </div>

@@ -76,23 +76,20 @@
                  <tr>
                   <th>Quote</th>
                   <th>Dated</th>
-                  <th>Status</th>
+                
                 </tr>
               </thead>
               <tbody>
                 @foreach($myquotes as $myquote)
                 <tr>
                   <td>
-                    <strong><a href="{{route('quotes.show',$myquote->id)}}">{{$myquote->id}}</a> </strong>
+                    <a href="{{route('quotes.show',$myquote->id)}}">{{$myquote->quote_no}}</a>
                   </td>
                   <td>
                    <a href="{{route('quotes.show',$myquote->id)}}">
-                    {{date('M j, Y',strtotime($myquote->created_at))}}</a>
+                    {{date('M j,Y',strtotime($myquote->created_at))}}</a>
                   </td>
-                  <td>
-                    <a href="{{route('quotes.show',$myquote->id)}}">
-                     {{$myquote->Status->status_en}}</a>
-                   </td>
+                  
                  </tr>
                  @endforeach
                </tbody>

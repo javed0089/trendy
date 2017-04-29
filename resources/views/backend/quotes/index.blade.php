@@ -50,7 +50,7 @@
 								@foreach($quotes as $quote)
 								<tr>
 									
-									<td>{{$quote->id}}</td>
+									<td>{{$quote->quote_no}}</td>
 									<td>{{$quote->User->first_name}} {{$quote->User->last_name}}
 										{!! User::isActivated($quote->user_id)?'<span class="label label-success pull-right">Activated</span>':'<span class="label label-danger pull-right">Not-Activated</span>' !!}
 									</td>

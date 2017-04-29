@@ -31,7 +31,7 @@
           <tbody>
             @foreach($myquotes as $quote)
             <tr>
-              <td>{{$quote->id}}</td>
+              <td>{{$quote->quote_no}}</td>
               <td>{{date('M j, Y H:i',strtotime($quote->created_at))}}</td>
               <td>{{isset($quote->quote_validity)?date('M j, Y H:i',strtotime($quote->quote_validity)):''}}</td>
               <td>{{$quote->Status->status_en}}</td>

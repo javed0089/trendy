@@ -19,7 +19,7 @@ class Cart
 
 	public function add($item, $id)
 	{
-		$storedItem = ['item' => $item,'quantity' => '16.5','unit' =>'8','port_of_delivery' => '', 'delivery_terms' => '', 'payment_method' => '', 'invoice' => '','packing_list' => '','co' => '','others' => '','others_text' => ''];
+		$storedItem = ['item' => $item,'quantity' => '16.5','unit' =>'MTN','port_of_delivery' => '', 'delivery_terms' => 'ExWorks', 'payment_method' => 'LC', 'invoice' => '0','packing_list' => '0','co' => '0','others' => '0','others_text' => ''];
 
 		if($this->items){
 			if(array_key_exists($id, $this->items)) {
