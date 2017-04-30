@@ -1,6 +1,11 @@
  @extends('layouts.main')
 
- @section('title','Job')
+ @if(isset($job->{lang_col('meta_title')}))
+ @section('title'){{ $job->{lang_col('meta_title')} }} @stop
+ @endif
+ @if(isset($job->{lang_col('meta_description')}))
+ @section('meta-description'){{ $job->{lang_col('meta_description')} }} @stop
+ @endif
 
  @section('styles')
  <link href="{{asset('css/parsley.css')}}" rel="stylesheet">

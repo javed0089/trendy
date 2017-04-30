@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Block\Block;
+use App\Models\Company\Webpage;
 use App\Models\Page\Page;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,9 @@ class AboutController extends Controller
 
     	$quickfact=Block::where('block_type','=','About-QuickFact')->first();
 
-    	return view('frontend.about')->with('topImage',$topImage)->with('section1',$section1)->with('yellowbox',$yellowbox)->with('section2',$section2)->with('stats',$stats)->with('accordians',$accordians)->with('quickfact',$quickfact);
+        $metatags = Webpage::where('page_name','=','company')->first();
+
+    	return view('frontend.about')->with('topImage',$topImage)->with('section1',$section1)->with('yellowbox',$yellowbox)->with('section2',$section2)->with('stats',$stats)->with('accordians',$accordians)->with('quickfact',$quickfact)->with('metatags',$metatags);
       	
 
     }

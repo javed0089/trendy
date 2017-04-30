@@ -52,6 +52,11 @@ class InformationController extends Controller
         $information->desc_en=$request->desc_en;
         $information->desc_ar=$request->desc_ar;
         $information->status=(isset($request->status)) ? 1 : 0;
+
+        $information->meta_title_en=$request->meta_title_en;
+        $information->meta_title_ar=$request->meta_title_ar;
+        $information->meta_description_en=$request->meta_description_en;
+        $information->meta_description_ar=$request->meta_description_ar;
            
         $information->save();
         return redirect(route('informations.index'))->with('success','Record saved successfully!');
@@ -103,6 +108,11 @@ class InformationController extends Controller
         $information->desc_en=$request->desc_en;
         $information->desc_ar=$request->desc_ar;
         $information->status=(isset($request->status)) ? 1 : 0;
+
+        $information->meta_title_en=$request->meta_title_en;
+        $information->meta_title_ar=$request->meta_title_ar;
+        $information->meta_description_en=$request->meta_description_en;
+        $information->meta_description_ar=$request->meta_description_ar;
            
         $information->save();
         return redirect(route('informations.index'))->with('success','Record saved successfully!');

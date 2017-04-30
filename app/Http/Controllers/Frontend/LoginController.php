@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company\Webpage;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -14,9 +15,10 @@ class LoginController extends Controller
 {
     public function index(Request $request)
     {
+        $metatags = Webpage::where('page_name','=','login')->first();
 
         if(!Sentinel::check())
-    	   return view('frontend.login');
+    	   return view('frontend.login')->with('metatags',$metatags);
         else
             return redirect('/');
     }

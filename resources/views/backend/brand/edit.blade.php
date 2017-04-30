@@ -75,6 +75,26 @@
 											</div>
 										</div>
 								@endif
+
+								<div class="form-group">
+								<label for="meta_title_en">Meta page title[En] </label>
+								<input type="text" class="form-control"  name="meta_title_en"  value="{{$brand->meta_title_en}}" >
+							</div>
+
+							<div class="form-group">
+								<label for="meta_description_en">Meta description[En]</label>
+								<textarea class="mceNoEditor" name="meta_description_en"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{$brand->meta_description_en}}</textarea>
+							</div>
+
+							<div class="form-group">
+								<label for="meta_title_ar">Meta page title[Ar]</label>
+								<input type="text" class="form-control"  name="meta_title_ar"  value="{{$brand->meta_title_ar}}" >
+							</div>
+
+							<div class="form-group">
+								<label for="meta_description_ar">Meta description[Ar]</label>
+								<textarea class="mceNoEditor" name="meta_description_ar"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{$brand->meta_description_ar}}</textarea>
+							</div>	
 							
 					</div>
 					<div class="box-footer">

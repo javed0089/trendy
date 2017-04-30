@@ -28,5 +28,6 @@ class AddColQuotenoToQuotes extends Migration
         Schema::table('quotes', function (Blueprint $table) {
             $table->dropColumn('quote_no');
         });
+        
     }
 }

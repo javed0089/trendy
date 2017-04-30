@@ -61,6 +61,11 @@
 				                <p>{{date('M j, Y H:i',strtotime($information->updated_at))}}</p>
 				                <h4>Status</h4>
 				                <p>{!!$information->status?'<span class="label label-success">Active</span>':'<span class="label label-warning">In-active</span>'!!}</p>
+
+				                <h4>Meta page title</h4>
+				                <p>{{$information->meta_title_en}}</p>
+				                <h4>Meta description</h4>
+				                <p>{{$information->meta_description_en}}</p>
 			              </div>
 		              </div>
 					</div>
@@ -72,9 +77,26 @@
 						<h3 class="box-title">{{$information->name_ar}}</h3>
 					</div>
 					<div class="box-body">
-						<div class="col-md-8">
+						<div class="col-md-9">
 							<p>{!!$information->desc_ar!!}</p>
 						</div>
+						<div class="col-md-3">
+							<div class="callout ">
+								<h4>Page Type</h4>
+				                <p>{{$information->InformationType->information_type_en}}</p>
+								<h4>Created at</h4>
+				                <p>{{date('M j, Y H:i',strtotime($information->created_at))}}</p>
+				                <h4>Last updated at</h4>
+				                <p>{{date('M j, Y H:i',strtotime($information->updated_at))}}</p>
+				                <h4>Status</h4>
+				                <p>{!!$information->status?'<span class="label label-success">Active</span>':'<span class="label label-warning">In-active</span>'!!}</p>
+
+				                <h4>Meta page title</h4>
+				                <p>{{$information->meta_title_ar}}</p>
+				                <h4>Meta description</h4>
+				                <p>{{$information->meta_description_ar}}</p>
+			              </div>
+		              </div>
 					</div>
 
 				</div>

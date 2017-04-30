@@ -63,6 +63,11 @@ class PostController extends Controller
         $post->author_ar=$request->author_ar;
         $post->featured=(isset($request->featured)) ? 1 : 0;
 
+        $post->meta_title_en=$request->meta_title_en;
+        $post->meta_title_ar=$request->meta_title_ar;
+        $post->meta_description_en=$request->meta_description_en;
+        $post->meta_description_ar=$request->meta_description_ar;
+
         if ($request->hasFile('image')){
             $image=$request->file('image');
             $post->image=$this->saveImage($image,'');
@@ -141,6 +146,11 @@ class PostController extends Controller
         $post->author_en=$request->author_en;
         $post->author_ar=$request->author_ar;
         $post->featured=(isset($request->featured)) ? 1 : 0;
+
+        $post->meta_title_en=$request->meta_title_en;
+        $post->meta_title_ar=$request->meta_title_ar;
+        $post->meta_description_en=$request->meta_description_en;
+        $post->meta_description_ar=$request->meta_description_ar;
 
         if ($request->hasFile('image')){
             $image=$request->file('image');

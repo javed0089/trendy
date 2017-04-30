@@ -87,6 +87,11 @@ class CategoryController extends Controller
         $category->desc_ar=$request->desc_ar;
         $category->sort_order=$request->sort_order;
 
+        $category->meta_title_en=$request->meta_title_en;
+        $category->meta_title_ar=$request->meta_title_ar;
+        $category->meta_description_en=$request->meta_description_en;
+        $category->meta_description_ar=$request->meta_description_ar;
+
 
         if ($request->hasFile('image')){
             $image=$request->file('image');
@@ -173,6 +178,10 @@ class CategoryController extends Controller
         $category->desc_ar=$request->desc_ar;
         $category->sort_order=$request->sort_order;
 
+        $category->meta_title_en=$request->meta_title_en;
+        $category->meta_title_ar=$request->meta_title_ar;
+        $category->meta_description_en=$request->meta_description_en;
+        $category->meta_description_ar=$request->meta_description_ar;
 
         if ($request->hasFile('image')){
             $image=$request->file('image');

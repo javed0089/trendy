@@ -62,6 +62,12 @@ class ProductController extends Controller
         $product->featured=(isset($request->featured)) ? 1 : 0;
         $product->sort_order=$request->sort_order;
 
+        $product->meta_title_en=$request->meta_title_en;
+        $product->meta_title_ar=$request->meta_title_ar;
+        $product->meta_description_en=$request->meta_description_en;
+        $product->meta_description_ar=$request->meta_description_ar;
+
+
         $product->save();
         return redirect(route('products.show',$product->id))->with('success','Record saved successfully!');
     }
@@ -120,6 +126,11 @@ class ProductController extends Controller
         $product->specs_ar=$request->specs_ar;
         $product->featured=(isset($request->featured)) ? 1 : 0;
         $product->sort_order=$request->sort_order;
+
+        $product->meta_title_en=$request->meta_title_en;
+        $product->meta_title_ar=$request->meta_title_ar;
+        $product->meta_description_en=$request->meta_description_en;
+        $product->meta_description_ar=$request->meta_description_ar;
         
         $product->save();
         return redirect(route('products.edit',$id))->with('success','Record saved successfully!');

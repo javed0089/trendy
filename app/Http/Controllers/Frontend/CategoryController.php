@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company\Webpage;
 use App\Models\Page\Page;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
@@ -15,8 +16,9 @@ class CategoryController extends Controller
     {
     	$categories=Category::all();
         $topImage = Page::find(110)->PageSections()->first();
+        $metatags = Webpage::where('page_name','=','categories')->first();
 
-        return view('frontend.categories')->with('categories',$categories)->with('topImage',$topImage);
+        return view('frontend.categories')->with('categories',$categories)->with('topImage',$topImage)->with('metatags',$metatags);
     }
 
     public function productlist($slug)

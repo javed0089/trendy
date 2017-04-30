@@ -1,5 +1,24 @@
 @extends('layouts.main')
-@section('title','Product List')
+
+@if(isset($category))
+ @if(isset($category->{lang_col('meta_title')}))
+ @section('title'){{ $category->{lang_col('meta_title')} }} @stop
+ @endif
+ @if(isset($category->{lang_col('meta_description')}))
+ @section('meta-description'){{ $category->{lang_col('meta_description')} }} @stop
+ @endif
+@elseif(isset($brand))
+  @if(isset($brand->{lang_col('meta_title')}))
+ @section('title'){{ $brand->{lang_col('meta_title')} }} @stop
+ @endif
+ @if(isset($brand->{lang_col('meta_description')}))
+ @section('meta-description'){{ $brand->{lang_col('meta_description')} }} @stop
+ @endif
+ @endif
+
+
+
+
 @section('content')
 
 

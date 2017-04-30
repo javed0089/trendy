@@ -50,6 +50,11 @@ class ServiceController extends Controller
         $service->desc_en=$request->desc_en;
         $service->desc_ar=$request->desc_ar;
         $service->status=(isset($request->status)) ? 1 : 0;
+
+        $service->meta_title_en=$request->meta_title_en;
+        $service->meta_title_ar=$request->meta_title_ar;
+        $service->meta_description_en=$request->meta_description_en;
+        $service->meta_description_ar=$request->meta_description_ar;
            
         $service->save();
         return redirect(route('services.index'))->with('success','Record saved successfully!');
@@ -101,6 +106,11 @@ class ServiceController extends Controller
         $service->desc_en=$request->desc_en;
         $service->desc_ar=$request->desc_ar;
         $service->status=(isset($request->status)) ? 1 : 0;
+
+        $service->meta_title_en=$request->meta_title_en;
+        $service->meta_title_ar=$request->meta_title_ar;
+        $service->meta_description_en=$request->meta_description_en;
+        $service->meta_description_ar=$request->meta_description_ar;
            
         $service->save();
         return redirect(route('services.index'))->with('success','Record saved successfully!');

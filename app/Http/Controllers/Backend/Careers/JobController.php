@@ -62,6 +62,11 @@ class JobController extends Controller
         $job->responsibilities_en=$request->responsibilities_en;
         $job->responsibilities_ar=$request->responsibilities_ar;
         $job->job_status=(isset($request->job_status)) ? 1 : 0;
+
+        $job->meta_title_en=$request->meta_title_en;
+        $job->meta_title_ar=$request->meta_title_ar;
+        $job->meta_description_en=$request->meta_description_en;
+        $job->meta_description_ar=$request->meta_description_ar;
         
         
         $job->save();
@@ -122,6 +127,12 @@ class JobController extends Controller
         $job->responsibilities_en=$request->responsibilities_en;
         $job->responsibilities_ar=$request->responsibilities_ar;
         $job->job_status=(isset($request->job_status)) ? 1 : 0;
+
+        $job->meta_title_en=$request->meta_title_en;
+        $job->meta_title_ar=$request->meta_title_ar;
+        $job->meta_description_en=$request->meta_description_en;
+        $job->meta_description_ar=$request->meta_description_ar;
+        
         
         $job->save();
         return redirect(route('jobs.index'))->with('success','Record saved successfully!');

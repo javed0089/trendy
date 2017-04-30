@@ -1,6 +1,11 @@
  @extends('layouts.main')
 
- @section('title','News')
+  @if(isset($news->{lang_col('meta_title')}))
+ @section('title'){{ $news->{lang_col('meta_title')} }} @stop
+ @endif
+ @if(isset($news->{lang_col('meta_description')}))
+ @section('meta-description'){{ $news->{lang_col('meta_description')} }} @stop
+ @endif
 
 
 @section('content')

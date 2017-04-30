@@ -1,6 +1,12 @@
  @extends('layouts.main')
 
- @section('title','Login')
+ @if(isset($metatags->{lang_col('meta_title')}))
+ @section('title'){{ $metatags->{lang_col('meta_title')} }} @stop
+ @endif
+ @if(isset($metatags->{lang_col('meta_description')}))
+ @section('meta-description'){{ $metatags->{lang_col('meta_description')} }} @stop
+ @endif
+ 
  @section('styles')
  <link href="{{asset('css/parsley.css')}}" rel="stylesheet">
  @endsection

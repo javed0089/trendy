@@ -76,6 +76,19 @@
 						                  </label>
 						                </div>
 
+						                <div class="form-group">
+										<label for="meta_title_en">Meta page title</label>
+											<input type="text" class="form-control"  name="meta_title_en"  value="{{$information->meta_title_en}}" >
+										</div>
+
+										<div class="form-group">
+											<label for="meta_description_en">Meta description</label>
+											<textarea class="mceNoEditor" name="meta_description_en"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{$information->meta_description_en}}</textarea>
+										</div>
+
+
+
+
 									</div>
 									<!-- /.box-body -->
 
@@ -96,6 +109,16 @@
 											<label for="desc_ar">Description</label>
 											<small class="text-red">(Do not use enter key for new line. Use Shift+Enter for newline!)</small>
 											<textarea class="textarea" name="desc_ar" id="desc_ar" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$information->desc_ar}}</textarea>
+										</div>
+
+										<div class="form-group">
+										<label for="meta_title_ar">Meta page title</label>
+											<input type="text" class="form-control"  name="meta_title_ar"  value="{{$information->meta_title_ar}}" >
+										</div>
+
+										<div class="form-group">
+											<label for="meta_description_ar">Meta description</label>
+											<textarea class="mceNoEditor" name="meta_description_ar"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{$information->meta_description_ar}}</textarea>
 										</div>
 									</div>
 									<!-- /.box-body -->
@@ -122,7 +145,8 @@
 	@section('scripts')
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 	<script>tinymce.init({
-		selector:'textarea',
+		mode : "specific_textareas",
+        editor_selector : "textarea",
 		plugins: 'code preview lists link image',
 		menubar:false,
 		toolbar: 'undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code preview',

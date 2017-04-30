@@ -48,6 +48,10 @@ class BrandController extends Controller
         $brand->name_en=$request->name_en;
         $brand->name_ar=$request->name_ar;
         $brand->slug=$request->slug;
+        $brand->meta_title_en=$request->meta_title_en;
+        $brand->meta_title_ar=$request->meta_title_ar;
+        $brand->meta_description_en=$request->meta_description_en;
+        $brand->meta_description_ar=$request->meta_description_ar;
      
         if ($request->hasFile('logo')){
             $image=$request->file('logo');
@@ -114,6 +118,11 @@ class BrandController extends Controller
         $brand->name_en=$request->name_en;
         $brand->name_ar=$request->name_ar;
         $brand->slug=$request->slug;
+        $brand->meta_title_en=$request->meta_title_en;
+        $brand->meta_title_ar=$request->meta_title_ar;
+        $brand->meta_description_en=$request->meta_description_en;
+        $brand->meta_description_ar=$request->meta_description_ar;
+     
       
         if ($request->hasFile('logo')){
             $image=$request->file('logo');

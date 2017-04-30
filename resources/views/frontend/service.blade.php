@@ -1,6 +1,11 @@
  @extends('layouts.main')
 
- @section('title','Service')
+ @if(isset($service->{lang_col('meta_title')}))
+ @section('title'){{ $service->{lang_col('meta_title')} }} @stop
+ @endif
+ @if(isset($service->{lang_col('meta_description')}))
+ @section('meta-description'){{ $service->{lang_col('meta_description')} }} @stop
+ @endif
 
 
  @section('content')

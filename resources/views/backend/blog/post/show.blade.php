@@ -61,7 +61,12 @@
 				                <p>{{date('M j, Y H:i',strtotime($post->updated_at))}}</p>
 				                <h4>Post link</h4>
 				                <p><a style="color: blue;" href="{{url($post->slug)}}">{{url($post->slug)}}</a></p>
+				                <h4>Meta page title</h4>
+				                <p>{{$post->meta_title_en}}</p>
+				                <h4>Meta description</h4>
+				                 <p>{{$post->meta_description_en}}</p>
 				                <a class="btn btn-primary bt-md" href="{{ route('posts.edit',$post->id) }}">Edit Post</a>
+
 			              </div>
 		              </div>
 					</div>
@@ -88,6 +93,10 @@
 				                <p>{{date('M j, Y H:i',strtotime($post->updated_at))}}</p>
 				                <h4>Post link</h4>
 				                <p><a style="color: blue;" href="{{url($post->slug)}}">{{url($post->slug)}}</a></p>
+				                <h4>Meta page title</h4>
+				                <p>{{$post->meta_title_ar}}</p>
+				                <h4>Meta description</h4>
+				                 <p>{{$post->meta_description_ar}}</p>
 				                <a class="btn btn-primary bt-md" href="{{ route('posts.edit',$post->id) }}">Edit Post</a>
 			              </div>
 		              </div>

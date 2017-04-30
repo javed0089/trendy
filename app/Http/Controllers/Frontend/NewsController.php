@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company\Webpage;
 use App\Models\News\News;
 use App\Models\Page\Page;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class NewsController extends Controller
     	$news = News::where('status','=','1')->get();
         $topImage = [];
         $topImage = Page::find(100)->PageSections()->first();
-    	return view('frontend.news')->with('newsCol',$news)->with('topImage',$topImage);
+        $metatags = Webpage::where('page_name','=','news')->first();
+    	return view('frontend.news')->with('newsCol',$news)->with('topImage',$topImage)->with('metatags',$metatags);
     }
 
     public function show($id)

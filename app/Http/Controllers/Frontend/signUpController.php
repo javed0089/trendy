@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company\Webpage;
 use App\Models\Page\Page;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Http\Request;
@@ -20,8 +21,9 @@ class signUpController extends Controller
 
         $benefits = [];
         $benefits = Page::find(151)->PageSections()->get();
+        $metatags = Webpage::where('page_name','=','register')->first();
 
-        return view('frontend.register')->with('topImage',$topImage)->with('benefits',$benefits);
+        return view('frontend.register')->with('topImage',$topImage)->with('benefits',$benefits)->with('metatags',$metatags);
     }
 
     public function postRegister(Request $request)

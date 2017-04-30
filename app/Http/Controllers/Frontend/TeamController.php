@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Block\Block;
+use App\Models\Company\Webpage;
 use App\Models\Page\Page;
 use App\Models\Team\Member;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class TeamController extends Controller
 	    $quickfact=Block::where('block_type','=','Team-QuickFact')->first();
 
 	    $members = Member::where('status', '=','1')->get();
+	    $metatags = Webpage::where('page_name','=','ourteam')->first();
 
-	    return view('frontend.team')->with('topImage',$topImage)->with('section1',$section1)->with('leaders',$leaders)->with('quickfact',$quickfact)->with('members',$members);
+	    return view('frontend.team')->with('topImage',$topImage)->with('section1',$section1)->with('leaders',$leaders)->with('quickfact',$quickfact)->with('members',$members)->with('metatags',$metatags);
 	}
 }

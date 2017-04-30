@@ -69,7 +69,8 @@
             </span>
           </a>
             <ul class="treeview-menu">
-               <li {{ Request::is('backoffice/pages')?"class=active":'' }}><a href="{{route('pages.index')}}"><i class="fa fa-circle-o"></i>Pages</a></li>
+              <li {{ Request::is('backoffice/webpages')?"class=active":'' }} {{ Request::is('backoffice/webpages/*')?"class=active":'' }}><a href="{{route('webpages.index')}}"><i class="fa fa-circle-o"></i>Pages</a></li>
+               <li {{ Request::is('backoffice/pages')?"class=active":'' }}><a href="{{route('pages.index')}}"><i class="fa fa-circle-o"></i>Page Sections</a></li>
                <li {{ Request::is('backoffice/pages/blocks/*')?"class=active":'' }} id="hp">
                   <a href="#"><i class="fa fa-circle-o"></i>Blocks
                     <span class="pull-right-container">

@@ -47,6 +47,11 @@ class NewsController extends Controller
         $news->desc_en=$request->desc_en;
         $news->desc_ar=$request->desc_ar;
         $news->status=(isset($request->status)) ? 1 : 0;
+
+        $news->meta_title_en=$request->meta_title_en;
+        $news->meta_title_ar=$request->meta_title_ar;
+        $news->meta_description_en=$request->meta_description_en;
+        $news->meta_description_ar=$request->meta_description_ar;
                 
         $news->save();
         return redirect(route('news.index'))->with('success','Record saved successfully!');
@@ -95,6 +100,11 @@ class NewsController extends Controller
         $news->desc_en=$request->desc_en;
         $news->desc_ar=$request->desc_ar;
         $news->status=(isset($request->status)) ? 1 : 0;
+
+        $news->meta_title_en=$request->meta_title_en;
+        $news->meta_title_ar=$request->meta_title_ar;
+        $news->meta_description_en=$request->meta_description_en;
+        $news->meta_description_ar=$request->meta_description_ar;
                 
         $news->save();
         return redirect(route('news.index'))->with('success','Record saved successfully!');

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Page\Page;
 use App\Models\Blog\BlogCategory;
 use App\Models\Blog\Post;
 use App\Models\Blog\Tag;
+use App\Models\Company\Webpage;
+use App\Models\Page\Page;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -20,7 +21,9 @@ class BlogController extends Controller
         $topImage = [];
         $topImage = Page::find(90)->PageSections()->first();
 
-    	return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage);
+        $metatags = Webpage::where('page_name','=','blog')->first();
+
+    	return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
     }
 
     public function categoryPosts($blogCategoryId)

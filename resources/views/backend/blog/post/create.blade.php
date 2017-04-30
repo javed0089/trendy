@@ -5,8 +5,8 @@
 @section('content')
 
 @section('styles')
- <!-- Select2 -->
-  <link rel="stylesheet" href="{{asset('backend/plugins/select2/select2.min.css')}}">
+<!-- Select2 -->
+<link rel="stylesheet" href="{{asset('backend/plugins/select2/select2.min.css')}}">
 @endsection
 <!-- Main content -->
 <section class="content">
@@ -59,28 +59,28 @@
 									</div>
 
 									<div class="form-group">
-									<label for="slug">Slug</label>
+										<label for="slug">Slug</label>
 										<input type="text" class="form-control"  name="slug" id="slug" placeholder="Url slug" required  value="{{old('slug')}}">
 									</div>
 
 									<div class="form-group">
-									<label for="blog_category_id">Category</label>
-										 <select name="blog_category_id" class="form-control" required>
-								            <option value="">Select Category</option>
-								            @foreach($blogCategories as $blogCategory)
-								              <option value="{{$blogCategory->id}}">{{$blogCategory->name_en}}</option>
-								            @endforeach
-								         </select>
+										<label for="blog_category_id">Category</label>
+										<select name="blog_category_id" class="form-control" required>
+											<option value="">Select Category</option>
+											@foreach($blogCategories as $blogCategory)
+											<option value="{{$blogCategory->id}}">{{$blogCategory->name_en}}</option>
+											@endforeach
+										</select>
 									</div>
 									
 									<div class="form-group">
-						                <label>Tags</label>
-						                <select class="form-control select2" multiple="multiple" name="tags[]" data-placeholder="Choose tags" style="width: 100%;">
-						                  @foreach($tags as $tag)
-											 <option value="{{$tag->id}}">{{$tag->name_en}}</option>
-										  @endforeach
-						                </select>
-						              </div>
+										<label>Tags</label>
+										<select class="form-control select2" multiple="multiple" name="tags[]" data-placeholder="Choose tags" style="width: 100%;">
+											@foreach($tags as $tag)
+											<option value="{{$tag->id}}">{{$tag->name_en}}</option>
+											@endforeach
+										</select>
+									</div>
 
 									<div class="form-group">
 										<label for="body_en">Body</label>
@@ -89,7 +89,7 @@
 									</div>
 
 									<div class="form-group">
-									<label for="author_en">Author</label>
+										<label for="author_en">Author</label>
 										<input type="text" class="form-control"  name="author_en" id="author_en" placeholder="Name of author" required value="{{old('author_en')}}">
 									</div>
 
@@ -99,10 +99,20 @@
 									</div>
 									
 									<div class="checkbox">
-						                <label>
-						            	    <input name="featured" type="checkbox"> Featured
-						                </label>
-						            </div>
+										<label>
+											<input name="featured" type="checkbox"> Featured
+										</label>
+									</div>
+
+									<div class="form-group">
+										<label for="meta_title_en">Meta page title</label>
+										<input type="text" class="form-control"  name="meta_title_en"  value="{{old('meta_title_en')}}" >
+									</div>
+
+									<div class="form-group">
+										<label for="meta_description_en">Meta description</label>
+										<textarea class="mceNoEditor" name="meta_description_en"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{old('meta_description_en')}}</textarea>
+									</div>
 
 								</div>
 								<!-- /.box-body -->
@@ -129,7 +139,7 @@
 									</div>
 
 									<div class="form-group">
-									<label for="author_ar">Author</label>
+										<label for="author_ar">Author</label>
 										<input type="text" class="form-control"  name="author_ar" id="author_ar" placeholder="Name of author"  value="{{old('author_ar')}}">
 									</div>
 
@@ -138,6 +148,15 @@
 										<input type="file"  id="featured_image_ar" name="featured_image_ar">
 									</div>
 									
+									<div class="form-group">
+										<label for="meta_title_ar">Meta page title</label>
+										<input type="text" class="form-control"  name="meta_title_ar"  value="{{old('meta_title_ar')}}" >
+									</div>
+
+									<div class="form-group">
+										<label for="meta_description_ar">Meta description</label>
+										<textarea class="mceNoEditor" name="meta_description_ar"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{old('meta_description_ar')}}</textarea>
+									</div>
 									
 
 								</div>
@@ -164,21 +183,22 @@
 	@section('scripts')
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 	<script>tinymce.init({
-		selector:'textarea',
+		mode : "specific_textareas",
+        editor_selector : "textarea",
 		plugins: 'code preview lists link image',
 		menubar:false,
 		toolbar: 'undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code preview',
 
 	});
- 
- $(function () {
+
+	$(function () {
     //Initialize Select2 Elements
     $(".select2").select2();
 
-	});
-	</script>
-	
+});
+</script>
 
-	<script src="{{ asset('backend/plugins/select2/select2.full.min.js')}}"></script>
 
-	@endsection
+<script src="{{ asset('backend/plugins/select2/select2.full.min.js')}}"></script>
+
+@endsection

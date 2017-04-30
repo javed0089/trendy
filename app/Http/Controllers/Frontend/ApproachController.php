@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Block\Block;
+use App\Models\Company\Webpage;
 use App\Models\Page\Page;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,8 @@ class ApproachController extends Controller
 	    
 	    $quickfact=Block::where('block_type','=','Approach-QuickFact')->first();
 
-	    return view('frontend.approach')->with('topImage',$topImage)->with('section1',$section1)->with('section2',$section2)->with('yellowbox',$yellowbox)->with('quality',$quality)->with('advantages',$advantages)->with('quickfact',$quickfact);
+	    $metatags = Webpage::where('page_name','=','approach')->first();
+
+	    return view('frontend.approach')->with('topImage',$topImage)->with('section1',$section1)->with('section2',$section2)->with('yellowbox',$yellowbox)->with('quality',$quality)->with('advantages',$advantages)->with('quickfact',$quickfact)->with('metatags',$metatags);
 	}
 }

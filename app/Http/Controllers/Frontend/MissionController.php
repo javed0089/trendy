@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Block\Block;
+use App\Models\Company\Webpage;
 use App\Models\Page\Page;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class MissionController extends Controller
 	    $mission=Page::find(43)->PageSections()->get();
 	    
 	    $quickfact=Block::where('block_type','=','Mission-QuickFact')->first();
+	    $metatags = Webpage::where('page_name','=','mission')->first();
 
-	    return view('frontend.mission')->with('topImage',$topImage)->with('section1',$section1)->with('yellowbox',$yellowbox)->with('vision',$vision)->with('mission',$mission)->with('quickfact',$quickfact);
+	    return view('frontend.mission')->with('topImage',$topImage)->with('section1',$section1)->with('yellowbox',$yellowbox)->with('vision',$vision)->with('mission',$mission)->with('quickfact',$quickfact)->with('metatags',$metatags);
 	}
 }

@@ -54,6 +54,10 @@
 							<p>{!!$product->desc_en!!}</p>
 							<h3>Specification</h3>
 							<p>{!!$product->specs_en!!}</p>
+							<h3>Meta title</h3>
+							<p>{{$product->meta_title_en}}</p>
+							<h3>Meta description</h3>
+							<p>{{$product->meta_description_en}}</p>
 						</div>
 						<div class="col-md-3">
 							<div class="callout ">
@@ -104,6 +108,10 @@
 							<p>{!!$product->desc_ar!!}</p>
 							<h3>Specification</h3>
 							<p>{!!$product->specs_ar!!}</p>
+							<h3>Meta title</h3>
+							<p>{{$product->meta_title_ar}}</p>
+							<h3>Meta description</h3>
+							<p>{{$product->meta_description_ar}}</p>
 						</div>
 					</div>
 

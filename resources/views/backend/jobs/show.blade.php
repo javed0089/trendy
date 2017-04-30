@@ -55,6 +55,10 @@
 
 							<h3>Responsibilities</h3>	
 							<p>{!!$job->responsibilities_en!!}</p>
+							<h3>Meta page title</h3>	
+							<p>{!!$job->meta_title_en!!}</p>
+							<h3>Meta description</h3>	
+							<p>{!!$job->meta_description_en!!}</p>
 						</div>
 						<div class="col-md-3">
 							<div class="callout ">
@@ -87,6 +91,10 @@
 
 							<h4>Responsibilities</h4>	
 							<p>{!!$job->responsibilities_ar!!}</p>
+							<h3>Meta page title</h3>	
+							<p>{{$job->meta_title_ar}}</p>
+							<h3>Meta description</h3>	
+							<p>{{$job->meta_description_ar}}</p>
 						</div>
 						<div class="col-md-3">
 							<div class="callout ">
@@ -96,6 +104,7 @@
 								<p>{{$job->education_ar}}</p>
 								<h4>Experience</h4>
 								<p>{{$job->experience_ar}}</p>
+								
 							</div>
 						</div>
 					</div>

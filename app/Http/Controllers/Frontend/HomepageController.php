@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Block\Block;
 use App\Models\Blog\Post;
 use App\Models\Company\Company;
+use App\Models\Company\Webpage;
 use App\Models\Page\Page;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
@@ -59,8 +60,9 @@ class HomepageController extends Controller
         $ratings = new Rating();
 
         $company = Company::first();
+        $metatags = Webpage::where('page_name','=','homepage')->first();
 
-        return view('frontend.index')->with('CompBlock',$homepageCompBlock)->with('ServBlock',$homepageServBlock)->with('PubBlocks',$homepagePubBlock)->with('CeoBlock',$homepageCeoBlock)->with('SlidersBlock',$homepageSliders)->with('categories',$categories)->with('homepageCategoryText',$homepageCategoryText)->with('testimonials',$testimonials)->with('products',$products)->with('posts',$posts)->with('brands',$brands)->with('stats',$stats)->with('ratings',$ratings)->with('company',$company);
+        return view('frontend.index')->with('CompBlock',$homepageCompBlock)->with('ServBlock',$homepageServBlock)->with('PubBlocks',$homepagePubBlock)->with('CeoBlock',$homepageCeoBlock)->with('SlidersBlock',$homepageSliders)->with('categories',$categories)->with('homepageCategoryText',$homepageCategoryText)->with('testimonials',$testimonials)->with('products',$products)->with('posts',$posts)->with('brands',$brands)->with('stats',$stats)->with('ratings',$ratings)->with('company',$company)->with('metatags',$metatags);
 
 
 

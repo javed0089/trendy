@@ -1,7 +1,13 @@
  @extends('layouts.main')
 
- @section('title','Product')
-
+ @if(isset($product->{lang_col('meta_title')}))
+ @section('title'){{ $product->{lang_col('meta_title')} }} @stop
+ @endif
+ @if(isset($product->{lang_col('meta_description')}))
+ @section('meta-description'){{ $product->{lang_col('meta_description')} }} @stop
+ @endif
+ 
+  
 
  @section('content')
 
@@ -69,7 +75,9 @@
             <h4 class="hood-subtitle subtitle"> {{$product->{lang_col('name')} }} </h4>
           </div>
           <div class="col-md-4">
+          @if($product->Brand)
            <img src="{{asset($product->Brand->logo)}}" height="80" width="180" alt="{{$product->Brand->{lang_col('name')} }}">
+           @endif
           </div>
         </div>
         <input type="text" hidden value="{{route('addToCart',$product->id)}}" name="">

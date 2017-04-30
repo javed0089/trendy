@@ -1,10 +1,9 @@
- <!-- Basic Page Needs -->
+ <!-- Meta Tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="GAP - Polymers">
    
-    <!-- Page Title -->
-    <title> @yield('title') : GAP-Polymers </title>
+    <title> @yield('title', 'GAP-Polymers') </title>
+    <meta name="description" content="@yield('meta-description', 'GAP Polymers')" />
 
     <!-- Favicon 
     <link rel="icon" type="image/png" href="favicon.png">-->

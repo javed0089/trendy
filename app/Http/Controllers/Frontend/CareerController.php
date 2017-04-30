@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Block\Block;
 use App\Models\Careers\Job;
 use App\Models\Careers\JobApplication;
+use App\Models\Company\Webpage;
 use App\Models\Department\Department;
 use App\Models\Page\Page;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CareerController extends Controller
 {
@@ -26,8 +27,9 @@ class CareerController extends Controller
         $section1 = Page::find(71)->PageSections()->first();
 
         $work=Block::where('block_type','=','Career-Work')->first();
+        $metatags = Webpage::where('page_name','=','career')->first();
 
-        return view('frontend.careers')->with('jobs',$jobs)->with('departments',$departments)->with('topImage',$topImage)->with('section1',$section1)->with('work',$work);
+        return view('frontend.careers')->with('jobs',$jobs)->with('departments',$departments)->with('topImage',$topImage)->with('section1',$section1)->with('work',$work)->with('metatags',$metatags);
     }
 
     public function job($slug)

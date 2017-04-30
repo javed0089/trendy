@@ -164,6 +164,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		/*Route::post('pages/delete/{id}', 'Backend\Page\PageController@destroy')->name('pages.delete');
 */
 
+		Route::resource('webpages','Backend\Page\WebPageController');
 
 		///////*****Blog********//////
 		Route::resource('blog/posts','Backend\Blog\PostController');
