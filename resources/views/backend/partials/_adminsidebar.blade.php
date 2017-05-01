@@ -291,6 +291,18 @@
                   </ul>
                 </li>
               </ul>
+              <ul class="treeview-menu">
+                <li >
+                  <a href="#"><i class="fa fa-circle-o"></i>Testimonials
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                  <li {{ $activeLink=='testimonials-top-image'?'class=active':''}}><a href="{{ route('pages.show','170') }}"><i class="fa fa-circle-o"></i> Top Image</a></li>
+                  </ul>
+                </li>
+              </ul>
 
               <ul class="treeview-menu">
                 <li >

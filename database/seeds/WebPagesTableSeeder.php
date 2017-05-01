@@ -28,6 +28,7 @@ class WebPagesTableSeeder extends Seeder
     		['page_name' => 'contact'],
     		['page_name' => 'register'],
     		['page_name' => 'login'],
+            ['page_name' => 'testimonials'],
     	]);
     }
 }

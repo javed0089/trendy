@@ -1,4 +1,4 @@
- @extends('layouts.main')
+@extends('layouts.main')
 
  @if(isset($metatags->{lang_col('meta_title')}))
  @section('title'){{ $metatags->{lang_col('meta_title')} }} @stop

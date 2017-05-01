@@ -72,6 +72,9 @@
         /** Contact **/
         Route::get('/contact','Frontend\ContactController@show')->name('frontend.contact');
 
+        /** Testimonials **/
+        Route::get('/testimonials','Frontend\TestimonialController@show')->name('frontend.testimonials');
+
         /** Information Pages **/
         Route::get('/information/{slug}','Frontend\InformationController@show')->name('frontend.information');
 

@@ -363,6 +363,9 @@
             @endforeach
             @endif
         </div>
+         <div class="blog-btn text-center">
+            <a href="{{route('frontend.testimonials')}}" class="btn btn-primary" role="button">{{__('READ MORE TESTIMONIALS')}}</a>
+        </div>
     </div>
 </section>
 

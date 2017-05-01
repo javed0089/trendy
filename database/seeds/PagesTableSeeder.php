@@ -91,6 +91,9 @@ class PagesTableSeeder extends Seeder
 
           ////////////////////*Post*/////////////////
           ['id' => 160,'status'=>'1','page_sec_name' => 'post-top-image','page_title' => 'Post','section_title' => 'Top Image','is_multi' => '0','has_title' => '0','has_heading1' => '0','has_content' => '0','has_image' => '1',],
+
+           ////////////////////*TESTIMONIALS*/////////////////
+          ['id' => 170,'status'=>'1','page_sec_name' => 'testimonials-top-image','page_title' => 'Testimonials','section_title' => 'Top Image','is_multi' => '0','has_title' => '1','has_heading1' => '0','has_content' => '1','has_image' => '1',], 
                 
 
           ]
