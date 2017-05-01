@@ -5140,6 +5140,13 @@ ul.nav-tabs {
     margin:0;
 
 }
+.secondlineheight {
+    line-height: 22px !important;
+}
+
+.secondlineheight::first-line {
+    line-height: .5em !important;
+}
 .treeview li a:hover {                                 
     background-color: #e9e9e9;
 }
