@@ -2,9 +2,9 @@
 
 @if (count($category['Children']) > 0)
 
-<li {{ Request::is('*/category/'.$category->slug)?"class=active":'' }}> <a class="secondlineheight" href="{{route('frontend.productlist',$category->slug)}}">{{ $category->{lang_col('name')} }}</a>
+<li {{ Request::is('*/category/'.$category->slug)?"class=active":'' }}> <a  href="{{route('frontend.productlist',$category->slug)}}"><span>{{ $category->{lang_col('name')} }}</span></a>
 	 @else
-	    <li {{ Request::is('*/category/'.$category->slug)?"class=active":'' }}> <a class="secondlineheight" href="{{route('frontend.productlist',$category->slug)}}">{{ $category->{lang_col('name')} }} </a> 
+	    <li {{ Request::is('*/category/'.$category->slug)?"class=active":'' }}> <a  href="{{route('frontend.productlist',$category->slug)}}"><span>{{ $category->{lang_col('name')} }}</span> </a> 
 @endif
 	@if (count($category['Children']) > 0)
 	    <ul>

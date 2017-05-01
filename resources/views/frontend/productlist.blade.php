@@ -135,7 +135,7 @@
     font-size: 16px;
     padding: 7px !important;">Brands</li>
       @foreach($brands as $brand)
-      <li {{ Request::is('*/brand/'.$brand->slug)?"class=active":'' }}><a href="{{route('frontend.productsByBrand',$brand->slug)}}">{{$brand->name_en}}</a></li>
+      <li {{ Request::is('*/brand/'.$brand->slug)?"class=active":'' }}><a href="{{route('frontend.productsByBrand',$brand->slug)}}"><span>{{$brand->name_en}}</span></a></li>
       @endforeach
      
    
