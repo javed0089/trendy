@@ -5145,7 +5145,12 @@ ul.nav-tabs {
     margin:0;
 
 }
-
+.treeview li a span{
+    line-height: 20px;
+    }
+.treeview li a span:first-line{
+    line-height: .5em;
+    }
 .treeview li a:hover {                                 
     background-color: #e9e9e9;
 }
