@@ -12,7 +12,7 @@ class NewsController extends Controller
 {
     public function index()
     {
-    	$news = News::where('status','=','1')->get();
+    	$news = News::where('status','=','1')->paginate(6);
         $topImage = [];
         $topImage = Page::find(100)->PageSections()->first();
         $metatags = Webpage::where('page_name','=','news')->first();

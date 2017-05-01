@@ -55,7 +55,7 @@
                         <div class="clearfix spacer-50"></div>
                         @endforeach
                         @else
-                        <span>{{__('No news')}}..</span>
+                        <span>{{__('No testimonials')}}..</span>
                         @endif
 
                         <div class="col-md-12 text-center"> 
