@@ -46,7 +46,7 @@
                         <div class="col-sm-6">
                             <div class="blog-img-box">
                                 <div class="blog-date"> <span class="month">{{date('M',strtotime($news->created_at))}} </span> <span class="date">{{date('d',strtotime($news->created_at))}}</span> </div>
-                                <a class="hover-effect" href="{{route('frontend.news',$news->id)}}">
+                                <a class="hover-effect" href="{{route('frontend.news.show',$news->id)}}">
                                  @if($news->Photos->first()) 
                                  <img src="{{asset($news->Photos->first()->filename)}}" alt="{{$news->{lang_col('title')} }}" />
                                  @else
