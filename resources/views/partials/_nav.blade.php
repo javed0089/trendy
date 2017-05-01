@@ -156,10 +156,12 @@
  </nav>
 
  <div class="language-menu visible-lg visible-md" >
- <ul class="list-inline">
-   <li><a rel="alternate" hreflang="en" href="{{LaravelLocalization::getLocalizedURL('en') }}">English</a></li> |
-   <li><a rel="alternate" hreflang="ar" href="{{LaravelLocalization::getLocalizedURL('ar') }}">العربية</a></li>
-  </ul>
+
+  <select  onchange="window.location=this.value">
+    <option {{LaravelLocalization::getCurrentLocale()=='en'?'selected':''}} value="{{LaravelLocalization::getLocalizedURL('en') }}">English</option>
+    <option {{LaravelLocalization::getCurrentLocale()=='ar'?'selected':''}} value="{{LaravelLocalization::getLocalizedURL('ar') }}">العربية</option>
+
+  </select>
 </div>
 </div>
 

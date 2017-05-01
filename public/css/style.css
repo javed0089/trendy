@@ -5646,10 +5646,13 @@ a.btn.btn-xs {
     position: relative;
     height: 40px;
     width: 120px;
-
+    
 }
-.language-menu ul{
-position: absolute;top:50%
+.language-menu select{
+position: absolute;top:45%;
+border:0;
+background: transparent;
+font-weight: bold;
 }
 
 .login-links li{
