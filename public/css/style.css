@@ -5135,7 +5135,7 @@ ul.nav-tabs {
     color: #61656F;
     padding: 22px 5px  22px 10px;
     display: block;
-    line-height: 20px;
+    line-height: .5em;
     border-bottom: 1px solid #fcfcfd;
     margin:0;
 
