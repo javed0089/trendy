@@ -5143,7 +5143,7 @@ ul.nav-tabs {
 .treeview li a span{
     line-height: 20px;
     }
-.treeview li a span:first-line{
+.treeview li a span::first-line{
     line-height: .5em !important;
     }
 .treeview li a:hover {                                 
