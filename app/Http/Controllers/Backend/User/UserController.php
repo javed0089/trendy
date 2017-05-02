@@ -7,11 +7,13 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Sentinel;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
-    
+
     public function index()
     {
         $backendUsers = User::where('backend_user', '=' , '1')->get();
@@ -34,16 +36,16 @@ class UserController extends Controller
     public function update(Request $request,$id){
 
         $this->validate($request, [
-        'first_name' =>'required|max:255',
-        'last_name' =>'required|max:255',
-        'email' =>'required|email|unique:users,email,'.$id,
+            'first_name' =>'required|max:255',
+            'last_name' =>'required|max:255',
+            'email' =>'required|email|unique:users,email,'.$id,
 
-        ]);
+            ]);
 
         $user=Sentinel::findUserById($id);
         $reqUser=$request->all();
         $user=Sentinel::update($user,$reqUser);
- 
+
         $role = Sentinel::findRoleBySlug($user->roles->first()->slug);
         $role->users()->detach($user);
 
@@ -58,16 +60,16 @@ class UserController extends Controller
     public function changePassword(Request $request){
 
         $this->validate($request, [
-        'oldPassword' =>'required',
-        'newPassword' =>'required|min:6',
-        'confirmPassword' =>'required|same:newPassword',
-        ]);
+            'oldPassword' =>'required',
+            'newPassword' =>'required|min:6',
+            'confirmPassword' =>'required|same:newPassword',
+            ]);
 
         $curUser = Sentinel::getUser();
 
         $credentials = [
-            'email'    => $curUser->email,
-            'password' => $request->oldPassword,
+        'email'    => $curUser->email,
+        'password' => $request->oldPassword,
         ];
 
         $user = Sentinel::validateCredentials($curUser, $credentials);
@@ -82,4 +84,50 @@ class UserController extends Controller
         }
 
     }
+
+    public function addPicture(Request $request){
+
+     $this->validate($request, [
+       'picture' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+       ]);
+
+     $file = $request->file('picture');
+     $filename = rand(1,100).time().'.'. $file->getClientOriginalExtension();
+     $location="profile/";
+     if($file){
+        Storage::disk('local')->put($location.$filename,  File::get($file));
+
+        $curUser = Sentinel::getUser();
+        if($curUser){
+            $user = User::find($curUser->id);
+            $user->picture = $filename;
+            $user->save();
+            return redirect()->back()->with(['success' => 'Picture added successfully!']);
+        }
+    }
+    return redirect()->back()->with(['error' => 'Something went wrong!']);
+}
+
+
+
+public function getProfilePicture($id)
+{
+    $user = User::find($id);
+    if($user){
+        $filename = $user->picture;
+        $location="profile/";
+        if($user->picture){
+            $file = Storage::disk('local')->get( $location.$filename);
+            $response = Response($file, 200);
+            return $response;
+        }
+        else{
+            $file =Storage::disk('public')->get('backend/dist/img/general-user.png');
+
+            $response = Response($file, 200);
+            return $response;
+        }
+    }
+
+}
 }

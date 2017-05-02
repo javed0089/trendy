@@ -250,5 +250,8 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 	Route::get('user/profile', 'Backend\User\UserController@show')->name('users.show');
 	Route::post('user/profile/changepasword', 'Backend\User\UserController@changePassword')->name('users.changepassword');
+	Route::post('user/addpicture', 'Backend\User\UserController@addPicture')->name('users.addpicture');
+	Route::get('user/getprofilepicture/{file}','Backend\User\UserController@getProfilePicture')->name('users.getprofilepicture');
+
 });
 
