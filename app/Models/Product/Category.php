@@ -20,4 +20,6 @@ class Category extends Model
     {
         return $this->hasMany(self::class, 'parent_id');
     }
+
+    
 }

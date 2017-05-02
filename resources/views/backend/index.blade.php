@@ -89,9 +89,133 @@
     </div>
     <!-- ./col -->
   </div>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua"><i class="ion ion-cube"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Total Products</span>
+          <span class="info-box-number">{{$totalProducts}}</span>
+        </div>
+      </div>
+    </div>
+
+    @foreach ($prodcount as $category) 
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="background: #fff">
+          @if($category['logo'])
+          <img src="{{asset($category['logo'])}}">
+          @else
+          <img src="http://placehold.it/50x66">
+
+          @endif 
+        </span>
+        <div class="info-box-content">
+          <span class="info-box-text">{{$category['name']}}</span>
+          <span class="info-box-number">{{$category['prodCount']}}</span>
+        </div>
+      </div>
+    </div>
+    @endforeach
+  </div>
   <!-- /.row -->
   <!-- Main row -->
   <div class="row">
+    <div class="col-md-6">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Latest Quote Requests <span class="small">Today</span></h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive">
+            <table class="table no-margin">
+              <thead>
+                <tr>
+                  <th>Quote #</th>
+                  <th>Customer</th>
+                  <th>Status</th>
+                  <th>Assigned To</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($quotes as $quote)
+                <tr>
+                  <td><a href="{{route('quote-requests.show',$quote->id)}}">{{$quote->quote_no}}</a></td>
+                  <td>{{$quote->User->first_name}} {{$quote->User->last_name}}
+                    {!! User::isActivated($quote->user_id)?'<span class="label label-success">Activated</span>':'<span class="label label-danger">Not-Activated</span>' !!}</td>
+                    <td><span class="label label-{{$quote->status==1?'danger':'success'}}">{{$quote->Status->status_en}}</span></td>
+                    <td>
+                      {{isset($quote->AssignedTo)?$quote->AssignedTo->first_name:''}} {{isset($quote->AssignedTo)?$quote->AssignedTo->last_name:''}}</td>
+
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="box-footer clearfix">
+              <a href="{{route('quote-requests.index')}}" class="btn btn-sm btn-info btn-flat pull-left">Show All Requests</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Latest Orders <span class="small">Today</span></h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Customer</th>
+                      <th>Status</th>
+                      <th>Assigned To</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   @foreach($orders as $order)
+                   <tr>
+                    <td><a href="{{ route('orders.show',$order->id) }}">{{$order->id}}</a></td>
+                    <td>{{$order->User->first_name}} {{$order->User->last_name}}</td>
+                    <td><span class="label label-{{$order->status==1?'danger':'success'}}">{{$order->Status->status_en}}</span></td>
+                    <td>
+                     {{isset($order->AssignedTo)?$order->AssignedTo->first_name:''}} {{isset($order->AssignedTo)?$order->AssignedTo->last_name:''}}
+                   </td>
+                 </tr>
+                 @endforeach
+
+               </tbody>
+             </table>
+           </div>
+           <!-- /.table-responsive -->
+         </div>
+         <!-- /.box-body -->
+         <div class="box-footer clearfix">
+          <a href="{{ route('orders.index') }}" class="btn btn-sm btn-info btn-flat pull-left">Show All Orders</a>
+        </div>
+        <!-- /.box-footer -->
+      </div>
+
+    </div>
     <!-- Left col -->
     <section class="col-lg-7 connectedSortable">
 
@@ -105,10 +229,10 @@
         <!-- /.box-header -->
         <div class="box-body">
 
-       
+
 
           <div class="clearfix">
-          <span class="pull-left">Excellent</span>
+            <span class="pull-left">Excellent</span>
             <small class="pull-right">{{$ratings->excellent()}}%</small>
           </div>
           <div class="progress">
@@ -117,7 +241,7 @@
             </div>
           </div>
           <div class="clearfix">
-          <span class="pull-left">Good</span>
+            <span class="pull-left">Good</span>
             <small class="pull-right">{{$ratings->good()}}%</small>
           </div>
           <div class="progress">
@@ -126,7 +250,7 @@
             </div>
           </div>
           <div class="clearfix">
-          <span class="pull-left">Average</span>
+            <span class="pull-left">Average</span>
             <small class="pull-right">{{$ratings->average()}}%</small>
           </div>
           <div class="progress">
@@ -135,7 +259,7 @@
             </div>
           </div>
           <div class="clearfix">
-          <span class="pull-left">Poor</span>
+            <span class="pull-left">Poor</span>
             <small class="pull-right">{{$ratings->poor()}}%</small>
           </div>
           <div class="progress">
@@ -151,161 +275,130 @@
 
 
 
-      <!-- quick email widget -->
-      <div class="box box-info">
-        <div class="box-header">
-          <i class="fa fa-envelope"></i>
 
-          <h3 class="box-title">Quick Email</h3>
+    </section>
+    <!-- /.Left col -->
+    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+    <section class="col-lg-5 connectedSortable">
+
+
+
+
+
+      <!-- Calendar -->
+      <div class="box box-solid bg-green-gradient">
+        <div class="box-header">
+          <i class="fa fa-calendar"></i>
+
+          <h3 class="box-title">Calendar</h3>
           <!-- tools box -->
           <div class="pull-right box-tools">
-            <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
+            <!-- button with a dropdown -->
+            <div class="btn-group">
+              <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bars"></i></button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                  <li><a href="#">Add new event</a></li>
+                  <li><a href="#">Clear events</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">View calendar</a></li>
+                </ul>
+              </div>
+              <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
+              </button>
             </div>
             <!-- /. tools -->
           </div>
-          <div class="box-body">
-            <form action="#" method="post">
-              <div class="form-group">
-                <input type="email" class="form-control" name="emailto" placeholder="Email to:">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" placeholder="Subject">
-              </div>
-              <div>
-                <textarea class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-              </div>
-            </form>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <!--The calendar -->
+            <div id="calendar" style="width: 100%"></div>
           </div>
-          <div class="box-footer clearfix">
-            <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
-              <i class="fa fa-arrow-circle-right"></i></button>
+          <!-- /.box-body -->
+          <div class="box-footer text-black">
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- Progress bars -->
+                <div class="clearfix">
+                  <span class="pull-left">Task #1</span>
+                  <small class="pull-right">90%</small>
+                </div>
+                <div class="progress xs">
+                  <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
+                </div>
+
+                <div class="clearfix">
+                  <span class="pull-left">Task #2</span>
+                  <small class="pull-right">70%</small>
+                </div>
+                <div class="progress xs">
+                  <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-sm-6">
+                <div class="clearfix">
+                  <span class="pull-left">Task #3</span>
+                  <small class="pull-right">60%</small>
+                </div>
+                <div class="progress xs">
+                  <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
+                </div>
+
+                <div class="clearfix">
+                  <span class="pull-left">Task #4</span>
+                  <small class="pull-right">40%</small>
+                </div>
+                <div class="progress xs">
+                  <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
+                </div>
+              </div>
+              <!-- /.col -->
             </div>
+            <!-- /.row -->
           </div>
-
-        </section>
-        <!-- /.Left col -->
-        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-        <section class="col-lg-5 connectedSortable">
-
-
-
-
-
-          <!-- Calendar -->
-          <div class="box box-solid bg-green-gradient">
-            <div class="box-header">
-              <i class="fa fa-calendar"></i>
-
-              <h3 class="box-title">Calendar</h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <!-- button with a dropdown -->
-                <div class="btn-group">
-                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bars"></i></button>
-                    <ul class="dropdown-menu pull-right" role="menu">
-                      <li><a href="#">Add new event</a></li>
-                      <li><a href="#">Clear events</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">View calendar</a></li>
-                    </ul>
-                  </div>
-                  <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                  </button>
-                </div>
-                <!-- /. tools -->
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body no-padding">
-                <!--The calendar -->
-                <div id="calendar" style="width: 100%"></div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer text-black">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <!-- Progress bars -->
-                    <div class="clearfix">
-                      <span class="pull-left">Task #1</span>
-                      <small class="pull-right">90%</small>
-                    </div>
-                    <div class="progress xs">
-                      <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                    </div>
-
-                    <div class="clearfix">
-                      <span class="pull-left">Task #2</span>
-                      <small class="pull-right">70%</small>
-                    </div>
-                    <div class="progress xs">
-                      <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                    </div>
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-sm-6">
-                    <div class="clearfix">
-                      <span class="pull-left">Task #3</span>
-                      <small class="pull-right">60%</small>
-                    </div>
-                    <div class="progress xs">
-                      <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                    </div>
-
-                    <div class="clearfix">
-                      <span class="pull-left">Task #4</span>
-                      <small class="pull-right">40%</small>
-                    </div>
-                    <div class="progress xs">
-                      <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                    </div>
-                  </div>
-                  <!-- /.col -->
-                </div>
-                <!-- /.row -->
-              </div>
-            </div>
-            <!-- /.box -->
-
-          </section>
-          <!-- right col -->
         </div>
-        <!-- /.row (main row) -->
+        <!-- /.box -->
 
       </section>
-      <!-- /.content -->
-      @endsection
+      <!-- right col -->
+    </div>
+    <!-- /.row (main row) -->
 
-      @section('scripts')
-      <!-- Morris.js charts -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-     
-       <!-- Sparkline -->
-      <script src="{{ asset('backend/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+  </section>
+  <!-- /.content -->
+  @endsection
+
+  @section('scripts')
+  <!-- Morris.js charts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+  <!-- Sparkline -->
+  <script src="{{ asset('backend/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 
 
-      <!-- jvectormap -->
-      <script src="{{ asset('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
-      <script src="{{ asset('backend/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
-      <!-- jQuery Knob Chart -->
-      <script src="{{ asset('backend/plugins/knob/jquery.knob.js')}}"></script>
-      <!-- Bootstrap WYSIHTML5 -->
-      <script src="{{ asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
-      <script type="text/javascript">
-        $(document).ready(function() {
+  <!-- jvectormap -->
+  <script src="{{ asset('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
+  <script src="{{ asset('backend/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="{{ asset('backend/plugins/knob/jquery.knob.js')}}"></script>
+  <!-- Bootstrap WYSIHTML5 -->
+  <script src="{{ asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
       $('.progress .progress-bar').css("width",
-                function() {
-                    return $(this).attr("aria-valuenow") + "%";
-                }
+        function() {
+          return $(this).attr("aria-valuenow") + "%";
+        }
         )
     });
 
-      </script>
+  </script>
 
-      <!-- AdminLTE App -->
-<script src="{{ asset('backend/dist/js/app.min.js')}}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('backend/dist/js/pages/dashboard.js')}}"></script>
-      @endsection
+  <!-- AdminLTE App -->
+  <script src="{{ asset('backend/dist/js/app.min.js')}}"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="{{ asset('backend/dist/js/pages/dashboard.js')}}"></script>
+  @endsection

@@ -32,7 +32,7 @@
 					<div class="box-header" style="padding: 5px 15px; height: 32px; "> 
 						<form method="get" action="{{url()->current()}}">
 							<div class="form-group col-md-6">
-								<label>Search <small class="text-green"><i>First name,Last name,Country,City,Email</i></small></label>
+								<label>Search: <small class="text-green"><i>First name,Last name,Country,City,Email</i></small></label>
 								<input type="text" class="form-control" name="term" value="{{Request::get('term')}}">
 							</div> 
 							
