@@ -48,7 +48,7 @@
 										
 										<th>Customer</th>
 										<th>Email</th>
-										<th>Address</th>
+										<th>Full Address</th>
 										<th>IP Address</th>
 										<th>Activation Status</th>
 										<th>Created</th>
