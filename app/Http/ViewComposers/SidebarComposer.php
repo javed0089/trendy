@@ -48,13 +48,13 @@ class SidebarComposer{
 		if(Sentinel::check()){
 			$user=User::find(Sentinel::check()->id);
 			if($user)
-				$orders = $user->Orders()->get();
+				$orders = $user->Orders()->orderBy('created_at', 'desc')->take(4)->get();
 		}
 		$myquotes=[];
 		if(Sentinel::check()){
 			$user=User::find(Sentinel::check()->id);
 			if($user)
-				$myquotes = $user->Quotes()->get();
+				$myquotes = $user->Quotes()->orderBy('created_at', 'desc')->take(4)->get();
 		}
 		if(count($cart)>0)
 			$cart=$cart->items;

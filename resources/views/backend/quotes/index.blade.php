@@ -13,8 +13,6 @@
 	<h1>
 		Quote Requests
 	</h1>
-	
-	
 </section>
 
 <!-- Main content -->
@@ -30,7 +28,33 @@
 				@endif
 				<div class="box box-success">
 					<div class="box-header" style="padding: 5px 15px; height: 32px; "> 
-						<h3 class="box-title" style="line-height: 25px;" >All Quotes</h3> 
+						<form method="get" action="{{url()->current()}}">
+							<div class="form-group col-md-2">
+								<label>Status</label>
+								<select class="form-control" name="status" style="width: 100%;" tabindex="-1" aria-hidden="true">
+									<option value="">--All--</option>
+									@foreach($statuses as $status)
+									<option {{{ Request::get('status') == $status->id?'selected':'' }}} value="{{$status->id}}">{{$status->status_en}} </option>
+
+									@endforeach
+								</select>
+							</div> 
+							@if(User::isSupervisor())
+							<div class="form-group col-md-2">
+								<label>Assigned to</label>
+								<select class="form-control" name="assign_to_id" style="width: 100%;" tabindex="-1" aria-hidden="true">
+									<option value="">--All--</option>
+									@foreach($salesExecutives as $salesExecutive)
+									<option {{{ Request::get('assign_to_id') == $salesExecutive->id?'selected':'' }}} value="{{$salesExecutive->id}}">{{$salesExecutive->first_name}} {{$salesExecutive->last_name}} </option>
+
+									@endforeach
+								</select>
+							</div> 
+							@endif
+							<div class="col-md-1 pull-right" style="margin-top: 20px;" >
+								<button class="btn btn-primary btn-md" type="submit">Filter</button>
+							</div>
+						</form>	
 					</div>
 					<div class="box-body">
 						<table id="example2" class="table table-bordered table-hover">
@@ -68,6 +92,14 @@
 
 							</tfoot>
 						</table>
+
+						<div class="row">
+							<div class="col-md-2 pull-right"> 
+								{{ $quotes->links() }}
+							</div>
+							<div class="col-md-4 pull-left" style="margin-top: 25px; ">Showing {{ $quotes->firstItem() }} - {{ $quotes->lastItem() }} of {{ $quotes->total() }} [Page {{ $quotes->currentPage() }} of {{$quotes->lastPage()}}]
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -85,15 +117,14 @@
 	<!-- page script -->
 	<script>
 		$(function () {
-			$('#example2').DataTable({
+		/*	$('#example2').DataTable({
 				"paging": true,
 				"lengthChange": false,
 				"searching": false,
 				"ordering": true,
 				"info": true,
-				"autoWidth": false,
-				"order": [[ 1, "desc" ]]
-			});
+				"autoWidth": false
+			});*/
 
 			$("#delbutton").on("click", function(){
 				return confirm("Are you sure, you want to delete it?");

@@ -95,7 +95,7 @@
 										@endforeach
 									</select>
 									<button type="submit" name="submit" class="btn btn-block btn-primary" value="assignSalesRep">Assign</button>
-									<button type="submit" name="submit" class="btn btn-block btn-success" value="sendQuote">Send Quote</button>
+									<button type="submit" name="submit" class="btn btn-block btn-success" value="sendQuote">Approve</button>
 									@endif
 									@if(User::isSalesExecutive())
 									<button type="submit" name="submit" class="btn btn-block btn-success" value="quoteProcessed">Processed</button>
@@ -188,7 +188,7 @@
 
 																<div class="form-group" style="display:block;">
 																	<label for="title_en">Port of delivery</label>
-																	<input type="text" style="display: block;width: 100%" class="form-control" name="port_of_delivery" id="port_of_delivery" value="{{$item->port_of_delivery}}" >
+																	<input type="text" style="display: block;width: 100%" class="form-control" name="port_of_delivery" id="port_of_delivery" value="{{$item->port_of_delivery}}">
 																</div>
 																<div class="form-group" style="display:block;">
 																	<label for="delivery_terms">Delivery Terms</label>

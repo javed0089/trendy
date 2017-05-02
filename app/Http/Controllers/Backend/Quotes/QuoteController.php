@@ -22,16 +22,57 @@ class QuoteController extends Controller
     public function index()
     {
 
+        $statuses = Status::all();
+        $role = Sentinel::findRoleById(4);
+        $salesExecutives = $role->users()->get();
+
         $quotes=[];        
-        if(User::isSupervisor())
-            $quotes = Quote::all();
+        if(User::isSupervisor()){
+/*$queries =[];
+$columns = ['status','assign_to_id'];
+foreach ($columns as $column) {
+    if(request()->has($column)){
+        $quotes = Quote::where($column,request($column));
+        $queries[$column] = request($column);
+    }
+}
+}
+if($queries)
+$quotes = $quotes->paginate(2)->appends($queries);
+else
+$quotes = Quote::paginate(2);
+*/
+
+
+            $quotes = Quote::where(function($query){
+                $status = request('status')?request('status'):null;
+                $assigned = request('assign_to_id')?request('assign_to_id'):null;
+
+                if(isset($status)){
+                    $query->where('status','=',$status);
+                }
+                if(isset($assigned)){
+                    $query->where('assign_to_id','=',$assigned);
+                }
+
+                $query->where('status','>','0');
+            })->paginate(15)->appends(['status'=> request('status'),'assign_to_id'=> request('assign_to_id')]);
+        }
         elseif(User::isSalesExecutive()){
             $user=Sentinel::getUser();
-            $quotes = Quote::where('assign_to_id','=',$user->id)->get();
+            $quotes = Quote::where(function($query) use ($user){
+                $status = request('status')?request('status'):null;
+                if(isset($status)){
+                    $query->where('status','=',$status)
+                    ->where('assign_to_id','=',$user->id);
+                }
+
+                $query->where('status','>','0')
+                ->where('assign_to_id','=',$user->id);
+            })->paginate(15)->appends('status',request('status'));
         }
 
-
-        return view('backend.quotes.index')->with('quotes',$quotes);
+        return view('backend.quotes.index')->with('quotes',$quotes)->with('statuses',$statuses)->with('salesExecutives',$salesExecutives);
     }
 
     /**
@@ -124,11 +165,23 @@ class QuoteController extends Controller
             }
         }
         elseif($submitReq =="saveProduct"){
+
+            $podNotReq = array('ExWorks','FOB');
+            if((!in_array($request->delivery_terms,$podNotReq ) && $request->port_of_delivery==""))
+            {
+                $this->validate($request, [
+                    'port_of_delivery' =>   'required',
+                    ]);
+            }
+            if(in_array($request->delivery_terms,$podNotReq )) 
+            {
+                $request->port_of_delivery="";
+            }
             $this->validate($request, [
                 'quantity' =>   'required',
                 'price' =>   'required',
-                'port_of_delivery' =>   'required',
                 ]);
+
             $quoteDetail = QuoteDetail::find($id);
             $quoteDetail->quantity = $request->quantity;
             $quoteDetail->unit = $request->unit;
@@ -171,24 +224,24 @@ class QuoteController extends Controller
            if($quoteProduct->status == '2')
             $quoteProduct->status = '3';
         $quoteProduct->save();
-        }
-         return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
-  
     }
-     elseif($submitReq =="addComment"){
-            $quoteComment = new QuoteComment;
-            $quoteComment->comment_type = '1';
-            $quoteComment->quote_id = $id;
-            $quoteComment->user_id = User::getId();
-            $quoteComment->comment = $request->comment;
+    return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
 
-            $quoteComment->save();
+}
+elseif($submitReq =="addComment"){
+    $quoteComment = new QuoteComment;
+    $quoteComment->comment_type = '1';
+    $quoteComment->quote_id = $id;
+    $quoteComment->user_id = User::getId();
+    $quoteComment->comment = $request->comment;
 
-            return redirect()->route('quote-requests.show',$id)->with('success','Comment added successfully!');
+    $quoteComment->save();
 
-        }
-     
-    }
+    return redirect()->route('quote-requests.show',$id)->with('success','Comment added successfully!');
+
+}
+
+}
 
     /**
      * Remove the specified resource from storage.

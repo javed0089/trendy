@@ -30,7 +30,16 @@
 				@endif
 				<div class="box box-success">
 					<div class="box-header" style="padding: 5px 15px; height: 32px; "> 
-						<h3 class="box-title" style="line-height: 25px;" >All Customers</h3> 
+						<form method="get" action="{{url()->current()}}">
+							<div class="form-group col-md-6">
+								<label>Search <small class="text-green"><i>First name,Last name,Country,City,Email</i></small></label>
+								<input type="text" class="form-control" name="term" value="{{Request::get('term')}}">
+							</div> 
+							
+							<div class="col-md-1 pull-right" style="margin-top: 20px;" >
+								<button class="btn btn-primary btn-md" type="submit">Filter</button>
+							</div>
+						</form>	
 					</div>
 						<div class="box-body">
 							<table id="example2" class="table table-bordered table-hover">
@@ -73,6 +82,13 @@
 
 								</tfoot>
 							</table>
+							<div class="row">
+							<div class="col-md-2 pull-right"> 
+								{{ $customers->links() }}
+							</div>
+							<div class="col-md-4 pull-left" style="margin-top: 25px; ">Showing {{ $customers->firstItem() }} - {{ $customers->lastItem() }} of {{ $customers->total() }} [Page {{ $customers->currentPage() }} of {{$customers->lastPage()}}]
+							</div>
+						</div>
 						</div>
 					</div>
 				</div>

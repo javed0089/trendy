@@ -11,6 +11,7 @@ use App\Models\Order\OrderShipment;
 use App\Models\Order\OrderShipmentFiles;
 use App\Models\Order\OrderShipmentStatus;
 use App\Models\Rating\Rating;
+use App\Models\Status\Status;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -27,16 +28,45 @@ class OrderController extends Controller
      */
     public function index()
     {
+         $statuses = Status::all();
+        $role = Sentinel::findRoleById(4);
+        $salesExecutives = $role->users()->get();
+
         $orders=[];        
-        if(User::isSupervisor())
-            $orders = Order::all();
+        if(User::isSupervisor()){
+            //$orders = Order::all();
+             $orders = Order::where(function($query){
+                $status = request('status')?request('status'):null;
+                $assigned = request('assign_to_id')?request('assign_to_id'):null;
+
+                if(isset($status)){
+                    $query->where('status','=',$status);
+                }
+                if(isset($assigned)){
+                    $query->where('assign_to_id','=',$assigned);
+                }
+
+                $query->where('status','>','0');
+            })->paginate(15)->appends(['status'=> request('status'),'assign_to_id'=> request('assign_to_id')]);
+        }
         elseif(User::isSalesExecutive()){
             $user=Sentinel::getUser();
-            $orders = Order::where('assign_to_id','=',$user->id)->get();
+           // $orders = Order::where('assign_to_id','=',$user->id)->get();
+
+            $orders = Order::where(function($query) use ($user){
+                $status = request('status')?request('status'):null;
+                if(isset($status)){
+                    $query->where('status','=',$status)
+                    ->where('assign_to_id','=',$user->id);
+                }
+
+                $query->where('status','>','0')
+                ->where('assign_to_id','=',$user->id);
+            })->paginate(15)->appends('status',request('status'));
         }
 
 
-        return view('backend.orders.index')->with('orders',$orders);
+        return view('backend.orders.index')->with('orders',$orders)->with('statuses',$statuses)->with('salesExecutives',$salesExecutives);
 
     }
 

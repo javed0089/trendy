@@ -18,7 +18,25 @@ class CustomerController extends Controller
     public function index()
     {
         $customerRole=Sentinel::findRoleBySlug(['subscriber']);
-        $customers = $customerRole->users()->with('roles')->get();
+       // $customers = $customerRole->users()->with('roles')->paginate(15);
+
+        $customers = $customerRole->users()->with('roles')->where(function($query){
+                $term = request('term')?request('term'):null;
+               
+                if(isset($term)){
+                    $query->where('first_name','like','%'.$term.'%')
+                    ->orWhere('last_name','like','%'.$term.'%')
+                    ->orWhere('country','like','%'.$term.'%')
+                    ->orWhere('city','like','%'.$term.'%')
+                    ->orWhere('email','like','%'.$term.'%');
+                  
+
+                }
+              
+               // $query->where('first_name','!=','');
+            })->paginate(15)->appends(['term'=> request('term')]);
+
+
         return view('backend.customer.index')->with('customers',$customers);
     }
 
