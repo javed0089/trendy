@@ -4575,7 +4575,7 @@ ul.nav-tabs {
 }
 
 .nav--primary .mega-menu .sub-menu li {
-    width: 25%;
+    width: 30%;
     position: static;
 }
 
@@ -4662,10 +4662,10 @@ ul.nav-tabs {
  */
 
  .nav--primary .mega-menu .sub-menu .sub-menu {
-    left: 25%;
+    left: 30%;
     top: 0;
     bottom: auto;
-    width: 70%;
+    width: 65%;
     display: none;
     border-left: 1px solid #ccc;
     background: #f0f0f0;
