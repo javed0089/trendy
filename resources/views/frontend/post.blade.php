@@ -100,12 +100,7 @@
 
                     <div class="col-md-3 sidebar">
 
-                        <div class="sidebar-search-form">
-                            <input type="text" class="  search-query form-control" placeholder="Search" />
-                            <button class="btn search-btn" type="button">
-                                <span class="fa fa-search"></span>
-                            </button>
-                        </div>
+                       
 
                         <div class="sidebar-blog-categories">
                             <h3 class="sidebar-title">Categories</h3>
