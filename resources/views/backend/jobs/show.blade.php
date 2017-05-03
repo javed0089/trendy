@@ -147,7 +147,7 @@
 										</td>
 										<td>{{ date('M j, Y H:i',strtotime($jobApplication->created_at))}}</td>
 										<td>
-										<form role="form"  method="Delete"  action="{{ route('job.deleteapplication',$jobApplication->id) }}">
+										<form role="form"  method="Post"  action="{{ route('job.deleteapplication',$jobApplication->id) }}">
 												{{csrf_field()}}
 												{{ method_field('Delete') }}
 												<button type="submit" id="delbutton" class="btn btn-block btn-danger">Delete</button>
