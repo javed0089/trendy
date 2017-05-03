@@ -60,7 +60,7 @@
  															<div class="col-md-4"> 
  																<div class="col-md-6 text-right">
  																	<h4>Quantity</h4>
- 																	<input style="width: 60px" type="number" name="quantity" required min="16.5" data-parsley-error-message="Min. value 16.5" step="any" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
+ 																	<input style="width: 60px" type="number" name="quantity" required min="16.50" data-parsley-error-message="Min. value 16.50" step=".25" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
  																</div>
  																<div class="col-md-6">
  																	<h4>Units</h4>
