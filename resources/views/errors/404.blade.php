@@ -36,7 +36,7 @@
                             <h1>404</h1>
                             <h2>Oops! That page can&rsquo;t be found</h2>
                             <h4>Sorry, but the page you are looking for does not exist</h4>
-                            <a href="index.html" class="btn btn-default"> BACK TO HOME PAGE </a>
+                            <a href="/" class="btn btn-default"> BACK TO HOME PAGE </a>
                         </div>
                     </div>
 
