@@ -195,7 +195,9 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 		///////*****Jobs********//////
 		Route::resource('module/jobs','Backend\Careers\JobController');
-		Route::get('careers/resume/{applicationId}','Backend\Careers\JobController@getResume')->name('job.getresume');
+		Route::get('module/jobs/getresume/{applicationId}','Backend\Careers\JobController@getResume')->name('job.getresume');
+		Route::delete('module/jobs/deleteapplication/{applicationId}','Backend\Careers\JobController@deleteApplication')->name('job.deleteapplication');
+
 
 		///////*****Testimonials********//////
 		Route::resource('module/testimonials','Backend\Testimonial\TestimonialController');

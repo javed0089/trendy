@@ -160,10 +160,25 @@ class JobController extends Controller
             $location="resumes/".$jobApplication->job_id.'/';
             $file = Storage::disk('local')->get( $location.$filename);
             $response = Response($file, 200);
-             $response->header("Content-Type", 'application/pdf');
+            $response->header("Content-Type", 'application/pdf');
             return $response;
         }
 
-
     }
+
+    public function deleteApplication($applicationId)
+    {
+        $jobApplication = JobApplication::find($applicationId);
+        if($jobApplication){
+            $filename = $jobApplication->resume;
+            $location="resumes/".$jobApplication->job_id.'/';
+            $res=Storage::disk('local')->delete($location.$filename);
+
+            $jobApplication->delete();
+            return back()->with('success','Record deleted successfully!');
+        }
+        return back()->with('error','Something went wrong!');
+    }
+
+
 }
