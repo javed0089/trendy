@@ -13,7 +13,7 @@
                 @if($topImage->page->status)
                     <div class="page-title text-center" style="background: url({{isset($topImage->{lang_col('image')})?asset($topImage->{lang_col('image')}):'http://placehold.it/1600x268'}});">
                         <h2 class="title"> {{str_limit($post->{lang_col('title')},50)}} </h2>
-            <p class="description light"> {{__('By')}} <a href="#"> {{$post->{lang_col('author')} }} </a> {{ date('M j, Y H:i',strtotime($post->created_at))}} {{__('in')}} {{$post->BlogCategory->{lang_col('name')} }}. <a href="#"> 3 {{__('comments')}} </a> </p>
+            <p class="description light"> {{__('By')}} <a href="#"> {{$post->{lang_col('author')} }} </a> {{ date('M j, Y H:i',strtotime($post->created_at))}} {{__('in')}} {{$post->BlogCategory->{lang_col('name')} }}. </p>
                     </div>
                 @endif
             @endif

@@ -36,7 +36,7 @@
                        </form>
                      </li>
                      @else
-                     <li><a href="{{ route('frontend.register')}}"><i class="fa fa-user-plus" aria-hidden="true"></i> {{__('Register')}}</a></li> 
+                     <li><a href="{{ route('frontend.register')}}"><i class="fa fa-user" aria-hidden="true"></i> {{__('Register')}}</a></li> 
                      
                      <li><a href="{{ route('frontend.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{__('Login')}}</a></li>
                      @endif
