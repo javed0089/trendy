@@ -5638,7 +5638,7 @@ a.btn.btn-xs {
 }
 
 .prod-desc{
-    height: 140px;
+    height: 135px;
     overflow:hidden;
 }
 
@@ -5681,3 +5681,6 @@ line-height: 25px;
     list-style-type: disc;
 }
 
+.badge{
+    background: #d9534f !important;
+}
