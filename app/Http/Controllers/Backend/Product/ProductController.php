@@ -18,7 +18,19 @@ class ProductController extends Controller
      */
     public function index()
     {
-     $products=Product::paginate(15);
+     $products=Product::where(function($query){
+                $term = request('term')?request('term'):null;
+               
+                if(isset($term)){
+                    $query->where('name_en','like','%'.$term.'%')
+                    ->orWhereHas('Category', function($q) use ($term){
+                        $q->where('name_en','like','%'.$term.'%');
+                    })
+                    ->orWhereHas('Brand', function($q) use ($term){
+                        $q->where('name_en','like','%'.$term.'%');
+                    });
+                }
+            })->paginate(15)->appends(['term'=> request('term')]);
      return view('backend.product.index')->with('products',$products);
 
  }

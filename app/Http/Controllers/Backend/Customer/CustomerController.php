@@ -29,7 +29,6 @@ class CustomerController extends Controller
                     ->orWhere('country','like','%'.$term.'%')
                     ->orWhere('city','like','%'.$term.'%')
                     ->orWhere('email','like','%'.$term.'%');
-                  
 
                 }
               

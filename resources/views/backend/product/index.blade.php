@@ -19,7 +19,7 @@
 	<div class="col-md-4" >
 		
 		<label for="inputEmail3" class=" control-label text-right">Search Product</label>
- <span id="searchmsg" class="text-red" style="margin-left: 10px; font-style: italic;"></span>
+		<span id="searchmsg" class="text-red" style="margin-left: 10px; font-style: italic;"></span>
 		<div class="input-group">
 
 			<input type="text" id="searchtxt" name="term" class="form-control" placeholder="Enter Product name">
@@ -45,10 +45,19 @@
 				@endif
 				<div class="box box-success">
 					<div class="box-header" style="padding: 5px 15px; height: 32px; "> 
-						<div class="col-md-3">
-							<h3 class="box-title" style="line-height: 25px;" >All Products</h3> 
+						<div class="col-md-6">
+							<form method="get" action="{{url()->current()}}">
+
+								<label>Search: <small class="text-green"><i>Product Name,Category,Brand</i></small></label> 
+								<div class="input-group input-group-sm">
+									<input type="text" class="form-control" name="term" value="{{Request::get('term')}}">
+									<span class="input-group-btn">
+										<button type="submit" class="btn btn-info btn-flat">Go!</button>
+									</span>
+								</div>
+							</form>	
 						</div>
-						
+
 						<div  class="col-md-2 pull-right">
 							<a href="{{ route('products.create') }}" class="btn btn-primary btn-block">Add Product</a>
 						</div>
@@ -92,7 +101,7 @@
 								@endif
 							</tbody>
 							<tfoot>
-								
+
 							</tfoot>
 						</table>
 						<div class="row">
