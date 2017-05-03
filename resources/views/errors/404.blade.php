@@ -24,7 +24,7 @@
                 <div class="container">
                     <span class="parent"> <i class="fa fa-home"></i> <a href="/"> {{__('Home')}} </a> </span>
                     <i class="fa fa-chevron-right"></i>
-                    <span class="child"> {{__('WHO WE ARE')}} </span>
+                    <span class="child"> {{__('404')}} </span>
                 </div>
             </div>
 
