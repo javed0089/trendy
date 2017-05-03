@@ -126,7 +126,7 @@
     <div class="col-md-6">
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Latest Quote Requests <span class="small">Today</span></h3>
+          <h3 class="box-title">Latest Quote Requests <span class="small">Last 10 days</span></h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -171,7 +171,7 @@
         <div class="col-md-6">
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Latest Orders <span class="small">Today</span></h3>
+              <h3 class="box-title">Latest Orders <span class="small">Last 10 days</span></h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>

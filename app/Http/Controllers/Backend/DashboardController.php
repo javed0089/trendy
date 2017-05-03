@@ -44,12 +44,12 @@ class DashboardController extends Controller
 		$quotes=[];
 		if(User::isSupervisor())
 		{
-			$quotes = Quote::whereDate('created_at', '=', Carbon::today()->toDateString())->get();
+			$quotes = Quote::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())->get();
 		}
 		elseif(User::isSalesExecutive())
 		{
 			$user=Sentinel::getUser();
-			$quotes = Quote::whereDate('created_at', '=', Carbon::today()->toDateString())
+			$quotes = Quote::whereDate('created_at', '=', Carbon::today()->subDays(10)->toDateString())
 			->where('assign_to_id','=',$user->id)->get();
 		}
 
