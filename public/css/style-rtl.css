@@ -306,7 +306,7 @@ main.main {
 }
 
 .logo-top-info {
-    padding: 25px 0;
+    padding: 25px 0 20px 0;
 }
 
 .top-info {
@@ -5668,6 +5668,8 @@ border:0;
 background: transparent;
 font-weight: bold;
 outline:0;
+padding: 5px;
+
 }
 .login-links li{
 line-height: 25px;

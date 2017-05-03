@@ -57,7 +57,7 @@
                   <li><a target="_blank" href="{{$social_blocks->get(4)->{lang_col('value')} }}"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                 </ul>
                 </div>
-  <div>
+  <div style="margin-top: 5px;">
                   <a class="center-block text-center" href="{{ route('cart')}}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> {{__('My Quote Request')}} <span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span></a>
                 </div>
               </div> 
