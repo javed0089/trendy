@@ -40,6 +40,7 @@
 								<button class="btn btn-primary btn-md" type="submit">Filter</button>
 							</div>
 						</form>	
+						
 					</div>
 						<div class="box-body">
 							<table id="example2" class="table table-bordered table-hover">

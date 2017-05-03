@@ -23,21 +23,23 @@ class BlogController extends Controller
 
         $metatags = Webpage::where('page_name','=','blog')->first();
 
-    	return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
+        return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
     }
 
-    public function categoryPosts($blogCategoryId)
+    public function categoryPosts($slug)
     {
-        $posts=Post::where('blog_category_id','=',$blogCategoryId)->get();
+        $posts=Post::where('slug','=',$slug)->paginate(6);
+
         $blogCategories=BlogCategory::all();
         $tags=Tag::all();
+
         return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags);
     }
 
-    public function tagPosts($tagId)
+    public function tagPosts($slug)
     {
-        $tag=Tag::find($tagId);
-        $posts=$tag->posts;
+        $tag=Tag::where('slug','=',$slug)->first();
+        $posts=$tag->posts()->paginate(6);
         $blogCategories=BlogCategory::all();
         $tags=Tag::all();
         return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags);
@@ -50,8 +52,8 @@ class BlogController extends Controller
         $topImage = [];
         $topImage = Page::find(160)->PageSections()->first();
 
-    	$blogCategories=BlogCategory::all();
-    	return view('frontend.post')->with('post',$post->first())->with('blogCategories',$blogCategories)->with('topImage',$topImage);
+        $blogCategories=BlogCategory::all();
+        return view('frontend.post')->with('post',$post->first())->with('blogCategories',$blogCategories)->with('topImage',$topImage);
     }
 
 

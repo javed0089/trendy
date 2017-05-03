@@ -40,12 +40,14 @@ class BlogCategoryController extends Controller
          $this->validate($request,[
             'name_en'=>   'required|max:255',
             'name_ar' =>   'required|max:255',
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:blog_categories,slug'
+
             ]);
         
         $blogCategory=new BlogCategory;
         $blogCategory->name_en=$request->name_en;
         $blogCategory->name_ar=$request->name_ar;
-       
+        $blogCategory->slug=$request->slug;
         
         $blogCategory->save();
         return back()->with('success','Blog Category added succesfully!');
@@ -87,13 +89,14 @@ class BlogCategoryController extends Controller
          $this->validate($request,[
             'name_en'=>   'required|max:255',
             'name_ar' =>   'required|max:255',
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:blog_categories,slug,'.$id
             ]);
         
         $blogCategory=BlogCategory::find($id);
         $blogCategory->name_en=$request->name_en;
         $blogCategory->name_ar=$request->name_ar;
-       
-        
+        $blogCategory->slug=$request->slug;
+
         $blogCategory->save();
         return redirect()->route('blogcategory.index')->with('success','Blog Category updated succesfully!');
     }

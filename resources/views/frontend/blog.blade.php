@@ -75,19 +75,14 @@
 
         <div class="col-md-3 sidebar">
 
-            <div class="sidebar-search-form">
-                <input type="text" class="  search-query form-control" placeholder="Search" />
-                <button class="btn search-btn" type="button">
-                    <span class="fa fa-search"></span>
-                </button>
-            </div>
+            
 
             <div class="sidebar-blog-categories">
                 <h3 class="sidebar-title">Categories</h3>
 
                 <ul>
                     @foreach($blogCategories as $blogCategory)
-                    <li> <a href="{{route('frontend.posts-by-category',$blogCategory->id)}}">{{$blogCategory->{lang_col('name')} }}</a> </li>
+                    <li> <a href="{{route('frontend.postsbycategory',$blogCategory->slug)}}">{{$blogCategory->{lang_col('name')} }}</a> </li>
                     @endforeach
                 </ul>
 
@@ -103,7 +98,7 @@
             <div class="sidebar-tags">
                 <h3 class="sidebar-title"> Tags </h3>
                 @foreach($tags as $tag)
-                <a href="{{route('frontend.posts-by-tag',$tag->id)}}"">{{$tag->{lang_col('name')} }}</a>
+                <a href="{{route('frontend.posts-by-tag',$tag->slug)}}"">{{$tag->{lang_col('name')} }}</a>
                 @endforeach
             </div>
 

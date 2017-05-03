@@ -50,14 +50,19 @@
 								</ul>
 							</div>
 							@endif
-							<div class="col-xs-6">
+							<div class="col-xs-4">
 								<label>Tag(En)</label>
-								<input type="text" name="name_en" class="form-control" placeholder="Tag in english" required @if(isset($tag)) value={{$tag->name_en}} @endif>
+								<input type="text" name="name_en" class="form-control" placeholder="Tag in english" required @if(isset($tag)) value="{{$tag->name_en}}" @endif>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-xs-4">
 								<label>Tag(Ar)</label>
-								<input type="text" name="name_ar" class="form-control" placeholder="Tag in arabic" required @if(isset($tag)) value={{$tag->name_ar}} @endif>
+								<input type="text" name="name_ar" class="form-control" placeholder="Tag in arabic" required @if(isset($tag)) value="{{$tag->name_ar}}" @endif>
 							</div>
+							<div class="col-xs-4">
+								<label>Slug</label>
+								<input type="text" name="slug" class="form-control" placeholder="Slug" required @if(isset($tag)) value="{{$tag->slug}}" @endif>
+							</div>
+
 							
 						</div>
 					</div>
@@ -92,6 +97,7 @@
 								<thead>
 									<tr>
 										<th>Tag</th>
+										<th>Slug</th>
 										<th>Created</th>
 										<th>Last Updated</th>
 										<th width="120"></th>
@@ -102,6 +108,7 @@
 									@foreach($tags as $tag)
 									<tr>
 										<td>{{str_limit($tag->name_en,30)}}</td>
+										<td>{{$tag->slug}}</td>
 										<td>{{ date('M j, Y H:i',strtotime($tag->created_at))}}</td>
 										<td>{{date('M j, Y H:i',strtotime($tag->updated_at))}}</td>
 										<td>

@@ -40,11 +40,14 @@ class TagController extends Controller
         $this->validate($request,[
             'name_en'=>   'required|max:255',
             'name_ar' =>   'required|max:255',
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:tags,slug'
+
             ]);
         
         $tag=new Tag;
         $tag->name_en=$request->name_en;
         $tag->name_ar=$request->name_ar;
+        $tag->slug=$request->slug;
        
         
         $tag->save();
@@ -87,11 +90,14 @@ class TagController extends Controller
          $this->validate($request,[
             'name_en'=>   'required|max:255',
             'name_ar' =>   'required|max:255',
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:tags,slug,'.$id
+
             ]);
         
         $tag=Tag::find($id);
         $tag->name_en=$request->name_en;
         $tag->name_ar=$request->name_ar;
+        $tag->slug=$request->slug;
        
         
         $tag->save();

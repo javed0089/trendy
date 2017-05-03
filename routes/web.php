@@ -43,7 +43,7 @@
 
     	/** Blog **/
        	Route::get('/blog','Frontend\BlogController@index')->name('frontend.blogs');
-       	Route::get('/blog/category/{category}','Frontend\BlogController@categoryPosts')->name('frontend.posts-by-category');
+       	Route::get('/blog/category/{category}','Frontend\BlogController@categoryPosts')->name('frontend.postsbycategory');
        	Route::get('/blog/tag/{tag}','Frontend\BlogController@tagPosts')->name('frontend.posts-by-tag');
        	Route::get('/blog-post/{slug}','Frontend\BlogController@post')->name('frontend.post');
 
