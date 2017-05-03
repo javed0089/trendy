@@ -54,7 +54,7 @@
                          </div>
                          <div class="blog-content">
                             <h3><a href="{{route('frontend.post',$post->slug)}}">{{str_limit($post->{lang_col('title')},60)}}</a></h3>
-                            <p>{{__('By')}} <a href="#">{{$post->{lang_col('author')} }}</a> {{__('in')}} {{$post->BlogCategory->{lang_col('name')} }}</p>
+                            <p>{{__('By')}} <span style="color: #034694; font-weight: bold">{{$post->{lang_col('author')} }}</span> {{__('in')}} {{$post->BlogCategory->{lang_col('name')} }}</p>
                         </div>
                     </div>
                     @endforeach
