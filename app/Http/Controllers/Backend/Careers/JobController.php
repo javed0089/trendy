@@ -44,6 +44,7 @@ class JobController extends Controller
     {
         $this->validate($request,[
             'title_en'=>   'required|max:255',
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:jobs,slug'
             ]);
         
         $job=new Job;
@@ -109,6 +110,7 @@ class JobController extends Controller
     {
         $this->validate($request,[
             'title_en'=>   'required|max:255',
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:jobs,slug,'.$id
             ]);
         
         $job=Job::find($id);

@@ -46,7 +46,7 @@
                         <div class="col-sm-6">
                             <div class="blog-img-box">
                                 <div class="blog-date"> <span class="month">{{date('M',strtotime($news->created_at))}} </span> <span class="date">{{date('d',strtotime($news->created_at))}}</span> </div>
-                                <a class="hover-effect" href="{{route('frontend.news.show',$news->id)}}">
+                                <a class="hover-effect" href="{{route('frontend.news.show',$news->slug)}}">
                                  @if($news->Photos->first()) 
                                  <img src="{{asset($news->Photos->first()->filename)}}" alt="{{$news->{lang_col('title')} }}" />
                                  @else
@@ -56,18 +56,18 @@
                              </a>
                          </div>
                          <div class="blog-content">
-                            <h3><a href="{{route('frontend.news.show',$news->id)}}">{{str_limit($news->{lang_col('title')},60)}}</a></h3>
-                            <a href="{{route('frontend.news.show',$news->id)}}" class="btn btn-default btn-sm">{{__('Read More')}}</a>
+                            <h3><a href="{{route('frontend.news.show',$news->slug)}}">{{str_limit($news->{lang_col('title')},60)}}</a></h3>
+                            <a href="{{route('frontend.news.show',$news->slug)}}" class="btn btn-default btn-sm">{{__('Read More')}}</a>
                         </div>
                     </div>
                     @else
                     <div class="col-sm-6">
                         <div class="blog-date"> <span class="month">{{date('M',strtotime($news->created_at))}} </span> <span class="date">{{date('d',strtotime($news->created_at))}}</span> </div>
                         <div class="blog-content">
-                            <h3><a href="{{route('frontend.news.show',$news->id)}}">{{str_limit($news->{lang_col('title')},60)}}</a></h3>
+                            <h3><a href="{{route('frontend.news.show',$news->slug)}}">{{str_limit($news->{lang_col('title')},60)}}</a></h3>
                             <p>{!!str_limit($news->{lang_col('desc')},300)!!}</p>
 
-                            <a href="{{route('frontend.news.show',$news->id)}}" class="btn btn-default btn-sm">{{__('Read More')}}</a>
+                            <a href="{{route('frontend.news.show',$news->slug)}}" class="btn btn-default btn-sm">{{__('Read More')}}</a>
                         </div>
                     </div>
                     @endif

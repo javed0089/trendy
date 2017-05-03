@@ -39,11 +39,13 @@ class NewsController extends Controller
     {
         $this->validate($request,[
             'title_en'=>   'required|max:255',
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:news,slug'
             ]);
         
         $news=new News;
         $news->title_en=$request->title_en;
         $news->title_ar=$request->title_ar;
+        $news->slug=$request->slug;
         $news->desc_en=$request->desc_en;
         $news->desc_ar=$request->desc_ar;
         $news->status=(isset($request->status)) ? 1 : 0;
@@ -92,11 +94,13 @@ class NewsController extends Controller
     {
         $this->validate($request,[
             'title_en'=>   'required|max:255',
+            'slug' =>   'required|alpha_dash|min:5|max:255|unique:news,slug,'.$id
             ]);
         
         $news= News::find($id);
         $news->title_en=$request->title_en;
         $news->title_ar=$request->title_ar;
+        $news->slug=$request->slug;
         $news->desc_en=$request->desc_en;
         $news->desc_ar=$request->desc_ar;
         $news->status=(isset($request->status)) ? 1 : 0;

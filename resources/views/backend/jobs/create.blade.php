@@ -59,6 +59,7 @@
 											<input type="text" class="form-control"  name="slug" id="slug" placeholder="Seo Url" required value="{{old('slug')}}" >
 										</div>
 
+
 										<div class="form-group">
 										<label for="department_id">Department</label>
 											 <select name="department_id" class="form-control">

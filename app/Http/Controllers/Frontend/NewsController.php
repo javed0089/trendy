@@ -19,9 +19,9 @@ class NewsController extends Controller
     	return view('frontend.news')->with('newsCol',$news)->with('topImage',$topImage)->with('metatags',$metatags);
     }
 
-    public function show($id)
+    public function show($slug)
     {
-    	$news = News::find($id);
+    	$news = News::where('slug','=',$slug)->first();
         $topImage = [];
         $topImage = Page::find(100)->PageSections()->first();
     	return view('frontend.newsdetail')->with('news',$news)->with('topImage',$topImage);

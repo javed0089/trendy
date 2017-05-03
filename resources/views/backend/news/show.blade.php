@@ -61,6 +61,8 @@
 				                <p>{{date('M j, Y H:i',strtotime($news->updated_at))}}</p>
 				                <h4>Status</h4>
 				                <p>{!!$news->status?'<span class="label label-success">Active</span>':'<span class="label label-danger">In-active</span>'!!}</p>
+				                <h4>Slug</h4>
+								<p><{{$news->slug}}</p>
 				                <h4>Meta page title</h4>
 				                <p>{{$news->meta_title_en}}</p>
 				                <h4>Meta description</h4>

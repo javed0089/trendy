@@ -49,7 +49,7 @@
 
        	/** News **/
        	Route::get('/news','Frontend\NewsController@index')->name('frontend.news');
-       	Route::get('/news/{id}','Frontend\NewsController@show')->name('frontend.news.show');
+       	Route::get('/news/{slug}','Frontend\NewsController@show')->name('frontend.news.show');
 
        	/** services **/
        	Route::get('/service/{slug}','Frontend\ServiceController@show')->name('frontend.services');
