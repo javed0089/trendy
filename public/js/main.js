@@ -268,7 +268,7 @@ Version: 1.0
               $('#cartNoProducts').hide();
               if($('#updateCart').length==0)
                 $('#side-cart-table').parent().append('<div id=\"updateCart\" class=\"center-block text-center\">'+
-                  '<a class=\"btn btn-primary btn-sm\" href=\"/cart\">Update Quote Request</a></div>'); 
+                  '<a class=\"btn btn-primary btn-sm\" href=\"/quoterequest\">Update Quote Request</a></div>'); 
             }
           }
           else

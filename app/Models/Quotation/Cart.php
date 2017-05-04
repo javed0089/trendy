@@ -5,7 +5,6 @@ namespace App\Models\Quotation;
 class Cart 
 {
 	public $items = null;
-	public $step ='1';
 
 	public function __construct($oldCart)
 	{

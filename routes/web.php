@@ -93,13 +93,12 @@
 
 
 		Route::get('add-to-cart/{id}', 'Frontend\QuoteController@addToCart')->name('addToCart');
-		Route::get('/cart', 'Frontend\QuoteController@index')->name('cart');
-		Route::post('/update-cart-qty/{id}', 'Frontend\QuoteController@updateCart')->name('updateCart');
-		Route::get('/cart/{step}', 'Frontend\QuoteController@confirmCart')->name('cart.step');
-		Route::post('/cart/{step}', 'Frontend\QuoteController@postConfirmCart')->name('cart.step');
-		Route::get('/send-quote', 'Frontend\QuoteController@sendQuote')->name('send.quote');
 		Route::get('/removecartitem/{id}', 'Frontend\QuoteController@removeCartItem')->name('cart.removeCartItem');
 		Route::post('/updatecartitem/{id}', 'Frontend\QuoteController@updateCartItem')->name('cart.updateCartItem');
+		
+		Route::get('/quoterequest', 'Frontend\QuoteController@index')->name('cart');
+		Route::get('/sendquoterequest', 'Frontend\QuoteController@sendQuoteRequest')->name('send.quote');
+
 		
 		Route::get('/result', function(){
 			return view('frontend.message');

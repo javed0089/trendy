@@ -24,14 +24,13 @@ class RegisterController extends Controller
         'email' =>'required|email|unique:users,email',
         'password' =>'required|min:6',
         'confirmPassword' =>'required|same:password',
-        
-        
         ]);
 
     	$reqUser=$request->all();
         $reqUser=array_add($reqUser,'backend_user','1');
         $reqUser=array_add($reqUser,'ip_address',\Request::ip());
         
+       // dd($reqUser);
         $user=Sentinel::registerAndActivate($reqUser);
 
         $userRole=$reqUser['role'];
