@@ -98,9 +98,9 @@
     <div class="spacer-40"></div>
     <div class="comments1">
 
-      <h3 class="title-2 text-center"> {{count($myquote->QuoteComments)}} Comments</h3>
+      <h3 class="title-2 text-center"> {{count($myquote->QuoteComments->where('is_private','==','0'))}} Comments</h3>
       <div class="message-box" >
-      @foreach($myquote->QuoteComments->sortByDesc('created_at') as $quoteComment)
+      @foreach($myquote->QuoteComments->sortByDesc('created_at')->where('is_private','==','0') as $quoteComment)
       <div class="{{$quoteComment->User->UserRole($quoteComment->User->id) == 'Subscriber'?'message1':'message2'}}">
         <i class="fa fa-user-circle"></i>
         <h3>{{$quoteComment->User->first_name}} {{$quoteComment->User->last_name}} <span {{$quoteComment->User->UserRole($quoteComment->User->id) == 'Subscriber'?'dir="rtl"':''}}>{{date('M j, Y H:i',strtotime($quoteComment->created_at))}}</span> </h3>

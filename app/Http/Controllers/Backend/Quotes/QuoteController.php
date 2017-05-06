@@ -234,16 +234,30 @@ return view('backend.quotes.index')->with('quotes',$quotes)->with('statuses',$st
     return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
 
 }
-elseif($submitReq =="addComment"){
+elseif($submitReq =="addCommentPrvt"){
     $quoteComment = new QuoteComment;
     $quoteComment->comment_type = '1';
     $quoteComment->quote_id = $id;
     $quoteComment->user_id = User::getId();
+    $quoteComment->is_private = '1';
     $quoteComment->comment = $request->comment;
 
     $quoteComment->save();
 
-    return redirect()->route('quote-requests.show',$id)->with('success','Comment added successfully!');
+    return redirect()->route('quote-requests.show',$id)->with('success','Private message added successfully!');
+
+}
+elseif($submitReq =="addCommentPub"){
+    $quoteComment = new QuoteComment;
+    $quoteComment->comment_type = '1';
+    $quoteComment->quote_id = $id;
+    $quoteComment->user_id = User::getId();
+    $quoteComment->is_private = '0';
+    $quoteComment->comment = $request->comment;
+
+    $quoteComment->save();
+
+    return redirect()->route('quote-requests.show',$id)->with('success','Public Comment added successfully!');
 
 }
 

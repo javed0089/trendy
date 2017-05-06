@@ -304,9 +304,9 @@
 
 
 <div class="comments1">
-  <h3 class="title-2 text-center"> {{count($order->OrderComments)}} Message(s)</h3>
+  <h3 class="title-2 text-center"> {{count($order->OrderComments->where('is_private','==','0'))}} Message(s)</h3>
   <div class="message-box" >
-    @foreach($order->OrderComments->sortByDesc('created_at') as $orderComment)
+    @foreach($order->OrderComments->sortByDesc('created_at')->where('is_private','==','0') as $orderComment)
     <div class="{{$orderComment->User->UserRole($orderComment->User->id) == 'Subscriber'?'message1':'message2'}}">
       <i class="fa fa-user-circle" ></i>
       <h3>{{$orderComment->User->first_name}} {{$orderComment->User->last_name}} <span {{$orderComment->User->UserRole($orderComment->User->id) == 'Subscriber'?'dir="rtl"':''}}>{{date('M j, Y H:i',strtotime($orderComment->created_at))}}</span> </h3>

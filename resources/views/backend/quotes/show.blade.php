@@ -278,55 +278,105 @@
 								</tfoot>
 							</table>
 
-							
-							
+							<hr>
+							<div class="nav-tabs-custom" style="margin-top: 20px;">
+								<ul class="nav nav-tabs">
+									<li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-comments-o"></i> Private Messages ({{ count($quote->QuoteComments->where('is_private','=','1')) }})</a></li>
+									<li><a href="#tab_2" data-toggle="tab"><i class="fa fa-comments-o"></i> Public Messages ({{ count($quote->QuoteComments->where('is_private','=','0')) }})</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab_1">
+											<div class="box-body chat" id="chat-box">
 
-							<div class="box box-success">
-								<div class="box-header">
-									<i class="fa fa-comments-o"></i>
+												<!-- chat item -->
+												@foreach($quote->QuoteComments->where('is_private','=','1') as $quoteComment)
+												<div class="item">
+													<i class="fa fa-user" style="font-size: 35px; color: #3c8dbc;"></i>
 
-									<h3 class="box-title">Comments</h3>
-									
-									<span class="pull-right text-muted"> {{ count($quote->QuoteComments) }} comments</span>
-									
-									
-									
-								</div>
-								<div class="box-body chat" id="chat-box">
-									
-									<!-- chat item -->
-									@foreach($quote->QuoteComments as $quoteComment)
-									<div class="item">
-										<i class="fa fa-user" style="font-size: 35px; color: #3c8dbc;"></i>
+													<p class="message">
+														<a href="#" class="name">
+															<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{date('M j, Y H:i',strtotime($quoteComment->created_at))}}</small>
+															{{$quoteComment->User->first_name}} {{$quoteComment->User->last_name}}
+														</a>
+														{{$quoteComment->comment}}
+													</p>
+												</div>
+												@endforeach
+												<!-- /.item -->
 
-										<p class="message">
-											<a href="#" class="name">
-												<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{date('M j, Y H:i',strtotime($quoteComment->created_at))}}</small>
-												{{$quoteComment->User->first_name}} {{$quoteComment->User->last_name}}
-											</a>
-											{{$quoteComment->comment}}
-										</p>
-									</div>
-									@endforeach
-									<!-- /.item -->
-									
-									
-								</div>
-								<!-- /.chat -->
-								<div class="box-footer">
-									<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}">
-										{{csrf_field()}}
-										{{ method_field('PATCH') }}
-										<div class="input-group">
-											<input class="form-control" name="comment" placeholder="Type message...">
 
-											<div class="input-group-btn">
-												<button type="submit" name="submit" value="addComment" class="btn btn-success"><i class="fa fa-plus"></i></button>
 											</div>
-										</div>
-									</form>
+											<!-- /.chat -->
+											<div class="box-footer">
+												<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}">
+													{{csrf_field()}}
+													{{ method_field('PATCH') }}
+													<div class="input-group">
+														<input class="form-control" name="comment" placeholder="Type message...">
+
+														<div class="input-group-btn">
+															<button type="submit" name="submit" value="addCommentPrvt" class="btn btn-success"><i class="fa fa-plus"></i></button>
+														</div>
+													</div>
+												</form>
+											</div>
+
+										
+
+									</div>
+									<!-- /.tab-pane -->
+									<div class="tab-pane" id="tab_2">
+										<div class="box-body chat" id="chat-box">
+
+												<!-- chat item -->
+												@foreach($quote->QuoteComments->where('is_private','=','0') as $quoteComment)
+												<div class="item">
+													<i class="fa fa-user" style="font-size: 35px; color: #3c8dbc;"></i>
+
+													<p class="message">
+														<a href="#" class="name">
+															<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{date('M j, Y H:i',strtotime($quoteComment->created_at))}}</small>
+															{{$quoteComment->User->first_name}} {{$quoteComment->User->last_name}}
+														</a>
+														{{$quoteComment->comment}}
+													</p>
+												</div>
+												@endforeach
+												<!-- /.item -->
+
+
+											</div>
+											<!-- /.chat -->
+											<div class="box-footer">
+												<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}">
+													{{csrf_field()}}
+													{{ method_field('PATCH') }}
+													<div class="input-group">
+														<input class="form-control" name="comment" placeholder="Type message...">
+
+														<div class="input-group-btn">
+															<button type="submit" name="submit" value="addCommentPub" class="btn btn-success"><i class="fa fa-plus"></i></button>
+														</div>
+													</div>
+												</form>
+											</div>
+
+										
+
+									</div>
+
+
+									<div class="box-footer">
+
+									</div>
 								</div>
+
 							</div>
+
+
+							
+
+							
 							<!-- /.box (chat box) -->
 						</div>
 					</div>

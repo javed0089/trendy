@@ -166,14 +166,25 @@ class OrderController extends Controller
       $order->save();
       return redirect()->route('orders.show',$id)->with('success','Record updated successfully!');
     }
-    elseif($submitReq =="addComment"){
+    elseif($submitReq =="addCommentPrvt"){
       $orderComment = new OrderComment;
       $orderComment->comment_type = '1';
       $orderComment->order_id = $id;
       $orderComment->user_id = User::getId();
       $orderComment->comment = $request->comment;
+      $orderComment->is_private = '1';
       $orderComment->save();
-      return redirect()->route('orders.show',$id)->with('success','Comment added successfully!');
+      return redirect()->route('orders.show',$id)->with('success','Private message added successfully!');
+    }
+    elseif($submitReq =="addCommentPub"){
+      $orderComment = new OrderComment;
+      $orderComment->comment_type = '1';
+      $orderComment->order_id = $id;
+      $orderComment->user_id = User::getId();
+      $orderComment->comment = $request->comment;
+      $orderComment->is_private = '0';
+      $orderComment->save();
+      return redirect()->route('orders.show',$id)->with('success','Public message added successfully!');
     }
     elseif($submitReq =="uploadDocument"){
 
@@ -227,20 +238,20 @@ class OrderController extends Controller
       $orderShipment->order_shipment_status_id = $request->order_shipment_status;
       $order->OrderShipments()->save($orderShipment);
       if($request->order_shipment_status =='1')
-         $order->status = '14';
-      elseif($request->order_shipment_status =='2')
-         $order->status = '15';
-      elseif($request->order_shipment_status =='3')
-         $order->status = '16';
-      elseif($request->order_shipment_status =='4')
-         $order->status = '17';
-      elseif($request->order_shipment_status =='5')
-         $order->status = '18';
+       $order->status = '14';
+     elseif($request->order_shipment_status =='2')
+       $order->status = '15';
+     elseif($request->order_shipment_status =='3')
+       $order->status = '16';
+     elseif($request->order_shipment_status =='4')
+       $order->status = '17';
+     elseif($request->order_shipment_status =='5')
+       $order->status = '18';
 
-       $order->save();
-      return redirect()->route('orders.show',$id)->with('success','Order status added.');
-    }
-    elseif($submitReq == "shipmentStatusImage"){
+     $order->save();
+     return redirect()->route('orders.show',$id)->with('success','Order status added.');
+   }
+   elseif($submitReq == "shipmentStatusImage"){
      $this->validate($request, [
        'order_shipment_document' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:20000'
        ]);

@@ -90,6 +90,7 @@ class QuotesController extends Controller
             $quoteComment->comment_type = '1';
             $quoteComment->quote_id = $id;
             $quoteComment->user_id = User::getId();
+            $quoteComment->is_private = '0';
             $quoteComment->comment = $request->comment;
 
             $quoteComment->save();

@@ -93,13 +93,14 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-     $submitReq = $request->submit;
-     if($submitReq =="addComment")
-     {
+       $submitReq = $request->submit;
+       if($submitReq =="addComment")
+       {
         $orderComment = new OrderComment;
         $orderComment->comment_type = '1';
         $orderComment->order_id = $id;
         $orderComment->user_id = User::getId();
+        $orderComment->is_private = '0';
         $orderComment->comment = $request->comment;
 
         $orderComment->save();
@@ -110,9 +111,9 @@ class OrderController extends Controller
     {
 
       $this->validate($request, [
-         'order_document' => 'required|mimes:pdf|max:10000',
-         'document_type' => 'required'
-         ]);
+       'order_document' => 'required|mimes:pdf|max:10000',
+       'document_type' => 'required'
+       ]);
       $order = Order::find($id);
       $file = $request->file('order_document');
       $filename = rand(1,100).time().'.'. 'pdf';
@@ -135,15 +136,15 @@ class OrderController extends Controller
         {
           $order->status='10';
           $order->save();
-        }
-        elseif($request->document_type == 3)
-        {
+      }
+      elseif($request->document_type == 3)
+      {
           $order->status='11';
           $order->save();
-        }
+      }
 
-        return redirect()->route('myorders.show',$id)->with('success','File Uploaded successfully!');
-    }
+      return redirect()->route('myorders.show',$id)->with('success','File Uploaded successfully!');
+  }
 }
 
 elseif($submitReq == "confirmPi")

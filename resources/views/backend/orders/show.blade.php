@@ -138,57 +138,118 @@
 							</table>
 
 
-							<div class="box box-success">
-								<div class="box-header">
-									<i class="fa fa-comments-o"></i>
-
-									<h3 class="box-title">Comments</h3>
-
-									<span class="pull-right text-muted"> {{ count($order->OrderComments) }} comments</span>
+						
 
 
 
-								</div>
-								<div class="box-body chat" id="chat-box">
-
-									<!-- chat item -->
-									@foreach($order->OrderComments as $orderComment)
-									<div class="item" >
-										<i class="fa fa-user" style="font-size: 35px; color: #3c8dbc;"></i>
-
-										<p class="message">
-											<a href="#" class="name">
-												<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{date('M j, Y H:i',strtotime($orderComment->created_at))}}</small>
-												{{$orderComment->User->first_name}} {{$orderComment->User->last_name}}
-											</a>
-
-											@if($orderComment->User->UserRole($orderComment->User->id) == 'Subscriber')
-											<span style="color: #0f814d">{{$orderComment->comment}}</span>
-											@else
-											
-											<span style="color: #953517">{{$orderComment->comment}}</span>
-											@endif
-										</p>
-									</div>
-									@endforeach
-									<!-- /.item -->
 
 
-								</div>
-								<!-- /.chat -->
-								<div class="box-footer">
-									<form role="form" method="Post" action="{{ route('orders.update',$order->id) }}">
-										{{csrf_field()}}
-										{{ method_field('PATCH') }}
-										<div class="input-group">
-											<input class="form-control" name="comment" placeholder="Type message...">
 
-											<div class="input-group-btn">
-												<button type="submit" name="submit" value="addComment" class="btn btn-success"><i class="fa fa-plus"></i></button>
+							<hr>
+							<div class="nav-tabs-custom" style="margin-top: 20px;">
+								<ul class="nav nav-tabs">
+									<li class="active"><a href="#tab_prvt" data-toggle="tab"><i class="fa fa-comments-o"></i> Private Messages ({{ count($order->OrderComments->where('is_private','=','1')) }})</a></li>
+									<li><a href="#tab_pub" data-toggle="tab"><i class="fa fa-comments-o"></i> Public Messages ({{ count($order->OrderComments->where('is_private','=','0')) }})</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab_prvt">
+										<div class="box-body chat" id="chat-box">
+
+											<!-- chat item -->
+											@foreach($order->OrderComments->where('is_private','=','1') as $orderComment)
+											<div class="item" >
+												<i class="fa fa-user" style="font-size: 35px; color: #3c8dbc;"></i>
+
+												<p class="message">
+													<a href="#" class="name">
+														<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{date('M j, Y H:i',strtotime($orderComment->created_at))}}</small>
+														{{$orderComment->User->first_name}} {{$orderComment->User->last_name}}
+													</a>
+
+													@if($orderComment->User->UserRole($orderComment->User->id) == 'Subscriber')
+													<span style="color: #0f814d">{{$orderComment->comment}}</span>
+													@else
+
+													<span style="color: #953517">{{$orderComment->comment}}</span>
+													@endif
+												</p>
 											</div>
+											@endforeach
+											<!-- /.item -->
+
+
 										</div>
-									</form>
+										<!-- /.chat -->
+										<div class="box-footer">
+											<form role="form" method="Post" action="{{ route('orders.update',$order->id) }}">
+												{{csrf_field()}}
+												{{ method_field('PATCH') }}
+												<div class="input-group">
+													<input class="form-control" name="comment" placeholder="Type message...">
+
+													<div class="input-group-btn">
+														<button type="submit" name="submit" value="addCommentPrvt" class="btn btn-success"><i class="fa fa-plus"></i></button>
+													</div>
+												</div>
+											</form>
+										</div>
+
+										
+
+									</div>
+									<!-- /.tab-pane -->
+									<div class="tab-pane" id="tab_pub">
+										<div class="box-body chat" id="chat-box">
+
+											<!-- chat item -->
+											@foreach($order->OrderComments->where('is_private','=','0') as $orderComment)
+											<div class="item" >
+												<i class="fa fa-user" style="font-size: 35px; color: #3c8dbc;"></i>
+
+												<p class="message">
+													<a href="#" class="name">
+														<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{date('M j, Y H:i',strtotime($orderComment->created_at))}}</small>
+														{{$orderComment->User->first_name}} {{$orderComment->User->last_name}}
+													</a>
+
+													@if($orderComment->User->UserRole($orderComment->User->id) == 'Subscriber')
+													<span style="color: #0f814d">{{$orderComment->comment}}</span>
+													@else
+
+													<span style="color: #953517">{{$orderComment->comment}}</span>
+													@endif
+												</p>
+											</div>
+											@endforeach
+											<!-- /.item -->
+
+
+										</div>
+										<!-- /.chat -->
+										<div class="box-footer">
+											<form role="form" method="Post" action="{{ route('orders.update',$order->id) }}">
+												{{csrf_field()}}
+												{{ method_field('PATCH') }}
+												<div class="input-group">
+													<input class="form-control" name="comment" placeholder="Type message...">
+
+													<div class="input-group-btn">
+														<button type="submit" name="submit" value="addCommentPub" class="btn btn-success"><i class="fa fa-plus"></i></button>
+													</div>
+												</div>
+											</form>
+										</div>
+
+										
+
+									</div>
+
+
+									<div class="box-footer">
+
+									</div>
 								</div>
+
 							</div>
 							<!-- /.box (chat box) -->
 
