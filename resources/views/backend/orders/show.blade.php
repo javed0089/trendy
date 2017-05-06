@@ -5,16 +5,16 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('backend/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{asset('backend/dist/css/vertical-tab.css')}}">
-  <style type="text/css">
-  	     .star{
-     	height: 30px;
-     }
+<style type="text/css">
+	.star{
+		height: 30px;
+	}
 
-    .star i{
-    	font-size:20px;
+	.star i{
+		font-size:20px;
 
-    }
-  </style>
+	}
+</style>
 
 @endsection
 
@@ -63,7 +63,7 @@
 								<h4>Status : <span>{{$order->Status->status_en}}</span></h4>
 
 								<h4><div id='star' class="star">Rating : </div></h4>
-              <input id="rating" hidden 	 type="text"  name="rating" value="{{count($rating)>0? $rating->rating:''}}">
+								<input id="rating" hidden 	 type="text"  name="rating" value="{{count($rating)>0? $rating->rating:''}}">
 							</div>
 							<div class="col-md-4">
 								<h4>Dated : <span>{{date('M j, Y',strtotime($order->created_at))}}</span></h4>
@@ -84,7 +84,7 @@
 										@endforeach
 									</select>
 									<button type="submit" name="submit" class="btn btn-block btn-primary" value="assignSalesRep">Assign</button>
-									<button type="submit" name="submit" class="btn btn-block btn-success" value="shipment">Shipment</button>
+									<button type="submit" name="submit" class="btn btn-block btn-success" value="shipment">Start Shipment</button>
 									@endif
 									@if(User::isSalesExecutive())
 									<button type="submit" name="submit" class="btn btn-block btn-success" value="orderProcessed">Processed</button>
@@ -163,7 +163,7 @@
 											</a>
 
 											@if($orderComment->User->UserRole($orderComment->User->id) == 'Subscriber')
-											 <span style="color: #0f814d">{{$orderComment->comment}}</span>
+											<span style="color: #0f814d">{{$orderComment->comment}}</span>
 											@else
 											
 											<span style="color: #953517">{{$orderComment->comment}}</span>
@@ -207,7 +207,7 @@
 									<thead>
 										<tr>
 											<th>Document Type</th>
-											<th>File Name</th>
+											
 											<th>Uploaded By</th>
 											<th>Upload Date</th>
 											<th></th>
@@ -218,7 +218,6 @@
 										@foreach($order->OrderFiles as $orderFile)
 										<tr>
 											<td>{{$orderFile->DocumentType->document_type_en}}</td>
-											<td>{{$orderFile->original_filename}}</td>
 											<td>{{$orderFile->UploadedBy->first_name}} {{$orderFile->UploadedBy->last_name}} - ({{$orderFile->UploadedBy->UserRole($orderFile->user_id)}})</td>
 											<td>{{date('M j, Y H:i',strtotime($orderFile->created_at))}}</td>
 											<td>
@@ -226,7 +225,7 @@
 												<form class="form-inline pull-right" role="form"  method="Post"  action="{{route('orders.update',$order->id)}}">
 													{{csrf_field()}}
 													{{ method_field('PATCH') }}
-													<button type="submit" name="submit" value="confirmPi" class="btn btn-sm btn-success">Confirm</button>
+													<button type="submit" name="submit" value="confirmPayment" class="btn btn-sm btn-success">Confirm</button>
 												</form>
 												@endif
 
@@ -286,7 +285,7 @@
 										<ul class="nav nav-tabs tabs-left">
 											@foreach($order->OrderShipments as $OrderShipment)
 											<li  {{{ $loop->first? 'class=active' : '' }}} ><a href="#{{$OrderShipment->id}}tab" data-toggle="tab"><i style="color:{{{$OrderShipment->order_shipment_status_id == '4'?($order->bl_draft_confirmed?'green':'red'):'green'}}} " class="fa fa-check-circle"></i> {{$OrderShipment->OrderShipmentStatus->shipping_status_en}}
-<span class="pull-right small text-muted">{{count($OrderShipment->OrderShipmentFiles)}}</span>
+												<span class="pull-right small text-muted">{{count($OrderShipment->OrderShipmentFiles)}}</span>
 											</a></li>
 											@endforeach
 
@@ -300,40 +299,40 @@
 											@foreach($order->OrderShipments as $OrderShipment)
 											<div class="tab-pane {{{ $loop->first? 'active' : '' }}}" id="{{$OrderShipment->id}}tab">
 												<div class="col-xs-12">
-												<div class="row">
-												<div class="col-xs-6">
-													<h4>Status: <span>{{$OrderShipment->OrderShipmentStatus->shipping_status_en}} </span></h4>
-													<h4>Dated: <span>{{date('M j, Y H:i',strtotime($OrderShipment->created_at))}}</span></h4>
+													<div class="row">
+														<div class="col-xs-6">
+															<h4>Status: <span>{{$OrderShipment->OrderShipmentStatus->shipping_status_en}} </span></h4>
+															<h4>Dated: <span>{{date('M j, Y H:i',strtotime($OrderShipment->created_at))}}</span></h4>
+														</div>
+														<div class="col-xs-6">
+															@if($OrderShipment->order_shipment_status_id == 4)
+															<h4>BL Status : {!! $order->bl_draft_confirmed?'<span class="label label-success">Confirmed</span>':'<span class="label label-danger">Not Confirmed</span>'!!}</h4>
+															@endif
+
+
+
+														</div>
+														<div class="col-xs-6 pull-right">
+															@if($OrderShipment->order_shipment_status_id == 5)
+															<form role="form" method="Post" enctype="multipart/form-data" action="{{ route('orders.update',$order->id) }}" >
+																{{csrf_field()}}
+																{{ method_field('PATCH') }}
+
+																<div class="form-group" >
+																	<label  for="">Tracking ID:</label>
+																	<input type="text" class="form-control" placeholder="Tracking ID" name="shipping_tracking_id"  value="{{$order->shipping_tracking_id	}}">
+																</div>
+																<div class="form-group" >
+																	<label  for="">Tracking Link:</label>
+																	<input type="text" class="form-control" placeholder="Tracking Link" name="shipping_tracking_hyperlink"  value="{{$order->shipping_tracking_hyperlink	}}">
+																</div>
+																<div class="col-xs-12 pull-right">
+																	<button type="submit" name="submit" class="btn btn-md btn-primary" value="shipmentTrackingUpdate">Update</button>
+																</div>
+															</form>
+															@endif
+														</div>
 													</div>
-													<div class="col-xs-6">
-@if($OrderShipment->order_shipment_status_id == 4)
-<h4>BL Status : {!! $order->bl_draft_confirmed?'<span class="label label-success">Confirmed</span>':'<span class="label label-danger">Not Confirmed</span>'!!}</h4>
-@endif
-
-
-
-</div>
-<div class="col-xs-6 pull-right">
-@if($OrderShipment->order_shipment_status_id == 5)
-	<form role="form" method="Post" enctype="multipart/form-data" action="{{ route('orders.update',$order->id) }}" >
-		{{csrf_field()}}
-		{{ method_field('PATCH') }}
-
-		<div class="form-group" >
-			<label  for="">Tracking ID:</label>
-			<input type="text" class="form-control" placeholder="Tracking ID" name="shipping_tracking_id"  value="{{$order->shipping_tracking_id	}}">
-		</div>
-		<div class="form-group" >
-			<label  for="">Tracking Link:</label>
-			<input type="text" class="form-control" placeholder="Tracking Link" name="shipping_tracking_hyperlink"  value="{{$order->shipping_tracking_hyperlink	}}">
-		</div>
-		<div class="col-xs-12 pull-right">
-	<button type="submit" name="submit" class="btn btn-md btn-primary" value="shipmentTrackingUpdate">Update</button>
-	</div>
-	</form>
-@endif
-</div>
-</div>
 													<div class="col-xs-4 pull-right">
 														@if($OrderShipment->order_shipment_status_id != 3)
 														<button type="button" class="btn btn-md btn-primary pull-right" data-toggle="modal" data-target="#{{$OrderShipment->id}}">Add File</button>
@@ -374,7 +373,7 @@
 															</div>
 														</div>
 
-													
+
 													</div>
 													@if($OrderShipment->order_shipment_status_id != 3)
 													<table id="example3" class="table table-bordered table-hover">
@@ -393,14 +392,14 @@
 																	@if(substr($OrderShipmentFile->mime,0,5) == 'image')
 																	<img src="{{route('orders.orderShipmentfile',[$OrderShipmentFile->id,$OrderShipmentFile->original_filename])}}" width="80" height="50">
 																	@else
-																	 <a target="_blank" href="{{route('orders.orderShipmentfile',[$OrderShipmentFile->id,$OrderShipmentFile->original_filename])}}">Download</a>
+																	<a target="_blank" href="{{route('orders.orderShipmentfile',[$OrderShipmentFile->id,$OrderShipmentFile->original_filename])}}">Download</a>
 																	@endif
 																</td>
 																<td>{{$OrderShipmentFile->original_filename}}</td>
 																<td>{{$OrderShipmentFile->created_at}}</td>
 																<td>
 
-																<button class="btn btn-danger btn-xs " >Delete</button>
+																	<button class="btn btn-danger btn-xs " >Delete</button>
 
 																</td>
 															</tr>
@@ -474,7 +473,7 @@
 	!-- DataTables -->
 	<script src="{{asset('backend/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 	<script src="{{asset('backend/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
-<script src="{{asset('js/stars.min.js')}}"></script>
+	<script src="{{asset('js/stars.min.js')}}"></script>
 	<!-- page script -->
 	<script>
 		$(function () {
@@ -493,15 +492,15 @@
 
 		});
 
-$('#star').stars({
-  stars: 4,
-  value:$('#rating').val(),
-  text: ['Poor', 'Average', 'Good','Excellent'],
-  color: '#ffda44',
-  starClass  : 'star',
-  click: function(index) {
-  }
-});
+		$('#star').stars({
+			stars: 4,
+			value:$('#rating').val(),
+			text: ['Poor', 'Average', 'Good','Excellent'],
+			color: '#ffda44',
+			starClass  : 'star',
+			click: function(index) {
+			}
+		});
 	</script>
 
 

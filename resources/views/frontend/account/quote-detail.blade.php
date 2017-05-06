@@ -76,7 +76,7 @@
             {{isset($quote->price)?$quote->price:'n/a'}}
 @endif
             </td>
-            <td>{{$quote->currency}}</td>
+            <td>@if($myquote->status == 3) {{$quote->currency}} @endif</td>
             <td>{{$quote->port_of_delivery}}</td>
             <td>{{$quote->delivery_terms}}</td>
             <td>{{$quote->payment_method}}</td>

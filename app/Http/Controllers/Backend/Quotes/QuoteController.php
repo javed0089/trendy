@@ -44,36 +44,36 @@ $quotes = Quote::paginate(2);
 */
 
 
-            $quotes = Quote::where(function($query){
-                $status = request('status')?request('status'):null;
-                $assigned = request('assign_to_id')?request('assign_to_id'):null;
+$quotes = Quote::where(function($query){
+    $status = request('status')?request('status'):null;
+    $assigned = request('assign_to_id')?request('assign_to_id'):null;
 
-                if(isset($status)){
-                    $query->where('status','=',$status);
-                }
-                if(isset($assigned)){
-                    $query->where('assign_to_id','=',$assigned);
-                }
-
-                $query->where('status','>','0');
-            })->paginate(15)->appends(['status'=> request('status'),'assign_to_id'=> request('assign_to_id')]);
-        }
-        elseif(User::isSalesExecutive()){
-            $user=Sentinel::getUser();
-            $quotes = Quote::where(function($query) use ($user){
-                $status = request('status')?request('status'):null;
-                if(isset($status)){
-                    $query->where('status','=',$status)
-                    ->where('assign_to_id','=',$user->id);
-                }
-
-                $query->where('status','>','0')
-                ->where('assign_to_id','=',$user->id);
-            })->paginate(15)->appends('status',request('status'));
-        }
-
-        return view('backend.quotes.index')->with('quotes',$quotes)->with('statuses',$statuses)->with('salesExecutives',$salesExecutives);
+    if(isset($status)){
+        $query->where('status','=',$status);
     }
+    if(isset($assigned)){
+        $query->where('assign_to_id','=',$assigned);
+    }
+
+    $query->where('status','>','0');
+})->orderBy('created_at','Desc')->paginate(15)->appends(['status'=> request('status'),'assign_to_id'=> request('assign_to_id')]);
+}
+elseif(User::isSalesExecutive()){
+    $user=Sentinel::getUser();
+    $quotes = Quote::where(function($query) use ($user){
+        $status = request('status')?request('status'):null;
+        if(isset($status)){
+            $query->where('status','=',$status)
+            ->where('assign_to_id','=',$user->id);
+        }
+
+        $query->where('status','>','0')
+        ->where('assign_to_id','=',$user->id);
+    })->orderBy('created_at','Desc')->paginate(15)->appends('status',request('status'));
+}
+
+return view('backend.quotes.index')->with('quotes',$quotes)->with('statuses',$statuses)->with('salesExecutives',$salesExecutives);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -203,10 +203,13 @@ $quotes = Quote::paginate(2);
            $quote->status = '2';
            $quote->save();
 
-           foreach ($quote->QuoteDetails as $quoteProduct) {
-               if($quoteProduct->status == '4')
+           foreach ($quote->QuoteDetails as $quoteProduct) 
+           {
+               if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
+               {
                 $quoteProduct->status = '2';
-            $quoteProduct->save();
+                $quoteProduct->save();
+            }
         }
         return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
     }
@@ -216,14 +219,17 @@ $quotes = Quote::paginate(2);
 
        return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
    }
-   elseif($submitReq =="sendQuote"){
-       $quote->status = '3';
-       $quote->save();
+   elseif($submitReq =="sendQuote")
+   {
+    $quote->status = '3';
+    $quote->save();
 
-       foreach ($quote->QuoteDetails as $quoteProduct) {
-           if($quoteProduct->status == '2')
+    foreach ($quote->QuoteDetails as $quoteProduct) {
+        if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
+        {
             $quoteProduct->status = '3';
-        $quoteProduct->save();
+            $quoteProduct->save();
+        }
     }
     return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
 

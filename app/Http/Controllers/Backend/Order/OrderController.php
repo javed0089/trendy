@@ -28,47 +28,47 @@ class OrderController extends Controller
      */
     public function index()
     {
-         $statuses = Status::all();
-        $role = Sentinel::findRoleById(4);
-        $salesExecutives = $role->users()->get();
+     $statuses = Status::all();
+     $role = Sentinel::findRoleById(4);
+     $salesExecutives = $role->users()->get();
 
-        $orders=[];        
-        if(User::isSupervisor()){
+     $orders=[];        
+     if(User::isSupervisor()){
             //$orders = Order::all();
-             $orders = Order::where(function($query){
-                $status = request('status')?request('status'):null;
-                $assigned = request('assign_to_id')?request('assign_to_id'):null;
+       $orders = Order::where(function($query){
+        $status = request('status')?request('status'):null;
+        $assigned = request('assign_to_id')?request('assign_to_id'):null;
 
-                if(isset($status)){
-                    $query->where('status','=',$status);
-                }
-                if(isset($assigned)){
-                    $query->where('assign_to_id','=',$assigned);
-                }
-
-                $query->where('status','>','0');
-            })->paginate(15)->appends(['status'=> request('status'),'assign_to_id'=> request('assign_to_id')]);
+        if(isset($status)){
+          $query->where('status','=',$status);
         }
-        elseif(User::isSalesExecutive()){
-            $user=Sentinel::getUser();
+        if(isset($assigned)){
+          $query->where('assign_to_id','=',$assigned);
+        }
+
+        $query->where('status','>','0');
+      })->orderBy('created_at','Desc')->paginate(15)->appends(['status'=> request('status'),'assign_to_id'=> request('assign_to_id')]);
+     }
+     elseif(User::isSalesExecutive()){
+      $user=Sentinel::getUser();
            // $orders = Order::where('assign_to_id','=',$user->id)->get();
 
-            $orders = Order::where(function($query) use ($user){
-                $status = request('status')?request('status'):null;
-                if(isset($status)){
-                    $query->where('status','=',$status)
-                    ->where('assign_to_id','=',$user->id);
-                }
-
-                $query->where('status','>','0')
-                ->where('assign_to_id','=',$user->id);
-            })->paginate(15)->appends('status',request('status'));
+      $orders = Order::where(function($query) use ($user){
+        $status = request('status')?request('status'):null;
+        if(isset($status)){
+          $query->where('status','=',$status)
+          ->where('assign_to_id','=',$user->id);
         }
 
-
-        return view('backend.orders.index')->with('orders',$orders)->with('statuses',$statuses)->with('salesExecutives',$salesExecutives);
-
+        $query->where('status','>','0')
+        ->where('assign_to_id','=',$user->id);
+      })->orderBy('created_at','Desc')->paginate(15)->appends('status',request('status'));
     }
+
+
+    return view('backend.orders.index')->with('orders',$orders)->with('statuses',$statuses)->with('salesExecutives',$salesExecutives);
+
+  }
 
     /**
      * Show the form for creating a new resource.
@@ -99,29 +99,32 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::find($id);
+      $order = Order::find($id);
 
-        $document_types = DocumentType::all();
-        $order_shipment_statuses = OrderShipmentStatus::whereNotIn('id',function($query) use($id){
-            $query->select('order_shipment_status_id')->from(with(new OrderShipment)->getTable())->where('order_id','=',$id );
+      $document_types = DocumentType::where('doc_type_id','=','1')->get();
 
-        })->get();
+      $order_shipment_statuses = OrderShipmentStatus::whereNotIn('id',function($query) use($id){
+        $query->select('order_shipment_status_id')->from(with(new OrderShipment)->getTable())->where('order_id','=',$id );
 
-        $rating = Rating::where('order_id','=',$id)->first();
-        
-        $flag=false;
-        if(User::isSalesExecutive()){
-            if(User::getId() == $order->assign_to_id)
-                $flag=true;
-        }
-        if(User::isSupervisor() || $flag){
+      })->get();
 
-            $role = Sentinel::findRoleById(4);
-            $users = $role->users()->get();
-            return view('backend.orders.show')->with('order',$order)->with('users',$users)->with('document_types',$document_types)->with('order_shipment_statuses',$order_shipment_statuses)->with('rating',$rating);
-        }
-        else
-            return redirect('backoffice/login');
+
+
+      $rating = Rating::where('order_id','=',$id)->first();
+
+      $flag=false;
+      if(User::isSalesExecutive()){
+        if(User::getId() == $order->assign_to_id)
+          $flag=true;
+      }
+      if(User::isSupervisor() || $flag){
+
+        $role = Sentinel::findRoleById(4);
+        $users = $role->users()->get();
+        return view('backend.orders.show')->with('order',$order)->with('users',$users)->with('document_types',$document_types)->with('order_shipment_statuses',$order_shipment_statuses)->with('rating',$rating);
+      }
+      else
+        return redirect('backoffice/login');
     }
 
     /**
@@ -144,33 +147,33 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $order = Order::find($id);
-       $submitReq = $request->submit;
-       if($submitReq =="assignSalesRep"){
-        $this->validate($request, [
-            'assign_to_id' =>   'required',
-            ]);
-        if($request->assign_to_id>0){
-            $order->assign_to_id = $request->assign_to_id;
-            $order->status = '4';
-            $order->save();
+     $order = Order::find($id);
+     $submitReq = $request->submit;
+     if($submitReq =="assignSalesRep"){
+      $this->validate($request, [
+        'assign_to_id' =>   'required',
+        ]);
+      if($request->assign_to_id>0){
+        $order->assign_to_id = $request->assign_to_id;
+        $order->status = '4';
+        $order->save();
 
-            return redirect()->route('orders.show',$id)->with('success','Record updated successfully!');
-        }
+        return redirect()->route('orders.show',$id)->with('success','Record updated successfully!');
+      }
     }
     elseif($submitReq =="orderProcessed"){
-        $order->status = '2';
-        $order->save();
-        return redirect()->route('orders.show',$id)->with('success','Record updated successfully!');
+      $order->status = '2';
+      $order->save();
+      return redirect()->route('orders.show',$id)->with('success','Record updated successfully!');
     }
     elseif($submitReq =="addComment"){
-        $orderComment = new OrderComment;
-        $orderComment->comment_type = '1';
-        $orderComment->order_id = $id;
-        $orderComment->user_id = User::getId();
-        $orderComment->comment = $request->comment;
-        $orderComment->save();
-        return redirect()->route('orders.show',$id)->with('success','Comment added successfully!');
+      $orderComment = new OrderComment;
+      $orderComment->comment_type = '1';
+      $orderComment->order_id = $id;
+      $orderComment->user_id = User::getId();
+      $orderComment->comment = $request->comment;
+      $orderComment->save();
+      return redirect()->route('orders.show',$id)->with('success','Comment added successfully!');
     }
     elseif($submitReq =="uploadDocument"){
 
@@ -186,70 +189,91 @@ class OrderController extends Controller
 
         Storage::disk('local')->put($location.$filename,  File::get($file));
 
+        $doc_name = DocumentType::find($request->document_type);
+        $doc_name =str_replace(' ', '', $doc_name->document_type_en);
         $orderFile = new OrderFile;
         $orderFile->filename=$filename;
         $orderFile->document_type = $request->document_type;
         $orderFile->mime=$file->getClientMimeType();
-        $orderFile->original_filename=$file->getClientOriginalName();
+        $orderFile->original_filename=$doc_name.'-'.$order->id.'.pdf';
         $orderFile->user_id = Sentinel::check()->id;
 
         $order->OrderFiles()->save($orderFile);
 
+        if($request->document_type == 1)
+        {
+          $order->status='9';
+          $order->save();
+        }
+
+
 
         return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
+      }    
+    }
+    elseif($submitReq == "confirmPayment"){
+      $order->payment_status = '1';
+      $order->status='12';
+      $order->save();
+      return redirect()->route('orders.show',$id)->with('success','Payment confirmed!');
+    }
+    elseif($submitReq == "shipment"){
+      $order->status = '8';
+      $order->save();
+      return redirect()->route('orders.show',$id)->with('success','Order status shipment.');
+    }
+    elseif($submitReq == "addShippingstatus"){
+      $orderShipment = new OrderShipment;
+      $orderShipment->order_shipment_status_id = $request->order_shipment_status;
+      $order->OrderShipments()->save($orderShipment);
+      if($request->order_shipment_status =='1')
+         $order->status = '14';
+      elseif($request->order_shipment_status =='2')
+         $order->status = '15';
+      elseif($request->order_shipment_status =='3')
+         $order->status = '16';
+      elseif($request->order_shipment_status =='4')
+         $order->status = '17';
+      elseif($request->order_shipment_status =='5')
+         $order->status = '18';
+
+       $order->save();
+      return redirect()->route('orders.show',$id)->with('success','Order status added.');
+    }
+    elseif($submitReq == "shipmentStatusImage"){
+     $this->validate($request, [
+       'order_shipment_document' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:20000'
+       ]);
+
+     $file = $request->file('order_shipment_document');
+     $filename = rand(1,100).time().'.'. $file->getClientOriginalExtension();
+     $location="order-docs/".$order->id.'/';
+     if($file){
+
+      Storage::disk('local')->put($location.$filename,  File::get($file));
+
+      $orderShipmentFile = new OrderShipmentFiles;
+      $orderShipmentFile->filename=$filename;
+      $orderShipmentFile->mime=$file->getClientMimeType();
+      $orderShipmentFile->original_filename=$file->getClientOriginalName();
+
+      $OrderShipment =Ordershipment::find($request->order_shipment_id);
+
+      $OrderShipment->OrderShipmentFiles()->save($orderShipmentFile);
+
+
+      return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
     }    
-}
-elseif($submitReq == "confirmPi"){
-    $order->payment_status = '1';
-    $order->save();
-    return redirect()->route('orders.show',$id)->with('success','Payment confirmed!');
-}
-elseif($submitReq == "shipment"){
-    $order->status = '8';
-    $order->save();
-    return redirect()->route('orders.show',$id)->with('success','Order status shipment.');
-}
-elseif($submitReq == "addShippingstatus"){
-    $orderShipment = new OrderShipment;
-    $orderShipment->order_shipment_status_id = $request->order_shipment_status;
-    $order->OrderShipments()->save($orderShipment);
-    return redirect()->route('orders.show',$id)->with('success','Order status added.');
-}
-elseif($submitReq == "shipmentStatusImage"){
-        //dd($request);
- $this->validate($request, [
-   'order_shipment_document' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:20000'
-   ]);
+  }
 
- $file = $request->file('order_shipment_document');
- $filename = rand(1,100).time().'.'. $file->getClientOriginalExtension();
- $location="order-docs/".$order->id.'/';
- if($file){
-
-    Storage::disk('local')->put($location.$filename,  File::get($file));
-
-    $orderShipmentFile = new OrderShipmentFiles;
-    $orderShipmentFile->filename=$filename;
-    $orderShipmentFile->mime=$file->getClientMimeType();
-    $orderShipmentFile->original_filename=$file->getClientOriginalName();
-
-    $OrderShipment =Ordershipment::find($request->order_shipment_id);
-
-    $OrderShipment->OrderShipmentFiles()->save($orderShipmentFile);
-
-
-    return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
-}    
-}
-
-elseif($submitReq == "shipmentTrackingUpdate"){
+  elseif($submitReq == "shipmentTrackingUpdate"){
     $order->shipping_tracking_id = $request->shipping_tracking_id;
     $order->shipping_tracking_hyperlink = $request->shipping_tracking_hyperlink;
     $order->save();
     return redirect()->route('orders.show',$id)->with('success','Shipment tracking updated.');
-}
+  }
 
-return back();
+  return back();
 }
 
     /**
@@ -264,50 +288,50 @@ return back();
 
     public function getOrderFile($id)
     {
-        $orderFile = OrderFile::find($id);
-        if($orderFile){
-            $filename = $orderFile->filename;
+      $orderFile = OrderFile::find($id);
+      if($orderFile){
+        $filename = $orderFile->filename;
 
-            $flag=false;
-            if(User::isSalesExecutive()){
-                if(User::getId() == $orderFile->Order->assign_to_id)
-                    $flag=true;
-            }
-            if(User::isSupervisor() || $flag){
+        $flag=false;
+        if(User::isSalesExecutive()){
+          if(User::getId() == $orderFile->Order->assign_to_id)
+            $flag=true;
+        }
+        if(User::isSupervisor() || $flag){
 
-                $location="order-docs/".$orderFile->Order->id.'/';
-                $file = Storage::disk('local')->get( $location.$filename);
-                $response = Response($file, 200);
-              //  $response->header("Content-Type", 'application/pdf');
-                return $response;
-            }}
-            else
-                return redirect('backoffice/login');
+          $location="order-docs/".$orderFile->Order->id.'/';
+          $file = Storage::disk('local')->get( $location.$filename);
+          $response = Response($file, 200);
+          $response->header("Content-Type", 'application/pdf');
+          return $response;
+        }}
+        else
+          return redirect('backoffice/login');
+
+      }
+
+
+      public function getOrderShipmentFile($id)
+      {
+        $orderShipmentFile = OrderShipmentFiles::find($id);
+        if($orderShipmentFile){
+          $filename = $orderShipmentFile->filename;
+
+          $flag=false;
+          if(User::isSalesExecutive()){
+            if(User::getId() == $orderShipmentFile->Ordershipment->Order->assign_to_id)
+              $flag=true;
+          }
+          if(User::isSupervisor() || $flag){
+
+            $location="order-docs/".$orderShipmentFile->Ordershipment->Order->id.'/';
+            $file = Storage::disk('local')->get( $location.$filename);
+            $response = Response($file, 200);
+            $response->header("Content-Type", $orderShipmentFile->mime);
+            return $response;
+          }}
+          else
+            return redirect('backoffice/login');
 
         }
-
-
-        public function getOrderShipmentFile($id)
-        {
-            $orderShipmentFile = OrderShipmentFiles::find($id);
-            if($orderShipmentFile){
-                $filename = $orderShipmentFile->filename;
-
-                $flag=false;
-                if(User::isSalesExecutive()){
-                    if(User::getId() == $orderShipmentFile->Ordershipment->Order->assign_to_id)
-                        $flag=true;
-                }
-                if(User::isSupervisor() || $flag){
-
-                    $location="order-docs/".$orderShipmentFile->Ordershipment->Order->id.'/';
-                    $file = Storage::disk('local')->get( $location.$filename);
-                    $response = Response($file, 200);
-                    $response->header("Content-Type", $orderShipmentFile->mime);
-                    return $response;
-                }}
-                else
-                    return redirect('backoffice/login');
-
-            }
-        }
+      }

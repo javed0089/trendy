@@ -48,8 +48,9 @@
 						<div class="col-md-4">
 							<h4>Dated : <span>{{date('M j, Y',strtotime($quote->created_at))}}</span></h4>
 							<h4>Valid until :<span>{{isset($quote->quote_validity)?date('M j, Y',strtotime($quote->quote_validity)):''}}</span>
-
+								@if($quote->status != 3)
 								<button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#setValidity">Set</button></h4>
+								@endif
 								<div id="setValidity" class="modal fade" role="dialog">
 									<div class="modal-dialog">
 
@@ -94,11 +95,15 @@
 										<option {{$quote->assign_to_id==$user->id?'Selected':''}} value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
 										@endforeach
 									</select>
+
+									@if($quote->status != 3)
 									<button type="submit" name="submit" class="btn btn-block btn-primary" value="assignSalesRep">Assign</button>
 									<button type="submit" name="submit" class="btn btn-block btn-success" value="sendQuote">Approve</button>
-									@endif
+									
 									@if(User::isSalesExecutive())
 									<button type="submit" name="submit" class="btn btn-block btn-success" value="quoteProcessed">Processed</button>
+									@endif
+									@endif
 									@endif
 								</form>
 							</div>
@@ -141,9 +146,10 @@
 
 										</td>
 										<td>{{$item->Status->status_en}}</td>
-										<td>		
+										<td>
+											@if($quote->status != 3)		
 											<button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#{{$item->id}}">Edit</button>
-
+											@endif
 											<div id="{{$item->id}}" class="modal fade" role="dialog">
 												<div class="modal-dialog">
 

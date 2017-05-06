@@ -21,7 +21,7 @@ class QuotesController extends Controller
     public function index()
     {
         $user=User::find(Sentinel::check()->id);
-        $myquotes = $user->Quotes()->get();
+        $myquotes = $user->Quotes()->orderBy('created_at','Desc')->paginate(10);
         return view('frontend.account.my-quotes')->with('myquotes',$myquotes);
     }
 

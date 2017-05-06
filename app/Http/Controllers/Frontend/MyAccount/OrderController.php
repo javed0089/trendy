@@ -28,7 +28,7 @@ class OrderController extends Controller
     public function index()
     {
         $user=User::find(Sentinel::check()->id);
-        $orders = $user->Orders()->get();
+        $orders = $user->Orders()->orderBy('created_at','Desc')->paginate(10);
         return view('frontend.account.order.orders')->with('orders',$orders);
     }
 
@@ -65,9 +65,9 @@ class OrderController extends Controller
         $order=[];
         $user=User::getUser();
         $order=$user->Orders()->find($id);
-        $document_types = DocumentType::all();
+        $document_types = DocumentType::where('doc_type_id','=','2')->get();
         $total = $order->OrderProducts()->selectRaw('SUM(price * quantity) as total')->pluck('total');
-       
+
         $rating = Rating::where('order_id','=',$id)->first();
 
         return view('frontend.account.order.order')->with('document_types',$document_types)->with('order',$order)->with('total',$total[0])->with('rating',$rating);
@@ -94,7 +94,8 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
      $submitReq = $request->submit;
-     if($submitReq =="addComment"){
+     if($submitReq =="addComment")
+     {
         $orderComment = new OrderComment;
         $orderComment->comment_type = '1';
         $orderComment->order_id = $id;
@@ -105,7 +106,8 @@ class OrderController extends Controller
 
         return redirect()->route('myorders.show',$id)->with('success','Comment added successfully!');
     }
-    elseif($submitReq =="uploadDocument"){
+    elseif($submitReq =="uploadDocument")
+    {
 
       $this->validate($request, [
          'order_document' => 'required|mimes:pdf|max:10000',
@@ -115,38 +117,51 @@ class OrderController extends Controller
       $file = $request->file('order_document');
       $filename = rand(1,100).time().'.'. 'pdf';
       $location="order-docs/".$order->id.'/';
-      if($file){
+      if($file)
+      {
+        $doc_name = DocumentType::find($request->document_type);
+        $doc_name =str_replace(' ', '', $doc_name->document_type_en);
 
         Storage::disk('local')->put($location.$filename,  File::get($file));
-
         $orderFile = new OrderFile;
         $orderFile->filename=$filename;
         $orderFile->document_type = $request->document_type;
         $orderFile->mime=$file->getClientMimeType();
-        $orderFile->original_filename=$file->getClientOriginalName();
+        $orderFile->original_filename=$doc_name.'-'.$order->id.'.pdf';
         $orderFile->user_id = Sentinel::check()->id;
-
         $order->OrderFiles()->save($orderFile);
 
-        
+        if($request->document_type == 2)
+        {
+          $order->status='10';
+          $order->save();
+        }
+        elseif($request->document_type == 3)
+        {
+          $order->status='11';
+          $order->save();
+        }
+
         return redirect()->route('myorders.show',$id)->with('success','File Uploaded successfully!');
     }
 }
 
-elseif($submitReq == "confirmPi"){
+elseif($submitReq == "confirmPi")
+{
     $order = Order::find($id);
     $order->pi_confirmed = '1';
+    $order->status='10';
     $order->save();
     return redirect()->route('myorders.show',$id)->with('success','You have confirmed Performa Invoice!');
 }
 
-elseif($submitReq == "confirmBl"){
+elseif($submitReq == "confirmBl")
+{
     $order = Order::find($id);
     $order->bl_draft_confirmed = '1';
     $order->save();
     return redirect()->route('myorders.show',$id)->with('success','You have confirmed BL Draft!');
 }
-
 }
 
     /**
@@ -170,25 +185,28 @@ elseif($submitReq == "confirmBl"){
         $order->status = 1;
         $order->save();
         foreach ($quote->QuoteDetails as $quoteProduct) {
-            $orderProduct = new OrderProduct;
-            $orderProduct->product_id = $quoteProduct->product_id;
-            $orderProduct->product_name = $quoteProduct->Product->name_en;
-            $orderProduct->quantity = $quoteProduct->quantity;
-            $orderProduct->unit = $quoteProduct->unit;
-            $orderProduct->price = $quoteProduct->price;
-            $orderProduct->currency = $quoteProduct->currency;
-            $orderProduct->port_of_delivery = $quoteProduct->port_of_delivery;
-            $orderProduct->delivery_terms = $quoteProduct->delivery_terms ;
-            $orderProduct->payment_method =$quoteProduct->payment_method;
-            $orderProduct->shipping_doc_invoice =$quoteProduct->shipping_doc_invoice;
-            $orderProduct->shipping_doc_packing_list =$quoteProduct->shipping_doc_packing_list;
-            $orderProduct->shipping_doc_co = $quoteProduct->shipping_doc_co;
-            $orderProduct->shipping_doc_others = $quoteProduct->shipping_doc_others;
-            $orderProduct->shipping_doc_others_text = $quoteProduct->shipping_doc_others_text;
-            $order->OrderProducts()->save($orderProduct);
+            if($quoteProduct->status==3)
+            {
+                $orderProduct = new OrderProduct;
+                $orderProduct->product_id = $quoteProduct->product_id;
+                $orderProduct->product_name = $quoteProduct->Product->name_en;
+                $orderProduct->quantity = $quoteProduct->quantity;
+                $orderProduct->unit = $quoteProduct->unit;
+                $orderProduct->price = $quoteProduct->price;
+                $orderProduct->currency = $quoteProduct->currency;
+                $orderProduct->port_of_delivery = $quoteProduct->port_of_delivery;
+                $orderProduct->delivery_terms = $quoteProduct->delivery_terms ;
+                $orderProduct->payment_method =$quoteProduct->payment_method;
+                $orderProduct->shipping_doc_invoice =$quoteProduct->shipping_doc_invoice;
+                $orderProduct->shipping_doc_packing_list =$quoteProduct->shipping_doc_packing_list;
+                $orderProduct->shipping_doc_co = $quoteProduct->shipping_doc_co;
+                $orderProduct->shipping_doc_others = $quoteProduct->shipping_doc_others;
+                $orderProduct->shipping_doc_others_text = $quoteProduct->shipping_doc_others_text;
+                $order->OrderProducts()->save($orderProduct);
+            }
         }
 
-        return redirect()->route('myorders.index')->with('success', 'Your have succesfully submitted your order.');
+        return redirect()->route('myorders.show',$order->id)->with('success', 'Your have succesfully created the order.');
     }
 
     public function getOrderFile($id)

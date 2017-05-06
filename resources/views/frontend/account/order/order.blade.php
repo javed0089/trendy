@@ -140,7 +140,6 @@
 
                <tr>
                 <th>Document Type</th>
-                <th>File Name</th>
                 <th>Uploaded By</th>
                 <th>Upload Date</th>
                 <th></th>
@@ -150,7 +149,6 @@
               @foreach($order->OrderFiles as $orderFile)
               <tr>
                 <td>{{$orderFile->DocumentType->document_type_en}}</td>
-                <td>{{$orderFile->original_filename}}</td>
                 <td>{{$orderFile->UploadedBy->first_name}} {{$orderFile->UploadedBy->last_name}} 
                   @if($orderFile->UploadedBy->UserRole($orderFile->user_id)!='Subscriber')
                   - ({{$orderFile->UploadedBy->UserRole($orderFile->user_id)}})
@@ -186,110 +184,118 @@
       <div class="content">
         <div class="row">
 
-          <div class="col-md-12">
-            <div class="col-xs-3"> 
-              <ul class="nav nav-tabs tabs-left">
-                @foreach($order->OrderShipments as $OrderShipment)
-                <li  {{{ $loop->first? 'class=active' : '' }}} ><a href="#{{$OrderShipment->id}}tab" data-toggle="tab"><i style="color:{{{$OrderShipment->order_shipment_status_id == '4'?($order->bl_draft_confirmed?'green':'red'):'green'}}} " class="fa fa-check-circle"></i> {{$OrderShipment->OrderShipmentStatus->shipping_status_en}}
-                  <span class="pull-right small text-muted">{{count($OrderShipment->OrderShipmentFiles)}}</span>
-                </a></li>
-                @endforeach
-
-              </ul>
-            </div>
-            <div class="col-xs-9">
-              <div class="tab-content">
-
-
-
-                @foreach($order->OrderShipments as $OrderShipment)
-                <div class="tab-pane {{{ $loop->first? 'active' : '' }}}" id="{{$OrderShipment->id}}tab">
-                  <div class="col-xs-12">
-                    <div class="row">
-                      <div class="col-xs-6">
-                        <h4>Status: <span>{{$OrderShipment->OrderShipmentStatus->shipping_status_en}} </span></h4>
-                        <h4>Dated: <span>{{date('M j, Y H:i',strtotime($OrderShipment->created_at))}}</span></h4>
-                      </div>
-                      <div class="col-xs-6">
-                        @if($OrderShipment->order_shipment_status_id == 4)
-                        <h4>BL Status : {!! $order->bl_draft_confirmed?'<span class="label label-success">Confirmed</span>':'<span class="label label-danger">Not Confirmed</span>'!!}</h4>
-                        @endif
-                      </div>
-                    </div>
-
-                    <h4>Files</h4>
-                    <table class="table table-striped">
-                      <thead>
-                       <tr>
-                        <th>Filename</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                     @foreach($OrderShipment->OrderShipmentFiles as $OrderShipmentFile)
-                     <tr>
-                       <td>
-
-                        {{$OrderShipmentFile->original_filename}}
-                      </td>
-                      <td>
-                       @if($OrderShipment->order_shipment_status_id == 4 && !$order->bl_draft_confirmed)
-                       <form class="form-inline pull-right" role="form"  method="Post"  action="{{route('myorders.update',$order->id)}}">
-                        {{csrf_field()}}
-                        {{ method_field('PATCH') }}
-                        <button type="submit" name="submit" value="confirmBl" class="btn btn-xs btn-success">Confirm</button>
-                      </form>
-                      @endif
-                      <a target="_blank" class="btn btn-primary btn-xs" href="{{route('myorders.orderShipmentfile',[$OrderShipmentFile->id,$OrderShipmentFile->original_filename])}}">Download</a></td>
-                    </tr>
-                    
-                    @endforeach
-                  </tbody>
-                </table>
-                
-                <div class="spacer-30"></div>
-
-                @if($OrderShipment->order_shipment_status_id != 3)
-
-                @foreach($OrderShipment->OrderShipmentFiles as $OrderShipmentFile)
-                @if(substr($OrderShipmentFile->mime,0,5) == 'image')
-                @if($loop->first)
-                <div class="service-slider"  style="direction: ltr;">
-                 <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                  <ul class="slides" style="width: 800%; transition-duration: 0s; transform: translate3d(-1110px, 0px, 0px);">
-                    @endif
-
-
-                    <li class="clone" aria-hidden="true" style="width: 555px; margin-right: 0px; float: left; display: block;">
-                      <img src="{{route('myorders.orderShipmentfile',[$OrderShipmentFile->id,$OrderShipmentFile->original_filename])}}" alt="" draggable="false">
-                      <div class="slider-caption">
-                        <p> {{$OrderShipmentFile->original_filename }}  </p>
-                      </div>
-                    </li>
-                    @if($loop->last)
-
-                  </ul>
-                </div>
-                <ul class="flex-direction-nav">
-                  <li class="flex-nav-prev"><a class="flex-prev" href="#">{{__('Previous')}}</a></li>
-                  <li class="flex-nav-next"><a class="flex-next" href="#">{{__('Next')}}</a></li>
-                </ul>
-              </div>
-              @endif
-              @endif
+         <div class="col-md-12">
+          <div class="col-xs-3"> 
+            <ul class="nav nav-tabs tabs-left">
+              @foreach($order->OrderShipments as $OrderShipment)
+              <li  {{{ $loop->first? 'class=active' : '' }}} ><a href="#{{$OrderShipment->id}}tab" data-toggle="tab"><i style="color:{{{$OrderShipment->order_shipment_status_id == '4'?($order->bl_draft_confirmed?'green':'red'):'green'}}} " class="fa fa-check-circle"></i> {{$OrderShipment->OrderShipmentStatus->shipping_status_en}}
+                <span class="pull-right small text-muted">{{count($OrderShipment->OrderShipmentFiles)}}</span>
+              </a></li>
               @endforeach
 
-              @endif
-
-            </div>
+            </ul>
           </div>
-          @endforeach
-        </div>
-      </div>
+          <div class="col-xs-9">
+            <div class="tab-content">
 
+
+
+              @foreach($order->OrderShipments as $OrderShipment)
+              <div class="tab-pane {{{ $loop->first? 'active' : '' }}}" id="{{$OrderShipment->id}}tab">
+                <div class="col-xs-12">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <h4>Status: <span>{{$OrderShipment->OrderShipmentStatus->shipping_status_en}} </span></h4>
+                      <h4>Dated: <span>{{date('M j, Y H:i',strtotime($OrderShipment->created_at))}}</span></h4>
+                    </div>
+                    <div class="col-xs-6">
+                      @if($OrderShipment->order_shipment_status_id == 4)
+                      <h4>BL Status : {!! $order->bl_draft_confirmed?'<span class="label label-success">Confirmed</span>':'<span class="label label-danger">Not Confirmed</span>'!!}</h4>
+                      @endif
+
+                      @if(isset($order->shipping_tracking_id) || isset($order->shipping_tracking_hyperlink))
+
+                      <h4>Tracking ID: {{$order->shipping_tracking_id}}</h4>
+                      <h4>Tracking link:  <a href="{{$order->shipping_tracking_hyperlink}}" target="_blank">Click here</a>  </h4>
+
+
+                      @endif
+                    </div>
+                  </div>
+                  @if($OrderShipment->order_shipment_status_id != 3)
+                  <h4>Files</h4>
+                  <table class="table table-striped">
+                    <thead>
+                     <tr>
+                      <th>Filename</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   @foreach($OrderShipment->OrderShipmentFiles as $OrderShipmentFile)
+                   <tr>
+                     <td>
+
+                      {{$OrderShipmentFile->original_filename}}
+                    </td>
+                    <td>
+                     @if($OrderShipment->order_shipment_status_id == 4 && !$order->bl_draft_confirmed)
+                     <form class="form-inline pull-right" role="form"  method="Post"  action="{{route('myorders.update',$order->id)}}">
+                      {{csrf_field()}}
+                      {{ method_field('PATCH') }}
+                      <button type="submit" name="submit" value="confirmBl" class="btn btn-xs btn-success">Confirm</button>
+                    </form>
+                    @endif
+                    <a target="_blank" class="btn btn-primary btn-xs" href="{{route('myorders.orderShipmentfile',[$OrderShipmentFile->id,$OrderShipmentFile->original_filename])}}">Download</a></td>
+                  </tr>
+
+                  @endforeach
+                </tbody>
+              </table>
+
+              <div class="spacer-30"></div>
+
+
+
+              @foreach($OrderShipment->OrderShipmentFiles as $OrderShipmentFile)
+              @if(substr($OrderShipmentFile->mime,0,5) == 'image')
+              @if($loop->first)
+              <div class="service-slider"  style="direction: ltr;">
+               <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                <ul class="slides" style="width: 800%; transition-duration: 0s; transform: translate3d(-1110px, 0px, 0px);">
+                  @endif
+
+
+                  <li class="clone" aria-hidden="true" style="width: 555px; margin-right: 0px; float: left; display: block;">
+                    <img src="{{route('myorders.orderShipmentfile',[$OrderShipmentFile->id,$OrderShipmentFile->original_filename])}}" alt="" draggable="false">
+                    <div class="slider-caption">
+                      <p> {{$OrderShipmentFile->original_filename }}  </p>
+                    </div>
+                  </li>
+                  @if($loop->last)
+
+                </ul>
+              </div>
+              <ul class="flex-direction-nav">
+                <li class="flex-nav-prev"><a class="flex-prev" href="#">{{__('Previous')}}</a></li>
+                <li class="flex-nav-next"><a class="flex-next" href="#">{{__('Next')}}</a></li>
+              </ul>
+            </div>
+            @endif
+            @endif
+            @endforeach
+
+            @endif
+
+          </div>
+        </div>
+        @endforeach
+      </div>
     </div>
 
   </div>
+
+</div>
 </div>
 </div>
 
@@ -300,16 +306,16 @@
 <div class="comments1">
   <h3 class="title-2 text-center"> {{count($order->OrderComments)}} Message(s)</h3>
   <div class="message-box" >
-  @foreach($order->OrderComments->sortByDesc('created_at') as $orderComment)
-  <div class="{{$orderComment->User->UserRole($orderComment->User->id) == 'Subscriber'?'message1':'message2'}}">
-    <i class="fa fa-user-circle" ></i>
-    <h3>{{$orderComment->User->first_name}} {{$orderComment->User->last_name}} <span {{$orderComment->User->UserRole($orderComment->User->id) == 'Subscriber'?'dir="rtl"':''}}>{{date('M j, Y H:i',strtotime($orderComment->created_at))}}</span> </h3>
-  
-    <p>{{$orderComment->comment}}</p>
+    @foreach($order->OrderComments->sortByDesc('created_at') as $orderComment)
+    <div class="{{$orderComment->User->UserRole($orderComment->User->id) == 'Subscriber'?'message1':'message2'}}">
+      <i class="fa fa-user-circle" ></i>
+      <h3>{{$orderComment->User->first_name}} {{$orderComment->User->last_name}} <span {{$orderComment->User->UserRole($orderComment->User->id) == 'Subscriber'?'dir="rtl"':''}}>{{date('M j, Y H:i',strtotime($orderComment->created_at))}}</span> </h3>
+
+      <p>{{$orderComment->comment}}</p>
+    </div>
+
+    @endforeach
   </div>
-  
-  @endforeach
-</div>
 
 </div>
 <div class="col-md-12 text-center">

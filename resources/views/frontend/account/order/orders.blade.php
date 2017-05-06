@@ -13,8 +13,8 @@
   <div class="container">
 
     <div class="row about-sidebar">
- <div class="spacer-40"></div>
-    <div class="col-md-10 about-content">
+     <div class="spacer-40"></div>
+     <div class="col-md-10 about-content">
        <div class="panel-div">
         <div class="panel-title">My Orders</div>
         <div class="content">
@@ -38,17 +38,19 @@
             @endforeach
           </tbody>
         </table>
-
+        <div class="pull-right">
+          {{$orders->links()}}
         </div>
       </div>
     </div>
+  </div>
 
   <div class="col-md-2 sidebar left" style="padding:0;">
     <div class="sidebar-blog-categories">
       @include('partials._acct-sidebar')
     </div>
   </div>
-  </div>
+</div>
 
 </div>
 

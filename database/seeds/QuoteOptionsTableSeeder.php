@@ -28,6 +28,9 @@ class QuoteOptionsTableSeeder extends Seeder
 
             ['id'=>'9','option_type'=>'4','name_en'=>'US$','name_ar'=>'US$'],
             ['id'=>'10','option_type'=>'4','name_en'=>'SAR','name_ar'=>'SAR'],
+            ['id'=>'11','option_type'=>'4','name_en'=>'AED','name_ar'=>'AED'],
+            ['id'=>'12','option_type'=>'4','name_en'=>'EUR','name_ar'=>'EUR'],
+
           
     		
     		]);
