@@ -98,13 +98,16 @@
 
 									@if($quote->status != 3)
 									<button type="submit" name="submit" class="btn btn-block btn-primary" value="assignSalesRep">Assign</button>
-									<button type="submit" name="submit" class="btn btn-block btn-success" value="sendQuote">Approve</button>
 									
-									@if(User::isSalesExecutive())
+									
+									<button type="submit" name="submit" class="btn btn-block btn-success" value="sendQuote">Approve</button>
+									@endif
+									@endif
+									@if(User::isSalesExecutive() && $quote->status != 3)
 									<button type="submit" name="submit" class="btn btn-block btn-success" value="quoteProcessed">Processed</button>
 									@endif
-									@endif
-									@endif
+									
+									
 								</form>
 							</div>
 						</div>

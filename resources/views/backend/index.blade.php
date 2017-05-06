@@ -216,6 +216,53 @@
       </div>
 
     </div>
+
+    <div class="col-md-6">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Quotes for Approval</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive">
+            <table class="table no-margin">
+              <thead>
+                <tr>
+                  <th>Quote #</th>
+                  <th>Customer</th>
+                  <th>Status</th>
+                  <th>Assigned To</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($quotesForApproval as $quote)
+                <tr>
+                  <td><a href="{{route('quote-requests.show',$quote->id)}}">{{$quote->quote_no}}</a></td>
+                  <td>{{$quote->User->first_name}} {{$quote->User->last_name}}
+                    {!! User::isActivated($quote->user_id)?'<span class="label label-success">Activated</span>':'<span class="label label-danger">Not-Activated</span>' !!}</td>
+                    <td><span class="label label-{{$quote->status==1?'danger':'success'}}">{{$quote->Status->status_en}}</span></td>
+                    <td>
+                      {{isset($quote->AssignedTo)?$quote->AssignedTo->first_name:''}} {{isset($quote->AssignedTo)?$quote->AssignedTo->last_name:''}}</td>
+
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="box-footer clearfix">
+              <a href="{{route('quote-requests.index')}}" class="btn btn-sm btn-info btn-flat pull-left">Show All Requests</a>
+            </div>
+          </div>
+
+        </div>
+
     <!-- Left col -->
     <section class="col-lg-7 connectedSortable">
 

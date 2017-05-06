@@ -42,9 +42,11 @@ class DashboardController extends Controller
 			$prodcount[]=$cat;
 		}
 		$quotes=[];
+		$quotesForApproval=[];
 		if(User::isSupervisor())
 		{
 			$quotes = Quote::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())->get();
+			$quotesForApproval = Quote::where('status', '=', '2')->get();
 		}
 		elseif(User::isSalesExecutive())
 		{
@@ -69,6 +71,6 @@ class DashboardController extends Controller
 
 		$ratings = new Rating();
 
-		return view('backend.index')->with('totalOrders',$totalOrders)->with('totalQuotes',$totalQuotes)->with('totalRegistrations',$totalRegistrations)->with('totalProducts',$totalProducts)->with('ratings',$ratings)->with('quotes',$quotes)->with('orders',$orders)->with('prodcount',$prodcount);
+		return view('backend.index')->with('totalOrders',$totalOrders)->with('totalQuotes',$totalQuotes)->with('totalRegistrations',$totalRegistrations)->with('totalProducts',$totalProducts)->with('ratings',$ratings)->with('quotes',$quotes)->with('orders',$orders)->with('prodcount',$prodcount)->with('quotesForApproval',$quotesForApproval);
 	}
 }
