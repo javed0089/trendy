@@ -8,6 +8,7 @@ use App\Models\Quotation\Cart;
 use App\Models\Quotation\Quote;
 use App\Models\Quotation\QuoteDetail;
 use App\Models\Quotation\QuoteOption;
+use App\Notifications\QuoteRequestMade;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -227,6 +228,10 @@ class QuoteController extends Controller
           $newReg = Session::get('newUser');
           Session::forget('newUser');
           Session::forget('oldUrl');
+
+          //$user = User::find('14');
+         // $user->notify(new QuoteRequestMade($quote));
+
           if($newReg)
             return redirect()->route('message')->with('success', 'Your quote was send succesfully, but you must activate your account to have your request processed.');
           else

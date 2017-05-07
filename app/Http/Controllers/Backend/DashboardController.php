@@ -51,25 +51,27 @@ class DashboardController extends Controller
 		elseif(User::isSalesExecutive())
 		{
 			$user=Sentinel::getUser();
-			$quotes = Quote::whereDate('created_at', '=', Carbon::today()->subDays(10)->toDateString())
+			$quotes = Quote::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())
 			->where('assign_to_id','=',$user->id)->get();
+
 		}
 
 		$orders=[];
 		if(User::isSupervisor())
 		{
-			$orders = Order::whereDate('created_at', '=', Carbon::today()->toDateString())->get();
+			$orders = Order::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())->get();
 		}
 		elseif(User::isSalesExecutive())
 		{
 			$user=Sentinel::getUser();
-			$orders = Order::whereDate('created_at', '=', Carbon::today()->toDateString())
+			$orders = Order::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())
 			->where('assign_to_id','=',$user->id)->get();
 		}
 
 
 
 		$ratings = new Rating();
+
 
 		return view('backend.index')->with('totalOrders',$totalOrders)->with('totalQuotes',$totalQuotes)->with('totalRegistrations',$totalRegistrations)->with('totalProducts',$totalProducts)->with('ratings',$ratings)->with('quotes',$quotes)->with('orders',$orders)->with('prodcount',$prodcount)->with('quotesForApproval',$quotesForApproval);
 	}

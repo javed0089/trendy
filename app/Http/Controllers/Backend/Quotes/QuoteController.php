@@ -28,52 +28,36 @@ class QuoteController extends Controller
 
         $quotes=[];        
         if(User::isSupervisor()){
-/*$queries =[];
-$columns = ['status','assign_to_id'];
-foreach ($columns as $column) {
-    if(request()->has($column)){
-        $quotes = Quote::where($column,request($column));
-        $queries[$column] = request($column);
-    }
-}
-}
-if($queries)
-$quotes = $quotes->paginate(2)->appends($queries);
-else
-$quotes = Quote::paginate(2);
-*/
+            $quotes = Quote::where(function($query){
+                $status = request('status')?request('status'):null;
+                $assigned = request('assign_to_id')?request('assign_to_id'):null;
 
+                if(isset($status)){
+                    $query->where('status','=',$status);
+                }
+                if(isset($assigned)){
+                    $query->where('assign_to_id','=',$assigned);
+                }
 
-$quotes = Quote::where(function($query){
-    $status = request('status')?request('status'):null;
-    $assigned = request('assign_to_id')?request('assign_to_id'):null;
+                $query->where('status','>','0');
+            })->orderBy('created_at','Desc')->paginate(15)->appends(['status'=> request('status'),'assign_to_id'=> request('assign_to_id')]);
+        }
+        elseif(User::isSalesExecutive()){
+            $user=Sentinel::getUser();
+            $quotes = Quote::where(function($query) use ($user){
+                $status = request('status')?request('status'):null;
+                if(isset($status)){
+                    $query->where('status','=',$status)
+                    ->where('assign_to_id','=',$user->id);
+                }
 
-    if(isset($status)){
-        $query->where('status','=',$status);
-    }
-    if(isset($assigned)){
-        $query->where('assign_to_id','=',$assigned);
-    }
-
-    $query->where('status','>','0');
-})->orderBy('created_at','Desc')->paginate(15)->appends(['status'=> request('status'),'assign_to_id'=> request('assign_to_id')]);
-}
-elseif(User::isSalesExecutive()){
-    $user=Sentinel::getUser();
-    $quotes = Quote::where(function($query) use ($user){
-        $status = request('status')?request('status'):null;
-        if(isset($status)){
-            $query->where('status','=',$status)
-            ->where('assign_to_id','=',$user->id);
+                $query->where('status','>','0')
+                ->where('assign_to_id','=',$user->id);
+            })->orderBy('created_at','Desc')->paginate(15)->appends('status',request('status'));
         }
 
-        $query->where('status','>','0')
-        ->where('assign_to_id','=',$user->id);
-    })->orderBy('created_at','Desc')->paginate(15)->appends('status',request('status'));
-}
-
-return view('backend.quotes.index')->with('quotes',$quotes)->with('statuses',$statuses)->with('salesExecutives',$salesExecutives);
-}
+        return view('backend.quotes.index')->with('quotes',$quotes)->with('statuses',$statuses)->with('salesExecutives',$salesExecutives);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -200,13 +184,13 @@ return view('backend.quotes.index')->with('quotes',$quotes)->with('statuses',$st
             return redirect()->route('quote-requests.show',$quoteDetail->quote_id)->with('success','Record updated successfully!');
         }
         elseif($submitReq =="quoteProcessed"){
-           $quote->status = '2';
-           $quote->save();
+         $quote->status = '2';
+         $quote->save();
 
-           foreach ($quote->QuoteDetails as $quoteProduct) 
-           {
-               if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
-               {
+         foreach ($quote->QuoteDetails as $quoteProduct) 
+         {
+             if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
+             {
                 $quoteProduct->status = '2';
                 $quoteProduct->save();
             }
@@ -214,13 +198,13 @@ return view('backend.quotes.index')->with('quotes',$quotes)->with('statuses',$st
         return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
     }
     elseif($submitReq =="setValidity"){
-       $quote->quote_validity = $request->quote_validity;
-       $quote->save();
+     $quote->quote_validity = $request->quote_validity;
+     $quote->save();
 
-       return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
-   }
-   elseif($submitReq =="sendQuote")
-   {
+     return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
+ }
+ elseif($submitReq =="sendQuote")
+ {
     $quote->status = '3';
     $quote->save();
 

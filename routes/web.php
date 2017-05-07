@@ -148,6 +148,11 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 	Route::get('/','Backend\DashboardController@index');
 
 	Route::group(['middleware' =>'super-admin'], function(){
+
+		///////*****Email testing********//////
+		Route::get('sendNotification', 'Backend\Notification\NotificationController@send')->name('sendNotification');
+
+
 		///////*****User Management********//////
 		Route::get('user/register', 'Backend\User\RegisterController@index');
 		Route::post('user/register', 'Backend\User\RegisterController@postRegister');
