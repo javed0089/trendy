@@ -12,10 +12,18 @@ use App\Models\Order\OrderShipmentFiles;
 use App\Models\Order\OrderShipmentStatus;
 use App\Models\Rating\Rating;
 use App\Models\Status\Status;
+use App\Notifications\OrderAssigned;
+use App\Notifications\OrderDocumentUploaded;
+use App\Notifications\OrderPaymentConfirmed;
+use App\Notifications\OrderPiLoaded;
+use App\Notifications\OrderProcessed;
+use App\Notifications\OrderShipmentStarted;
+use App\Notifications\OrderShipmentStatusUpdated;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Sentinel;
 
@@ -155,8 +163,13 @@ class OrderController extends Controller
         ]);
       if($request->assign_to_id>0){
         $order->assign_to_id = $request->assign_to_id;
-        $order->status = '4';
+        if($order->status < 4)
+          $order->status = '4';
         $order->save();
+
+         //Send Notification to assigned User
+        $user=$order->AssignedTo;
+        $user->notify(new OrderAssigned($order,"backend"));
 
         return redirect()->route('orders.show',$id)->with('success','Record updated successfully!');
       }
@@ -164,6 +177,13 @@ class OrderController extends Controller
     elseif($submitReq =="orderProcessed"){
       $order->status = '2';
       $order->save();
+
+      //Send Notification to Supervisors
+        //Get all Supervisors
+      $role = Sentinel::findRoleBySlug('supervisor');
+      $users = $role->users()->with('roles')->get();
+      Notification::send($users, new OrderProcessed($order,"backend"));
+
       return redirect()->route('orders.show',$id)->with('success','Record updated successfully!');
     }
     elseif($submitReq =="addCommentPrvt"){
@@ -173,118 +193,158 @@ class OrderController extends Controller
       $orderComment->user_id = User::getId();
       $orderComment->comment = $request->comment;
       $orderComment->is_private = '1';
-      $orderComment->save();
-      return redirect()->route('orders.show',$id)->with('success','Private message added successfully!');
-    }
-    elseif($submitReq =="addCommentPub"){
-      $orderComment = new OrderComment;
-      $orderComment->comment_type = '1';
-      $orderComment->order_id = $id;
-      $orderComment->user_id = User::getId();
-      $orderComment->comment = $request->comment;
-      $orderComment->is_private = '0';
-      $orderComment->save();
-      return redirect()->route('orders.show',$id)->with('success','Public message added successfully!');
-    }
-    elseif($submitReq =="uploadDocument"){
 
-      $this->validate($request, [
-       'order_document' => 'required|mimes:pdf|max:10000',
-       'document_type' => 'required'
-       ]);
-
-      $file = $request->file('order_document');
-      $filename = rand(1,100).time().'.'. 'pdf';
-      $location="order-docs/".$order->id.'/';
-      if($file){
-
-        Storage::disk('local')->put($location.$filename,  File::get($file));
-
-        $doc_name = DocumentType::find($request->document_type);
-        $doc_name =str_replace(' ', '', $doc_name->document_type_en);
-        $orderFile = new OrderFile;
-        $orderFile->filename=$filename;
-        $orderFile->document_type = $request->document_type;
-        $orderFile->mime=$file->getClientMimeType();
-        $orderFile->original_filename=$doc_name.'-'.$order->id.'.pdf';
-        $orderFile->user_id = Sentinel::check()->id;
-
-        $order->OrderFiles()->save($orderFile);
-
-        if($request->document_type == 1)
-        {
-          $order->status='9';
-          $order->save();
-        }
+      //Send Notification to Supervisor or Sales Executive
+      if(User::isSupervisor())
+      {
+       $user=$order->AssignedTo;
+       $user->notify(new NewOrderMessage($order,"backend"));
+     }
+     elseif(User::isSalesExecutive())
+     {
+       $role = Sentinel::findRoleBySlug('supervisor');
+       $users = $role->users()->with('roles')->get();
+       Notification::send($users, new NewOrderMessage($order,"backend"));
+     }
 
 
-
-        return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
-      }    
-    }
-    elseif($submitReq == "confirmPayment"){
-      $order->payment_status = '1';
-      $order->status='12';
-      $order->save();
-      return redirect()->route('orders.show',$id)->with('success','Payment confirmed!');
-    }
-    elseif($submitReq == "shipment"){
-      $order->status = '8';
-      $order->save();
-      return redirect()->route('orders.show',$id)->with('success','Order status shipment.');
-    }
-    elseif($submitReq == "addShippingstatus"){
-      $orderShipment = new OrderShipment;
-      $orderShipment->order_shipment_status_id = $request->order_shipment_status;
-      $order->OrderShipments()->save($orderShipment);
-      if($request->order_shipment_status =='1')
-       $order->status = '14';
-     elseif($request->order_shipment_status =='2')
-       $order->status = '15';
-     elseif($request->order_shipment_status =='3')
-       $order->status = '16';
-     elseif($request->order_shipment_status =='4')
-       $order->status = '17';
-     elseif($request->order_shipment_status =='5')
-       $order->status = '18';
-
-     $order->save();
-     return redirect()->route('orders.show',$id)->with('success','Order status added.');
+     $orderComment->save();
+     return redirect()->route('orders.show',$id)->with('success','Private message added successfully!');
    }
-   elseif($submitReq == "shipmentStatusImage"){
-     $this->validate($request, [
-       'order_shipment_document' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:20000'
-       ]);
+   elseif($submitReq =="addCommentPub"){
+    $orderComment = new OrderComment;
+    $orderComment->comment_type = '1';
+    $orderComment->order_id = $id;
+    $orderComment->user_id = User::getId();
+    $orderComment->comment = $request->comment;
+    $orderComment->is_private = '0';
+    $orderComment->save();
 
-     $file = $request->file('order_shipment_document');
-     $filename = rand(1,100).time().'.'. $file->getClientOriginalExtension();
-     $location="order-docs/".$order->id.'/';
-     if($file){
+          //Send Notification Customer
+    $customer=$order->User;
+    $customer->notify(new NewOrderMessage($order,"frontend"));
+
+
+    return redirect()->route('orders.show',$id)->with('success','Public message added successfully!');
+  }
+  elseif($submitReq =="uploadDocument"){
+
+    $this->validate($request, [
+     'order_document' => 'required|mimes:pdf|max:10000',
+     'document_type' => 'required'
+     ]);
+
+    $file = $request->file('order_document');
+    $filename = rand(1,100).time().'.'. 'pdf';
+    $location="order-docs/".$order->id.'/';
+    if($file){
 
       Storage::disk('local')->put($location.$filename,  File::get($file));
 
-      $orderShipmentFile = new OrderShipmentFiles;
-      $orderShipmentFile->filename=$filename;
-      $orderShipmentFile->mime=$file->getClientMimeType();
-      $orderShipmentFile->original_filename=$file->getClientOriginalName();
+      $doc_name = DocumentType::find($request->document_type);
+      $doc_name =str_replace(' ', '', $doc_name->document_type_en);
+      $orderFile = new OrderFile;
+      $orderFile->filename=$filename;
+      $orderFile->document_type = $request->document_type;
+      $orderFile->mime=$file->getClientMimeType();
+      $orderFile->original_filename=$doc_name.'-'.$order->id.'.pdf';
+      $orderFile->user_id = Sentinel::check()->id;
 
-      $OrderShipment =Ordershipment::find($request->order_shipment_id);
+      $order->OrderFiles()->save($orderFile);
 
-      $OrderShipment->OrderShipmentFiles()->save($orderShipmentFile);
+      if($request->document_type == 1)
+      {
+        $order->status='9';
+        $order->pi_confirmed  ='0';
+        $order->save();
+      }
+
+      //Send Notification Customer
+      $customer=$order->User;
+      $customer->notify(new OrderPiLoaded($order,"frontend"));
+
 
 
       return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
     }    
   }
+  elseif($submitReq == "confirmPayment"){
+    $order->payment_status = '1';
+    $order->status='12';
 
-  elseif($submitReq == "shipmentTrackingUpdate"){
-    $order->shipping_tracking_id = $request->shipping_tracking_id;
-    $order->shipping_tracking_hyperlink = $request->shipping_tracking_hyperlink;
+    //Send Notification Customer
+    $customer=$order->User;
+    $customer->notify(new OrderPaymentConfirmed($order,"frontend"));
+
     $order->save();
-    return redirect()->route('orders.show',$id)->with('success','Shipment tracking updated.');
+    return redirect()->route('orders.show',$id)->with('success','Payment confirmed!');
   }
+  elseif($submitReq == "shipment"){
+    $order->status = '8';
+    $order->save();
 
-  return back();
+     //Send Notification Customer
+    $customer=$order->User;
+    $customer->notify(new OrderShipmentStarted($order,"frontend"));
+
+    return redirect()->route('orders.show',$id)->with('success','Order status shipment.');
+  }
+  elseif($submitReq == "addShippingstatus"){
+    $orderShipment = new OrderShipment;
+    $orderShipment->order_shipment_status_id = $request->order_shipment_status;
+    $order->OrderShipments()->save($orderShipment);
+    if($request->order_shipment_status =='1')
+     $order->status = '14';
+   elseif($request->order_shipment_status =='2')
+     $order->status = '15';
+   elseif($request->order_shipment_status =='3')
+     $order->status = '16';
+   elseif($request->order_shipment_status =='4')
+     $order->status = '17';
+   elseif($request->order_shipment_status =='5')
+     $order->status = '18';
+
+    //Send Notification Customer
+   $customer=$order->User;
+   $customer->notify(new OrderShipmentStatusUpdated($order,"frontend",$order->Status->status_en));
+
+   $order->save();
+   return redirect()->route('orders.show',$id)->with('success','Order status added.');
+ }
+ elseif($submitReq == "shipmentStatusImage"){
+   $this->validate($request, [
+     'order_shipment_document' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:20000'
+     ]);
+
+   $file = $request->file('order_shipment_document');
+   $filename = rand(1,100).time().'.'. $file->getClientOriginalExtension();
+   $location="order-docs/".$order->id.'/';
+   if($file){
+
+    Storage::disk('local')->put($location.$filename,  File::get($file));
+
+    $orderShipmentFile = new OrderShipmentFiles;
+    $orderShipmentFile->filename=$filename;
+    $orderShipmentFile->mime=$file->getClientMimeType();
+    $orderShipmentFile->original_filename=$file->getClientOriginalName();
+
+    $OrderShipment =Ordershipment::find($request->order_shipment_id);
+
+    $OrderShipment->OrderShipmentFiles()->save($orderShipmentFile);
+
+
+    return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
+  }    
+}
+
+elseif($submitReq == "shipmentTrackingUpdate"){
+  $order->shipping_tracking_id = $request->shipping_tracking_id;
+  $order->shipping_tracking_hyperlink = $request->shipping_tracking_hyperlink;
+  $order->save();
+  return redirect()->route('orders.show',$id)->with('success','Shipment tracking updated.');
+}
+
+return back();
 }
 
     /**

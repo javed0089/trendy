@@ -36,7 +36,9 @@
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-table"></i> Order Details</a></li>
 					<li><a href="#tab_2" data-toggle="tab"><i class="fa fa-folder"></i> Order Documents ({{ count($order->OrderFiles) }} )</a></li>
+					@if($order->Status->status_type ==3)
 					<li><a href="#tab_3" data-toggle="tab"><i class="fa fa-folder"></i> Shipping </a></li>
+					@endif
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="tab_1">
@@ -66,6 +68,7 @@
 								<input id="rating" hidden 	 type="text"  name="rating" value="{{count($rating)>0? $rating->rating:''}}">
 							</div>
 							<div class="col-md-4">
+							<h4>Quotation : <span>{{$order->Quote->quote_no}}</span></h4>
 								<h4>Dated : <span>{{date('M j, Y',strtotime($order->created_at))}}</span></h4>
 								<h4>P.I Status : {!! $order->pi_confirmed?'<span class="label label-success">Confirmed</span>':'<span class="label label-danger">Not Confirmed</span>'!!}</h4>
 								<h4>Payment Status : {!! $order->payment_status?'<span class="label label-success">Paid</span>':'<span class="label label-danger">Not Paid</span>'!!}</h4>
@@ -83,10 +86,14 @@
 										<option {{$order->assign_to_id==$user->id?'Selected':''}} value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
 										@endforeach
 									</select>
+									@if($order->status <18)
 									<button type="submit" name="submit" class="btn btn-block btn-primary" value="assignSalesRep">Assign</button>
+									@endif
+									@if($order->Status->status_type !=3 )
 									<button type="submit" name="submit" class="btn btn-block btn-success" value="shipment">Start Shipment</button>
 									@endif
-									@if(User::isSalesExecutive())
+									@endif
+									@if(User::isSalesExecutive() && ($order->Status->status_type !=3 ))
 									<button type="submit" name="submit" class="btn btn-block btn-success" value="orderProcessed">Processed</button>
 									@endif
 
@@ -138,7 +145,7 @@
 							</table>
 
 
-						
+
 
 
 
@@ -331,6 +338,7 @@
 							</div>
 						</div>		
 
+@if($order->Status->status_type == 3)
 
 						<div class="tab-pane" id="tab_3">
 							<div class="box-header with-border">
@@ -510,7 +518,8 @@
 									</div>
 								</div>
 							</div>
-						</div>					
+						</div>	
+@endif				
 					</div>
 
 

@@ -27,11 +27,12 @@
             <!-- inner menu: contains the actual data -->
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
 
-
+<!-- inner menu: contains the actual data -->
+          <ul class="menu">
              @foreach (User::getUser()->notifications as $notification) 
              <li>
-              <a href="/backoffice/quotes/quote-requests/{{$notification->data['Id']}}" class="{{$notification->read_at?'':'text-bold'}}">
-              <i class="fa fa-pencil-square-o " ></i> {{$notification->data['Title']}}
+              <a href="{{route($notification->data['route-name'],$notification->data['Id'])}}"  class="{{$notification->read_at?'':'text-bold'}}">
+                <i class="fa fa-pencil-square-o " ></i> {{$notification->data['Title']}}
               </a>
             </li>
 
@@ -44,43 +45,43 @@
       </ul>
     </li>
 
-    <!-- User Account: style can be found in dropdown.less -->
-    <li class="dropdown user user-menu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <img src="{{route('users.getprofilepicture',Sentinel::check()->id)}}" class="user-image" alt="User Image">
-        <span class="hidden-xs">{{Sentinel::getUser()->first_name." ".Sentinel::getUser()->last_name}}</span>
-      </a>
-      <ul class="dropdown-menu">
-        <!-- User image -->
-        <li class="user-header">
-          <img src="{{route('users.getprofilepicture',Sentinel::check()->id)}}" class="img-circle" alt="User Image">
+  <!-- User Account: style can be found in dropdown.less -->
+  <li class="dropdown user user-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <img src="{{route('users.getprofilepicture',Sentinel::check()->id)}}" class="user-image" alt="User Image">
+      <span class="hidden-xs">{{Sentinel::getUser()->first_name." ".Sentinel::getUser()->last_name}}</span>
+    </a>
+    <ul class="dropdown-menu">
+      <!-- User image -->
+      <li class="user-header">
+        <img src="{{route('users.getprofilepicture',Sentinel::check()->id)}}" class="img-circle" alt="User Image">
 
-          <p>
-            {{Sentinel::getUser()->first_name." ".Sentinel::getUser()->last_name}} -
-            {{Sentinel::getUser()->roles()->first()->name}}
+        <p>
+          {{Sentinel::getUser()->first_name." ".Sentinel::getUser()->last_name}} -
+          {{Sentinel::getUser()->roles()->first()->name}}
 
-            <small>Member since {{Sentinel::getUser()->created_at}}</small>
-          </p>
-        </li>
-        <!-- Menu Body -->
+          <small>Member since {{Sentinel::getUser()->created_at}}</small>
+        </p>
+      </li>
+      <!-- Menu Body -->
 
-        <!-- Menu Footer-->
-        <li class="user-footer">
-          <div class="pull-left">
-            <a href="{{route('users.show')}}" class="btn btn-default btn-flat">Profile</a>
-          </div>
-          <div class="pull-right">
-            <form action="/backoffice/logout" method="post" id="logout-form">
-              {{csrf_field()}}
-              <a href="#" onclick="document.getElementById('logout-form').submit()" class="btn btn-default btn-flat">Logout</a>
+      <!-- Menu Footer-->
+      <li class="user-footer">
+        <div class="pull-left">
+          <a href="{{route('users.show')}}" class="btn btn-default btn-flat">Profile</a>
+        </div>
+        <div class="pull-right">
+          <form action="/backoffice/logout" method="post" id="logout-form">
+            {{csrf_field()}}
+            <a href="#" onclick="document.getElementById('logout-form').submit()" class="btn btn-default btn-flat">Logout</a>
 
-            </form>
-          </div>
-        </li>
-      </ul>
-    </li>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </li>
 
-  </ul>
+</ul>
 </div>
 </nav>
 </header>

@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Location\Location;
 use App\Models\Quotation\Quote;
 use App\Models\Quotation\QuoteComment;
+use App\Notifications\NewQuoteMessage;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 use Sentinel;
 
@@ -57,7 +59,10 @@ class QuotesController extends Controller
         $myquote=[];
         $user=User::getUser();
         $myquote=$user->Quotes()->find($id);
-        return view('frontend.account.quote-detail')->with('myquote',$myquote);
+        if($myquote)
+            return view('frontend.account.quote-detail')->with('myquote',$myquote);
+        else
+            abort(404);
     }
 
     /**
@@ -68,9 +73,9 @@ class QuotesController extends Controller
      */
     public function edit($id)
     {
-        
-      
-       
+
+
+
     }
 
     /**
@@ -95,6 +100,19 @@ class QuotesController extends Controller
 
             $quoteComment->save();
 
+            //Send Notification Assigned Sales Executive
+            $quote=Quote::find($id);
+            if($quote->AssignedTo)
+            {
+                $assignedUser=$quote->AssignedTo;
+                $assignedUser->notify(new NewQuoteMessage($quote,"backend"));
+            }
+            //Send Notification to Supervisors
+            //Get all Supervisors
+            $role = Sentinel::findRoleBySlug('supervisor');
+            $users = $role->users()->with('roles')->get();
+            Notification::send($users, new NewQuoteMessage($quote,"backend"));
+
             return redirect()->route('quotes.show',$id)->with('success','Comment added successfully!');
         }
     }
@@ -116,7 +134,7 @@ class QuotesController extends Controller
         $user=User::getUser();
         $myquote=$user->Quotes()->find($id);
         $quoteProducts = $myquote->QuoteDetails->where('status','=','3');
-       $location = Location::first();
+        $location = Location::first();
 
         
         $data['myquote'] = $myquote;

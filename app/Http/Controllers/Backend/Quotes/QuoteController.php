@@ -8,9 +8,14 @@ use App\Models\Quotation\QuoteComment;
 use App\Models\Quotation\QuoteDetail;
 use App\Models\Quotation\QuoteOption;
 use App\Models\Status\Status;
+use App\Notifications\NewQuoteMessage;
+use App\Notifications\QuoteAssigned;
+use App\Notifications\QuoteRequestProcessed;
+use App\Notifications\QuoteRequestQuoted;
 use App\User;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class QuoteController extends Controller
 {
@@ -136,7 +141,8 @@ class QuoteController extends Controller
         $quote = Quote::find($id);
         $submitReq = $request->submit;
 
-        if($submitReq =="assignSalesRep"){
+        if($submitReq =="assignSalesRep")
+        {
             $this->validate($request, [
                 'assign_to_id' =>   'required',
                 ]);
@@ -145,10 +151,16 @@ class QuoteController extends Controller
                 $quote->status = '4';
                 $quote->save();
 
+                //Send Notification to assigned User
+                $user=$quote->AssignedTo;
+                $user->notify(new QuoteAssigned($quote,"backend"));
+
+
                 return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
             }
         }
-        elseif($submitReq =="saveProduct"){
+        elseif($submitReq =="saveProduct")
+        {
 
             $podNotReq = array('ExWorks','FOB');
             if((!in_array($request->delivery_terms,$podNotReq ) && $request->port_of_delivery==""))
@@ -183,55 +195,85 @@ class QuoteController extends Controller
             $quoteDetail->save();
             return redirect()->route('quote-requests.show',$quoteDetail->quote_id)->with('success','Record updated successfully!');
         }
-        elseif($submitReq =="quoteProcessed"){
-         $quote->status = '2';
-         $quote->save();
+        elseif($submitReq =="quoteProcessed")
+        {
+           $quote->status = '2';
+           $quote->save();
 
-         foreach ($quote->QuoteDetails as $quoteProduct) 
-         {
-             if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
-             {
+           foreach ($quote->QuoteDetails as $quoteProduct) 
+           {
+               if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
+               {
                 $quoteProduct->status = '2';
                 $quoteProduct->save();
             }
         }
+
+        //Send Notification to Supervisors
+        //Get all Supervisors
+        $role = Sentinel::findRoleBySlug('supervisor');
+        $users = $role->users()->with('roles')->get();
+        Notification::send($users, new QuoteRequestProcessed($quote,"backend"));
+
         return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
     }
-    elseif($submitReq =="setValidity"){
-     $quote->quote_validity = $request->quote_validity;
-     $quote->save();
+    elseif($submitReq =="setValidity")
+    {
+        $quote->quote_validity = $request->quote_validity;
+        $quote->save();
 
-     return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
- }
- elseif($submitReq =="sendQuote")
- {
-    $quote->status = '3';
-    $quote->save();
-
-    foreach ($quote->QuoteDetails as $quoteProduct) {
-        if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
-        {
-            $quoteProduct->status = '3';
-            $quoteProduct->save();
-        }
+        return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
     }
-    return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
+    elseif($submitReq =="sendQuote")
+    {
+        $quote->status = '3';
+        $quote->save();
 
-}
-elseif($submitReq =="addCommentPrvt"){
-    $quoteComment = new QuoteComment;
-    $quoteComment->comment_type = '1';
-    $quoteComment->quote_id = $id;
-    $quoteComment->user_id = User::getId();
-    $quoteComment->is_private = '1';
-    $quoteComment->comment = $request->comment;
+        foreach ($quote->QuoteDetails as $quoteProduct) 
+        {
+            if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
+            {
+                $quoteProduct->status = '3';
+                $quoteProduct->save();
+            }
+        }
 
-    $quoteComment->save();
+        //Send Notification Customer
+        $customer=$quote->User;
+        $customer->notify(new QuoteRequestQuoted($quote,"frontend"));
 
-    return redirect()->route('quote-requests.show',$id)->with('success','Private message added successfully!');
+        return redirect()->route('quote-requests.show',$id)->with('success','Record updated successfully!');
 
-}
-elseif($submitReq =="addCommentPub"){
+    }
+    elseif($submitReq =="addCommentPrvt"){
+        $quoteComment = new QuoteComment;
+        $quoteComment->comment_type = '1';
+        $quoteComment->quote_id = $id;
+        $quoteComment->user_id = User::getId();
+        $quoteComment->is_private = '1';
+        $quoteComment->comment = $request->comment;
+
+        $quoteComment->save();
+
+
+        //Send Notification to Supervisor or Sales Executive
+        if(User::isSupervisor())
+        {
+           $user=$quote->AssignedTo;
+           $user->notify(new NewQuoteMessage($quote,"backend"));
+       }
+       elseif(User::isSalesExecutive())
+       {
+           $role = Sentinel::findRoleBySlug('supervisor');
+           $users = $role->users()->with('roles')->get();
+           Notification::send($users, new NewQuoteMessage($quote,"backend"));
+       }
+
+
+       return redirect()->route('quote-requests.show',$id)->with('success','Private message added successfully!');
+
+   }
+   elseif($submitReq =="addCommentPub"){
     $quoteComment = new QuoteComment;
     $quoteComment->comment_type = '1';
     $quoteComment->quote_id = $id;
@@ -240,6 +282,10 @@ elseif($submitReq =="addCommentPub"){
     $quoteComment->comment = $request->comment;
 
     $quoteComment->save();
+
+        //Send Notification Customer
+    $customer=$quote->User;
+    $customer->notify(new NewQuoteMessage($quote,"frontend"));
 
     return redirect()->route('quote-requests.show',$id)->with('success','Public Comment added successfully!');
 

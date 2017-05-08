@@ -8,9 +8,11 @@ use App\Models\Quotation\Cart;
 use App\Models\Quotation\Quote;
 use App\Models\Quotation\QuoteDetail;
 use App\Models\Quotation\QuoteOption;
+use App\Notifications\NewQuoteRequest;
 use App\Notifications\QuoteRequestMade;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\URL;
 use Sentinel;
 use Session;
@@ -229,8 +231,7 @@ class QuoteController extends Controller
           Session::forget('newUser');
           Session::forget('oldUrl');
 
-          //$user = User::find('14');
-         // $user->notify(new QuoteRequestMade($quote));
+          $this->sendNotifications($quote);
 
           if($newReg)
             return redirect()->route('message')->with('success', 'Your quote was send succesfully, but you must activate your account to have your request processed.');
@@ -240,6 +241,18 @@ class QuoteController extends Controller
 
       }
     }
+  }
+  
+
+  public function sendNotifications($quote)
+  { 
+
+    //Get all Supervisors
+    $role = Sentinel::findRoleBySlug('supervisor');
+    $users = $role->users()->with('roles')->get();
+
+    //Send Notification
+    Notification::send($users, new NewQuoteRequest($quote));
   }
 
 }

@@ -216,7 +216,7 @@
                       @if(isset($order->shipping_tracking_id) || isset($order->shipping_tracking_hyperlink))
 
                       <h4>Tracking ID: {{$order->shipping_tracking_id}}</h4>
-                      <h4>Tracking link:  <a href="{{$order->shipping_tracking_hyperlink}}" target="_blank">Click here</a>  </h4>
+                      <h4>Tracking link:  <a href="{{url($order->shipping_tracking_hyperlink)}}" target="_blank">Click here</a>  </h4>
 
 
                       @endif

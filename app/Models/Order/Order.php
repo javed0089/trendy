@@ -28,7 +28,7 @@ class Order extends Model
 
     public function Quote()
     {
-        return $this->hasOne('App\Models\Quotation\Quote','quote_id','id');
+        return $this->hasOne('App\Models\Quotation\Quote','id','quote_id');
     }
 
 

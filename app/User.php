@@ -4,11 +4,12 @@ namespace App;
 
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 //Authenticatable
 //use Illuminate\Support\Facades\Facade;
-class User extends  Authenticatable
+class User extends EloquentUser
 {
     use Notifiable;
 
@@ -18,7 +19,20 @@ class User extends  Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email',
+        'password',
+        'last_name',
+        'first_name',
+        'permissions',
+        'backend_user',
+        'ip_address',
+        'website',
+        'telephone',
+        'mobile',
+        'address',
+        'city',
+        'country',
+        'company',
     ];
 
     /**

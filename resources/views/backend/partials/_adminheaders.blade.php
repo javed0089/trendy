@@ -20,6 +20,7 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('backend/plugins/iCheck/flat/blue.css')}}">
  
+ 
   <!-- Date Picker -->
   <link rel="stylesheet" href="{{ asset('backend/plugins/datepicker/datepicker3.css')}}">
   <!-- Daterange picker -->
