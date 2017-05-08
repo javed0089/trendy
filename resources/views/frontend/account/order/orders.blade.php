@@ -30,7 +30,7 @@
           <tbody>
             @foreach($orders as $order)
             <tr>
-              <td>{{$order->id}}</td>
+              <td>{{$order->order_no}}</td>
               <td>{{date('M j, Y H:i',strtotime($order->created_at))}}</td>
               <td>{{$order->Status->status_en}}</td>
               <td><a href="{{route('myorders.show',$order->id)}}" class="btn btn-xs btn-default">View</a></td>

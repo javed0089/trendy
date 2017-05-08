@@ -252,6 +252,10 @@ class OrderController extends Controller
       $order->quote_id = $id;
       $order->status = 1;
       $order->save();
+
+      $order->order_no='GAP/ORD/'.date("Y").'/'.$order->id;
+      $order->save();
+
       foreach ($quote->QuoteDetails as $quoteProduct) {
         if($quoteProduct->status==3)
         {

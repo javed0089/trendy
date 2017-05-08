@@ -131,7 +131,6 @@
              <tr>
                <th>Order</th>
                <th>Dated</th>
-               <th>Status</th>
              </tr>
            </thead>
            <tbody>
@@ -139,18 +138,14 @@
             <tr>
               <td>
                 <a href="{{route('myorders.show',$order->id)}}">
-                  <strong>{{$order->id}}</strong></a>
+                  <strong>{{$order->order_no}}</strong></a>
                 </td>
                 <td>
                   <a href="{{route('myorders.show',$order->id)}}">
                     {{date('M j, Y',strtotime($order->created_at))}}
                   </a>
                 </td>
-                <td>
-                  <a href="{{route('myorders.show',$order->id)}}">
-                   {{$order->Status->status_en}}
-                 </a>
-               </td>
+                
              </tr>
              @endforeach
            </tbody>

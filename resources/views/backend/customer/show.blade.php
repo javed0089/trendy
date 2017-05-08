@@ -98,10 +98,10 @@
 								</thead>
 								<tbody>
 
-									@foreach($customer->Quotes as $quote)
+									@foreach($customer->Quotes->sortByDesc('created_at') as $quote)
 									<tr>
 										
-										<td>{{$quote->id}}</td>
+										<td>{{$quote->quote_no}}</td>
 										<td>{{$quote->User->first_name}} {{$quote->User->last_name}}</td>
 										<td>{{ date('M j, Y H:i',strtotime($quote->created_at))}}</td>
 										<td>{{isset($quote->AssignedTo)?$quote->AssignedTo->first_name:''}} {{isset($quote->AssignedTo)?$quote->AssignedTo->last_name:''}}</td>
@@ -145,10 +145,10 @@
 								</thead>
 								<tbody>
 
-									@foreach($customer->Orders as $order)
+									@foreach($customer->Orders->sortByDesc('created_at') as $order)
 									<tr>
 										
-										<td>{{$order->id}}</td>
+										<td>{{$order->order_no}}</td>
 										<td>{{$order->User->first_name}} {{$order->User->last_name}}</td>
 										<td>
 											{!! $order->pi_confirmed?'<span class="label label-success">Confirmed</span>':'<span class="label label-danger">Not Confirmed</span>'!!}

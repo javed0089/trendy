@@ -59,7 +59,7 @@
 						@endif
 						<div class="box-header  with-border" > 
 							<div class="col-md-4">
-								<h4>Order # : <span >{{$order->id}}</span></h4>
+								<h4>Order # : <span >{{$order->order_no}}</span></h4>
 								<h4>Customer : <span >{{$order->User->first_name}} {{$order->User->last_name}}</span></h4>
 								<h4>Email : <span >{{$order->User->email}}</span></h4>
 								<h4>Status : <span>{{$order->Status->status_en}}</span></h4>

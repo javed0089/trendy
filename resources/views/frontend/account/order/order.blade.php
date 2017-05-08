@@ -40,7 +40,7 @@
             <div class="row">
 
               <div class="col-md-4">
-                <h4>Order # : <span >{{$order->id}}</span></h4>
+                <h4>Order # : <span >{{$order->order_no}}</span></h4>
                 <h4>Status : <span>{{$order->Status->status_en}}</span></h4>
 
               </div>

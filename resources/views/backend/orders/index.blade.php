@@ -78,7 +78,7 @@
 									@foreach($orders as $order)
 									<tr>
 										
-										<td>{{$order->id}}</td>
+										<td>{{$order->order_no}}</td>
 										<td>{{$order->User->first_name}} {{$order->User->last_name}}</td>
 										<td>
 											{!! $order->pi_confirmed?'<span class="label label-success">Confirmed</span>':'<span class="label label-danger">Not Confirmed</span>'!!}
