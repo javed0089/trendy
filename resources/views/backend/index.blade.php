@@ -195,7 +195,7 @@
                   <tbody>
                    @foreach($orders as $order)
                    <tr>
-                    <td><a href="{{ route('orders.show',$order->id) }}">{{$order->id}}</a></td>
+                    <td><a href="{{ route('orders.show',$order->id) }}">{{$order->order_no}}</a></td>
                     <td>{{$order->User->first_name}} {{$order->User->last_name}}</td>
                     <td><span class="label label-{{$order->status==1?'danger':'success'}}">{{$order->Status->status_en}}</span></td>
                     <td>
@@ -218,6 +218,7 @@
 
     </div>
 
+@if(!User::isSalesExecutive())
     <div class="col-md-6">
       <div class="box box-info">
         <div class="box-header with-border">
@@ -263,7 +264,7 @@
           </div>
 
         </div>
-
+@endif
     <!-- Left col -->
     <section class="col-lg-7 connectedSortable">
 
