@@ -258,9 +258,9 @@ table tfoot tr td:first-child {
     <div style="position: relative;height: 840pt">
     <main>
       <div id="details" class="clearfix col-xs-12">
-        <div id="client" class="col-xs-4">
+        <div id="client" class="col-xs-12">
           <div class="to">Attn:</div>
-          <h2 class="name">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h2>
+          <h4 class="name">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
           <div class="address">{{$myquote->User->address}}</div>
           <div class="address">{{$myquote->User->city}},{{$myquote->User->country}}</div>
           <div class="email">{{$myquote->User->email}}</div>
