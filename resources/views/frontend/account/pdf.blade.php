@@ -151,7 +151,7 @@ table td i{
 table th {
   white-space: nowrap;        
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   /*border: 1px solid black;*/
 }
 
