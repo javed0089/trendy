@@ -146,7 +146,7 @@ class QuotesController extends Controller
 
 
         $pdf = PDF::loadView('frontend.account.pdf',$data)->setOption('page-width', '210')
-->setOption('page-height', '297');;
+->setOption('page-height', '297')->setOption('margin-left', 7)->setOption('margin-right', 7)->setOption('margin-top', 2)->setOption('margin-bottom', 2);
         return $pdf->stream('Gap-Quotation-'.$id.'.pdf');
     }
 
