@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html >
+<html lang="ar">
 <head>
   <meta charset="utf-8">
   <title>Gap-Polymers - Quotation</title>
