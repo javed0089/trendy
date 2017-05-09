@@ -259,7 +259,7 @@ table tfoot tr td:first-child {
           Email: info@gap-polymers.com</span>
         </div>
       </div>
-      <div class="row" style="margin-top: 50px;"" >
+      <div class="row" style="margin-top: 10px;" >
         <div style="font-weight: bold; color:#ff0000; padding-left: 15px;" class="col-xs-6" >{{$myquote->quote_no}}</div>
 
         <div style="font-weight: bold; color:#ff0000;padding-right: 15px;" class="col-xs-6 text-right" >{{$myquote->created_at}}</div>
