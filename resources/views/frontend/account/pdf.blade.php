@@ -78,9 +78,12 @@ header {
   text-align: right;
   color: #0359c1;
 }
+#company h4 {
+  font-weight: bold;
+  margin: 0;
+}
 #company span{
  font-size:13px;
- margin-top: -10px;
 }
 
 #details {
@@ -98,11 +101,7 @@ header {
   color: #777777;
 }
 
-h2.name {
-  font-size: 1.4em;
-  font-weight: normal;
-  margin: 0;
-}
+
 #invoice {
   float: right;
   text-align: right;
@@ -247,7 +246,7 @@ table tfoot tr td:first-child {
     </div>
     <div id="company" class="col-xs-6">
       <!--<h2 class="name" style="font-weight: bold;">شـركــــة الشـامــل الحد يثـــة للبـــلاستيــــك</h2>-->
-      <h4 class="name" style="font-weight: bold">GLOBAL ADVANCE POLYMERS LLC</h4>
+      <h4>GLOBAL ADVANCE POLYMERS LLC</h4>
       <span>Captain Baraq Tower - Ibrahem Al Raqi St.<br>
         Bagdadiah West - P.O. Box: 24237<br>
         Jeddah 21449 - Kingdom of Saudi Arabia.<br>
