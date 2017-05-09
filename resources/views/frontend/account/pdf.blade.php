@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <title>Gap-Polymers - Quotation</title>
   <link href="{{public_path('css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Changa" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Reem+Kufi" rel="stylesheet">
   <style type="text/css">
     @font-face {
       font-family: "Georgia, serif";
@@ -250,7 +252,7 @@ table tfoot tr td:first-child {
 
       </div>
       <div id="company" class="col-xs-6">
-        <!--<h2 class="name" style="font-weight: bold;">شـركــــة الشـامــل الحد يثـــة للبـــلاستيــــك</h2>-->
+        <h3 style="font-family: 'Reem Kufi', sans-serif; font-weight: bold;">شـركــــة الشـامــل الحد يثـــة للبـــلاستيــــك</h3>
         <h4>GLOBAL ADVANCE POLYMERS LLC</h4>
         <span>Captain Baraq Tower - Ibrahem Al Raqi St.<br>
           Bagdadiah West - P.O. Box: 24237<br>
