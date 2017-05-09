@@ -272,7 +272,7 @@ table tfoot tr td:first-child {
   </header>
   <div style="position: relative;">
     <main>
-      <div id="details" class="clearfix col-xs-12">
+      <div class="col-xs-12">
        <div class="col-xs-1">
         <div class="to">Attn:</div>
         <div class="to">C.I</div>
