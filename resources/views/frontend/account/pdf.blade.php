@@ -278,11 +278,11 @@ table tfoot tr td:first-child {
         <div class="to">C.I</div>
        </div>
         <div class="col-xs-11">
-          <h4 style="margin: 0">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
-          <div >{{$myquote->User->address}}</div>
-          <div >{{$myquote->User->city}},{{$myquote->User->country}}</div>
-          <div>{{$myquote->User->email}}</div>
-          <div > {{$myquote->User->telephone}}</a> </div>
+          <h4 style="margin: 0;color:#ff0000;">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
+          <div style="color:#ff0000;">{{$myquote->User->address}}</div>
+          <div style="color:#ff0000;">{{$myquote->User->city}},{{$myquote->User->country}}</div>
+          <div style="color:#ff0000;">{{$myquote->User->email}}</div>
+          <div style="color:#ff0000;"> {{$myquote->User->telephone}}</a> </div>
         </div>
 
 
