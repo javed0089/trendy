@@ -5658,8 +5658,8 @@ a.btn.btn-xs {
 .language-menu{
     float: left; !important;
     position: relative;
-    height: 40px;
-    width: 120px;
+    height: 30px;
+    width: 20px;
     z-index: 100;
 }
 .language-menu select{
