@@ -302,7 +302,7 @@ table tfoot tr td:first-child {
 
              <tr>
 
-              <td class="desc"><h4>{{$quote->Product->Brand->name_en}} - {{$quote->Product->Category->name_en}} - {{$quote->Product->name_en}} ({{$quote->delivery_terms}} - {{$quote->port_of_delivery}})</h4>
+              <td class="desc">{{$quote->Product->Brand->name_en}} - {{$quote->Product->Category->name_en}} - {{$quote->Product->name_en}} ({{$quote->delivery_terms}} - {{$quote->port_of_delivery}})
               </td>
 
 
