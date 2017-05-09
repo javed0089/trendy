@@ -270,7 +270,7 @@ table tfoot tr td:first-child {
       </div>
     </div>
   </header>
-  <div style="position: relative;height: 840pt">
+  <div style="position: relative;">
     <main>
       <div id="details" class="clearfix col-xs-12">
         <div class="col-xs-12">
