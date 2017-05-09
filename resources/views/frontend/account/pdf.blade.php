@@ -57,7 +57,7 @@
   color: #000000;
   background: #FFFFFF; 
   font-family: Arial, sans-serif; 
-  font-size: 15px; 
+  font-size: 13px; 
   font-family:"Arial";
 
 }
