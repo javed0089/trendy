@@ -53,6 +53,7 @@
 									<input type="text" class="form-control" name="term" value="{{Request::get('term')}}">
 									<span class="input-group-btn">
 										<button type="submit" class="btn btn-info btn-flat">Go!</button>
+										
 									</span>
 								</div>
 							</form>	

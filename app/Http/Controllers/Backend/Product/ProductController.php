@@ -32,6 +32,7 @@ class ProductController extends Controller
                 }
             })->paginate(15)->appends(['term'=> request('term')]);
      return view('backend.product.index')->with('products',$products);
+     
 
  }
 

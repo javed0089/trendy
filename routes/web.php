@@ -28,8 +28,11 @@
     	/** Categories And Products **/
     	Route::get('/categories', 'Frontend\CategoryController@index')->name('frontend.categories');
     	Route::get('/category/{slug}', 'Frontend\CategoryController@productlist')->name('frontend.productlist');
+    	Route::get('/productsearch', 'Frontend\CategoryController@productlistSearch')->name('frontend.productlistsearch');
+
     	Route::get('/brand/{slug}', 'Frontend\CategoryController@productsByBrand')->name('frontend.productsByBrand');
     	Route::get('product/{slug}', 'Frontend\CategoryController@product')->name('frontend.product');
+
 
 
 		

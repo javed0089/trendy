@@ -37,6 +37,14 @@
       <span class="parent"> <i class="fa fa-home"></i> <a href="index.html"> {{__('Home')}} </a> </span>
       <i class="fa fa-chevron-right"></i>
       <span class="child"> {{__('Products')}} </span>
+
+      <div class="pull-right">
+    <form method="get" action="{{route('frontend.productlistsearch')}}" class="searchbox">
+        <input type="search" placeholder="Search Products......" name="term" class="searchbox-input" onkeyup="buttonUp();" required value="{{Request::get('term')}}">
+        <input type="submit" class="searchbox-submit" value="GO">
+        <span class="searchbox-icon"><i class="fa fa-search"></i></span>
+    </form>
+</div>
     </div>
   </div>
 
@@ -53,7 +61,11 @@
 
          <hr>
          @if (isset($products) && count($products) > 0)
-
+         @if(Request::get('term'))
+         <div class="alert alert-info">
+          {{Request::get('term')?'Search results for:  '.Request::get('term'):''}}
+         </div>
+         @endif
          @foreach($products->sortBy('sort_order')->chunk(3) as $productsChunk)
          @foreach($productsChunk as $product)
          <div id="addToQuote" class="col-md-4 col-sm-4">
@@ -76,10 +88,12 @@
          @endforeach
          @else
          <div class="alert alert-info">{{isset($category)?'Stock not available for this product category. Visit again to view this page':''}}
-         {{isset($brand)?'Stock not available for this product brand. Visit again to view this page':''}}</div>
+         {{isset($brand)?'Stock not available for this product brand. Visit again to view this page':''}}
+          {{Request::get('term')?'No products found.':''}}
+         </div>
          @endif
 
-
+@if(isset($subCategories))
          @foreach($subCategories as $subCategory)
          <h2 class="color-title" style="display: block;">{{$subCategory->name_en}}</h2>
          <hr>
@@ -111,6 +125,7 @@
          @endif
 
          @endforeach
+ @endif
        </div>
      </section>
 

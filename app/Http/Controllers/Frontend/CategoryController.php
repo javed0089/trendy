@@ -35,6 +35,37 @@ class CategoryController extends Controller
 
         return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('subCategories',$subCategories)->with('brands',$brands)->with('category',$category);
     }
+    public function productlistSearch()
+    {
+        $categories=Category::where('parent_id','=','0')->get();
+        //$category=Category::where('slug','=',$slug)->first();
+
+       // $subCategories = Category::where('parent_id','=',$category->id)->get();
+        //$products=Product::where([['category_id','=',$category->id],['discontinued','=','0']])->get();
+
+        $brands = Brand::all();
+
+        $topImage = Page::find(120)->PageSections()->first();
+
+          $products=Product::where(function($query){
+                $term = request('term')?request('term'):null;
+               
+                if(isset($term)){
+                    $query->where('name_en','like','%'.$term.'%')
+                    ->where('discontinued','=','0')
+                    ->orWhereHas('Category', function($q) use ($term){
+                        $q->where('name_en','like','%'.$term.'%');
+                    })
+                    ->orWhereHas('Brand', function($q) use ($term){
+                        $q->where('name_en','like','%'.$term.'%');
+                    });
+                }
+            })->get();
+     
+//dd($products);
+
+        return view('frontend.productlist')->with('categories',$categories)->with('products',$products)->with('topImage',$topImage)->with('brands',$brands);
+    }
 
     public function productsByBrand($slug)
     {
