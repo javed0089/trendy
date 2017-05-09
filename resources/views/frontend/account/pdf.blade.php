@@ -273,13 +273,16 @@ table tfoot tr td:first-child {
   <div style="position: relative;">
     <main>
       <div id="details" class="clearfix col-xs-12">
-        <div class="col-xs-12">
-          <div class="to">Attn:</div>
-          <h4 class="name">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
-          <div class="address">{{$myquote->User->address}}</div>
-          <div class="address">{{$myquote->User->city}},{{$myquote->User->country}}</div>
-          <div class="email">{{$myquote->User->email}}</div>
-          <div class="email"> {{$myquote->User->telephone}}</a> </div>
+       <div class="col-xs-1">
+        <div class="to">Attn:</div>
+        <div class="to">C.I</div>
+       </div>
+        <div class="col-xs-11">
+          <h4 style="margin: 0">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
+          <div >{{$myquote->User->address}}</div>
+          <div >{{$myquote->User->city}},{{$myquote->User->country}}</div>
+          <div>{{$myquote->User->email}}</div>
+          <div > {{$myquote->User->telephone}}</a> </div>
         </div>
 
 
