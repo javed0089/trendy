@@ -79,7 +79,8 @@ header {
   color: #0359c1;
 }
 #company span{
- font-size:14px;
+ font-size:13px;
+ margin-top: -4px;
 }
 
 #details {
