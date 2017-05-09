@@ -250,7 +250,7 @@ table tfoot tr td:first-child {
 
       </div>
       <div id="company" class="col-xs-6">
-        <!--<h3 style="font-weight: bold;">شـركــــة الشـامــل الحد يثـــة للبـــلاستيــــك</h3>-->
+        <h3 style="font-weight: bold;">شـركــــة الشـامــل الحد يثـــة للبـــلاستيــــك</h3>
         <h4>GLOBAL ADVANCE POLYMERS LLC</h4>
         <span>Captain Baraq Tower - Ibrahem Al Raqi St.<br>
           Bagdadiah West - P.O. Box: 24237<br>
