@@ -145,7 +145,8 @@ class QuotesController extends Controller
         $data['total'] = $totalSum[0];
 
 
-        $pdf = PDF::loadView('frontend.account.pdf',$data);
+        $pdf = PDF::loadView('frontend.account.pdf',$data)->setOption('page-width', '210')
+->setOption('page-height', '297');;
         return $pdf->stream('Gap-Quotation-'.$id.'.pdf');
     }
 
