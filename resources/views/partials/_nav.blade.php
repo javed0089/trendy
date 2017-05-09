@@ -154,9 +154,16 @@
    </ul>
 
  </nav>
-
+<!--<div class="searchlink" >
+    <i id="searchlink" class="fa fa-search fa-custom"></i>
+    <div class="searchform">
+        <form id="search" action="">
+            <input type="text" class="s" id="s" name="s" placeholder="keywords...">
+            <button type="submit" class="sbtn"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>-->
  <div class="language-menu visible-lg visible-md" >
-
   <select  onchange="window.location=this.value">
     <option {{LaravelLocalization::getCurrentLocale()=='en'?'selected':''}} value="{{LaravelLocalization::getLocalizedURL('en') }}">English</option>
     <option {{LaravelLocalization::getCurrentLocale()=='ar'?'selected':''}} value="{{LaravelLocalization::getLocalizedURL('ar') }}">العربية</option>
@@ -164,4 +171,5 @@
   </select>
 </div>
 </div>
+
 

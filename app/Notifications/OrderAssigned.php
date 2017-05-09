@@ -48,11 +48,11 @@ class OrderAssigned extends Notification
             $url = url('/myaccount/myorders/'.$this->order->id);
 
         return (new MailMessage)
-        ->subject('New order assigned')
-        ->greeting('Hello!')
-        ->line('A new order is assigned to you.')
+        ->subject('A New Order is Assigned')
+        ->greeting('Dear Team!')
+        ->line('A new order is assigned to you, your prompt action is required to quickly support the customer.')
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check your Order STATUS, and proceed!');
     }
 
     /**

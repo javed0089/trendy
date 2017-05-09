@@ -48,11 +48,11 @@ class OrderPiLoaded extends Notification
             $url = url('/myaccount/myorders/'.$this->order->id);
 
         return (new MailMessage)
-        ->subject('PI loaded')
-        ->greeting('Hello!')
-        ->line('Performa Invoice was loaded for confirmation.')
+        ->subject('You received a PI on your order')
+        ->greeting('Dear Customer!')
+        ->line('A Performa Invoice on your order have been uploaded to your account, your confirmation is required to proceed further.')
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check and confirm the submitted Performa Invoice!');
     }
 
     /**

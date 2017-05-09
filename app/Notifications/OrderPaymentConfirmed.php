@@ -48,11 +48,11 @@ class OrderPaymentConfirmed extends Notification
             $url = url('/myaccount/myorders/'.$this->order->id);
 
         return (new MailMessage)
-        ->subject('Order payment confirmed')
-        ->greeting('Hello!')
-        ->line('Order payment was confirmed.')
+        ->subject('Payment on Order is confirmed')
+        ->greeting('Greetings!')
+        ->line('Payment on Order is confirmed.')
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check your Order STATUS!');
     }
 
     /**

@@ -48,11 +48,11 @@ class NewOrderMessage extends Notification
             $url = url('/myaccount/myorders/'.$this->order->id);
 
         return (new MailMessage)
-        ->subject('New order Message')
-        ->greeting('Hello!')
-        ->line('A new message was added to order.')
+        ->subject('A New Message on Order')
+        ->greeting('Greetings!')
+        ->line('There was a new message added to order.')
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check the message on Order!');
     }
 
     /**

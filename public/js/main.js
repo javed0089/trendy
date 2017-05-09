@@ -509,4 +509,9 @@ error: function(jqXHR, json, errorThrown) {
    });
 
 
+ $('#searchlink').on('click', function(e) {
+      $(this).parent().toggleClass('open');
+    });
+ 
+
   })(jQuery);

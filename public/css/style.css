@@ -5684,3 +5684,80 @@ line-height: 25px;
 .badge{
     background: #d9534f !important;
 }
+
+
+ .searchlink {
+    position: relative;
+    float: left;
+    right: 80px;
+    cursor: pointer;
+    display: block;
+    float: right;
+    font-size: 20px;
+    height: 50px;
+    padding: 10px 20px 15px 18.5px;
+    position: relative;
+    z-index: 999;
+}
+
+.searchlink:hover,
+.searchlink.open {
+    cursor: pointer;
+}
+
+.searchlink.open > .searchform {
+    display: block;
+}
+
+.searchform {
+    display: none;
+    position: absolute;
+    width: 200px;
+    height: 70px;
+    line-height: 40px;
+    top: 60px;
+    right: 0;
+    padding: 0 15px;
+    cursor: default;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e1e1e1;
+    box-shadow: 0 3px 13px 0 rgba(0, 0, 0, 0.2);
+    margin-left: -120px;
+    z-index: 9999999;
+    background-color: #fff;
+}
+
+.searchlink.open .searchform {
+    display: block;
+}
+
+#search {
+    display: block;
+    position: relative;
+}
+
+#s {
+    width: 135px;
+    background: #fff;
+    padding: 0 11px;
+    border: 1px solid #e1e1e1;
+    border-right: none;
+    color: #888;
+    margin: 14px 0;
+}
+
+.sbtn {
+    display: block;
+    position: absolute;
+    background: none;
+    border: 1px solid #f00f00;
+    color: #fff;
+    font-size: 0.6em;
+    cursor: pointer;
+    right: 0px;
+    top: 14px;
+    width: 35px;
+    background-color: #f00f00;
+}

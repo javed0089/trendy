@@ -44,11 +44,11 @@ class NewRegistration extends Notification
 
 
         return (new MailMessage)
-        ->subject('New Registration')
-        ->greeting('Hello!')
-        ->line('New user registered :'. $this->user->first_name ." ". $this->user->last_name.",")
+        ->subject('A New Registration Online')
+        ->greeting('Dear GAP Polymers Team!')
+        ->line('A New user registered :'. $this->user->first_name ." ". $this->user->last_name.",")
         ->action('Customer', $url)
-        ->line('You can click the above link to check the user!');
+        ->line('Click above to check the User!');
     }
 
     /**

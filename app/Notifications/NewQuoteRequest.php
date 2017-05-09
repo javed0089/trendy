@@ -43,11 +43,11 @@ class NewQuoteRequest extends Notification
     {
         $url = url('/backoffice/quotes/quote-requests/'.$this->quote->id);
         return (new MailMessage)
-                    ->subject('New Quote Request')
-                    ->greeting('Hello!')
-                    ->line('A new quote request was made by '. $this->quote->User->first_name ." ". $this->quote->User->last_name.",")
+                    ->subject('New Quotation Request Online')
+                    ->greeting('Dear GAP Polymers Team!')
+                    ->line('A new online quotation request was made by '. $this->quote->User->first_name ." ". $this->quote->User->last_name.",")
                     ->action('Quote Request', $url)
-                    ->line('You can click the above link to check the quote!');
+                    ->line('Click above to check the Quote Request!');
     }
 
     /**

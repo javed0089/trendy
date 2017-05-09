@@ -48,11 +48,11 @@ class QuoteAssigned extends Notification
             $url = url('/myaccount/quotes/'.$this->quote->id);
 
         return (new MailMessage)
-        ->subject('Quote Request Assigned')
-        ->greeting('Hello!')
-        ->line('Quote Request is assigned to you.')
+        ->subject('A Quote Request is Assigned')
+        ->greeting('Hello Dear!')
+        ->line('A Quotation Request is assigned to you, your prompt action will be appreciated.')
         ->action('Quote Request', $url)
-        ->line('You can click the above link to check the quote!');
+        ->line('Click above to check your Assignment!');
     }
 
     /**

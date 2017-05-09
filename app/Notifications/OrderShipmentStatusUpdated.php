@@ -50,11 +50,11 @@ class OrderShipmentStatusUpdated extends Notification
             $url = url('/myaccount/myorders/'.$this->order->id);
 
         return (new MailMessage)
-        ->subject('Order shipment status updated')
-        ->greeting('Hello!')
-        ->line('Order shipment status was updated to '. $this->status)
+        ->subject('Order Shipment Status Updated')
+        ->greeting('Hope you are doing well!')
+        ->line('Shipment status of your Order updated to '. $this->status)
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check your Order STATUS!');
     }
 
     /**

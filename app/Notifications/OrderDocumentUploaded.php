@@ -48,11 +48,11 @@ class OrderDocumentUploaded extends Notification
             $url = url('/myaccount/myorders/'.$this->order->id);
 
         return (new MailMessage)
-        ->subject('New order document uploaded')
-        ->greeting('Hello!')
-        ->line('A new document was uploaded to order.')
+        ->subject('A New Document is uploaded on order')
+        ->greeting('Greetings!')
+        ->line('A new document is uploaded on order.')
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check your Order STATUS!');
     }
 
     /**

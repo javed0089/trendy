@@ -48,11 +48,11 @@ class QuoteRequestQuoted extends Notification
             $url = url('/myaccount/quotes/'.$this->quote->id);
 
         return (new MailMessage)
-        ->subject('Quote Request Quoted')
-        ->greeting('Hello!')
-        ->line('Your quote request is quoted.')
+        ->subject('Quotation Received – GAP Polymers')
+        ->greeting('Greetings From GAP Polymers!')
+        ->line('Quotation received on your, quote request.')
         ->action('Quote Request', $url)
-        ->line('You can click the above link to check the quote!');
+        ->line('CLICK above to check your Quote!');
     }
 
     /**

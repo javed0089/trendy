@@ -48,11 +48,11 @@ class QuoteRequestProcessed extends Notification
             $url = url('/myaccount/quotes/'.$this->quote->id);
 
         return (new MailMessage)
-        ->subject('Quote Request Processed')
+        ->subject('Quote Request is Processed')
         ->greeting('Hello!')
         ->line('Quote Request is processed and waiting for approval.')
         ->action('Quote Request', $url)
-        ->line('You can click the above link to check the quote!');
+        ->line('Click above to check your Quote status!');
     }
 
     /**

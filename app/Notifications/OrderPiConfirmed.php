@@ -48,11 +48,11 @@ class OrderPiConfirmed extends Notification
             $url = url('/myaccount/myorders/'.$this->order->id);
 
         return (new MailMessage)
-        ->subject('PI confirmed')
-        ->greeting('Hello!')
-        ->line('Performa Invoice was confirmed by the customer.')
+        ->subject('PI Confirmed by customer')
+        ->greeting('Dear GAP Polymers Team!')
+        ->line('The submitted Performa Invoice was confirmed by the customer, a quick action required to proceed further.')
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check your Order STATUS, and proceed!');
     }
 
     /**

@@ -48,11 +48,11 @@ class OrderShipmentStarted extends Notification
             $url = url('/myaccount/myorders/'.$this->order->id);
 
         return (new MailMessage)
-        ->subject('Order shipment started')
-        ->greeting('Hello!')
-        ->line('Order shipment is started.')
+        ->subject('Your Order Shipment Started')
+        ->greeting('Greetings!')
+        ->line('Kindly note that, your Order Shipment is already been started, we will be updating you on each status of your order')
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check your Order STATUS!');
     }
 
     /**

@@ -48,11 +48,11 @@ class NewQuoteMessage extends Notification
             $url = url('/myaccount/quotes/'.$this->quote->id);
 
         return (new MailMessage)
-        ->subject('New Quote Message')
-        ->greeting('Hello!')
-        ->line('A new message was added to quote.')
+        ->subject('A New Message on Quotation')
+        ->greeting('Greetings!')
+        ->line('There was a new message added to quotation.')
         ->action('Quote Request', $url)
-        ->line('You can click the above link to check the quote!');
+        ->line('Click above to check the message on Quote!');
     }
 
     /**

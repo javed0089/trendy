@@ -49,11 +49,11 @@ class OrderProcessed extends Notification
 
 
         return (new MailMessage)
-        ->subject('Order Processed')
-        ->greeting('Hello!')
+        ->subject('Order is Processed')
+        ->greeting('Dear GAP Polymers Team!')
         ->line('Order is processed and waiting for approval.')
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check your Order STATUS!');
     }
 
     /**

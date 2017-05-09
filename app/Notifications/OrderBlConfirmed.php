@@ -48,11 +48,11 @@ class OrderBlConfirmed extends Notification
             $url = url('/myaccount/myorders/'.$this->order->id);
 
         return (new MailMessage)
-        ->subject('BL confirmed')
-        ->greeting('Hello!')
-        ->line('Bill of loading was confirmed by the customer.')
+        ->subject('BL Confirmed by customer')
+        ->greeting('Dear GAP Polymers Team!')
+        ->line('A bill of loading was confirmed by the customer, kindly proceed further on its early.')
         ->action('Order', $url)
-        ->line('You can click the above link to check the order!');
+        ->line('Click above to check your Order STATUS, and proceed!');
     }
 
     /**
