@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Gap-Polymers - Quotation</title>
-  <link href="{{public_path('css/bootstrap.min.css')}}" rel="stylesheet">
+ 
   <style type="text/css">
     @font-face {
       font-family: "Georgia, serif";
