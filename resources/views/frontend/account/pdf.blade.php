@@ -266,7 +266,7 @@ table tfoot tr td:first-child {
       </div>
       <div class="row">
        <div class="col-xs-offset-4 col-xs-4 text-center">
-        <h3><u>Sales Quotation</u></h3>
+        <h4 style="margin: 0"><u>Sales Quotation</u></h4>
       </div>
     </div>
   </header>
