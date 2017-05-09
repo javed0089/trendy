@@ -262,7 +262,7 @@ table tfoot tr td:first-child {
       <div class="row" style="margin-top: 10px;" >
         <div style="font-weight: bold; color:#ff0000; padding-left: 15px;" class="col-xs-6" >{{$myquote->quote_no}}</div>
 
-        <div style="font-weight: bold; color:#ff0000;padding-right: 15px;" class="col-xs-6 text-right" >{{$myquote->created_at}}</div>
+        <div style="font-weight: bold;padding-right: 15px;" class="col-xs-6 text-right" >Dated: <span style="font-weight: bold; color:#ff0000;padding-left: 10px;">{{date('M j, Y',strtotime($myquote->created_at))}}</span></div>
       </div>
       <div class="row">
        <div class="col-xs-offset-4 col-xs-4 text-center">
@@ -317,13 +317,14 @@ table tfoot tr td:first-child {
         </table>
       </div>
     </div>
+     <div class="row" style="padding-left: 15px;">
     <div>1. Price Valid Till: <span style="color: #ff0000">{{date('M j, Y',strtotime($myquote->quote_validity))}}</span></div>
     <div>2. Deliery of Material is subject to avaliability</div>
 
     <div style="margin-top: 160px">For: Global Advanced Polymers LLC</div>
 
     <div style="margin-top: 50px">Authorised Signature </div>
-
+</div>
 
   </main>
 
