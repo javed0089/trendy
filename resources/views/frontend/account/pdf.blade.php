@@ -80,7 +80,7 @@ header {
 }
 #company span{
  font-size:13px;
- margin-top: -4px;
+ margin-top: -10px;
 }
 
 #details {
