@@ -148,9 +148,9 @@
      <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500 hidden-lg hidden-md"><a href="{{route('frontend.login')}}">{{__('Login')}}</a></li>
 
      @endif
-     <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500 hidden-lg hidden-md"><a rel="alternate" hreflang="en" href="{{LaravelLocalization::getLocalizedURL('en') }}">English</a></li>
+    <!-- <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500 hidden-lg hidden-md"><a rel="alternate" hreflang="en" href="{{LaravelLocalization::getLocalizedURL('en') }}">English</a></li>
      <li id="menu-item-3500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3500 hidden-lg hidden-md"><a rel="alternate" hreflang="ar" href="{{LaravelLocalization::getLocalizedURL('ar') }}">العربية</a></li>
-
+-->
    </ul>
 
  </nav>
@@ -163,13 +163,17 @@
         </form>
     </div>
 </div>-->
+<!--
  <div class="language-menu visible-lg visible-md" >
   <select  onchange="window.location=this.value">
     <option {{LaravelLocalization::getCurrentLocale()=='en'?'selected':''}} value="{{LaravelLocalization::getLocalizedURL('en') }}">English</option>
     <option {{LaravelLocalization::getCurrentLocale()=='ar'?'selected':''}} value="{{LaravelLocalization::getLocalizedURL('ar') }}">العربية</option>
 
   </select>
+</div>-->
 </div>
 </div>
+</div>
+
 
 

@@ -38,7 +38,7 @@
       <i class="fa fa-chevron-right"></i>
       <span class="child"> {{__('Products')}} </span>
 
-      <div class="pull-right">
+     <div class="searchbox-container">
     <form method="get" action="{{route('frontend.productlistsearch')}}" class="searchbox">
         <input type="search" placeholder="Search Products......" name="term" class="searchbox-input" onkeyup="buttonUp();" required value="{{Request::get('term')}}">
         <input type="submit" class="searchbox-submit" value="GO">
@@ -46,6 +46,7 @@
     </form>
 </div>
     </div>
+     
   </div>
 
   <div class="container">
@@ -55,11 +56,11 @@
 
       <section class="services-company">
         <div class="row"> 
-
+        @if(isset($category) || isset($brand))
         <h2 class="color-title" style="display: block;">{{isset($category)?$category->name_en:''}}</h2>
         <h2 class="color-title" style="display: block;">{{isset($brand)?$brand->name_en:''}}</h2>
-
          <hr>
+         @endif
          @if (isset($products) && count($products) > 0)
          @if(Request::get('term'))
          <div class="alert alert-info">
