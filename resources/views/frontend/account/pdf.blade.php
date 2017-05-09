@@ -24,7 +24,10 @@
     html, body {
       height: 100%;
     }
-
+  .row{
+    margin:0;
+    padding: 0;
+  }
     #wrap {
       min-height: 100%;
     }
@@ -56,7 +59,7 @@
   font-family: Arial, sans-serif; 
   font-size: 15px; 
   font-family:"Arial";
- 
+
 }
 
 header {
@@ -239,26 +242,38 @@ table tfoot tr td:first-child {
 </head>
 <body>
   <header class="clearfix">
-    <div id="logo" class="col-xs-6">
-      <img src="{{ public_path().'/images/logo.png' }}" width="300" height="50">
+    <div class="row">
+      <div id="logo" class="col-xs-6">
+        <img src="{{ public_path().'/images/logo.png' }}" width="300" height="50">
 
-      <div style="margin-top: 50px; font-weight: bold; color:#ff0000" >{{$myquote->quote_no}}</div>
-    </div>
-    <div id="company" class="col-xs-6">
-      <!--<h2 class="name" style="font-weight: bold;">شـركــــة الشـامــل الحد يثـــة للبـــلاستيــــك</h2>-->
-      <h4>GLOBAL ADVANCE POLYMERS LLC</h4>
-      <span>Captain Baraq Tower - Ibrahem Al Raqi St.<br>
-        Bagdadiah West - P.O. Box: 24237<br>
-        Jeddah 21449 - Kingdom of Saudi Arabia.<br>
-        Tel: +966 12 6491516 - Fax: +966 126495242<br>
-        Email: info@gap-polymers.com</span>
+
+
       </div>
+      <div id="company" class="col-xs-6">
+        <!--<h2 class="name" style="font-weight: bold;">شـركــــة الشـامــل الحد يثـــة للبـــلاستيــــك</h2>-->
+        <h4>GLOBAL ADVANCE POLYMERS LLC</h4>
+        <span>Captain Baraq Tower - Ibrahem Al Raqi St.<br>
+          Bagdadiah West - P.O. Box: 24237<br>
+          Jeddah 21449 - Kingdom of Saudi Arabia.<br>
+          Tel: +966 12 6491516 - Fax: +966 126495242<br>
+          Email: info@gap-polymers.com</span>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 50px;"" >
+        <div style="font-weight: bold; color:#ff0000; padding-left: 15px;" class="col-xs-6" >{{$myquote->quote_no}}</div>
 
-    </header>
-    <div style="position: relative;height: 840pt">
+        <div style="font-weight: bold; color:#ff0000;padding-right: 15px;" class="col-xs-6 text-right" >{{$myquote->created_at}}</div>
+      </div>
+      <div class="row">
+       <div class="col-xs-offset-4 col-xs-4 text-center">
+        <h3><u>Sales Quotation</u></h3>
+      </div>
+    </div>
+  </header>
+  <div style="position: relative;height: 840pt">
     <main>
       <div id="details" class="clearfix col-xs-12">
-        <div id="client" class="col-xs-12">
+        <div class="col-xs-12">
           <div class="to">Attn:</div>
           <h4 class="name">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
           <div class="address">{{$myquote->User->address}}</div>
@@ -266,12 +281,8 @@ table tfoot tr td:first-child {
           <div class="email">{{$myquote->User->email}}</div>
           <div class="email"> {{$myquote->User->telephone}}</a> </div>
         </div>
-        <div class="col-xs-4 text-center">
-          <h3><u>Sales Quotation</u></h3>
-        </div>
-        <div id="invoice" class="col-xs-4">
-          <div class="date">Date: <span style="font-weight: bold; color:#ff0000;"> {{date('M j, Y',strtotime($myquote->created_at))}}</span></div>
-        </div>
+
+
       </div>
       <div class="row">
         <div  class="col-xs-12">
@@ -291,7 +302,7 @@ table tfoot tr td:first-child {
               <td class="desc"><h3>{{$quote->Product->Brand->name_en}} - {{$quote->Product->Category->name_en}} - {{$quote->Product->name_en}} ({{$quote->delivery_terms}} - {{$quote->port_of_delivery}})</h3>
               </td>
 
-              
+
 
               <td class="price">{{number_format(floatval($quote->price),2)}} {{$quote->currency}}
 
@@ -299,7 +310,7 @@ table tfoot tr td:first-child {
             </tr>
             @endforeach
           </tbody>
-         
+
         </table>
       </div>
     </div>
@@ -310,9 +321,9 @@ table tfoot tr td:first-child {
 
     <div style="margin-top: 50px">Authorised Signature </div>
 
-    
+
   </main>
- 
-  </div>
+
+</div>
 </body>
 </html>
