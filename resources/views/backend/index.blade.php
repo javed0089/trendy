@@ -90,36 +90,7 @@
     <!-- ./col -->
   </div>
 
-  <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua"><i class="ion ion-cube"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">Total Products</span>
-          <span class="info-box-number">{{$totalProducts}}</span>
-        </div>
-      </div>
-    </div>
-
-    @foreach ($prodcount as $category) 
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon" style="background: #fff">
-          @if($category['logo'])
-          <img src="{{asset($category['logo'])}}">
-          @else
-          <img src="http://placehold.it/50x66">
-
-          @endif 
-        </span>
-        <div class="info-box-content">
-          <span class="info-box-text">{{$category['name']}}</span>
-          <span class="info-box-number">{{$category['prodCount']}}</span>
-        </div>
-      </div>
-    </div>
-    @endforeach
-  </div>
+ 
   <!-- /.row -->
   <!-- Main row -->
   <div class="row">
@@ -151,7 +122,7 @@
                 <tr>
                   <td><a href="{{route('quote-requests.show',$quote->id)}}">{{$quote->quote_no}}</a></td>
                   <td>{{$quote->User->first_name}} {{$quote->User->last_name}}
-                    {!! User::isActivated($quote->user_id)?'<span class="label label-success">Activated</span>':'<span class="label label-danger">Not-Activated</span>' !!}</td>
+                    {!! User::isActivated($quote->user_id)?'<i class="fa fa-flag text-green"></i>':'<i class="fa fa-flag text-red"></i>' !!}</td>
                     <td><span class="label label-{{$quote->status==1?'danger':'success'}}">{{$quote->Status->status_en}}</span></td>
                     <td>
                       {{isset($quote->AssignedTo)?$quote->AssignedTo->first_name:''}} {{isset($quote->AssignedTo)?$quote->AssignedTo->last_name:''}}</td>
@@ -258,7 +229,55 @@
               </div>
             </div>
             <div class="box-footer clearfix">
-              <a href="{{route('quote-requests.index')}}" class="btn btn-sm btn-info btn-flat pull-left">Show All Requests</a>
+              <a href="{{route('quote-requests.index')}}" class="btn btn-sm btn-info btn-flat pull-left">Show All Quotes</a>
+            </div>
+          </div>
+
+        </div>
+@endif
+
+@if(!User::isSalesExecutive())
+    <div class="col-md-6">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Orders for Approval</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive">
+            <table class="table no-margin">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Customer</th>
+                  <th>Status</th>
+                  <th>Assigned To</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($ordersForApproval as $order)
+                <tr>
+                  <td><a href="{{route('orders.show',$order->id)}}">{{$order->quote_no}}</a></td>
+                  <td>{{$order->User->first_name}} {{$order->User->last_name}}
+                    {!! User::isActivated($order->user_id)?'<span class="label label-success">Activated</span>':'<span class="label label-danger">Not-Activated</span>' !!}</td>
+                    <td><span class="label label-{{$order->status==1?'danger':'success'}}">{{$order->Status->status_en}}</span></td>
+                    <td>
+                      {{isset($order->AssignedTo)?$order->AssignedTo->first_name:''}} {{isset($order->AssignedTo)?$order->AssignedTo->last_name:''}}</td>
+
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="box-footer clearfix">
+              <a href="{{route('orders.index')}}" class="btn btn-sm btn-info btn-flat pull-left">Show All orders</a>
             </div>
           </div>
 
@@ -411,6 +430,38 @@
         <!-- /.box -->
 
       </section>
+
+
+       <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua"><i class="ion ion-cube"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Total Products</span>
+          <span class="info-box-number">{{$totalProducts}}</span>
+        </div>
+      </div>
+    </div>
+
+    @foreach ($prodcount as $category) 
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon" style="background: #fff">
+          @if($category['logo'])
+          <img src="{{asset($category['logo'])}}">
+          @else
+          <img src="http://placehold.it/50x66">
+
+          @endif 
+        </span>
+        <div class="info-box-content">
+          <span class="info-box-text">{{$category['name']}}</span>
+          <span class="info-box-number">{{$category['prodCount']}}</span>
+        </div>
+      </div>
+    </div>
+    @endforeach
+  </div>
       <!-- right col -->
     </div>
     <!-- /.row (main row) -->

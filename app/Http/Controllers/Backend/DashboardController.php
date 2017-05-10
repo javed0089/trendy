@@ -57,9 +57,11 @@ class DashboardController extends Controller
 		}
 
 		$orders=[];
+		$ordersForApproval=[];
 		if(User::isSupervisor())
 		{
 			$orders = Order::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())->get();
+			$ordersForApproval = Order::where('status', '=', '2')->get();
 		}
 		elseif(User::isSalesExecutive())
 		{
@@ -73,6 +75,6 @@ class DashboardController extends Controller
 		$ratings = new Rating();
 
 
-		return view('backend.index')->with('totalOrders',$totalOrders)->with('totalQuotes',$totalQuotes)->with('totalRegistrations',$totalRegistrations)->with('totalProducts',$totalProducts)->with('ratings',$ratings)->with('quotes',$quotes)->with('orders',$orders)->with('prodcount',$prodcount)->with('quotesForApproval',$quotesForApproval);
+		return view('backend.index')->with('totalOrders',$totalOrders)->with('totalQuotes',$totalQuotes)->with('totalRegistrations',$totalRegistrations)->with('totalProducts',$totalProducts)->with('ratings',$ratings)->with('quotes',$quotes)->with('orders',$orders)->with('prodcount',$prodcount)->with('quotesForApproval',$quotesForApproval)->with('ordersForApproval',$ordersForApproval);
 	}
 }
