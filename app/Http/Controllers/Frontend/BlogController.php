@@ -32,8 +32,12 @@ class BlogController extends Controller
         $posts=$blogCategory->Posts()->paginate(6);
         $blogCategories=BlogCategory::all();
         $tags=Tag::all();
+        $topImage = [];
+        $topImage = Page::find(90)->PageSections()->first();
 
-        return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags);
+        $metatags = Webpage::where('page_name','=','blog')->first();
+
+        return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
     }
 
     public function tagPosts($slug)
@@ -42,7 +46,13 @@ class BlogController extends Controller
         $posts=$tag->posts()->paginate(6);
         $blogCategories=BlogCategory::all();
         $tags=Tag::all();
-        return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags);
+        $topImage = [];
+        $topImage = Page::find(90)->PageSections()->first();
+
+        $metatags = Webpage::where('page_name','=','blog')->first();
+
+
+        return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
     }
 
 
