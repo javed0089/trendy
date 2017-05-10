@@ -172,7 +172,6 @@ table .no {
 
 table .desc {
   text-align: left;
-  color: #ff0000;
 }
 
 table .unit {
@@ -186,8 +185,6 @@ table .qty {
 
 table .price {
   text-align: right;
-  color: #ff0000;
-
 }
 table .total {
   text-align: right;
@@ -260,9 +257,9 @@ table tfoot tr td:first-child {
         </div>
       </div>
       <div class="row" style="margin-top: 10px;" >
-        <div style="font-weight: bold; color:#ff0000; padding-left: 15px;" class="col-xs-6" >{{$myquote->quote_no}}</div>
+        <div style="font-weight: bold; padding-left: 15px;" class="col-xs-6" >{{$myquote->quote_no}}</div>
 
-        <div style="font-weight: bold;padding-right: 15px;" class="col-xs-6 text-right" >Dated: <span style="font-weight: bold; color:#ff0000;padding-left: 10px;">{{date('M j, Y',strtotime($myquote->created_at))}}</span></div>
+        <div style="font-weight: bold;padding-right: 15px;" class="col-xs-6 text-right" >Dated: <span style="font-weight: bold; padding-left: 10px;">{{date('M j, Y',strtotime($myquote->created_at))}}</span></div>
       </div>
       <div class="row">
        <div class="col-xs-offset-4 col-xs-4 text-center">
@@ -278,11 +275,11 @@ table tfoot tr td:first-child {
         <div class="to">C.I</div>
        </div>
         <div class="col-xs-11">
-          <h4 style="margin: 0;color:#ff0000;">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
-          <div style="color:#ff0000;">{{$myquote->User->address}}</div>
-          <div style="color:#ff0000;">{{$myquote->User->city}},{{$myquote->User->country}}</div>
-          <div style="color:#ff0000;">{{$myquote->User->email}}</div>
-          <div style="color:#ff0000;"> {{$myquote->User->telephone}}</a> </div>
+          <h4 style="margin: 0;">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
+          <div >{{$myquote->User->address}}</div>
+          <div >{{$myquote->User->city}} {{$myquote->User->country}}</div>
+          <div >{{$myquote->User->email}}</div>
+          <div > {{$myquote->User->telephone}}</a> </div>
         </div>
 
 
@@ -318,7 +315,7 @@ table tfoot tr td:first-child {
       </div>
     </div>
      <div class="row" style="padding-left: 15px;">
-    <div>1. Price Valid Till: <span style="color: #ff0000">{{date('M j, Y',strtotime($myquote->quote_validity))}}</span></div>
+    <div>1. Price Valid Till: <span >{{date('M j, Y',strtotime($myquote->quote_validity))}}</span></div>
     <div>2. Deliery of Material is subject to avaliability</div>
 
     <div style="margin-top: 160px">For: Global Advanced Polymers LLC</div>
