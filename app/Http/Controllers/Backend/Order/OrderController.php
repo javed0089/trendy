@@ -13,12 +13,14 @@ use App\Models\Order\OrderShipmentStatus;
 use App\Models\Rating\Rating;
 use App\Models\Status\Status;
 use App\Notifications\OrderAssigned;
+use App\Notifications\OrderBlDraftConfirmation;
 use App\Notifications\OrderDocumentUploaded;
 use App\Notifications\OrderPaymentConfirmed;
 use App\Notifications\OrderPiLoaded;
 use App\Notifications\OrderProcessed;
 use App\Notifications\OrderShipmentStarted;
 use App\Notifications\OrderShipmentStatusUpdated;
+use App\Notifications\OrderStartShipment;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -287,54 +289,70 @@ class OrderController extends Controller
     $customer=$order->User;
     $customer->notify(new OrderShipmentStarted($order,"frontend"));
 
-    return redirect()->route('orders.show',$id)->with('success','Order status shipment.');
-  }
-  elseif($submitReq == "addShippingstatus"){
-    $orderShipment = new OrderShipment;
-    $orderShipment->order_shipment_status_id = $request->order_shipment_status;
-    $order->OrderShipments()->save($orderShipment);
-    if($request->order_shipment_status =='1')
-     $order->status = '14';
-   elseif($request->order_shipment_status =='2')
-     $order->status = '15';
-   elseif($request->order_shipment_status =='3')
-     $order->status = '16';
-   elseif($request->order_shipment_status =='4')
-     $order->status = '17';
-   elseif($request->order_shipment_status =='5')
-     $order->status = '18';
+    //Send Notification to Sales Executive
+    if($order->AssignedTo)
+    {
+     $user=$order->AssignedTo;
+     $user->notify(new OrderStartShipment($order,"backend"));
+   }
 
-    //Send Notification Customer
-   $customer=$order->User;
-   $customer->notify(new OrderShipmentStatusUpdated($order,"frontend",$order->Status->status_en));
-
-   $order->save();
-   return redirect()->route('orders.show',$id)->with('success','Order status added.');
+   return redirect()->route('orders.show',$id)->with('success','Order status shipment.');
  }
- elseif($submitReq == "shipmentStatusImage"){
-   $this->validate($request, [
-     'order_shipment_document' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:20000'
-     ]);
+ elseif($submitReq == "addShippingstatus"){
+  $orderShipment = new OrderShipment;
+  $orderShipment->order_shipment_status_id = $request->order_shipment_status;
+  $order->OrderShipments()->save($orderShipment);
+  if($request->order_shipment_status =='1')
+   $order->status = '14';
+ elseif($request->order_shipment_status =='2')
+   $order->status = '15';
+ elseif($request->order_shipment_status =='3')
+   $order->status = '16';
+ elseif($request->order_shipment_status =='4')
+   $order->status = '17';
+ elseif($request->order_shipment_status =='5')
+   $order->status = '18';
 
-   $file = $request->file('order_shipment_document');
-   $filename = rand(1,100).time().'.'. $file->getClientOriginalExtension();
-   $location="order-docs/".$order->id.'/';
-   if($file){
+ $order->save();
+ 
+ //Send Notification Customer
+ if($order->status == '17')
+ {
+  $customer=$order->User;
+  $customer->notify(new OrderBlDraftConfirmation($order,"frontend",$order->Status->status_en));
 
-    Storage::disk('local')->put($location.$filename,  File::get($file));
+}
+else{
+ $customer=$order->User;
+ $customer->notify(new OrderShipmentStatusUpdated($order,"frontend",$order->Status->status_en));
+}
 
-    $orderShipmentFile = new OrderShipmentFiles;
-    $orderShipmentFile->filename=$filename;
-    $orderShipmentFile->mime=$file->getClientMimeType();
-    $orderShipmentFile->original_filename=$file->getClientOriginalName();
+return redirect()->route('orders.show',$id)->with('success','Order status added.');
+}
+elseif($submitReq == "shipmentStatusImage"){
+ $this->validate($request, [
+   'order_shipment_document' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:20000'
+   ]);
 
-    $OrderShipment =Ordershipment::find($request->order_shipment_id);
+ $file = $request->file('order_shipment_document');
+ $filename = rand(1,100).time().'.'. $file->getClientOriginalExtension();
+ $location="order-docs/".$order->id.'/';
+ if($file){
 
-    $OrderShipment->OrderShipmentFiles()->save($orderShipmentFile);
+  Storage::disk('local')->put($location.$filename,  File::get($file));
+
+  $orderShipmentFile = new OrderShipmentFiles;
+  $orderShipmentFile->filename=$filename;
+  $orderShipmentFile->mime=$file->getClientMimeType();
+  $orderShipmentFile->original_filename=$file->getClientOriginalName();
+
+  $OrderShipment =Ordershipment::find($request->order_shipment_id);
+
+  $OrderShipment->OrderShipmentFiles()->save($orderShipmentFile);
 
 
-    return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
-  }    
+  return redirect()->route('orders.show',$id)->with('success','File Uploaded successfully!');
+}    
 }
 
 elseif($submitReq == "shipmentTrackingUpdate"){

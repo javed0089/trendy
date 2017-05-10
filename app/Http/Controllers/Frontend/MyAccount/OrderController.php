@@ -16,6 +16,7 @@ use App\Notifications\NewOrderMessage;
 use App\Notifications\NewQuoteMessage;
 use App\Notifications\OrderBlConfirmed;
 use App\Notifications\OrderDocumentUploaded;
+use App\Notifications\OrderPaymentUpload;
 use App\Notifications\OrderPiConfirmed;
 use App\User;
 use Illuminate\Http\Request;
@@ -205,6 +206,10 @@ class OrderController extends Controller
       Notification::send($users, new OrderPiConfirmed($order,"backend"));
 
 
+      //Send Notification to customer to upload payment proof
+      $customer=$order->User;
+      $customer->notify(new OrderPaymentUpload($order,"frontend"));
+
       return redirect()->route('myorders.show',$id)->with('success','You have confirmed Performa Invoice!');
     }
 
@@ -212,6 +217,7 @@ class OrderController extends Controller
     {
       $order = Order::find($id);
       $order->bl_draft_confirmed = '1';
+       $order->status='13';
       $order->save();
 
       //Send Notification to Assigned Sales Executive

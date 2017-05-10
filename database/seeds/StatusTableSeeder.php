@@ -29,7 +29,7 @@ class StatusTableSeeder extends Seeder
         ['id' => '14', 'status_type' => '3', 'status_ar' => 'Before Loading', 'status_en' => 'Before Loading'],
         ['id' => '15', 'status_type' => '3', 'status_ar' => 'Loading', 'status_en' => 'Loading'],
         ['id' => '16', 'status_type' => '3', 'status_ar' => 'Clearance', 'status_en' => 'Clearance'],
-        ['id' => '17', 'status_type' => '3', 'status_ar' => 'BL Draft', 'status_en' => 'Bl Draft'],
+        ['id' => '17', 'status_type' => '3', 'status_ar' => 'BL Draft Added', 'status_en' => 'Bl Draft Added'],
         ['id' => '18', 'status_type' => '3', 'status_ar' => 'Shipment', 'status_en' => 'Shipment'],
 
 
