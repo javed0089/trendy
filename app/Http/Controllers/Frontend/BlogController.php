@@ -28,8 +28,8 @@ class BlogController extends Controller
 
     public function categoryPosts($slug)
     {
-        $posts=Post::where('slug','=',$slug)->paginate(6);
-
+        $blogCategory = BlogCategory::where('slug','=',$slug)->first();
+        $posts=$blogCategory->Posts()->paginate(6);
         $blogCategories=BlogCategory::all();
         $tags=Tag::all();
 
