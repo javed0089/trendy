@@ -50,6 +50,8 @@ class PostController extends Controller
             'title_en'=>   'required|max:255',
             'body_en' =>   'required',
             'slug' =>   'required|alpha_dash|min:5|max:255|unique:posts,slug',
+            'meta_description_en' => 'max:255',
+            'meta_description_ar' => 'max:255',
             ]);
         
         $post=new Post;
@@ -120,6 +122,8 @@ class PostController extends Controller
             'title_en'=>   'required|max:255',
             'body_en' =>   'required',
             'slug' =>   'required|alpha_dash|min:5|max:255|unique:posts,slug,'.$id,
+            'meta_description_en' => 'max:255',
+            'meta_description_ar' => 'max:255',
             ]);
         
         $post=Post::find($id);

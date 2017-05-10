@@ -66,7 +66,7 @@
 
 							<div class="form-group">
 								<label for="meta_description_en">Meta description[En]</label>
-								<textarea class="mceNoEditor" name="meta_description_en"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{old('meta_description_en')}}</textarea>
+								<textarea class="mceNoEditor" maxlength="255" name="meta_description_en"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{old('meta_description_en')}}</textarea>
 							</div>
 
 							<div class="form-group">
@@ -76,7 +76,7 @@
 
 							<div class="form-group">
 								<label for="meta_description_ar">Meta description[Ar]</label>
-								<textarea class="mceNoEditor" name="meta_description_ar"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{old('meta_description_ar')}}</textarea>
+								<textarea class="mceNoEditor" maxlength="255" name="meta_description_ar"  style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"> {{old('meta_description_ar')}}</textarea>
 							</div>	
 
 						</div>
