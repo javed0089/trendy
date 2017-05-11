@@ -9,6 +9,7 @@
 	<section class="content-header">
 		<h1>
 			Add News
+			
 		</h1>
 	</section>
 
