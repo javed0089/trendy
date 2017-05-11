@@ -27,7 +27,7 @@ class QuoteController extends Controller
     public function index()
     {
 
-        $statuses = Status::all();
+        $statuses = Status::where('status_type','=','1')->orWhere('status_type','=','2')->get();
         $role = Sentinel::findRoleById(4);
         $salesExecutives = $role->users()->get();
 

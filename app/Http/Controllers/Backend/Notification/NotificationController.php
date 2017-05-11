@@ -11,18 +11,12 @@ use Illuminate\Support\Facades\Notification;
 
 class NotificationController extends Controller
 {
-    public function send()
+
+
+    public function index()
     {
-    	$quote = Quote::find('7');
-    	//Multi
-    	//$user = User::where('id','>','14')->get();
-
-    	//Single
-    	$user = User::find('15');
-    	//dd($user);
-    	//Notification::send($user, new QuoteRequestMade($quote));
-    	$user->notify(new QuoteRequestMade($quote));
-
-    	dd("Notification send");
+        
+        return view('backend.notifications.index');
     }
+    
 }

@@ -61,7 +61,7 @@ class NewRegistration extends Notification
     {
 
         return [
-        'Title' => "New Registration". $this->user->first_name ." ". $this->user->last_name.",",
+        'Title' => "New Registration by ". $this->user->first_name ." ". $this->user->last_name.",",
         'route-name' => 'customers.show',
         'Id' => $this->user->id 
         ];
