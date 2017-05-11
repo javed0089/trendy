@@ -152,10 +152,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 	Route::group(['middleware' =>'super-admin'], function(){
 
-		///////*****Email testing********//////
-		Route::get('sendNotification', 'Backend\Notification\NotificationController@send')->name('sendNotification');
-
-		Route::get('notifications', 'Backend\Notification\NotificationController@index')->name('notifications.index');
+		
 
 
 		///////*****User Management********//////
@@ -248,7 +245,10 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 	
 
-	
+	///////*****Email testing********//////
+		Route::get('sendNotification', 'Backend\Notification\NotificationController@send')->name('sendNotification');
+
+		Route::get('notifications', 'Backend\Notification\NotificationController@index')->name('notifications.index');
 	
 
 	///////*****Quotes********//////
