@@ -37,7 +37,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="about-txt widget">
                         <img src="{{asset('images/footer-logo.png')}}" alt="logo" />
-                        <p>{!! isset($footer_blocks->get(3)->{lang_col('value')})?$footer_blocks->get(3)->{lang_col('value')}:'Not set' !!} </p>
+                        <p style="text-align: justify;">{!! isset($footer_blocks->get(3)->{lang_col('value')})?$footer_blocks->get(3)->{lang_col('value')}:'Not set' !!} </p>
                         <div class="widgets-social">
                             <a href="{!! isset($social_blocks->get(0)->{lang_col('value')})?$social_blocks->get(0)->{lang_col('value')}:'#' !!}" target="_blank"> <i class="fa fa-facebook" aria-hidden="true"></i> </a>
                             <a href="{!! isset($social_blocks->get(1)->{lang_col('value')})?$social_blocks->get(1)->{lang_col('value')}:'#' !!}" target="_blank"> <i class="fa fa-twitter" aria-hidden="true"></i></a>

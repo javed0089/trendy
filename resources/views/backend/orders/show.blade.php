@@ -72,6 +72,7 @@
 								<h4>Dated : <span>{{date('M j, Y',strtotime($order->created_at))}}</span></h4>
 								<h4>P.I Status : {!! $order->pi_confirmed?'<span class="label label-success">Confirmed</span>':'<span class="label label-danger">Not Confirmed</span>'!!}</h4>
 								<h4>Payment Status : {!! $order->payment_status?'<span class="label label-success">Paid</span>':'<span class="label label-danger">Not Paid</span>'!!}</h4>
+								<h4>Assigned to : @if($order->AssignedTo)<span>{{$order->AssignedTo->first_name}} {{$order->AssignedTo->last_name}}</span>@endif</h4>
 							</div>
 							<div class="col-md-2 pull-right">
 

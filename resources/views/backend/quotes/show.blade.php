@@ -80,7 +80,7 @@
 										</div>
 									</div>
 								</div>
-
+								<h4>Assigned to : @if($quote->AssignedTo)<span>{{$quote->AssignedTo->first_name}} {{$quote->AssignedTo->last_name}}</span>@endif</h4>
 							</div>
 							<div class="col-md-2 pull-right">
 								

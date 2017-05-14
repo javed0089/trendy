@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'hello@example.com',
+        'address' => 'marketing@gap-polymers.com',
         'name' => 'Gap polymers',
     ],
 

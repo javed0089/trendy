@@ -87,10 +87,10 @@ class CategoryController extends Controller
         $product=Product::where('slug','=',$slug)->first();
         $topImage = Page::find(130)->PageSections()->first();
 
-        $relatedProds = Product::where([['category_id','=',$product->category->id],['id','!=',$product->id]])->inRandomOrder()->take(3)->get();
+        $relatedProds = Product::where([['category_id','=',$product->category->id],['id','!=',$product->id],['discontinued','=','0']])->inRandomOrder()->take(3)->get();
         if(!count($relatedProds) >0 )
         {
-            $relatedProds = Product::where([['id','!=',$product->id]])->inRandomOrder()->take(3)->get();
+            $relatedProds = Product::where([['id','!=',$product->id],['discontinued','=','0']])->inRandomOrder()->take(3)->get();
         }
 
         if($product)

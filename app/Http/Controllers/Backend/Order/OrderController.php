@@ -12,6 +12,7 @@ use App\Models\Order\OrderShipmentFiles;
 use App\Models\Order\OrderShipmentStatus;
 use App\Models\Rating\Rating;
 use App\Models\Status\Status;
+use App\Notifications\NewOrderMessage;
 use App\Notifications\OrderAssigned;
 use App\Notifications\OrderBlDraftConfirmation;
 use App\Notifications\OrderDocumentUploaded;
