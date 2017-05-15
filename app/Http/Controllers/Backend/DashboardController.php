@@ -13,6 +13,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Sentinel;
+use Analytics;
 
 class DashboardController extends Controller
 {
@@ -70,11 +71,11 @@ class DashboardController extends Controller
 			->where('assign_to_id','=',$user->id)->get();
 		}
 
-
-
 		$ratings = new Rating();
 
+		$analyticsData = Analytics::getVisitorsAndPageViews(1)->first();
+		//dd($analyticsData);
 
-		return view('backend.index')->with('totalOrders',$totalOrders)->with('totalQuotes',$totalQuotes)->with('totalRegistrations',$totalRegistrations)->with('totalProducts',$totalProducts)->with('ratings',$ratings)->with('quotes',$quotes)->with('orders',$orders)->with('prodcount',$prodcount)->with('quotesForApproval',$quotesForApproval)->with('ordersForApproval',$ordersForApproval);
+		return view('backend.index')->with('totalOrders',$totalOrders)->with('totalQuotes',$totalQuotes)->with('totalRegistrations',$totalRegistrations)->with('totalProducts',$totalProducts)->with('ratings',$ratings)->with('quotes',$quotes)->with('orders',$orders)->with('prodcount',$prodcount)->with('quotesForApproval',$quotesForApproval)->with('ordersForApproval',$ordersForApproval)->with('analyticsData' ,$analyticsData );
 	}
 }

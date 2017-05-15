@@ -8,7 +8,8 @@
         <li class="header">MAIN NAVIGATION </li>
         <li><a href="{{ url('backoffice/') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
        
-        @if(User::isSuperAdmin())
+        @if(User::isSuperAdmin() ||User::isAdmin())
+          @if(User::isSuperAdmin())
           <li class="treeview {{ Request::is('backoffice/user/*')?'active':'' }}">
             <a href="#">
               <i class="fa fa-user"></i> <span>User Management</span>
@@ -21,7 +22,7 @@
               <li {{ Request::is('backoffice/user/register')?"class=active":'' }}><a href="{{ url('backoffice/user/register') }}"><i class="fa fa-circle-o"></i>Create User</a></li>
             </ul>
           </li>
-
+        @endif
 
          <li class="treeview {{ Request::is('backoffice/catalog/*')?'active':'' }}">
           <a href="#">
@@ -401,7 +402,7 @@
            
           </ul>
         </li>
-
+ @if(User::isSuperAdmin())
         <li class="treeview {{ Request::is('backoffice/customers/*')?'active':'' }}">
           <a href="#">
             <i class="fa fa-newspaper-o"></i> <span>Customers</span>
@@ -416,6 +417,7 @@
            
           </ul>
         </li>
+        @endif
 @endif
         <li class="treeview {{ Request::is('backoffice/quotes/*')?'active':'' }}">
           <a href="#">

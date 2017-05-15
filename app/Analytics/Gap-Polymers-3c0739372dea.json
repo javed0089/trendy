@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gap-polymers",
+  "private_key_id": "3c0739372dea299ae1797155e00d047a2bc2e904",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCgxAtgbixC6jY8\n0w8qQKJQvsLQJnqCo5h8nhx9PpOLAuy/q40eLa8JrYZuN+7MXdbAkIbYB8Xv4sTe\nKiW8Kbpuds/XVvxwvg1QCK+3oZmnrSn/YASjq8jki9OHH8rVyrazkvsD/Sm3WoyD\nNHOSOYgZ//lemnYbN2dbOqLvPG+YQfFl6RPd8HvmHm5C3QcdwSotLeZJu81rHhDR\n8uJaoYLg5CP4Z+RG++gPtT6NA3vqfJE5KAeblhRD4DncvF4j/IpoS0rE7cbIhMGi\nriVkeF3odrBLl2d2hfIydMVfJ75mWhHSmyiDy68tBZuQPVUjyYNTb0WdDgfiOvXZ\nqXziw9nXAgMBAAECggEASH9f6gKE70ATaWZ8Zj9zcxozXA6eHJ+NulTK4CgB/SQ6\ng0znfH55etHH15hdlceTeo8yX+VRe5Y11UIIdkwTCJGHtMJDYMwz0K26IAM9+YF7\nePBh5zUmiPoNT9gkbjjWHzDfBbN6xnaM+vYCUCSlnaPzXpglPqzDbT6KD3yfjncm\nTHl7QS1QdjJQZZe0v9Tm0e830QKW0HXdowtLljZE+N/M9sGOC3M46yIwDro/otkR\nm9wyhGFx0lsF5j16SUfxp7kW9+YMYF1w72ORu9GraFXiQPqTvyit49PaH0kgLwRi\nyySSXzm1CvYj+o8f8oHmNwthIrr2P2kAQKdlDFHfcQKBgQDiB80eldYURORphHBx\n3vvnUEnkLfijNofRFIcabEHZzWulmUarbM3l18a8aITti0xEM69OD4pDGsyq4TeY\n2cqyuYWIZCuKbjhUsGvAwLHF74SJloA5tRSeqMIuHtEmU8kP+BZNFELTS65iEVGq\n69eX1khOsFl3zuqsZMXrKgu0fQKBgQC2FPNwaqAZVBwcng/GMKvx4dhVeHpjKIpq\naz6B4FMxr1jpuZekvSIjbQnEMR7+GoJleaHU9166n5WFyirWCShXOfvFLQmBVY2j\n1u9HdCgZ3pE3kt413ZuxOQ48g7f6YuBn4UfqLittVB7pqOM5QB+UjDpQa6x2wvP8\nhdFYwxI74wKBgG6hXN9EfVTMZ3PR8+t4NZmBLbl2WsUf8pf+USY4qH5/UdnqzLEo\n/xopY8dh7PYLgRe8qGgvqP+xRU26EClLKDAUJ+ybAsitq/qfow3kAt8bnaZuOHKG\nVAJYHTrPsJTu23FqfxfY++BJoZ+0VGGxL4PMyPVi0VeXujsI0+qHWNVNAoGAZRmK\n9f9uN8IY/dbRwWTjBCI3gXWs1wP6nw4/HdQVvX+0KcqQJbuSigMQKixwHf1QK9H2\nho53vb3AQxI26LMbABvE7P2Nyo9bXv6Hy6/2WC7ZiPb2hQgwW53nhrhIXjGqkmNn\nD+Nk34aWx3yr9ezh3BRkiKTQlPy4hp0y2UsvA6sCgYBGlhdMD3KrGtbjZ+H6+TT2\nbS4TSvrWcMWzfyd9WwOWWxEmqhsH0BM8JV6T6bFgWauwI+DaJRoJV0TOFhs4ZiGO\ngYg33mBBkbO337mzlXuKZ0Z2FLPWe3EvgV2EgUrAXGzGRUhcxNk4gKqp7MC1TWU7\n/MbY3Nc49PAY0tqQY/Uz2A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "analytics-api@gap-polymers.iam.gserviceaccount.com",
+  "client_id": "108544047126324364239",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/analytics-api%40gap-polymers.iam.gserviceaccount.com"
+}

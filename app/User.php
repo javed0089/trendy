@@ -72,10 +72,22 @@ class User extends EloquentUser
         return false;
     }
 
+    public static function isAdmin()
+    {
+        if (Sentinel::check()) {
+            if(Sentinel::inRole('admin'))
+                return true;
+            else
+                return false;
+        }
+
+        return false;
+    }
+
     public static function isSupervisor()
     {
         if (Sentinel::check()) {
-            if(Sentinel::inRole('supervisor') || Sentinel::inRole('super-admin'))
+            if(Sentinel::inRole('supervisor') || Sentinel::inRole('super-admin')|| Sentinel::inRole('admin'))
                 return true;
             else
                 return false;

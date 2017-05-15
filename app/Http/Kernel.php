@@ -55,6 +55,7 @@ class Kernel extends HttpKernel
         'backend' =>\App\Http\Middleware\BackendMiddleware::class,
         'customer' =>\App\Http\Middleware\CustomerMiddleware::class,
         'super-admin' =>\App\Http\Middleware\SuperAdminMiddleware::class,
+        'admin' =>\App\Http\Middleware\AdminMiddleware::class,
 
 
         /**** OTHER MIDDLEWARE ****/

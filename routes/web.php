@@ -162,8 +162,13 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		Route::get('user/edit/{id}', 'Backend\User\UserController@edit')->name('users.edit');
 		Route::post('user/update/{id}', 'Backend\User\UserController@update')->name('users.update');
 
-
+		///////*****Customers********//////
+		Route::resource('customers/customers','Backend\Customer\CustomerController');
 		
+
+});
+
+		Route::group(['middleware' =>'admin'], function(){
 
 			///////*****Pages********//////
 		Route::resource('pages','Backend\Page\PageController');
@@ -214,8 +219,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		///////*****Blocks********//////
 		Route::resource('pages/blocks','Backend\Block\BlockController');
 
-		///////*****Customers********//////
-		Route::resource('customers/customers','Backend\Customer\CustomerController');
+		
 
 		///////*****Services********//////
 		Route::resource('module/services','Backend\Services\ServiceController');
@@ -265,4 +269,6 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 	Route::get('user/getprofilepicture/{file}','Backend\User\UserController@getProfilePicture')->name('users.getprofilepicture');
 
 });
+
+
 

@@ -73,6 +73,27 @@
       </div>
     </div>
     <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+            <div class="col-xs-6">
+              <h3>{{$analyticsData['visitors']}}</h3>
+
+              <p>Visitors Yesterday</p>
+              </div>
+              <div class="col-xs-6 text-right">
+              <h3>{{$analyticsData['pageViews']}}</h3>
+
+              <p>Page Views Yesterday</p>
+              </div>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="https://analytics.google.com" target="_blank" class="small-box-footer">Google Analytics <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
    
     <!-- ./col -->
   </div>
