@@ -124,7 +124,7 @@
 
  <!-- page script -->
 <script>
-  $(function () {
+/*  $(function () {
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
@@ -139,6 +139,6 @@
 	    return confirm("Are you sure, you want to delete it?");
 	});
 
-  });
+  });*/
 </script>
 @endsection
