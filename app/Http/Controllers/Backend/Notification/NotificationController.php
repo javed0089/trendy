@@ -45,5 +45,6 @@ class NotificationController extends Controller
 			$notification->delete();
 		}
 		return back();
+		
 	}
 }

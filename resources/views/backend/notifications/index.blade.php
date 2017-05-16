@@ -49,6 +49,7 @@
             <div class="box-footer clearfix no-border">
                <a href="{{route('notifications.allnotifications')}}" type="button" class="btn btn-info pull-left"><i class="fa fa-check"></i> Show all</a>
                <a href="{{route('notifications.index')}}" type="button" class="btn btn-info pull-left"><i class="fa fa-check"></i> Unread</a>
+               
               <a href="{{route('notifications.delete')}}" type="button" class="btn btn-danger pull-right"><i class="fa fa-check"></i> Delete all read</a>
               <a href="{{route('notifications.markallasread')}}" type="button" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Mark all as read</a>
             </div>

@@ -258,6 +258,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		Route::get('allnotifications', 'Backend\Notification\NotificationController@allNotifications')->name('notifications.allnotifications');
 		Route::get('delnotifications', 'Backend\Notification\NotificationController@delete')->name('notifications.delete');
 
+
 	///////*****Quotes********//////
 	Route::resource('quotes/quote-requests','Backend\Quotes\QuoteController');
 
