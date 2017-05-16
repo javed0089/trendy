@@ -1,5 +1,5 @@
 @extends('backend.layouts.adminmain')
-@section('title','News')
+@section('title','Notifications')
 
 @section('content')
 

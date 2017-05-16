@@ -33,7 +33,7 @@ class CustomerController extends Controller
                 }
               
                // $query->where('first_name','!=','');
-            })->paginate(15)->appends(['term'=> request('term')]);
+            })->orderBy('created_at','desc')->paginate(15)->appends(['term'=> request('term')]);
 
 
         return view('backend.customer.index')->with('customers',$customers);
