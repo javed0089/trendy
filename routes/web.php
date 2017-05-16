@@ -253,7 +253,10 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		Route::get('sendNotification', 'Backend\Notification\NotificationController@send')->name('sendNotification');
 
 		Route::get('notifications', 'Backend\Notification\NotificationController@index')->name('notifications.index');
-	
+		Route::get('notifications/{id}', 'Backend\Notification\NotificationController@markAsRead')->name('notifications.markasread');
+		Route::get('markallasread', 'Backend\Notification\NotificationController@markAllAsRead')->name('notifications.markallasread');
+		Route::get('allnotifications', 'Backend\Notification\NotificationController@allNotifications')->name('notifications.allnotifications');
+		Route::get('delnotifications', 'Backend\Notification\NotificationController@delete')->name('notifications.delete');
 
 	///////*****Quotes********//////
 	Route::resource('quotes/quote-requests','Backend\Quotes\QuoteController');

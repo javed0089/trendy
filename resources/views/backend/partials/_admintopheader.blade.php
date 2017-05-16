@@ -19,17 +19,17 @@
        <li class="dropdown notifications-menu">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
           <i class="fa fa-bell-o"></i>
-          <span class="label label-danger">{{count(User::getUser()->notifications)}}</span>
+          <span class="label label-danger">{{count(User::getUser()->unReadNotifications)}}</span>
         </a>
         <ul class="dropdown-menu">
-          <li class="header">You have {{count(User::getUser()->notifications)}} notifications</li>
+          <li class="header">You have {{count(User::getUser()->unReadNotifications)}} notifications</li>
           <li>
             <!-- inner menu: contains the actual data -->
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
 
 <!-- inner menu: contains the actual data -->
           <ul class="menu">
-             @foreach (User::getUser()->notifications as $notification) 
+             @foreach (User::getUser()->unReadNotifications as $notification) 
              <li>
               <a href="{{route($notification->data['route-name'],$notification->data['Id'])}}"  class="{{$notification->read_at?'':'text-bold'}}">
                 <i class="fa fa-pencil-square-o " ></i> {{$notification->data['Title']}}
