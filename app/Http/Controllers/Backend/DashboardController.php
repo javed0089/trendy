@@ -42,7 +42,7 @@ class DashboardController extends Controller
 			$cat=['name' =>$parent->name_en,'logo'=>$parent->logo,'prodCount'=>$counter];
 			$prodcount[]=$cat;
 		}
-		
+
 		$quotes=[];
 		$quotesForApproval=[];
 		if(User::isSupervisor())
@@ -56,6 +56,7 @@ class DashboardController extends Controller
 			$quotes = Quote::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())
 			->where('assign_to_id','=',$user->id)->orderBy('created_at','desc')->get();
 		}
+
 
 		$orders=[];
 		$ordersForApproval=[];
