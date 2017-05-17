@@ -54,7 +54,6 @@ class DashboardController extends Controller
 			$user=Sentinel::getUser();
 			$quotes = Quote::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())
 			->where('assign_to_id','=',$user->id)->orderBy('created_at','desc')->get();
-
 		}
 
 		$orders=[];
