@@ -42,6 +42,7 @@ class DashboardController extends Controller
 			$cat=['name' =>$parent->name_en,'logo'=>$parent->logo,'prodCount'=>$counter];
 			$prodcount[]=$cat;
 		}
+		
 		$quotes=[];
 		$quotesForApproval=[];
 		if(User::isSupervisor())
