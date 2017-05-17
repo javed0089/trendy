@@ -46,14 +46,14 @@ class DashboardController extends Controller
 		$quotesForApproval=[];
 		if(User::isSupervisor())
 		{
-			$quotes = Quote::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())->get();
+			$quotes = Quote::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())->orderBy('created_at','desc')->get();
 			$quotesForApproval = Quote::where('status', '=', '2')->get();
 		}
 		elseif(User::isSalesExecutive())
 		{
 			$user=Sentinel::getUser();
 			$quotes = Quote::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())
-			->where('assign_to_id','=',$user->id)->get();
+			->where('assign_to_id','=',$user->id)->orderBy('created_at','desc')->get();
 
 		}
 
@@ -61,14 +61,14 @@ class DashboardController extends Controller
 		$ordersForApproval=[];
 		if(User::isSupervisor())
 		{
-			$orders = Order::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())->get();
+			$orders = Order::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())->orderBy('created_at','desc')->get();
 			$ordersForApproval = Order::where('status', '=', '2')->get();
 		}
 		elseif(User::isSalesExecutive())
 		{
 			$user=Sentinel::getUser();
 			$orders = Order::whereDate('created_at', '>=', Carbon::today()->subDays(10)->toDateString())
-			->where('assign_to_id','=',$user->id)->get();
+			->where('assign_to_id','=',$user->id)->orderBy('created_at','desc')->get();
 		}
 
 		$ratings = new Rating();
