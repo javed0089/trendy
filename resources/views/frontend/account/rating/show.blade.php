@@ -19,7 +19,7 @@
      <div class="spacer-40"></div>
      <div class="col-md-10 about-content">
        <div class="panel-div">
-        <div class="panel-title">Overall Service Rating</div>
+        <div class="panel-title">{{__('Overall Service Rating')}}</div>
         <div class="content">
           <div class="row">
            @if(session('error'))
@@ -42,13 +42,13 @@
           <div class="col-md-6 col-md-offset-3 text-center"> 
             <form  role="form"  method="Post"  action="{{route('rating.update2','0')}}">
               {{csrf_field()}}
-              <h4>Overall service rating</h4>
+              <h4>{{__('Overall service rating')}}</h4>
               <div id='star' class="star"></div>
               <input id="rating" hidden type="text"  name="rating" value="{{count($rating)>0? $rating->rating:''}}">
             </div>
             <div class="spacer-30"></div>
             <div class="col-md-4 col-md-offset-4">
-              <button type="submit" class="btn btn-md btn-block btn-primary">RATE</button>
+              <button type="submit" class="btn btn-md btn-block btn-primary">{{__('RATE')}}</button>
             </div>
           </form>
           

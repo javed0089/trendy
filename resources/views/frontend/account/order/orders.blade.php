@@ -16,14 +16,14 @@
      <div class="spacer-40"></div>
      <div class="col-md-10 about-content">
        <div class="panel-div">
-        <div class="panel-title">My Orders</div>
+        <div class="panel-title">{{__('My Orders')}}</div>
         <div class="content">
           <table class="table table-striped">
             <thead>
              <tr>
-              <th>Order #</th>
-              <th>Date</th>
-              <th>Status</th>
+              <th>{{__('Order No.')}}</th>
+              <th>{{__('Date')}}</th>
+              <th>{{__('Status')}}</th>
               <th></th>
             </tr>
           </thead>
@@ -33,7 +33,7 @@
               <td>{{$order->order_no}}</td>
               <td>{{date('M j, Y H:i',strtotime($order->created_at))}}</td>
               <td>{{$order->Status->status_en}}</td>
-              <td><a href="{{route('myorders.show',$order->id)}}" class="btn btn-xs btn-default">View</a></td>
+              <td><a href="{{route('myorders.show',$order->id)}}" class="btn btn-xs btn-default">{{__('View')}}</a></td>
             </tr>
             @endforeach
           </tbody>

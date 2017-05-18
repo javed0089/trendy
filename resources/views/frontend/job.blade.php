@@ -125,7 +125,7 @@
     <div class="modal-dialog modal-md" >
         <div class="modal-content">
             <div class="panel-div">
-                <div class="panel-title">Apply Now
+                <div class="panel-title">{{__('Apply Now')}}
                     <span class="pull-right"><a class="btn btn-xs btn-primary" data-dismiss="modal">x</a></span>
                 </div>
                 <div class="content">
@@ -151,7 +151,7 @@
                             </div>
                             <div class="spacer-60"></div>
                             <div class="col-md-4 col-md-offset-4">
-                                <button type="submit" class="btn btn-md btn-block btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-md btn-block btn-primary">{{__('Submit')}}</button>
                             </div>
                         </form>
                     </div>

@@ -1,7 +1,7 @@
 <ul>
-    <li> <a href="{{route('frontend.about')}}"> The Company </a> </li>
-    <li> <a href="{{route('frontend.industry')}}"> About Industry </a> </li>
-    <li> <a href="{{route('frontend.mission')}}"> Vision &amp; Mission </a> </li>
-    <li> <a href="{{route('frontend.approach')}}"> Our Approach </a> </li>
-    <li> <a href="{{route('frontend.team')}}"> Our Team </a> </li>
+    <li> <a href="{{route('frontend.about')}}"> {{__('The Company')}} </a> </li>
+    <li> <a href="{{route('frontend.industry')}}"> {{__('About Industry')}} </a> </li>
+    <li> <a href="{{route('frontend.mission')}}"> {{__('Mission & Vision')}} </a> </li>
+    <li> <a href="{{route('frontend.approach')}}"> {{__('Our Approach')}} </a> </li>
+    <li> <a href="{{route('frontend.team')}}"> {{__('Our Team')}} </a> </li>
 </ul>

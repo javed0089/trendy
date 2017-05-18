@@ -52,9 +52,9 @@
                                     <div class="form-group">
                                         <input name="password" placeholder="{{__('Password')}}" class="form-control" type="password" required minlength="6" data-parsley-required-message="Please enter your password" >
                                     </div>
-                                    <a href="{{route('frontend.forgot-password')}}">Forgot password?</a>
-                                    <div class=" pull-right">
-                                        <label><input name="rememberMe" style="margin-top: .5px;" type="checkbox"> Remeber me</label>
+                                    <a href="{{route('frontend.forgot-password')}}">{{__('Forgot password')}}?</a>
+                                    <div class="pull-right">
+                                        <label><input name="rememberMe" style="margin-top: .5px;" type="checkbox"> {{__('Remeber me')}}</label>
                                     </div>
                                     
                                     <!-- Button -->

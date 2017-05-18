@@ -21,11 +21,11 @@
             <!-- Breadcrumbs -->
             <div class="breadcrumbs">
                 <div class="container">
-                    <span class="parent"> <i class="fa fa-home"></i> <a href="index.html"> Home </a> </span>
+                    <span class="parent"> <i class="fa fa-home"></i> <a href="index.html"> {{__('Home')}} </a> </span>
                     <i class="fa fa-chevron-right"></i>
-                    <span class="child"> <a href="about.html"> About </a> </span>
+                    <span class="child"> <a href="about.html"> {{__('About')}} </a> </span>
                     <i class="fa fa-chevron-right"></i>
-                    <span class="child"> COMPANY OVERVIEW </span>
+                    <span class="child"> {{__('Our Team')}} </span>
                 </div>
             </div>
 

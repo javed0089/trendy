@@ -52,11 +52,11 @@
                     <div class="quick-links widget">
                         <h2 class="widget-title">{{__("QUICK LINKS")}}</h2>
                         <ul>
-                            <li> <a href="{{route('frontend.categories')}}"> Polymer Products </a> </li>
-                            <li> <a href="{{route('frontend.contact')}}"> Reach Us </a> </li>
-                            <li> <a href="{{route('frontend.about')}}"> Who we are </a> </li>
-                            <li> <a href="{{route('frontend.industry')}}"> Industry info </a> </li>
-                            <li> <a href="{{route('frontend.news')}}"> Latest News </a> </li>
+                            <li> <a href="{{route('frontend.categories')}}"> {{__('Polymer Products')}} </a> </li>
+                            <li> <a href="{{route('frontend.contact')}}"> {{__('Reach Us')}} </a> </li>
+                            <li> <a href="{{route('frontend.about')}}"> {{__('Who we are')}} </a> </li>
+                            <li> <a href="{{route('frontend.industry')}}"> {{__('Industry info')}} </a> </li>
+                            <li> <a href="{{route('frontend.news')}}"> {{__('Latest News')}} </a> </li>
                         </ul>
                     </div>
                 </div>

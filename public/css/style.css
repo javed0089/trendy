@@ -4727,9 +4727,9 @@ ul.nav-tabs {
     margin-bottom: 0;
     max-height: none;
     overflow-y: auto;
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
     -webkit-column-gap: 0;
     -moz-column-gap: 0;
     column-gap: 0;
@@ -5846,3 +5846,4 @@ line-height: 25px;
   text-decoration:none;
   color: #d74b4b;
 }
+

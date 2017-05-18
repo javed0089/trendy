@@ -82,7 +82,7 @@
             @endforeach
             @endif
             <div class="spacer-10"></div>
-            <a href="{{route('frontend.categories')}}" class="pull-right btn btn-default btn-sm">View all products <i class="fa fa-angle-double-right"></i></a>
+            <a href="{{route('frontend.categories')}}" class="pull-right btn btn-default btn-sm">{{__('View all products')}} <i class="fa fa-angle-double-right"></i></a>
         </div>
     </div>
 </section>
@@ -101,7 +101,7 @@
                 <a href="{{route('frontend.contact')}}" class="btn btn-primary" role="button">{{__('CONTACT')}}</a>
             </div>
             <div class="col-md-2">
-                <a href="{{route('frontend.mission')}}" class="btn btn-primary" role="button">{{__('OUR MISSIOn')}}</a>
+                <a href="{{route('frontend.mission')}}" class="btn btn-primary" role="button">{{__('OUR MISSION')}}</a>
             </div>
             <div class="col-md-2">
                 <a href="{{route('frontend.industry')}}" class="btn btn-primary" role="button">{{__('INDUSTRY')}}</a>
@@ -200,22 +200,22 @@
             </div>
             <div class="col-sm-6">
                 <div id="skills" class="process-bar">
-                    <div class="skillbar-title"> Excellent </div>
+                    <div class="skillbar-title"> {{__('Excellent')}} </div>
                     <div class="skillbar" data-percent="{{$ratings->excellent()}}%">
                         <div class="skillbar-bar"> </div>
                         <div class="skill-bar-percent">{{$ratings->excellent()}}%</div>
                     </div>
-                    <div class="skillbar-title"> Good</div>
+                    <div class="skillbar-title"> {{__('Good')}}</div>
                     <div class="skillbar" data-percent="{{$ratings->good()}}%">
                         <div class="skillbar-bar"> </div>
                         <div class="skill-bar-percent">{{$ratings->good()}}%</div>
                     </div>
-                    <div class="skillbar-title"> Average </div>
+                    <div class="skillbar-title"> {{__('Average')}} </div>
                     <div class="skillbar" data-percent="{{$ratings->average()}}%">
                         <div class="skillbar-bar"> </div>
                         <div class="skill-bar-percent">{{$ratings->average()}}%</div>
                     </div>
-                    <div class="skillbar-title">Poor </div>
+                    <div class="skillbar-title">{{__('Poor')}} </div>
                     <div class="skillbar" data-percent="{{$ratings->poor()}}%">
                         <div class="skillbar-bar"> </div>
                         <div class="skill-bar-percent">{{$ratings->poor()}}%</div>
@@ -230,7 +230,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="panel-div">
-                <div class="panel-title">RATE OUR SERVICE
+                <div class="panel-title">{{__('RATE OUR SERVICE')}}
                     <span class="pull-right"><a class="btn btn-xs btn-primary" data-dismiss="modal">x</a></span>
                 </div>
                 <div class="content">
@@ -246,7 +246,7 @@
                             </div>
                             <div class="spacer-60"></div>
                             <div class="col-md-4 col-md-offset-4">
-                                <button type="submit" class="btn btn-md btn-block btn-primary">RATE</button>
+                                <button type="submit" class="btn btn-md btn-block btn-primary">{{__('RATE')}}</button>
                             </div>
                         </form>
                     </div>
@@ -320,7 +320,7 @@
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="panel-div">
-                                    <div class="panel-title">QR CODE
+                                    <div class="panel-title">{{__('QR CODE')}}
                                         <span class="pull-right"><a class="btn btn-xs btn-primary" data-dismiss="modal">x</a></span>
                                     </div>
                                     <div class="content">
@@ -328,7 +328,7 @@
                                         <img src="{{isset($company->company_qrcode)?asset($company->company_qrcode):''}}">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('Close')}}</button>
                                     </div>
                                 </div>
                             </div>

@@ -20,7 +20,7 @@
      <div class="spacer-40"></div>
      <div class="col-md-10 about-content">
        <div class="panel-div">
-        <div class="panel-title">Personal Info</div>
+        <div class="panel-title">{{__('Personal Info')}}</div>
         <div class="content">
           <div class="row">
            @if(session('error'))
@@ -39,9 +39,9 @@
                   @endif
            <div class="col-xs-3"> 
             <ul class="nav nav-tabs tabs-left">
-              <li class=active><a href="#personalInfo" data-toggle="tab"><i class="fa fa-user-circle"></i> Personal Info
+              <li class=active><a href="#personalInfo" data-toggle="tab"><i class="fa fa-user-circle"></i> {{__('Personal Info')}}
               </a></li>
-              <li><a href="#changepassword" data-toggle="tab"><i class="fa fa-lock"></i> Change Password
+              <li><a href="#changepassword" data-toggle="tab"><i class="fa fa-lock"></i> {{__('Change Password')}}
               </a></li>
             </ul>
           </div>
@@ -49,20 +49,20 @@
             <div class="tab-content">
               <div class="tab-pane active userinfo" id="personalInfo">
                 <div class="col-xs-6">
-                  <h4>Full Name: <span>{{$user->first_name}} {{$user->last_name}}</span></h4>
-                  <h4>Address: <span>{{$user->address}}</span></h4>
-                  <h4>City: <span>{{$user->city}}</span></h4>
-                  <h4>Country: <span>{{$user->country}}</span></h4>
-                  <h4>Address: <span>{{$user->address}}</span></h4>
+                  <h4>{{__('Full Name')}}: <span>{{$user->first_name}} {{$user->last_name}}</span></h4>
+                  <h4>{{__('Address')}}: <span>{{$user->address}}</span></h4>
+                  <h4>{{__('City')}}: <span>{{$user->city}}</span></h4>
+                  <h4>{{__('Country')}}: <span>{{$user->country}}</span></h4>
+                  <h4>{{__('Address')}}: <span>{{$user->address}}</span></h4>
                   
 
                 </div>
                 <div class="col-xs-6">
-                  <h4>Company: <span>{{$user->company}}</span></h4>
-                  <h4>Telephone: <span>{{$user->telephone}}</span></h4>
-                  <h4>Mobile: <span>{{$user->mobile}}</span></h4>
-                  <h4>Website: <span>{{$user->website}}</span></h4>
-                  <h4>Email: <span>{{$user->email}}</span></h4>
+                  <h4>{{__('Company')}}: <span>{{$user->company}}</span></h4>
+                  <h4>{{__('Telephone')}}: <span>{{$user->telephone}}</span></h4>
+                  <h4>{{__('Mobile')}}: <span>{{$user->mobile}}</span></h4>
+                  <h4>{{__('Website')}}: <span>{{$user->website}}</span></h4>
+                  <h4>{{__('Email')}}: <span>{{$user->email}}</span></h4>
 
 
                 </div>

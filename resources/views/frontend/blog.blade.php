@@ -78,7 +78,7 @@
             
 
             <div class="sidebar-blog-categories">
-                <h3 class="sidebar-title">Categories</h3>
+                <h3 class="sidebar-title">{{__('Categories')}}</h3>
 
                 <ul>
                     @foreach($blogCategories as $blogCategory)

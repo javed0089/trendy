@@ -31,7 +31,7 @@
                 @if ( $menuProduct->category_id == $menuParentCat->id )
                 @if($var==0)
                 <li class="menu-item-type-custom menu-item-object-custom menu-item-2987-1">
-                  <a href="{{route('frontend.productlist',$menuParentCat->slug)}}">Grades</a>
+                  <a href="{{route('frontend.productlist',$menuParentCat->slug)}}">{{__('Grades')}}</a>
                   <ul class="sub-menu">
                     @endif
                     <li id="menu-item-2043" class="menu-item-2043"><a href="{{route('frontend.product',$menuProduct->slug)}}">{{$menuProduct->{lang_col('name')} }}</a></li>
@@ -91,7 +91,7 @@
           </li>
           @endforeach
           <li>
-            <a href="{{route('frontend.categories')}}">All Categories >></a>
+            <a href="{{route('frontend.categories')}}">{{__('All Categories')}} >></a>
           </li>
           @endif
 
@@ -163,8 +163,8 @@
         </form>
     </div>
 </div>-->
-<!--
- <div class="language-menu visible-lg visible-md" >
+
+ <!--<div class="language-menu visible-lg visible-md" >
   <select  onchange="window.location=this.value">
     <option {{LaravelLocalization::getCurrentLocale()=='en'?'selected':''}} value="{{LaravelLocalization::getLocalizedURL('en') }}">English</option>
     <option {{LaravelLocalization::getCurrentLocale()=='ar'?'selected':''}} value="{{LaravelLocalization::getLocalizedURL('ar') }}">العربية</option>

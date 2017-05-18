@@ -17,19 +17,19 @@
       <div class="col-md-10 about-content">
 
         <div class="panel-div">
-          <div class="panel-title">Quotation</div>
+          <div class="panel-title">{{__('Quotation')}}</div>
           <div class="content">
             <div class="row">
               <div class="col-md-4">
-                <h4>Quote # : <span >{{$myquote->quote_no}}</span></h4>
-                <h4>Status : <span>{{$myquote->Status->status_en}}</span></h4>
+                <h4>{{__('Quote No.')}} : <span >{{$myquote->quote_no}}</span></h4>
+                <h4>{{__('Status')}} : <span>{{$myquote->Status->status_en}}</span></h4>
 
               </div>
 
               <div class="col-md-4 text-right">
-                <h4>Dated : <span>{{date('M j, Y',strtotime($myquote->created_at))}}</span></h4>
+                <h4>{{__('Dated')}} : <span>{{date('M j, Y',strtotime($myquote->created_at))}}</span></h4>
 
-                <h4>Valid until :<span>{{isset($myquote->quote_validity)?date('M j, Y H:i',strtotime($myquote->quote_validity)):''}}</span></h4>
+                <h4>{{__('Valid Until')}} :<span>{{isset($myquote->quote_validity)?date('M j, Y H:i',strtotime($myquote->quote_validity)):''}}</span></h4>
               </div>
               <div class="col-md-2 pull-right text-right">
                <div style="margin-bottom: 3px;">
@@ -53,16 +53,16 @@
         <table class="table table-striped">
           <thead>
            <tr>
-            <th>Product</th>
-            <th>Qty.</th>
-            <th>Unit</th>
-            <th>Price</th>
-            <th>Curreny</th>
-            <th>P.O.D.</th>
-            <th>D.T.</th>
-            <th>P.M.</th>
-            <th>S.D.</th>
-            <th>Status</th>
+            <th>{{__('Product')}}</th>
+            <th>{{__('Qty.')}}</th>
+            <th>{{__('Unit')}}</th>
+            <th>{{__('Price')}}</th>
+            <th>{{__('Curreny')}}</th>
+            <th>{{__('P.O.D.')}}</th>
+            <th>{{__('D.T.')}}</th>
+            <th>{{__('P.M.')}}</th>
+            <th>{{__('S.D.')}}</th>
+            <th>{{__('Status')}}</th>
 
           </tr>
         </thead>
@@ -98,7 +98,7 @@
     <div class="spacer-40"></div>
     <div class="comments1">
 
-      <h3 class="title-2 text-center"> {{count($myquote->QuoteComments->where('is_private','==','0'))}} Comments</h3>
+      <h3 class="title-2 text-center"> {{count($myquote->QuoteComments->where('is_private','==','0'))}} {{__('Comments')}}</h3>
       <div class="message-box" >
       @foreach($myquote->QuoteComments->sortByDesc('created_at')->where('is_private','==','0') as $quoteComment)
       <div class="{{$quoteComment->User->UserRole($quoteComment->User->id) == 'Subscriber'?'message1':'message2'}}">
@@ -112,17 +112,17 @@
     </div>
 
     <div class="comment-box">
-      <h2 class="title-2 text-center"> Add Comment </h2>
+      <h2 class="title-2 text-center"> {{__('Add Comment')}} </h2>
 
       <form action="{{route('quotes.update',$myquote->id)}}" method="POST"  class="commentform">
         {{csrf_field()}}
         {{ method_field('PATCH') }}
         <div class='row'>
           <div id="comment-message" class="col-md-12">
-            <textarea id="comment" class="form-control" name="comment" placeholder="Message" required></textarea>
+            <textarea id="comment" class="form-control" name="comment" placeholder="{{__("Message")}}" required></textarea>
           </div>
           <div class="comment-btn col-md-12">
-            <button type="submit" name="submit" value="addComment" class="btn btn-block btn-warning"> ADD COMMENT </button>
+            <button type="submit" name="submit" value="addComment" class="btn btn-block btn-warning"> {{__("ADD COMMENT")}} </button>
           </div>
         </div>
       </form>
