@@ -39,20 +39,21 @@ class QuoteController extends Controller
 
   public function addToCart(Request $request, $id)
   {
+    try{
     $product = Product::find($id);
     $oldCart = Session::has('cart')? Session::get('cart') : null;
+
     if($oldCart)
     {
-
       if(!array_key_exists($id, $oldCart->items))
       {
         $cart = new cart($oldCart);
         $cart->add($product, $product->id);
         Session::put('cart', $cart);
-        $msg = 'Product added to quote!';
+        $msg = __('Product added to quote!');
       }
       else  
-        $msg = 'Product already added!';
+        $msg = __('Product already added!');
     }
     else
     {
@@ -60,7 +61,7 @@ class QuoteController extends Controller
       $cart = new cart($oldCart);
       $cart->add($product, $product->id);
       Session::put('cart', $cart);
-      $msg = 'Product added to quote!';
+      $msg = __('Product added to quote!');
     }
         //return redirect()->back();
 
@@ -80,6 +81,14 @@ class QuoteController extends Controller
         'msg' => 'There was an error!',
         );
     }
+  }
+     catch (ErrorException $e) {
+             $response = array(
+        'status' => 'error',
+        'msg' => 'There was an error!',
+        );
+            return response()->json($response);
+        }
 
     return response()->json($response);
   }
@@ -94,7 +103,7 @@ class QuoteController extends Controller
     $cart->delete($id);
 
     Session::put('cart', $cart);
-    $msg = 'Product removed from quote!';
+    $msg = __('Product removed from quote!');
 
 
     if($msg){
@@ -120,14 +129,15 @@ class QuoteController extends Controller
   {
 
     $podNotReq = array('ExWorks','FOB');
-    if((!in_array($request['delivery_terms'],$podNotReq ) && $request['port_of_delivery']==""))
+    if((!in_array($request['delivery_terms'],$podNotReq ) && $request['port_of_delivery']=="") || $request['quantity']=="")
     {
       $this->validate($request, [
         'port_of_delivery' =>'required',
-        'quantity' =>'required',
+        'quantity' =>'required|numeric|min:16.50'
         ],$messages = [
-        'port_of_delivery.required' => 'Port of delivery required!',
-        'quantity.required' => 'Quantity required!',
+        'port_of_delivery.required' => __('Port of delivery required!'),
+        'quantity.required' => __('Quantity required!'),
+        'quantity.min' => __('Quantity value not correct!'),
         ]);
     }
 
@@ -141,7 +151,7 @@ class QuoteController extends Controller
     {
       $response = array(
         'status' => 'success',
-        'msg' => "Quote item updated!",
+        'msg' => __('Quote item updated!'),
         );
     }
     else
@@ -239,6 +249,9 @@ class QuoteController extends Controller
             return redirect()->route('message')->with('success', 'Your quote was send succesfully.');
         }
 
+      }
+      else{
+        return redirect()->back();
       }
     }
   }

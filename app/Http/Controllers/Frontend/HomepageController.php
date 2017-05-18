@@ -103,7 +103,8 @@ class HomepageController extends Controller
         $this->validate($request, [
             'email' =>'required|email|unique:subscribers,email',
             ],$messages = [
-            'email.unique' => 'E-mail address already registered!',
+            'email.unique' => __('E-mail address already registered!'),
+            'email.required' => __('Please enter your e-mail first!'),
             ]);
 
         $subscriber = new Subscriber;

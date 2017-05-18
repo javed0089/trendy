@@ -16,6 +16,7 @@ class CommentController extends Controller
         'email' =>'required|email',
         'message' =>'required|min:10',
         ]);
+
     	$comment =  new Comment();
     	$comment->fullname = $request->fullname;
     	$comment->email = $request->email;

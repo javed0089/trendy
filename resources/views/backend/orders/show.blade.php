@@ -189,7 +189,7 @@
 										</div>
 										<!-- /.chat -->
 										<div class="box-footer">
-											<form role="form" method="Post" action="{{ route('orders.update',$order->id) }}">
+											<form role="form" method="Post" action="{{ route('orders.update',$order->id) }}" class="single-click-form">
 												{{csrf_field()}}
 												{{ method_field('PATCH') }}
 												<div class="input-group">
@@ -235,7 +235,7 @@
 										</div>
 										<!-- /.chat -->
 										<div class="box-footer">
-											<form role="form" method="Post" action="{{ route('orders.update',$order->id) }}">
+											<form role="form" method="Post" action="{{ route('orders.update',$order->id) }}" class="single-click-form">
 												{{csrf_field()}}
 												{{ method_field('PATCH') }}
 												<div class="input-group">

@@ -39,6 +39,16 @@
 
         <div class="col-md-12">
             <section class="contact">
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    There were some problems with your input.<br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -94,12 +104,12 @@
 
                         <!-- Phone Number-->
                         <div class="form-group">
-                            <input name="phone" placeholder="{{__('Phone Number')}}" class="form-control" type="text" data-rule-phoneUS="false" title="Please enter your phone number" data-msg-phoneUS="Ouch, that doesn't look like a valid phone number" required>
+                            <input name="phone" placeholder="{{__('Phone Number')}}" class="form-control" type="text" required data-rule-phoneUS="false" title="Please enter your phone number" data-msg-phoneUS="Ouch, that doesn't look like a valid phone number" >
                         </div>
 
                         <!-- Text area -->
                         <div class="form-group">
-                            <textarea class="form-control" name="message" placeholder="{{__('Message')}}" required data-rule-minlength="10" data-msg-minlength="Please enter atleast 10 characters" title="Please enter your message"></textarea>
+                            <textarea class="form-control" name="message" required placeholder="{{__('Message')}}"  data-rule-minlength="10" data-msg-minlength="Please enter atleast 10 characters" title="Please enter your message"></textarea>
                         </div>
                         <!-- Button -->
                         <button type="submit" class="btn btn-block btn-warning" > {{__('SEND MESSAGE')}} </button>
@@ -148,5 +158,8 @@
     <script src="{{asset('js/maps.js')}}"></script>
     <!-- parsley JS -->
     <script src="{{asset('js/parsley.min.js')}}"></script>
+     @if(LaravelLocalization::getCurrentLocale()=='ar')
+    <script src="{{asset('js/parsley/ar.js')}}"></script>
+    @endif
 
     @endsection

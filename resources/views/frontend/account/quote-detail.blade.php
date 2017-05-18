@@ -15,7 +15,17 @@
     <div class="row about-sidebar">
       <div class="spacer-40"></div>
       <div class="col-md-10 about-content">
-
+         @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong>{{ $message }}</strong>
+        </div>
+        @endif
+        @if ($error = Session::get('error'))
+        <div class="alert alert-danger">
+          <strong>{{ $error }}</strong>
+        </div>
+        @endif
         <div class="panel-div">
           <div class="panel-title">{{__('Quotation')}}</div>
           <div class="content">
@@ -34,14 +44,14 @@
               <div class="col-md-2 pull-right text-right">
                <div style="margin-bottom: 3px;">
                 @if(count($myquote->Order)==0 && $myquote->status == 3)
-                <form action="{{route('myorders.makeOrder',$myquote->id)}}" method="Post">
+                <form action="{{route('myorders.makeOrder',$myquote->id)}}" class="single-click-form" method="Post">
                   {{csrf_field()}}
-                  <button class="btn btn-success btn-sm btn-block">Make Order</button>
+                  <button class="btn btn-success btn-sm btn-block">{{__('Make Order')}}</button>
                 </form>
                 @endif
               </div>
               @if($myquote->status == 3)
-              <a target="_blank" href="{{route('quotes.download',$myquote->id)}}" class="btn btn-primary btn-sm btn-block">Download</a>
+              <a target="_blank" href="{{route('quotes.download',$myquote->id)}}" class="btn btn-primary btn-sm btn-block">{{__('Download')}}</a>
               @endif
 
             </div>
@@ -57,7 +67,7 @@
             <th>{{__('Qty.')}}</th>
             <th>{{__('Unit')}}</th>
             <th>{{__('Price')}}</th>
-            <th>{{__('Curreny')}}</th>
+            <th>{{__('Currency')}}</th>
             <th>{{__('P.O.D.')}}</th>
             <th>{{__('D.T.')}}</th>
             <th>{{__('P.M.')}}</th>
@@ -114,7 +124,7 @@
     <div class="comment-box">
       <h2 class="title-2 text-center"> {{__('Add Comment')}} </h2>
 
-      <form action="{{route('quotes.update',$myquote->id)}}" method="POST"  class="commentform">
+      <form  action="{{route('quotes.update',$myquote->id)}}" method="POST"  class="commentform single-click-form" >
         {{csrf_field()}}
         {{ method_field('PATCH') }}
         <div class='row'>
@@ -122,7 +132,7 @@
             <textarea id="comment" class="form-control" name="comment" placeholder="{{__("Message")}}" required></textarea>
           </div>
           <div class="comment-btn col-md-12">
-            <button type="submit" name="submit" value="addComment" class="btn btn-block btn-warning"> {{__("ADD COMMENT")}} </button>
+            <button  type="submit" name="submit" value="addComment" class="btn btn-block btn-warning"> {{__("ADD COMMENT")}} </button>
           </div>
         </div>
       </form>
@@ -149,3 +159,4 @@
 
 
 @endsection
+

@@ -200,8 +200,11 @@ class OrderController extends Controller
       //Send Notification to Supervisor or Sales Executive
       if(User::isSupervisor())
       {
-       $user=$order->AssignedTo;
-       $user->notify(new NewOrderMessage($order,"backend"));
+        if($order->AssignedTo)
+        {
+         $user=$order->AssignedTo;
+         $user->notify(new NewOrderMessage($order,"backend"));
+       }
      }
      elseif(User::isSalesExecutive())
      {

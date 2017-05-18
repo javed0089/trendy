@@ -4,7 +4,7 @@ namespace App\Models\Quotation;
 
 class Cart 
 {
-	public $items = null;
+	public $items = [];
 
 	public function __construct($oldCart)
 	{

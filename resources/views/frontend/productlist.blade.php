@@ -40,7 +40,7 @@
 
      <div class="searchbox-container">
     <form method="get" action="{{route('frontend.productlistsearch')}}" class="searchbox">
-        <input type="search" placeholder="Search Products......" name="term" class="searchbox-input" onkeyup="buttonUp();" required value="{{Request::get('term')}}">
+        <input type="search" placeholder="{{__('Search Products')}}......" name="term" class="searchbox-input" onkeyup="buttonUp();" required value="{{Request::get('term')}}">
         <input type="submit" class="searchbox-submit" value="GO">
         <span class="searchbox-icon"><i class="fa fa-search"></i></span>
     </form>
@@ -64,7 +64,7 @@
          @if (isset($products) && count($products) > 0)
          @if(Request::get('term'))
          <div class="alert alert-info">
-          {{Request::get('term')?'Search results for:  '.Request::get('term'):''}}
+          {{{Request::get('term')?__('Search results for').' :  '. Request::get('term'):''}}}
          </div>
          @endif
          @foreach($products->sortBy('sort_order')->chunk(3) as $productsChunk)
@@ -88,9 +88,9 @@
          <div class="clearfix spacer-50"></div>
          @endforeach
          @else
-         <div class="alert alert-info">{{isset($category)?'Stock not available for this product category. Visit again to view this page':''}}
-         {{isset($brand)?'Stock not available for this product brand. Visit again to view this page':''}}
-          {{Request::get('term')?'No products found.':''}}
+         <div class="alert alert-info">{{isset($category)?__('Stock not available for this product category. Visit again to view this page'):''}}
+         {{isset($brand)?__('Stock not available for this product brand. Visit again to view this page'):''}}
+          {{Request::get('term')?__('No products found'):''}}
          </div>
          @endif
 
@@ -120,8 +120,8 @@
          <div class="clearfix spacer-50"></div>
          @endforeach
          @else
-         <div class="alert alert-info">{{isset($category)?'Stock not available for this product category. Visit again to view this page':''}}
-         {{isset($brand)?'Stock not available for this product brand. Visit again to view this page':''}}</div>
+         <div class="alert alert-info">{{isset($category)?__('Stock not available for this product category. Visit again to view this page'):''}}
+         {{isset($brand)?__('Stock not available for this product brand. Visit again to view this page'):''}}</div>
          <div class="clearfix spacer-50"></div>
          @endif
 
@@ -157,7 +157,7 @@
    
     </ul>
     @else
-    <span>No categories</span>
+    <span>{{__('No categories')}}</span>
     @endif
 
     

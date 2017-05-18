@@ -253,6 +253,15 @@ class OrderController extends Controller
     {
       $quote = Quote::find($id);
 
+      if(count($quote->Order)){
+
+      return redirect()->route('myorders.show',$quote->Order->id)->with('success', 'Your have succesfully created the order.');
+
+      }
+      if($quote->status != 3){
+        return redirect()->back()->with('error','Quotation Request not quoted yet');
+      }
+
       $order = new Order;
       $order->user_id =  Sentinel::check()->id;
       $order->quote_id = $id;
@@ -284,12 +293,7 @@ class OrderController extends Controller
         }
       }
 
-      //Send Notification to Assigned Sales Executive
-      if($order->AssignedTo)
-      {
-        $assignedUser=$order->AssignedTo;
-        $assignedUser->notify(new NewOrder($order,"backend"));
-      }
+     
 
       //Send Notification to Supervisors
       //Get all Supervisors

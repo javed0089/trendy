@@ -14,7 +14,7 @@
  		<div class="row">
  			<div class="col-md-12">
  				<h2 class="company-title color-title"></h2>
- 				<h4 class="hood-subtitle subtitle">Update your quote request</h4>
+ 				<h4 class="hood-subtitle subtitle">{{__('Update your quote request')}}</h4>
  				<hr>
  				<table class="table">
  					<thead>

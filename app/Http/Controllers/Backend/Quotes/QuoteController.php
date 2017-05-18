@@ -197,13 +197,13 @@ class QuoteController extends Controller
         }
         elseif($submitReq =="quoteProcessed")
         {
-           $quote->status = '2';
-           $quote->save();
+         $quote->status = '2';
+         $quote->save();
 
-           foreach ($quote->QuoteDetails as $quoteProduct) 
-           {
-               if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
-               {
+         foreach ($quote->QuoteDetails as $quoteProduct) 
+         {
+             if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
+             {
                 $quoteProduct->status = '2';
                 $quoteProduct->save();
             }
@@ -259,21 +259,24 @@ class QuoteController extends Controller
         //Send Notification to Supervisor or Sales Executive
         if(User::isSupervisor())
         {
-           $user=$quote->AssignedTo;
-           $user->notify(new NewQuoteMessage($quote,"backend"));
-       }
-       elseif(User::isSalesExecutive())
-       {
-           $role = Sentinel::findRoleBySlug('supervisor');
-           $users = $role->users()->with('roles')->get();
-           Notification::send($users, new NewQuoteMessage($quote,"backend"));
-       }
+            if($quote->AssignedTo)
+            {
+             $user=$quote->AssignedTo;
+             $user->notify(new NewQuoteMessage($quote,"backend"));
+            }
+     }
+     elseif(User::isSalesExecutive())
+     {
+         $role = Sentinel::findRoleBySlug('supervisor');
+         $users = $role->users()->with('roles')->get();
+         Notification::send($users, new NewQuoteMessage($quote,"backend"));
+     }
 
 
-       return redirect()->route('quote-requests.show',$id)->with('success','Private message added successfully!');
+     return redirect()->route('quote-requests.show',$id)->with('success','Private message added successfully!');
 
-   }
-   elseif($submitReq =="addCommentPub"){
+ }
+ elseif($submitReq =="addCommentPub"){
     $quoteComment = new QuoteComment;
     $quoteComment->comment_type = '1';
     $quoteComment->quote_id = $id;

@@ -311,11 +311,11 @@
 										</div>
 										<!-- /.chat -->
 										<div class="box-footer">
-											<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}">
+											<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}" class="single-click-form">
 												{{csrf_field()}}
 												{{ method_field('PATCH') }}
 												<div class="input-group">
-													<input class="form-control" name="comment" placeholder="Type message...">
+													<input class="form-control" required name="comment" placeholder="Type message...">
 
 													<div class="input-group-btn">
 														<button type="submit" name="submit" value="addCommentPrvt" class="btn btn-success"><i class="fa fa-plus"></i></button>
@@ -351,11 +351,12 @@
 										</div>
 										<!-- /.chat -->
 										<div class="box-footer">
-											<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}">
+											<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}" 
+											class="single-click-form">
 												{{csrf_field()}}
 												{{ method_field('PATCH') }}
 												<div class="input-group">
-													<input class="form-control" name="comment" placeholder="Type message...">
+													<input class="form-control" required name="comment" placeholder="Type message...">
 
 													<div class="input-group-btn">
 														<button type="submit" name="submit" value="addCommentPub" class="btn btn-success"><i class="fa fa-plus"></i></button>
