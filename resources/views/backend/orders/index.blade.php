@@ -100,11 +100,11 @@
 						</tfoot>
 					</table>
 
-					<div class="col-xs-12">
-						<div class="col-xs-6 pull-right"> 
+					<div class="col-md-12">
+						<div class="col-md-6 pull-right text-right"> 
 							{{ $orders->links() }}
 						</div>
-						<div class="col-xs-6 pull-left" style="margin-top: 25px; ">Showing {{ $orders->firstItem() }} - {{ $orders->lastItem() }} of {{ $orders->total() }} [Page {{ $orders->currentPage() }} of {{$orders->lastPage()}}]
+						<div class="col-md-6 pull-left" style="margin-top: 25px; ">Showing {{ $orders->firstItem() }} - {{ $orders->lastItem() }} of {{ $orders->total() }} [Page {{ $orders->currentPage() }} of {{$orders->lastPage()}}]
 						</div>
 					</div>
 				</div>
