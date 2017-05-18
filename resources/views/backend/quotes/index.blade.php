@@ -95,7 +95,7 @@
 					</table>
 
 					<div class="col-xs-12">
-						<div class="col-xs-6 pull-right"> 
+						<div class="col-xs-6 pull-right text-right"> 
 							{{ $quotes->links() }}
 						</div>
 						<div class="col-xs-6 pull-left" style="margin-top: 25px; ">Showing {{ $quotes->firstItem() }} - {{ $quotes->lastItem() }} of {{ $quotes->total() }} [Page {{ $quotes->currentPage() }} of {{$quotes->lastPage()}}]
