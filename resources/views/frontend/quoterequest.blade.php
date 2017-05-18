@@ -137,16 +137,18 @@
  							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
 
  							</button>
- 							Your cart is empty!
+ 							Your Quote request is empty!
  						</div>
  						@endif 
 
  					</tbody>
  				</table>
  				<hr>
+ 				@if(count($cart)>0)
  				<div class="col-md-12 text-center">
  					<a href="{{route('send.quote')}}" class="btn btn-success btn-lg">Send Quote Request</a>
  				</div>
+ 				@endif
  			</div>
 
 
