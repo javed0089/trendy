@@ -87,11 +87,11 @@
 						</tfoot>
 					</table>
 
-					<div class="col-xs-12">
-						<div class="col-xs-6 pull-right text-right"> 
+					<div class="col-md-12">
+						<div class="col-md-6 pull-right text-right"> 
 							{{ $customers->links() }}
 						</div>
-						<div class="col-xs-6 pull-left" style="margin-top: 25px; ">Showing {{ $customers->firstItem() }} - {{ $customers->lastItem() }} of {{ $customers->total() }} [Page {{ $customers->currentPage() }} of {{$customers->lastPage()}}]
+						<div class="col-md-6 pull-left" style="margin-top: 25px; ">Showing {{ $customers->firstItem() }} - {{ $customers->lastItem() }} of {{ $customers->total() }} [Page {{ $customers->currentPage() }} of {{$customers->lastPage()}}]
 						</div>
 					</div>
 
