@@ -134,8 +134,7 @@
 									@foreach($job->JobApplications as $jobApplication)
 									<tr>
 										
-										<td>{{$jobApplication->id}}
-											{{$jobApplication->applicant_name}}
+										<td>{{$jobApplication->applicant_name}}
 										</td>
 										<td>{{$jobApplication->email}}</td>
 										<td>
