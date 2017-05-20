@@ -131,7 +131,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($job->JobApplications as $jobApplication)
+									@foreach($jobApplications as $jobApplication)
 									<tr>
 										
 										<td>{{$jobApplication->applicant_name}}
@@ -160,6 +160,13 @@
 
 								</tfoot>
 							</table>
+							<div class="row">
+							<div class="col-md-2 pull-right"> 
+								{{ $jobApplications->links() }}
+							</div>
+							<div class="col-md-4 pull-left" style="margin-top: 25px; ">Showing {{ $jobApplications->firstItem() }} - {{ $jobApplications->lastItem() }} of {{ $jobApplications->total() }} [Page {{ $jobApplications->currentPage() }} of {{$jobApplications->lastPage()}}]
+							</div>
+						</div>
 						</div>
 						
 					</div>
