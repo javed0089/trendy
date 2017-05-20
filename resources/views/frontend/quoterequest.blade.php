@@ -19,7 +19,7 @@
  				<table class="table">
  					<thead>
  						<tr>
- 							<th><h3>Products</h3></th>
+ 							<th><h3>{{__('Products')}}</h3></th>
  							@if ($message = Session::get('success'))
  							<div class="alert alert-success alert-block">
  								<button type="button" class="close" data-dismiss="alert">×</button>
@@ -44,16 +44,16 @@
  								<form class="quote-form" role="form"  method="Post" action="{{route('cart.updateCartItem',$item['item']['id'])}}" data-parsley-validate>
  									{{csrf_field()}}
  									<div class="col-md-4">
- 										<h4>Product Name</h4>
+ 										<h4>{{__('Product Name')}}</h4>
  										<h4 ><strong>{{$item['item']['name_en']}}</strong></h4>
  									</div>
  									<div class="col-md-4"> 
  										<div class="col-md-6 text-right">
- 											<h4>Quantity</h4>
- 											<input style="width: 60px" type="number" name="quantity" required min="16.50" data-parsley-error-message="Min. value 16.50" step=".25" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
+ 											<h4>{{__('Quantity')}}</h4>
+ 											<input style="width: 60px" type="number" name="quantity" required min="16.50" data-parsley-error-message="{{__("Min. value 16.50")}}" step=".25" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
  										</div>
  										<div class="col-md-6">
- 											<h4>Units</h4>
+ 											<h4>{{__('Unit')}}</h4>
  											<select name="unit">
  												@foreach($units as $unit)
  												<option {{$item['unit']==$unit->name_en ?'Selected':''}} value="{{$unit->name_en}}">{{$unit->name_en}}</option>
@@ -63,12 +63,12 @@
  										</div>
  									</div>
  									<div class="col-md-4">
- 										<h4>Port of Delivery</h4>
- 										<input class="form-control" type="text" name="port_of_delivery" value="{{ $item['port_of_delivery']}}"  data-parsley-required-message="Required">
+ 										<h4>{{__('Port of Delivery')}}</h4>
+ 										<input class="form-control" type="text" name="port_of_delivery" value="{{ $item['port_of_delivery']}}"  data-parsley-required-message="{{__('Required')}}">
  									</div>
  									<div class="spacer-5"></div>
  									<div class="col-md-4">
- 										<h4>Delivery Terms</h4>
+ 										<h4>{{__("Delivery Terms")}}</h4>
  										<select class="form-control" name="delivery_terms">
  											@foreach($delivery_terms as $delivery_term)
  											<option {{$item['delivery_terms']==$delivery_term->name_en ?'Selected':''}} value="{{$delivery_term->name_en}}">{{$delivery_term->name_en}}</option>
@@ -76,7 +76,7 @@
  										</select>
  									</div>
  									<div class="col-md-4">
- 										<h4>Payment Method</h4>
+ 										<h4>{{__('Payment Method')}}</h4>
  										<select class="form-control" name="payment_method">
  											@foreach($payment_methods as $payment_method)
  											<option {{$item['payment_method']==$payment_method->name_en ?'Selected':''}} value="{{$payment_method->name_en}}">{{$payment_method->name_en}}</option>
@@ -86,22 +86,22 @@
  									</div>
  									<div class="col-md-4">
  										<div>
- 											<h4 style="margin-bottom: 15px;">Shipping Documents</h4>
+ 											<h4 style="margin-bottom: 15px;">{{__('Shipping Documents')}}</h4>
  											<div class="checkbox checkbox-inline">
  												<input id="invoice{{$loop->iteration}}" name="invoice" class="styled"  type="checkbox" {{$item['invoice']?'checked':''}}>
- 												<label for="invoice{{$loop->iteration}}">Invoice</label>
+ 												<label for="invoice{{$loop->iteration}}">{{__('Invoice')}}</label>
  											</div>
  											<div class="checkbox checkbox-inline">
  												<input id="packing_list{{$loop->iteration}}" name="packing_list" class="styled"  type="checkbox" {{$item['packing_list']?'checked':''}}>
- 												<label for="packing_list{{$loop->iteration}}">Packing List</label>
+ 												<label for="packing_list{{$loop->iteration}}">{{__('Packing List')}}</label>
  											</div>
  											<div class="checkbox checkbox-inline">
  												<input id="co{{$loop->iteration}}" name="co" class="styled"  type="checkbox" {{$item['co']?'checked':''}}>
- 												<label for="co{{$loop->iteration}}">CO</label>
+ 												<label for="co{{$loop->iteration}}">{{__('CO')}}</label>
  											</div>
  											<div class="checkbox checkbox-inline">
  												<input id="others{{$loop->iteration}}" name="others" class="styled"  type="checkbox" {{$item['others']?'checked':''}}>
- 												<label for="others{{$loop->iteration}}">Others</label>
+ 												<label for="others{{$loop->iteration}}">{{__("Others")}}</label>
  											</div>
  										</div>
  										<div>
@@ -137,7 +137,7 @@
  							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
 
  							</button>
- 							Your Quote request is empty!
+ 							{{__("Your Quote request is empty!")}}
  						</div>
  						@endif 
 
@@ -146,7 +146,7 @@
  				<hr>
  				@if(count($cart)>0)
  				<div class="col-md-12 text-center">
- 					<a href="{{route('send.quote')}}" class="btn btn-success btn-lg">Send Quote Request</a>
+ 					<a href="{{route('send.quote')}}" class="btn btn-success btn-lg">{{__("Send Quote Request")}}</a>
  				</div>
  				@endif
  			</div>
@@ -161,7 +161,7 @@
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<div class="panel-div">
- 					<div class="panel-title">LOGIN OR REGISTER TO CONTINUE
+ 					<div class="panel-title">{{__('LOGIN OR REGISTER TO CONTINUE')}}
  						<span class="pull-right"><a class="btn btn-xs btn-primary" data-dismiss="modal">x</a></span>
  					</div>
  					<div class="content">
@@ -169,22 +169,22 @@
 
  							<div class="spacer-10"></div>
  							<div class="col-md-12"> 
- 								<p class="alert alert-success">Please login or register to send your request. Thank You!</p>
+ 								<p class="alert alert-success">{{__('Please login or register to send your request. Thank You!')}}</p>
  								<div class="spacer-10"></div>
  								<div class="radio">
  									<input type="radio" name="radio1" id="radio1" value="login" checked>
- 									<label for="radio1">Login</label>
+ 									<label for="radio1">{{__('Login')}}</label>
  								</div>
  								<div class="radio">
  									<input type="radio" name="radio1" id="radio2" value="register">
- 									<label for="radio2">Register Account</label>
+ 									<label for="radio2">{{__('Register Account')}}</label>
  								</div>
 
  							</div>
  							<div class="spacer-10"></div>
  							<hr>
  							<div class="col-md-4 pull-right">
- 								<a href="{{route('frontend.login')}}" id="login-register"  class="btn btn-success btn-sm pull-right">Continue</a>
+ 								<a href="{{route('frontend.login')}}" id="login-register"  class="btn btn-success btn-sm pull-right">{{__('Continue')}}</a>
  							</div>
 
  						</div>

@@ -5634,7 +5634,7 @@ a.btn.btn-xs {
     }
     .sidebar-nav .panel-heading .badge{
         position: absolute;
-        left: 0px;
+        right: 0px;
     }
     .sidebar-nav .panel-default > .panel-heading + .panel-collapse > .panel-body{
         padding: 0 !important;

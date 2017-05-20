@@ -55,7 +55,7 @@ public function postRegister(Request $request)
     $oldUrl=Session::get('oldUrl');
     Session::forget('oldUrl');
     Session::put('newUser',$user);
-    return redirect()->to($oldUrl)->with('success','You have succesfully registered an account. Please activate the account from your email!');
+    return redirect()->to($oldUrl)->with('success',__('You have succesfully registered an account. Please activate the account from your email!'));
     
 }
 
@@ -64,7 +64,7 @@ $role = Sentinel::findRoleBySlug('super-admin');
 $users = $role->users()->with('roles')->get();
 Notification::send($users, new NewRegistration($user,"backend"));
 
-return back()->with('success','You have succesfully registered an account. Please activate the account from your email!');
+return back()->with('success',__('You have succesfully registered an account. Please activate the account from your email!'));
 }
 
 private function sendEmail($user, $code){

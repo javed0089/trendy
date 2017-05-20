@@ -332,7 +332,7 @@ Version: 1.0
      if(me.closest('tbody').find('tr').length-1 === 0){
        me.closest('tbody').html('<div class=\"alert alert-danger alert-dismissable\">' +
         '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">' +
-        '</button>Your cart is empty!</div>');
+        '</button>Your quote request is empty!</div>');
        $('#updateCart').remove();
        $('#side-cart-table').parent('.panel-body').html('<div id="cartNoProducts" class="alert alert-danger">' +
         'No products added</div>');

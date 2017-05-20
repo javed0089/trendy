@@ -61,12 +61,12 @@ class UserController extends Controller
 
         $user = Sentinel::validateCredentials($curUser, $credentials);
         if(!$user)
-            return redirect()->back()->with(['error' => 'Old password not correct']);
+            return redirect()->back()->with('error', __('Old password not correct'));
         else{
             $user = User::find($curUser->id);
             $user->password = Hash::make($request->newPassword);
             $user->save();
-            return redirect()->back()->with(['success' => 'Password changed successfully']);
+            return redirect()->back()->with('success' , __('Password changed successfully'));
         }
     }
 

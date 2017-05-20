@@ -130,7 +130,7 @@ class OrderController extends Controller
 
       $orderComment->save();
 
-      return redirect()->route('myorders.show',$id)->with('success','Comment added successfully!');
+      return redirect()->route('myorders.show',$id)->with('success',__('Comment added successfully!'));
     }
     elseif($submitReq =="uploadDocument")
     {
@@ -181,7 +181,7 @@ class OrderController extends Controller
         $users = $role->users()->with('roles')->get();
         Notification::send($users, new OrderDocumentUploaded($order,"backend"));
 
-        return redirect()->route('myorders.show',$id)->with('success','File Uploaded successfully!');
+        return redirect()->route('myorders.show',$id)->with('success',__('File Uploaded successfully!'));
       }
     }
 
@@ -210,7 +210,7 @@ class OrderController extends Controller
       $customer=$order->User;
       $customer->notify(new OrderPaymentUpload($order,"frontend"));
 
-      return redirect()->route('myorders.show',$id)->with('success','You have confirmed Performa Invoice!');
+      return redirect()->route('myorders.show',$id)->with('success',__('You have confirmed Performa Invoice!'));
     }
 
     elseif($submitReq == "confirmBl")
@@ -234,7 +234,7 @@ class OrderController extends Controller
       Notification::send($users, new OrderBlConfirmed($order,"backend"));
 
 
-      return redirect()->route('myorders.show',$id)->with('success','You have confirmed BL Draft!');
+      return redirect()->route('myorders.show',$id)->with('success',__('You have confirmed BL Draft!'));
     }
   }
 
@@ -255,11 +255,11 @@ class OrderController extends Controller
 
       if(count($quote->Order)){
 
-      return redirect()->route('myorders.show',$quote->Order->id)->with('success', 'Your have succesfully created the order.');
+      return redirect()->route('myorders.show',$quote->Order->id)->with('success', __('Your have succesfully created the order.'));
 
       }
       if($quote->status != 3){
-        return redirect()->back()->with('error','Quotation Request not quoted yet');
+        return redirect()->back()->with('error',__('Quotation Request not quoted yet'));
       }
 
       $order = new Order;
@@ -302,7 +302,7 @@ class OrderController extends Controller
       Notification::send($users, new NewOrder($order,"backend"));
 
 
-      return redirect()->route('myorders.show',$order->id)->with('success', 'Your have succesfully created the order.');
+      return redirect()->route('myorders.show',$order->id)->with('success', __('Your have succesfully created the order.'));
     }
 
     public function getOrderFile($id)

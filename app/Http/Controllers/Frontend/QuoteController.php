@@ -199,7 +199,7 @@ class QuoteController extends Controller
           $userQuotes=$user->Quotes()->whereDate('created_at', '=', date('Y-m-d'))->get();
           if(count($userQuotes)>=3)
           {
-            return redirect()->route('message')->with('error', 'Sorry! Your can only send 3 quotes a day. Please try again tomorrow. Thank you!');
+            return redirect()->route('message')->with('error', __('Sorry! Your can only send 3 quotes a day. Please try again tomorrow. Thank you!'));
           }
 
           $quote = new Quote;
@@ -244,9 +244,9 @@ class QuoteController extends Controller
           $this->sendNotifications($quote);
 
           if($newReg)
-            return redirect()->route('message')->with('success', 'Your quote was send succesfully, but you must activate your account to have your request processed.');
+            return redirect()->route('message')->with('success', __('Your quote was send succesfully, but you must activate your account to have your request processed.'));
           else
-            return redirect()->route('message')->with('success', 'Your quote was send succesfully.');
+            return redirect()->route('message')->with('success', __('Your quote was send succesfully.'));
         }
 
       }

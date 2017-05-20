@@ -25,7 +25,7 @@ class CommentController extends Controller
     	$comment->ip_address = $request->ip();
     	$comment->save();
 
-    	return redirect()->route('frontend.contact')->with('success',"Your message was sent succesfully!");
+    	return redirect()->route('frontend.contact')->with('success',__('Your message was sent succesfully!'));
     		
     }
 }

@@ -37,7 +37,7 @@ class LoginController extends Controller
             $user=Sentinel::authenticate($request->all(),$rememberMe?true:false);
             if($user)
                 if(!($user->inRole('subscriber')))
-                    return redirect()->back()->with(['error' => 'Restriced for visitors only!']);
+                    return redirect()->back()->with('error',__('Restriced for visitors only!'));
             
         	if(Sentinel::check()){
                 if(Session::has('oldUrl')){
@@ -49,13 +49,13 @@ class LoginController extends Controller
                     return redirect('/');
         	}
             else
-                return redirect()->back()->with(['error' => 'Wrong Credentials']);
+                return redirect()->back()->with('error', __('Wrong Credentials'));
 
         } catch (ThrottlingException $e) {
             $delay= $e->getDelay();
-             return redirect()->back()->with(['error' => "You have been banned for $delay seconds"]);
+             return redirect()->back()->with('error', __('You have been banned for '). $delay. __(' seconds'));
         } catch(NotActivatedException $e){
-            return redirect()->back()->with(['error' => "Your account is not activated"]);
+            return redirect()->back()->with('error', __('Your account is not activated'));
         }
     }
 

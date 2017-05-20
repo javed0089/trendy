@@ -113,7 +113,7 @@ class QuotesController extends Controller
             $users = $role->users()->with('roles')->get();
             Notification::send($users, new NewQuoteMessage($quote,"backend"));
 
-            return redirect()->route('quotes.show',$id)->with('success','Comment added successfully!');
+            return redirect()->route('quotes.show',$id)->with('success',__('Comment added successfully!'));
         }
     }
 

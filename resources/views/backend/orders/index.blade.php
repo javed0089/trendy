@@ -28,7 +28,7 @@
 					<strong>{{ $message }}</strong>
 				</div>
 				@endif
-				<div class="box-header" style="padding: 5px 15px; height: 32px; "> 
+				<div class="box-header" style="padding: 5px 15px; "> 
 					<form method="get" action="{{url()->current()}}">
 						<div class="form-group col-md-2">
 							<label>Status</label>

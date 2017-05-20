@@ -131,4 +131,7 @@
 @section('scripts')
 <!-- parsley JS -->
 <script src="{{asset('js/parsley.min.js')}}"></script>
+@if(LaravelLocalization::getCurrentLocale()=='ar')
+    <script src="{{asset('js/parsley/ar.js')}}"></script>
+    @endif
 @endsection

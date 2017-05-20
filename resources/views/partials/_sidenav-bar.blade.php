@@ -14,16 +14,16 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#cart" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span> <span> My Quote Request </span>  </a> </h4>
+              <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#cart" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="badge cartCount">{{ Session::has('cart')? count(Session::get('cart')->items):''}}</span> <span> {{__("My Quote Request")}} </span>  </a> </h4>
             </div>
             <div id="cart" class="panel-collapse collapse" aria-expanded="false">
               <div class="panel-body">
                <table class="table table-striped"  id="side-cart-table">
                 <thead>
                  <tr>
-                  <th>Product</th>
-                  <th>Qty</th>
-                  <th>Units</th>
+                  <th>{{__('Product')}}</th>
+                  <th>{{__('Qty.')}}</th>
+                  <th>{{__('Unit')}}</th>
                 </tr>
               </thead>
               <tbody>
@@ -51,11 +51,11 @@
             @if(count($cart)<=0)
             <div id="cartNoProducts" class="alert alert-danger">
 
-              No products added
+              {{__('No products added')}}
             </div>
             @else
             <div id="updateCart" class="center-block text-center">
-              <a class="btn btn-primary btn-sm " href="{{ route('cart')}}">Update Quote Request</a>
+              <a class="btn btn-primary btn-sm " href="{{ route('cart')}}">{{__('Update Quote Request')}}</a>
             </div>
             @endif
 
@@ -66,7 +66,7 @@
         <div class="panel-heading">
           <h4 class="panel-title" >
             <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#quotes" aria-expanded="false">
-              <i class="fa fa-sticky-note "></i> <span> My Quotes</span></a> </h4>
+              <i class="fa fa-sticky-note "></i> <span> {{__('My Quotes')}}</span></a> </h4>
             </div>
             <div id="quotes" class="panel-collapse collapse" aria-expanded="false">
               <div class="panel-body">
@@ -74,8 +74,8 @@
                <table class="table table-striped">
                 <thead>
                  <tr>
-                  <th>Quote</th>
-                  <th>Dated</th>
+                  <th>{{__('Quote')}}</th>
+                  <th>{{__("Dated")}}</th>
                 
                 </tr>
               </thead>
@@ -99,7 +99,7 @@
              @else
 
              <div class="center-block text-center">
-              <a class="btn btn-primary btn-sm " href="{{ route('quotes.index')}}">My Quotes</a>
+              <a class="btn btn-primary btn-sm " href="{{ route('quotes.index')}}">{{__('My Quotes')}}</a>
             </div>
             @endif
 
@@ -107,7 +107,7 @@
             <div class="center-block text-center">
              <div class="alert alert-info">
 
-              You must login first
+              {{__('You must login first')}}
             </div>
 
             <a class="btn btn-primary btn-sm " href="{{ route('frontend.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{__('Login')}}</a>
@@ -121,7 +121,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title" >
-          <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#orders" aria-expanded="false"><i class="fa fa-truck"></i> <span> My Orders</span></a> </h4>
+          <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#orders" aria-expanded="false"><i class="fa fa-truck"></i> <span> {{__('My Orders')}}</span></a> </h4>
         </div>
         <div id="orders" class="panel-collapse collapse" aria-expanded="false">
           <div class="panel-body">
@@ -129,8 +129,8 @@
            <table class="table table-striped">
             <thead>
              <tr>
-               <th>Order</th>
-               <th>Dated</th>
+               <th>{{__('Order')}}</th>
+               <th>{{__('Dated')}}</th>
              </tr>
            </thead>
            <tbody>
@@ -155,7 +155,7 @@
          @else
 
          <div class="center-block text-center">
-          <a class="btn btn-primary btn-sm " href="{{ route('myorders.index')}}">My Orders</a>
+          <a class="btn btn-primary btn-sm " href="{{ route('myorders.index')}}">{{__('My Orders')}}</a>
         </div>
         @endif
 
@@ -163,7 +163,7 @@
         <div class="center-block text-center">
          <div class="alert alert-info">
 
-          You must login first
+          {{__('You must login first')}}
         </div>
 
         <a class="btn btn-primary btn-sm " href="{{ route('frontend.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{__('Login')}}</a>
@@ -178,7 +178,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="panel-title" >
-      <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#contact" aria-expanded="false"><i class="fa fa-envelope"></i> <span> Contact Us</span></a> </h4>
+      <a class="collapsed" data-toggle="collapse" data-parent="#sidebar-accordion" href="#contact" aria-expanded="false"><i class="fa fa-envelope"></i> <span> {{__('Contact Us')}}</span></a> </h4>
     </div>
     <div id="contact" class="panel-collapse collapse" aria-expanded="false">
       <div class="panel-body">

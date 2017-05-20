@@ -13,16 +13,23 @@ class RatingsController extends Controller
 	{
 		$rating = Rating::where([['user_id','=',Sentinel::check()->id],['rating_type','=','1']])->first();
 		
-			return view('frontend.account.rating.show')->with('rating',$rating);
+		return view('frontend.account.rating.show')->with('rating',$rating);
 	}
 
 	public function update(Request $request, $id)
 	{
+		$this->validate($request, [
+			'rating' => 'required'
+			],
+			$messages = [
+        'rating.required' => __('Please! select ratings stars first.')
+        ]);
+
 		$rating = Rating::where('order_id','=',$id)->first();
 		if(count($rating)>0){
 			$rating->rating = $request->rating;
 			$rating->save();
-			return redirect()->back()->with(['success' => "Thank you for your feedback!"]);
+			return redirect()->back()->with('success' ,__('Thank you for your feedback!'));
 		}
 		else{
 			$rating = new Rating;
@@ -31,19 +38,26 @@ class RatingsController extends Controller
 			$rating->order_id = $id;
 			$rating->user_id = Sentinel::check()->id;
 			$rating->save();
-			return redirect()->back()->with(['success' => "Thank you for your feedback!"]);
+			return redirect()->back()->with('success',__('Thank you for your feedback!'));
 		}
 	}
 
 	public function update2(Request $request)
 	{
+		$this->validate($request, [
+			'rating' => 'required'
+			],
+			$messages = [
+        'rating.required' => __('Please! select ratings stars first.')
+        ]);
+        
 		//dd($request);
 		$rating = Rating::where([['user_id','=',Sentinel::check()->id],['rating_type','=','1']])->first();
 		//dd($rating);
 		if(count($rating)>0){
 			$rating->rating = $request->rating;
 			$rating->save();
-			return redirect()->back()->with(['success' => "Thank you for your feedback!"]);
+			return redirect()->back()->with('success', __('Thank you for your feedback!'));
 		}
 		else{
 			$rating = new Rating;
@@ -52,7 +66,7 @@ class RatingsController extends Controller
 			$rating->order_id = 0;
 			$rating->user_id = Sentinel::check()->id;
 			$rating->save();
-			return redirect()->back()->with(['success' => "Thank you for your feedback!"]);
+			return redirect()->back()->with('success', __('Thank you for your feedback!'));
 		}
 	}
 }

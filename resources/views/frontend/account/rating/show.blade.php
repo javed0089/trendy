@@ -42,7 +42,7 @@
           <div class="col-md-6 col-md-offset-3 text-center"> 
             <form  role="form"  method="Post"  action="{{route('rating.update2','0')}}">
               {{csrf_field()}}
-              <h4>{{__('Overall service rating')}}</h4>
+              <h4>{{__('Overall Service Rating')}}</h4>
               <div id='star' class="star"></div>
               <input id="rating" hidden type="text"  name="rating" value="{{count($rating)>0? $rating->rating:''}}">
             </div>
