@@ -83,7 +83,7 @@
 
 
                 <div class="col-md-7 contact-map">
-                    <form id="contact_form" class="form well-form" action="{{route('frontend.signup')}}" method="post" data-parsley-validate>
+                    <form id="contact_form" class="form well-form single-click-form" action="{{route('frontend.signup')}}" method="post" data-parsley-validate>
 
                         {{csrf_field()}}
                         <!-- Text input-->

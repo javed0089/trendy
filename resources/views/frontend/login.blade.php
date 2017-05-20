@@ -26,7 +26,7 @@
                             <div class="col-md-6 col-md-offset-3">
 
                                 <h2 class="title-2" style="text-align: center;"> {{__('Login to your account')}} </h2>
-                                <form id="contact_form" class="form well-form" action="{{route('frontend.login')}}" method="post"  data-parsley-validate>
+                                <form id="contact_form" class="form well-form single-click-form" action="{{route('frontend.login')}}" method="post"  data-parsley-validate>
                                    {{csrf_field()}}
           
                                       @if(session('error'))

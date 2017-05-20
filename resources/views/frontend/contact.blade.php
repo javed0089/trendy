@@ -90,26 +90,26 @@
                     <div class="col-md-6">
 
                         <h2 class="title-2"> {{__('Send us a message')}} </h2>
-                        <form id="contact_form" class="form well-form" action="{{route('frontend.comment')}}" method="post" data-parsley-validate>
+                        <form id="contact_form" class="form well-form single-click-form" action="{{route('frontend.comment')}}" method="post" data-parsley-validate>
 
                          {{csrf_field()}}
                          <!-- Text input-->
                          <div class="form-group">
-                            <input name="fullname" placeholder="{{__('Full Name')}}" class="form-control" type="text" required title="Please enter your full name">
+                            <input name="fullname" placeholder="{{__('Full Name')}}" class="form-control" type="text" required value="{{old('fullname')}}" title="Please enter your full name">
                         </div>
                         <!-- Email input-->
                         <div class="form-group">
-                            <input name="email" placeholder="{{__('Email Address')}}" class="form-control" type="email" required title="Please enter your email address" data-msg-email="Ouch, that doesn't look like an email">
+                            <input name="email" placeholder="{{__('Email Address')}}" class="form-control" type="email" required value="{{old('email')}}" title="Please enter your email address" data-msg-email="Ouch, that doesn't look like an email">
                         </div>
 
                         <!-- Phone Number-->
                         <div class="form-group">
-                            <input name="phone" placeholder="{{__('Phone Number')}}" class="form-control" type="text" required data-rule-phoneUS="false" title="Please enter your phone number" data-msg-phoneUS="Ouch, that doesn't look like a valid phone number" >
+                            <input name="phone" placeholder="{{__('Phone Number')}}" class="form-control" type="text" required data-rule-phoneUS="false" title="Please enter your phone number" value="{{old('phone')}}" data-msg-phoneUS="Ouch, that doesn't look like a valid phone number" >
                         </div>
 
                         <!-- Text area -->
                         <div class="form-group">
-                            <textarea class="form-control" name="message" required placeholder="{{__('Message')}}"  data-rule-minlength="10" data-msg-minlength="Please enter atleast 10 characters" title="Please enter your message"></textarea>
+                            <textarea class="form-control" name="message" required placeholder="{{__('Message')}}"  data-parsley-minlength="10" data-msg-minlength="Please enter atleast 10 characters"  title="Please enter your message">{{old('message')}}</textarea>
                         </div>
                         <!-- Button -->
                         <button type="submit" class="btn btn-block btn-warning" > {{__('SEND MESSAGE')}} </button>
