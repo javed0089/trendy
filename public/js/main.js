@@ -377,8 +377,8 @@ error: function(jqXHR, json, errorThrown) {
   me.parsley().validate();
 
   if (me.parsley().isValid()){
-    
-    
+
+
 
 
     me.find('#msg').slideUp(1000);
@@ -570,14 +570,17 @@ error: function(jqXHR, json, errorThrown) {
     /*------Single Click Submit for forms-------*/
 
     $('.single-click-form').submit(function (event) {
+
       if ($(this).hasClass('submitted')) {
         event.preventDefault();
       }
       else {
+
         if ($(this).parsley().isValid()){
-        $(this).find(':submit').html('<i class="fa fa-spinner fa-spin"></i>');
-        $(this).addClass('submitted');
-      }
+          var title = $(this).find(':submit').text(); 
+          $(this).find(':submit').html(title +' <i class="fa fa-spinner fa-spin"></i>');
+          $(this).addClass('submitted');
+        }
       }
     });
 

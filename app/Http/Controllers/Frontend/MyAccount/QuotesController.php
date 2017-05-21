@@ -88,6 +88,13 @@ class QuotesController extends Controller
     public function update(Request $request, $id)
     {
 
+        $this->validate($request, [
+            'comment' => 'required'
+            ],
+            $messages = [
+        'comment.required' => __('Please! Enter your message first.')
+        ]);
+
         $submitReq = $request->submit;
 
         if($submitReq =="addComment"){

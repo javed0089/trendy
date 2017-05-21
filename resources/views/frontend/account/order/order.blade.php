@@ -5,6 +5,7 @@
  @section('styles')
  <link rel="stylesheet" href="{{asset('backend/dist/css/vertical-tab.css')}}">
  <link href="{{asset('css/starrr.css')}}" rel="stylesheet">
+ <link href="{{asset('css/parsley.css')}}" rel="stylesheet">
  @endsection
 
  @section('content') 
@@ -335,7 +336,7 @@
 <div class="comment-box">
   <h2 class="title-2 text-center"> {{__('New Message')}} </h2>
 
-  <form action="{{route('myorders.update',$order->id)}}" method="POST"  class="commentform single-click-form">
+  <form action="{{route('myorders.update',$order->id)}}" method="POST"  class="commentform single-click-form" data-parsley-validate>
     {{csrf_field()}}
     {{ method_field('PATCH') }}
     <div class='row'>
@@ -371,6 +372,14 @@
 @endsection
 @section('scripts')
 <script src="{{asset('js/stars.min.js')}}"></script>
+
+<!-- parsley JS -->
+<script src="{{asset('js/parsley.min.js')}}"></script>
+@if(LaravelLocalization::getCurrentLocale()=='ar')
+    <script src="{{asset('js/parsley/ar.js')}}"></script>
+    @endif
+
+
 <script type="text/javascript">
 
  $('#star').stars({
