@@ -1,4 +1,3 @@
- 
 @extends('backend.layouts.adminmain')
 @section('title', 'Dashboard')
 
@@ -473,7 +472,7 @@
       </div>
     </div>
     @endforeach
-  </div>
+  
       <!-- right col -->
     </div>
     <!-- /.row (main row) -->
@@ -481,6 +480,10 @@
   </section>
   <!-- /.content -->
   @endsection
+
+
+
+
 
   @section('scripts')
   <!-- Morris.js charts -->
@@ -509,7 +512,7 @@
   </script>
 
   <!-- AdminLTE App -->
-  <script src="{{ asset('backend/dist/js/app.min.js')}}"></script>
+  <!--<script src="{{ asset('backend/dist/js/app.min.js')}}"></script>-->
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="{{ asset('backend/dist/js/pages/dashboard.js')}}"></script>
   @endsection
