@@ -49,7 +49,7 @@ class NewOrder extends Notification
 
         return (new MailMessage)
         ->subject('A New Order Online')
-        ->greeting('Dear TAP Polymer Team!')
+        ->greeting('Dear GAP Polymer Team!')
         ->line('A New order was created by '. $this->order->User->first_name ." ". $this->order->User->last_name.",")
         ->action('Order', $url)
         ->line('Click above to check the Order!');

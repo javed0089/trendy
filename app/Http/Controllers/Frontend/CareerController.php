@@ -9,9 +9,12 @@ use App\Models\Careers\JobApplication;
 use App\Models\Company\Webpage;
 use App\Models\Department\Department;
 use App\Models\Page\Page;
+use App\Notifications\NewJobApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+use Sentinel;
 
 class CareerController extends Controller
 {
@@ -35,34 +38,42 @@ class CareerController extends Controller
     public function job($slug)
     {
     	$job=Job::where('slug','=',$slug)->get();
-     $topImage = Page::find(70)->PageSections()->first();
+       $topImage = Page::find(70)->PageSections()->first();
 
-     return view('frontend.job')->with('job',$job->first())->with('topImage',$topImage);
- }
+       return view('frontend.job')->with('job',$job->first())->with('topImage',$topImage);
+   }
 
- public function postApplication(Request $request)
- {
-     $this->validate($request, [
-         'applicant_name' => 'required',
-         'email' => 'required',
-         'jobId' => 'required',
-         'resume' => 'required|mimes:pdf|max:10000'
-         ]);
+   public function postApplication(Request $request)
+   {
+       $this->validate($request, [
+           'applicant_name' => 'required',
+           'email' => 'required',
+           'jobId' => 'required',
+           'resume' => 'required|mimes:pdf|max:10000'
+           ]);
 
-     $jobApplication = new JobApplication;
-     $jobApplication->job_id = $request->jobId;
-     $jobApplication->applicant_name = $request->applicant_name;
-     $jobApplication->email = $request->email;
+       $jobApplication = new JobApplication;
+       $jobApplication->job_id = $request->jobId;
+       $jobApplication->applicant_name = $request->applicant_name;
+       $jobApplication->email = $request->email;
 
-     $file = $request->file('resume');
-     $filename = rand(1,100).time().'.'. 'pdf';
-     $location="resumes/".$request->jobId.'/';
-     if($file)
-     {
+       $file = $request->file('resume');
+       $filename = rand(1,100).time().'.'. 'pdf';
+       $location="resumes/".$request->jobId.'/';
+       if($file)
+       {
         Storage::disk('local')->put($location.$filename,  File::get($file));
         $jobApplication->resume=$filename;
     }
     $jobApplication->save();
+
+
+      //Send Notification to Super admin
+      //Get all super admins
+    $role = Sentinel::findRoleBySlug('super-admin');
+    $users = $role->users()->with('roles')->get();
+    Notification::send($users, new NewJobApplication($jobApplication,"backend"));
+
     return redirect()->route('message')->with('success', 'Your application has been submitted. Thank you!');
 }
 }

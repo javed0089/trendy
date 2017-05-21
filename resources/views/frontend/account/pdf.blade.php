@@ -24,10 +24,10 @@
     html, body {
       height: 100%;
     }
-  .row{
-    margin:0;
-    padding: 0;
-  }
+    .row{
+      margin:0;
+      padding: 0;
+    }
     #wrap {
       min-height: 100%;
     }
@@ -273,57 +273,62 @@ table tfoot tr td:first-child {
        <div class="col-xs-1">
         <div class="to">Attn:</div>
         <div class="to">C.I</div>
-       </div>
-        <div class="col-xs-11">
-          <h4 style="margin: 0;">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
-          <div >{{$myquote->User->address}}</div>
-          <div >{{$myquote->User->city}} {{$myquote->User->country}}</div>
-          <div >{{$myquote->User->email}}</div>
-          <div > {{$myquote->User->telephone}}</a> </div>
-        </div>
-
-
       </div>
-      <div class="row">
-        <div  class="col-xs-12">
-          <table  border="1" cellspacing="1" cellpadding="1" >
-            <thead>
-              <tr>
-                <th class="col-xs-10">Description</th>
-
-                <th class="col-xs-2">Unit Price /M. Ton</th>
-              </tr>
-            </thead>
-            <tbody>
-             @foreach($quoteProducts as $quote)
-
-             <tr>
-
-              <td class="desc">{{$quote->Product->Brand->name_en}} - {{$quote->Product->Category->name_en}} - {{$quote->Product->name_en}} ({{$quote->delivery_terms}} - {{$quote->port_of_delivery}})
-              </td>
-
-
-
-              <td class="price">{{number_format(floatval($quote->price),2)}} {{$quote->currency}}
-
-              </td>
-            </tr>
-            @endforeach
-          </tbody>
-
-        </table>
+      <div class="col-xs-11">
+        <h4 style="margin: 0;">MR. {{$myquote->User->first_name}} {{$myquote->User->last_name}}</h4>
+        <div >{{$myquote->User->address}}</div>
+        <div >{{$myquote->User->city}} {{$myquote->User->country}}</div>
+        <div >{{$myquote->User->email}}</div>
+        <div > {{$myquote->User->telephone}}</a> </div>
       </div>
+
+
     </div>
-     <div class="row" style="padding-left: 15px;">
+    <div class="row">
+      <div  class="col-xs-12">
+        <table  border="1" cellspacing="1" cellpadding="1" >
+          <thead>
+            <tr>
+              <th class="col-xs-10">Description</th>
+
+              <th class="col-xs-2">Unit Price /M. Ton</th>
+            </tr>
+          </thead>
+          <tbody>
+           @foreach($quoteProducts as $quote)
+
+           <tr>
+
+            <td class="desc">{{$quote->Product->Brand->name_en}} - {{$quote->Product->Category->name_en}} - {{$quote->Product->name_en}} ({{$quote->delivery_terms}} - {{$quote->port_of_delivery}})
+            </td>
+
+
+
+            <td class="price">{{number_format(floatval($quote->price),2)}} {{$quote->currency}}
+
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+  <div class="row" style="padding-left: 15px;">
     <div>1. Price Valid Till: <span >{{date('M j, Y',strtotime($myquote->quote_validity))}}</span></div>
     <div>2. Deliery of Material is subject to avaliability</div>
 
     <div style="margin-top: 160px">For: Global Advanced Polymers LLC</div>
 
-    <div style="margin-top: 50px">Authorised Signature </div>
-</div>
+    <div style="margin-top: 50px">Authorised Signature 
+    </div>
+    <div>
+      <img src="{{ public_path().'/images/quotation/stamp.png' }}" width="260">
+      <img src="{{ public_path().'/images/quotation/signature.png' }}" width="150">
+    </div>
+  </div>
 
-  </main>
+</main>
 
 </div>
 </body>

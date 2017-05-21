@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Blog\BlogCategory;
 use App\Models\Blog\Post;
+use App\Models\Blog\PostComment;
 use App\Models\Blog\Tag;
 use App\Models\Company\Webpage;
 use App\Models\Page\Page;
-use App\Models\Blog\PostComment;
+use App\Notifications\NewPostComment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use Sentinel;
 
 class BlogController extends Controller
 {
@@ -85,6 +88,12 @@ class BlogController extends Controller
      $postComment->message = $request->message;
      $postComment->ip_address = $request->ip();
      $postComment->save();
+
+     //Send Notification to Super admin
+      //Get all super admins
+      $role = Sentinel::findRoleBySlug('super-admin');
+      $users = $role->users()->with('roles')->get();
+      Notification::send($users, new NewPostComment($postComment,"backend"));
 
      return redirect()->back()->with('success',__('Your comment was posted succesfully!'));
 

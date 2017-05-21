@@ -122,13 +122,15 @@ class OrderController extends Controller
         $assignedUser->notify(new NewOrderMessage($order,"backend"));
       }
       
+      $orderComment->save();
+      
       //Send Notification to Supervisors
       //Get all Supervisors
       $role = Sentinel::findRoleBySlug('supervisor');
       $users = $role->users()->with('roles')->get();
       Notification::send($users, new NewOrderMessage($order,"backend"));
 
-      $orderComment->save();
+
 
       return redirect()->route('myorders.show',$id)->with('success',__('Comment added successfully!'));
     }
@@ -217,7 +219,7 @@ class OrderController extends Controller
     {
       $order = Order::find($id);
       $order->bl_draft_confirmed = '1';
-       $order->status='13';
+      $order->status='13';
       $order->save();
 
       //Send Notification to Assigned Sales Executive
@@ -255,7 +257,7 @@ class OrderController extends Controller
 
       if(count($quote->Order)){
 
-      return redirect()->route('myorders.show',$quote->Order->id)->with('success', __('Your have succesfully created the order.'));
+        return redirect()->route('myorders.show',$quote->Order->id)->with('success', __('Your have succesfully created the order.'));
 
       }
       if($quote->status != 3){
@@ -293,7 +295,7 @@ class OrderController extends Controller
         }
       }
 
-     
+
 
       //Send Notification to Supervisors
       //Get all Supervisors

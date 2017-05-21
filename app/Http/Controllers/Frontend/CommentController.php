@@ -4,18 +4,21 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comments\Comment;
+use App\Notifications\NewContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use Sentinel;
 
 class CommentController extends Controller
 {
     public function store(Request $request)
     {
     	$this->validate($request, [
-        'fullname' =>'required|max:255',
-        'phone' =>'required|max:255',
-        'email' =>'required|email',
-        'message' =>'required|min:10',
-        ]);
+            'fullname' =>'required|max:255',
+            'phone' =>'required|max:255',
+            'email' =>'required|email',
+            'message' =>'required|min:10',
+            ]);
 
     	$comment =  new Comment();
     	$comment->fullname = $request->fullname;
@@ -25,7 +28,13 @@ class CommentController extends Controller
     	$comment->ip_address = $request->ip();
     	$comment->save();
 
-    	return redirect()->route('frontend.contact')->with('success',__('Your message was sent succesfully!'));
-    		
-    }
+        //Send Notification to Super admin
+      //Get all super admins
+      $role = Sentinel::findRoleBySlug('super-admin');
+      $users = $role->users()->with('roles')->get();
+      Notification::send($users, new NewContactMessage($comment,"backend"));
+
+      return redirect()->route('frontend.contact')->with('success',__('Your message was sent succesfully!'));
+
+  }
 }

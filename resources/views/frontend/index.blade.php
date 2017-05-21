@@ -408,7 +408,7 @@
 <section class="home-partners">
     <div class="container" dir="ltr">
         <div class="section-title text-center">
-            <h2 class="subtitle-testimonials title-2"> {{__('OUR BRANDS')}} </h2>
+            <h2 class="subtitle-testimonials title-2"> {{__('THE BRANDS')}} </h2>
             <div class="spacer-20"> </div>
         </div>
         <div class="row partners">
