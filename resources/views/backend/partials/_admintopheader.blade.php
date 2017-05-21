@@ -1,4 +1,5 @@
  <header class="main-header">
+ 
   <!-- Logo -->
   <a href="{{ url('backoffice/') }}" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->

@@ -1,17 +1,30 @@
  @extends('layouts.main')
 
-  @if(isset($post->{lang_col('meta_title')}))
+ @if(isset($post->{lang_col('meta_title')}))
  @section('title'){{ $post->{lang_col('meta_title')} }} @stop
  @endif
  @if(isset($post->{lang_col('meta_description')}))
  @section('meta-description'){{ $post->{lang_col('meta_description')} }} @stop
+
+
+
  @endif
 
 
  @section('content')
 
- <!-- Main Content Section -->
- <main class="main">
+ <script type="text/javascript">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+</script>
+<!-- Main Content Section -->
+<main class="main">
     <!-- Page Title -->
     
     @if(isset($topImage))
@@ -56,8 +69,16 @@
 
 
                         <div class="social-share text-center">
-                            <a class="fb-share" href="#"> <i class="fa fa-facebook" aria-hidden="true"></i>{{__('Share on Facebook')}} </a>
-                            <a class="tweet-share" href="#"> <i class="fa fa-twitter" aria-hidden="true"></i>{{__('Share on Twitter')}} </a>
+
+                            <div class="col-md-6 text-right">
+                                <div class="fb-share-button" 
+                                data-href="{{url()->current()}}" 
+                                data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">{{__('Share')}}</a></div>
+                            </div>
+
+                            <div class="col-md-6 text-left">
+                                <a href="https://twitter.com/share"  class="twitter-share-button" data-size="large" data-show-count="false">{{__('Tweet')}}</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            </div>
                         </div>
 
                         <div class="author-box">

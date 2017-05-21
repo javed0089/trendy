@@ -1,6 +1,7 @@
 @extends('backend.layouts.adminmain')
 @section('title','Customers')
 
+
 @section('styles')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('backend/plugins/datatables/dataTables.bootstrap.css')}}">
