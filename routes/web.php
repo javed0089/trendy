@@ -49,6 +49,7 @@
        	Route::get('/blog/category/{category}','Frontend\BlogController@categoryPosts')->name('frontend.postsbycategory');
        	Route::get('/blog/tag/{tag}','Frontend\BlogController@tagPosts')->name('frontend.posts-by-tag');
        	Route::get('/blog-post/{slug}','Frontend\BlogController@post')->name('frontend.post');
+       	Route::post('/blog-post-comment/{post_id}','Frontend\BlogController@postComment')->name('frontend.post-comment');
 
        	/** News **/
        	Route::get('/news','Frontend\NewsController@index')->name('frontend.news');
@@ -184,6 +185,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		Route::resource('blog/posts','Backend\Blog\PostController');
 		Route::resource('blog/blogcategory','Backend\Blog\BlogCategoryController');
 		Route::resource('blog/tags','Backend\Blog\TagController');
+		Route::delete('blog/post-comment/delete/{postCommentId}','Backend\Blog\PostController@deletePostComment')->name('delete-post-comment');
 
 		///////*****Product********//////
 		Route::resource('catalog/products','Backend\Product\ProductController');

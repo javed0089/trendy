@@ -93,7 +93,7 @@
                         <form id="contact_form" class="form well-form single-click-form" action="{{route('frontend.comment')}}" method="post" data-parsley-validate>
 
                          {{csrf_field()}}
-                         <!-- Text input-->
+                        
                          <div class="form-group">
                             <input name="fullname" placeholder="{{__('Full Name')}}" class="form-control" type="text" required value="{{old('fullname')}}" title="Please enter your full name">
                         </div>

@@ -8,6 +8,7 @@ use App\Models\Blog\Post;
 use App\Models\Blog\Tag;
 use App\Models\Company\Webpage;
 use App\Models\Page\Page;
+use App\Models\Blog\PostComment;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -58,13 +59,36 @@ class BlogController extends Controller
 
     public function post($slug)
     {
-    	$post=Post::where('slug','=',$slug);
+    	$post=Post::where('slug','=',$slug)->first();
+     
         $topImage = [];
         $topImage = Page::find(160)->PageSections()->first();
 
         $blogCategories=BlogCategory::all();
-        return view('frontend.post')->with('post',$post->first())->with('blogCategories',$blogCategories)->with('topImage',$topImage);
+        return view('frontend.post')->with('post',$post)->with('blogCategories',$blogCategories)->with('topImage',$topImage);
     }
+
+    public function postComment(Request $request,$post_id)
+    {
+
+     $this->validate($request, [
+        'name' =>'required|max:255',
+        'email' =>'required|email',
+        'message' =>'required|min:10|max:300',
+        ]);
+
+     $postComment =  new PostComment();
+     $postComment->post_id=$post_id;
+     $postComment->name = $request->name;
+     $postComment->email = $request->email;
+     $postComment->website = $request->website;
+     $postComment->message = $request->message;
+     $postComment->ip_address = $request->ip();
+     $postComment->save();
+
+     return redirect()->back()->with('success',__('Your comment was posted succesfully!'));
+
+ }
 
 
 }

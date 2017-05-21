@@ -25,6 +25,7 @@
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#tab_1" data-toggle="tab">English</a></li>
 				<li><a href="#tab_2" data-toggle="tab">Arabic</a></li>
+				<li><a href="#tab_3" data-toggle="tab">Comments</a></li>
 
 				<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
 			</ul>
@@ -103,6 +104,62 @@
 
 
 					</div>
+
+				</div>
+
+				<div class="tab-pane" id="tab_3">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{$post->title_en}}</h3>
+					</div>
+					<div class="box-body">
+						<div class="col-md-12">
+							<table id="example2" class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										
+										<th>Name</th>
+										<th>Email</th>
+										<th>Website</th>
+										<th>Message</th>
+										<th>Created</th>
+										<th width="80"></th>
+										
+									</tr>
+								</thead>
+								<tbody>
+									@foreach($post->PostComments as $postComment)
+									<tr>
+										
+										<td>{{$postComment->name}}
+										</td>
+										<td>{{$postComment->email}}</td>
+										<td>
+										{{$postComment->website}}
+										</td>
+										<td>
+										{{$postComment->message}}
+										</td>
+										<td>{{ date('M j, Y H:i',strtotime($post->created_at))}}</td>
+										<td>
+										<form role="form"  method="Post"  action="{{ route('delete-post-comment',$postComment->id) }}">
+												{{csrf_field()}}
+												{{ method_field('Delete') }}
+												<button type="submit" id="delbutton" class="btn btn-block btn-danger">Delete</button>
+											</form>
+										</td>
+									</tr>
+									@endforeach
+
+								</tbody>
+								<tfoot>
+
+								</tfoot>
+							</table>
+							
+						</div>
+						
+					</div>
+
 
 				</div>
 

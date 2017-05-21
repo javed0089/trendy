@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Backend\Blog;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Blog\Post;
 use App\Models\Blog\BlogCategory;
+use App\Models\Blog\Post;
+use App\Models\Blog\PostComment;
 use App\Models\Blog\Tag;
-use Image;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 
 class PostController extends Controller
@@ -181,6 +182,13 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function deletePostComment($id)
+    {
+        $postComment = PostComment::find($id);
+        $postComment->delete();
+        return redirect()->back()->with('success','Comment Deleted Succesfully');
     }
 
     public function saveImage($image,$filename){
