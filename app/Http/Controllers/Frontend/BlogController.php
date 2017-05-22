@@ -16,88 +16,95 @@ use Sentinel;
 
 class BlogController extends Controller
 {
-    public function index()
-    {
-    	$posts=Post::paginate(6);
-    	$blogCategories=BlogCategory::all();
-    	$tags=Tag::all();
+  public function index()
+  {
+   $posts=Post::paginate(6);
+   $blogCategories=BlogCategory::all();
+   $tags=Tag::all();
 
-        $topImage = [];
-        $topImage = Page::find(90)->PageSections()->first();
+   $topImage = [];
+   $topImage = Page::find(90)->PageSections()->first();
 
-        $metatags = Webpage::where('page_name','=','blog')->first();
+   $metatags = Webpage::where('page_name','=','blog')->first();
 
-        return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
-    }
+   return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
+ }
 
-    public function categoryPosts($slug)
-    {
-        $blogCategory = BlogCategory::where('slug','=',$slug)->first();
-        $posts=$blogCategory->Posts()->paginate(6);
-        $blogCategories=BlogCategory::all();
-        $tags=Tag::all();
-        $topImage = [];
-        $topImage = Page::find(90)->PageSections()->first();
+ public function categoryPosts($slug)
+ {
+  $blogCategory = BlogCategory::where('slug','=',$slug)->first();
+  $posts=$blogCategory->Posts()->paginate(6);
+  $blogCategories=BlogCategory::all();
+  $tags=Tag::all();
+  $topImage = [];
+  $topImage = Page::find(90)->PageSections()->first();
 
-        $metatags = Webpage::where('page_name','=','blog')->first();
+  $metatags = Webpage::where('page_name','=','blog')->first();
 
-        return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
-    }
+  return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
+}
 
-    public function tagPosts($slug)
-    {
-        $tag=Tag::where('slug','=',$slug)->first();
-        $posts=$tag->posts()->paginate(6);
-        $blogCategories=BlogCategory::all();
-        $tags=Tag::all();
-        $topImage = [];
-        $topImage = Page::find(90)->PageSections()->first();
+public function tagPosts($slug)
+{
+  $tag=Tag::where('slug','=',$slug)->first();
+  $posts=$tag->posts()->paginate(6);
+  $blogCategories=BlogCategory::all();
+  $tags=Tag::all();
+  $topImage = [];
+  $topImage = Page::find(90)->PageSections()->first();
 
-        $metatags = Webpage::where('page_name','=','blog')->first();
-
-
-        return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
-    }
+  $metatags = Webpage::where('page_name','=','blog')->first();
 
 
-    public function post($slug)
-    {
-    	$post=Post::where('slug','=',$slug)->first();
-     
-        $topImage = [];
-        $topImage = Page::find(160)->PageSections()->first();
+  return view('frontend.blog')->with('posts',$posts)->with('blogCategories',$blogCategories)->with('tags',$tags)->with('topImage',$topImage)->with('metatags',$metatags);
+}
 
-        $blogCategories=BlogCategory::all();
-        return view('frontend.post')->with('post',$post)->with('blogCategories',$blogCategories)->with('topImage',$topImage);
-    }
 
-    public function postComment(Request $request,$post_id)
-    {
+public function post($slug)
+{
+ $post=Post::where('slug','=',$slug)->first();
 
-     $this->validate($request, [
-        'name' =>'required|max:255',
-        'email' =>'required|email',
-        'message' =>'required|min:10|max:300',
-        ]);
+ $topImage = [];
+ $topImage = Page::find(160)->PageSections()->first();
 
-     $postComment =  new PostComment();
-     $postComment->post_id=$post_id;
-     $postComment->name = $request->name;
-     $postComment->email = $request->email;
-     $postComment->website = $request->website;
-     $postComment->message = $request->message;
-     $postComment->ip_address = $request->ip();
-     $postComment->save();
+ $blogCategories=BlogCategory::all();
+ return view('frontend.post')->with('post',$post)->with('blogCategories',$blogCategories)->with('topImage',$topImage);
+}
+
+public function postComment(Request $request,$post_id)
+{
+
+ $this->validate($request, [
+  'name' =>'required|max:255',
+  'email' =>'required|email',
+  'message' =>'required|min:10|max:500',
+  'g-recaptcha-response' => 'required|captcha'
+  ],
+  $messages= [
+  'g-recaptcha-response.required' => 'Prove you are not a robot',
+  'g-recaptcha-response.captcha' => 'Prove you are not a robot'
+
+  ]);
+
+
+ $postComment =  new PostComment();
+ $postComment->post_id=$post_id;
+ $postComment->name = $request->name;
+ $postComment->email = $request->email;
+ $postComment->website = $request->website;
+ $postComment->message = $request->message;
+ $postComment->ip_address = $request->ip();
+ $postComment->save();
 
      //Send Notification to Super admin
       //Get all super admins
-      $role = Sentinel::findRoleBySlug('super-admin');
-      $users = $role->users()->with('roles')->get();
-      Notification::send($users, new NewPostComment($postComment,"backend"));
+ $role = Sentinel::findRoleBySlug('super-admin');
+ $users = $role->users()->with('roles')->get();
+ Notification::send($users, new NewPostComment($postComment,"backend"));
 
-     return redirect()->back()->with('success',__('Your comment was posted succesfully!'));
+ return redirect()->back()->with('success',__('Your comment was posted succesfully!'));
 
- }
+}
 
 
 }

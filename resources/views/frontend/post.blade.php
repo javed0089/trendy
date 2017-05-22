@@ -138,7 +138,12 @@
                             <input type="url" id="comm-url" class="form-control" placeholder="{{__('Website optional')}}" name="website"  value="{{old('website')}}">
                         </div>
                         <div id="comment-message" class="col-md-12">
-                            <textarea id="comment" class="form-control" name="message" placeholder="{{__('Message')}}" required minlength="10"> {{old('message')}}</textarea>
+                            <textarea id="comment" class="form-control" name="message" placeholder="{{__('Message')}}" required minlength="10" maxlength="500"> {{old('message')}}</textarea>
+                        </div>
+                        <div class="col-md-12">
+                            {!! captcha_html() !!}
+                        </div>
+                        <div class="spacer-10">
                         </div>
                         <div class="comment-btn col-md-12">
                             <button type="submit" class="btn btn-block btn-warning"> {{__('ADD COMMENT')}} </button>

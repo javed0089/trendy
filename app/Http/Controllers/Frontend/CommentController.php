@@ -21,8 +21,8 @@ class CommentController extends Controller
             'g-recaptcha-response' => 'required|captcha'
             ],
             $messages= [
-            'g-recaptcha-response.required' => 'Prove i am not robot',
-            'g-recaptcha-response.captcha' => 'Prove i am not robot'
+            'g-recaptcha-response.required' => 'Prove you are not a robot',
+            'g-recaptcha-response.captcha' => 'Prove you are not a robot'
             
             ]);
 
