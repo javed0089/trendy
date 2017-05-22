@@ -41,7 +41,6 @@
             <section class="contact">
                 @if (count($errors) > 0)
                 <div class="alert alert-danger">
-                    There were some problems with your input.<br>
                     <ul>
                         @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -92,9 +91,9 @@
                         <h2 class="title-2"> {{__('Send us a message')}} </h2>
                         <form id="contact_form" class="form well-form single-click-form" action="{{route('frontend.comment')}}" method="post" data-parsley-validate>
 
-                         {{csrf_field()}}
-                        
-                         <div class="form-group">
+                           {{csrf_field()}}
+                           
+                           <div class="form-group">
                             <input name="fullname" placeholder="{{__('Full Name')}}" class="form-control" type="text" required value="{{old('fullname')}}" data-parsley-required-message="Please enter your full name">
                         </div>
                         <!-- Email input-->
@@ -111,7 +110,9 @@
                         <div class="form-group">
                             <textarea class="form-control" name="message" required placeholder="{{__('Message')}}"  data-parsley-minlength="10" data-msg-minlength="Please enter atleast 10 characters" data-parsley-maxlength="500" data-parsley-required-message="Please enter your message">{{old('message')}}</textarea>
                         </div>
-                        <!-- Button -->
+                        <div class="form-group">
+                            {!! captcha_html() !!}
+                        </div>
                         <button type="submit" class="btn btn-block btn-warning" > {{__('SEND MESSAGE')}} </button>
 
                         <div id="js-contact-result" data-success-msg="Form submitted successfully." data-error-msg="Oops. Something went wrong."></div>
@@ -122,8 +123,8 @@
                 <div class="col-md-6 contact-map">
                     <h2 class="title-2"> {{__('View Map')}} </h2>
                     <ul class="nav nav-pills" id="map-address">
-                     @foreach($locations as $location)
-                     <li>
+                       @foreach($locations as $location)
+                       <li>
                         <a href="#" data-latitude="{{$location->latitude}}" data-longitude="{{$location->longitude}}" data-map-title="{{$location->{lang_col('country')} }}" data-map-zoom="11" data-toggle="tab">{{$location->{lang_col('country')} }}</a>
                     </li>
                     @endforeach
@@ -158,7 +159,7 @@
     <script src="{{asset('js/maps.js')}}"></script>
     <!-- parsley JS -->
     <script src="{{asset('js/parsley.min.js')}}"></script>
-     @if(LaravelLocalization::getCurrentLocale()=='ar')
+    @if(LaravelLocalization::getCurrentLocale()=='ar')
     <script src="{{asset('js/parsley/ar.js')}}"></script>
     @endif
 

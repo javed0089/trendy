@@ -17,7 +17,13 @@ class CommentController extends Controller
             'fullname' =>'required|max:255',
             'phone' =>'required|max:255',
             'email' =>'required|email',
-            'message' =>'required|min:10',
+            'message' =>'required|min:10|max:500',
+            'g-recaptcha-response' => 'required|captcha'
+            ],
+            $messages= [
+            'g-recaptcha-response.required' => 'Prove i am not robot',
+            'g-recaptcha-response.captcha' => 'Prove i am not robot'
+            
             ]);
 
     	$comment =  new Comment();
