@@ -4,7 +4,8 @@
 @section('styles')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('backend/plugins/datatables/dataTables.bootstrap.css')}}">
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="{{asset('css/parsley.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -81,6 +82,14 @@
 									</div>
 								</div>
 								<h4>Assigned to : @if($quote->AssignedTo)<span>{{$quote->AssignedTo->first_name}} {{$quote->AssignedTo->last_name}}</span>@endif</h4>
+							</div>
+							<div class="col-md-2 ">
+								@if($quote->status == 3)
+								<a target="_blank" href="{{route('quote-requests.download',$quote->id)}}" class="btn btn-success btn-md">Download Pdf</a>
+								@endif
+								@if(!$quote->Order)	
+								<button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#addProduct">Add Product</button>
+								@endif
 							</div>
 							<div class="col-md-2 pull-right">
 								
@@ -169,7 +178,7 @@
 															<div class="modal-body">
 																<div class="form-group" >
 																	<label for="quantity">Quantity</label>
-																	<input type="number" class="form-control"  name="quantity" id="quantity" step="any" value="{{$item->quantity}}" style="width: 80px;">
+																	<input type="number" class="form-control"  name="quantity" id="quantity" step="any" value="{{$item->quantity}}" required style="width: 80px;">
 																</div>
 																<div class="form-group" >
 																	<label for="unit">Unit</label>
@@ -181,7 +190,7 @@
 																</div>
 																<div class="form-group" >
 																	<label for="price">Price</label>
-																	<input type="number"   class="form-control" name="price" id="price" step="any" value="{{$item->price}}" style="width: 120px;">
+																	<input type="number"   class="form-control" name="price" id="price" step="any" value="{{$item->price}}" required style="width: 120px;">
 																</div>
 																<div class="form-group" >
 																	<label for="currency">Currency</label>
@@ -266,7 +275,119 @@
 													</div>
 												</div>
 											</div>
+											<div id="addProduct" class="modal fade" role="dialog">
+												<div class="modal-dialog">
+													<!-- Modal content-->
+													<div class="modal-content">
+														<form role="form" method="Post" action="{{ route('quote-requests.store') }}" class="form-vertical" data-parsley-validate>
+															{{csrf_field()}}
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title">Select Product</h4>
+																<div class="input-group">
+																	<input type="text" id="searchtxt" name="term" style="width: 400px;" class="form-control" placeholder="Enter Product name" required>
+																	<span id="searchmsg" class="text-red" style="margin-left: 10px; font-style: italic;"></span>
 
+																	<input type="hidden" required name="product_id" id="prodId">
+
+																	<input type="hidden" required name="quote_id" value="{{$quote->id}}">
+
+																</div>
+															</div>
+
+															
+															<div class="modal-body">
+																<div class="form-group" >
+																	<label for="quantity">Quantity</label>
+																	<input type="number" class="form-control"  name="quantity" min="16.50" id="quantity" step=".25" value="16.50" step=".25" required style="width: 80px;">
+																</div>
+																<div class="form-group" >
+																	<label for="unit">Unit</label>
+																	<select class="form-control"  name="unit">
+																		@foreach($units as $unit)
+																		<option value="{{$unit->name_en}}">{{$unit->name_en}}</option>
+																		@endforeach	
+																	</select>
+																</div>
+																<div class="form-group" >
+																	<label for="price">Price</label>
+																	<input type="number"   class="form-control" name="price" id="price" step="any" value="" style="width: 120px;" required>
+																</div>
+																<div class="form-group" >
+																	<label for="currency">Currency</label>
+																	<select class="form-control"  name="currency">
+																		@foreach($currencies as $currency)
+																		<option  value="{{$currency->name_en}}">{{$currency->name_en}}</option>
+																		@endforeach	
+																	</select>
+																</div>
+																<div class="control-group">
+																	&nbsp;
+																</div>
+
+																<div class="form-group" style="display:block;">
+																	<label for="title_en">Port of delivery</label>
+																	<input type="text" style="display: block;width: 100%" class="form-control" name="port_of_delivery" value="">
+																</div>
+																<div class="form-group" style="display:block;">
+																	<label for="delivery_terms">Delivery Terms</label>
+																	<select class="form-control" style="display: block;width: 100%" name="delivery_terms">
+																		@foreach($delivery_terms as $delivery_term)
+																		<option  value="{{$delivery_term->name_en}}">{{$delivery_term->name_en}}</option>
+																		@endforeach	
+																	</select>
+																</div>
+																<div class="form-group" style="display:block;">
+																	<label for="delivery_terms">Payment Method</label>
+																	<select class="form-control" style="display: block;width: 100%" name="payment_method">
+																		@foreach($payment_methods as $payment_method)
+																		<option  value="{{$payment_method->name_en}}">{{$payment_method->name_en}}</option>
+
+																		@endforeach	
+																	</select>
+																</div>
+																<div class="form-group" style="display:block;">
+																	<div>
+																		<h4 style="margin-bottom: 15px;">Shipping Documents</h4>
+																		<div class="checkbox checkbox-inline">
+																			<input id="invoice" name="invoice" class="styled"  type="checkbox" >
+																			<label for="invoice">Invoice</label>
+																		</div>
+																		<div class="checkbox checkbox-inline">
+																			<input id="packing_list" name="packing_list" class="styled"  type="checkbox" >
+																			<label for="packing_list">Packing List</label>
+																		</div>
+																		<div class="checkbox checkbox-inline">
+																			<input id="co" name="co" class="styled"  type="checkbox" >
+																			<label for="co">CO</label>
+																		</div>
+																		<div class="checkbox checkbox-inline">
+																			<input id="others" name="others" class="styled"  type="checkbox" >
+																			<label for="others">Others</label>
+																		</div>
+																	</div>
+																	<div style="display:block;">
+																		<label for="others_text">Others</label>
+																		<input style="display: block;width: 100%" id="others" name="others_text" value="" class="form-control" type="text"  value="">
+																	</div>
+																</div>
+
+																<div class="form-group" style="display:block;">
+																	<label for="remarks">Remarks</label>
+																	<input type="text" style="display: block;width: 100%" class="form-control" name="remarks" id="remarks" value="" >
+																</div>
+																
+															</div>
+
+															<div class="modal-footer">
+																<button type="button" class="btn btn-md " data-dismiss="modal">Cancel</button>
+																<button type="submit" name="submit" class="btn btn-md btn-primary" value="addProduct">Add</button>
+															</div>
+														</form>
+
+													</div>
+												</div>
+											</div>
 
 
 
@@ -352,7 +473,7 @@
 										<!-- /.chat -->
 										<div class="box-footer">
 											<form role="form" method="Post" action="{{ route('quote-requests.update',$quote->id) }}" 
-											class="single-click-form">
+												class="single-click-form">
 												{{csrf_field()}}
 												{{ method_field('PATCH') }}
 												<div class="input-group">
@@ -385,6 +506,11 @@
 						</div>
 					</div>
 				</div>
+
+
+
+
+
 			</div>
 		</section>
 
@@ -404,6 +530,7 @@
 		<script src="{{asset('backend/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 		<script src="{{asset('backend/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
 
+		<script src="{{asset('js/parsley.min.js')}}"></script>
 		<!-- page script -->
 		<script>
 			$(function () {
@@ -420,7 +547,62 @@
 					return confirm("Are you sure, you want to delete it?");
 				});
 
-			});
 
+				$( "#searchtxt" ).autocomplete({
+
+					source: "{{route('products.search')}}",
+					appendTo: "#addProduct",
+					minLength: 2,
+					response: function(event, ui) {
+						if (ui.content.length === 0) {
+							$('#searchmsg').text("No results found");
+						} else {
+							$('#searchmsg').empty();
+						}
+					},
+					select: function(event, ui) {
+
+						$('#searchtxt').val(ui.item.value);
+						var id=ui.item.id;
+						$('#prodId').val(id);
+					},
+					change: function (event, ui) {
+						if (ui.item == null || ui.item == undefined) {
+							$("#searchtxt").val("");
+							$('#prodId').val("");
+						}
+					}
+				});
+
+
+				$("#searchtxt").keyup(function(event){
+					if(!this.value){
+						$('#searchmsg').empty();
+
+
+					}
+					if(event.keyCode != 13){
+						$('#prodId').val('');
+					}
+					
+				});
+
+
+				$("select[name=delivery_terms]").bind('change', function() {
+
+					if (($(this).val() != 'ExWorks') && ($(this).val() != 'FOB' )) {
+						$(this).closest('tr').find("input[name=port_of_delivery]")
+						.prop("disabled", false)
+						.attr('data-parsley-required', 'true')
+						.parsley();
+					} else {
+						$(this).closest('tr').find("input[name=port_of_delivery]")
+						.prop("disabled", true)
+						.removeAttr('data-parsley-required');
+						$(this).closest('tr').find("input[name=port_of_delivery]").val('');
+					}
+				});
+
+			});
 		</script>
 		@endsection

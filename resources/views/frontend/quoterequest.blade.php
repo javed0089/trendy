@@ -50,7 +50,7 @@
  									<div class="col-md-4"> 
  										<div class="col-md-6 text-right">
  											<h4>{{__('Quantity')}}</h4>
- 											<input style="width: 60px" type="number" name="quantity" required min="16.50" data-parsley-error-message="{{__("Min. value 16.50")}}" step=".25" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
+ 											<input style="width: 60px" type="number" name="quantity" required min="16.50"  data-parsley-error-message="{{__("Min. value 16.50")}}" step=".25" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
  										</div>
  										<div class="col-md-6">
  											<h4>{{__('Unit')}}</h4>
@@ -64,7 +64,7 @@
  									</div>
  									<div class="col-md-4">
  										<h4>{{__('Port of Delivery')}}</h4>
- 										<input class="form-control" type="text" name="port_of_delivery" value="{{ $item['port_of_delivery']}}"  data-parsley-required-message="{{__('Required')}}">
+ 										<input class="form-control" type="text" name="port_of_delivery"  value="{{ $item['port_of_delivery']}}"  data-parsley-required-message="{{__('Required')}}">
  									</div>
  									<div class="spacer-5"></div>
  									<div class="col-md-4">
@@ -214,63 +214,36 @@
  		@endif
 
 
- 		var a= "{{ isset($step)?$step:'1' }}";
- 			//$('a[data-toggle]').on('click', function(e) {
- 				$('a[data-parent="#accordion"]').on('click', function(e) {
+ 		
 
- 					var target=$(this).attr('href');
- 					var targetid = target.substr(target.length-1);
+ 		$('input[name=radio1]').change(function(){
+ 			var value = $( 'input[name=radio1]:checked' ).val();
+ 			if(value == "login"){
+ 				$('#login-register').attr('href',"{{route('frontend.login')}}");
+ 			}
+ 			else if(value == "register"){
+ 				$('#login-register').attr('href',"{{route('frontend.register')}}");
+ 			}
+ 		});
 
- 					if(targetid>a ){
- 						e.stopPropagation();
- 					}
-
- 				});
-
- 				if(a == 1){
- 					$("#1").collapse("show");
- 					$("#2").collapse("hide");
- 					$("#3").collapse("hide"); 
- 				}
- 				else if(a == 2){
- 					$("#1").collapse("hide");
- 					$("#2").collapse("show");
- 					$("#3").collapse("hide"); 
- 				}
- 				else if(a == 3){
- 					$("#1").collapse("hide");
- 					$("#2").collapse("hide");
- 					$("#3").collapse("show"); 
- 				}
-
- 				$('input[name=radio1]').change(function(){
- 					var value = $( 'input[name=radio1]:checked' ).val();
- 					if(value == "login"){
- 						$('#login-register').attr('href',"{{route('frontend.login')}}");
- 					}
- 					else if(value == "register"){
- 						$('#login-register').attr('href',"{{route('frontend.register')}}");
- 					}
- 				});
-
- 			});
+ 		
 
 
- 	$("select[name=delivery_terms]").bind('change', function() {
+ 		$("select[name=delivery_terms]").bind('change', function() {
 
- 		if (($(this).val() != 'ExWorks') && ($(this).val() != 'FOB' )) {
- 			$(this).closest('tr').find("input[name=port_of_delivery]")
- 			.prop("disabled", false)
- 			.attr('data-parsley-required', 'true')
- 			.parsley();
- 		} else {
- 			$(this).closest('tr').find("input[name=port_of_delivery]")
- 			.prop("disabled", true)
- 			.removeAttr('data-parsley-required');
- 			$(this).closest('tr').find("input[name=port_of_delivery]").val('');
- 		}
+ 			if (($(this).val() != 'ExWorks') && ($(this).val() != 'FOB' )) {
+ 				$(this).closest('tr').find("input[name=port_of_delivery]")
+ 				.prop("disabled", false)
+ 				.attr('data-parsley-required', 'true')
+ 				.parsley();
+ 			} else {
+ 				$(this).closest('tr').find("input[name=port_of_delivery]")
+ 				.prop("disabled", true)
+ 				.removeAttr('data-parsley-required');
+ 				$(this).closest('tr').find("input[name=port_of_delivery]").val('');
+ 			}
+ 		});
  	});
-
 
 
 

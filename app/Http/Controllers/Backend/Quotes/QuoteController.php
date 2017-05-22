@@ -16,6 +16,7 @@ use App\User;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use PDF;
 
 class QuoteController extends Controller
 {
@@ -81,9 +82,49 @@ class QuoteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+    { 
+
+         $this->validate($request, [
+            'product_id'    => 'required',
+            'quote_id'  => 'required',
+            'price' =>  'required',
+           'quantity' =>'required|numeric|min:16.50'
+            ]);
+
+      $podNotReq = array('ExWorks','FOB');
+      if(!in_array($request['delivery_terms'],$podNotReq ) && $request['port_of_delivery']=="")
+      {
+          $this->validate($request, [
+            'product_id'    => 'required',
+            'quote_id'  => 'required',
+            'price' =>  'required',
+            'port_of_delivery' =>'required',
+            ],$messages = [
+            'port_of_delivery.required' => 'Port of delivery required!',
+            ]);
+      }
+
+      $quoteDetail = new QuoteDetail;
+      $quoteDetail->quote_id = $request->quote_id;
+      $quoteDetail->product_id = $request->product_id;
+      $quoteDetail->quantity = $request->quantity;
+      $quoteDetail->unit = $request->unit;
+      $quoteDetail->price = $request->price;
+      $quoteDetail->port_of_delivery = $request->port_of_delivery;
+      $quoteDetail->delivery_terms = $request->delivery_terms;
+      $quoteDetail->payment_method = $request->payment_method;
+      $quoteDetail->shipping_doc_invoice = (isset($request->invoice)) ? 1 : 0;
+      $quoteDetail->shipping_doc_packing_list = (isset($request->packing_list)) ? 1 : 0;
+      $quoteDetail->shipping_doc_co = (isset($request->co)) ? 1 : 0;
+      $quoteDetail->shipping_doc_others = (isset($request->others)) ? 1 : 0;
+      $quoteDetail->shipping_doc_others_text = $request->others_text;
+      $quoteDetail->status = '1';
+      $quoteDetail->save();
+
+      return redirect()->back()->with('success',"Product was added succesfully!");
+
+
+  }
 
     /**
      * Display the specified resource.
@@ -195,15 +236,16 @@ class QuoteController extends Controller
             $quoteDetail->save();
             return redirect()->route('quote-requests.show',$quoteDetail->quote_id)->with('success','Record updated successfully!');
         }
+
         elseif($submitReq =="quoteProcessed")
         {
-         $quote->status = '2';
-         $quote->save();
+           $quote->status = '2';
+           $quote->save();
 
-         foreach ($quote->QuoteDetails as $quoteProduct) 
-         {
-             if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
-             {
+           foreach ($quote->QuoteDetails as $quoteProduct) 
+           {
+               if(($quoteProduct->status != '6') && ($quoteProduct->status != '7'))
+               {
                 $quoteProduct->status = '2';
                 $quoteProduct->save();
             }
@@ -261,22 +303,22 @@ class QuoteController extends Controller
         {
             if($quote->AssignedTo)
             {
-             $user=$quote->AssignedTo;
-             $user->notify(new NewQuoteMessage($quote,"backend"));
-            }
-     }
-     elseif(User::isSalesExecutive())
-     {
-         $role = Sentinel::findRoleBySlug('supervisor');
-         $users = $role->users()->with('roles')->get();
-         Notification::send($users, new NewQuoteMessage($quote,"backend"));
-     }
+               $user=$quote->AssignedTo;
+               $user->notify(new NewQuoteMessage($quote,"backend"));
+           }
+       }
+       elseif(User::isSalesExecutive())
+       {
+           $role = Sentinel::findRoleBySlug('supervisor');
+           $users = $role->users()->with('roles')->get();
+           Notification::send($users, new NewQuoteMessage($quote,"backend"));
+       }
 
 
-     return redirect()->route('quote-requests.show',$id)->with('success','Private message added successfully!');
+       return redirect()->route('quote-requests.show',$id)->with('success','Private message added successfully!');
 
- }
- elseif($submitReq =="addCommentPub"){
+   }
+   elseif($submitReq =="addCommentPub"){
     $quoteComment = new QuoteComment;
     $quoteComment->comment_type = '1';
     $quoteComment->quote_id = $id;
@@ -305,5 +347,40 @@ class QuoteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+    public function downloadPdf($id)
+    {
+        $quote=[];
+        
+        $quote = Quote::find($id);
+
+        $flag=false;
+        if(User::isSalesExecutive()){
+            if(User::getId() == $quote->assign_to_id)
+                $flag=true;
+        }
+        if(User::isSupervisor() || $flag){
+
+
+            $quoteProducts = $quote->QuoteDetails->where('status','=','3');
+            
+
+            
+            $data['myquote'] = $quote;
+            $data['quoteProducts'] = $quoteProducts;
+            
+            
+
+
+            $pdf = PDF::loadView('frontend.account.pdf',$data)->setOption('page-width', '210')
+            ->setOption('page-height', '297')->setOption('margin-left', 2)->setOption('margin-right', 2)->setOption('margin-top', 2)->setOption('margin-bottom', 2);
+            return $pdf->stream('Gap-Quotation-'.$id.'.pdf');
+        }
+        else
+            return redirect('backoffice/login');
+
     }
 }

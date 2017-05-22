@@ -263,6 +263,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 	///////*****Quotes********//////
 	Route::resource('quotes/quote-requests','Backend\Quotes\QuoteController');
+	Route::get('quotes/download/{id}','Backend\Quotes\QuoteController@downloadPdf')->name('quote-requests.download');
 
 	///////*****Orders********//////
 	Route::resource('orders','Backend\Order\OrderController');

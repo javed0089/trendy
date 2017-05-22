@@ -373,7 +373,7 @@ error: function(jqXHR, json, errorThrown) {
  $('.quote-form').on('submit',function(e){ 
   e.preventDefault(); 
   var me = $(this);
-
+ me.find('#msg').text('');
   me.parsley().validate();
 
   if (me.parsley().isValid()){
