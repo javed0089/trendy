@@ -39,7 +39,7 @@
 								<th>Full Name</th>
 								<th>Email</th>
 								<th>Phone</th>
-								<th>Message</th>
+								<th width="200px">Message</th>
 								<th>IP Address</th>
 								<th>Dated</th>
 								<th></th>
