@@ -95,21 +95,21 @@
                          {{csrf_field()}}
                         
                          <div class="form-group">
-                            <input name="fullname" placeholder="{{__('Full Name')}}" class="form-control" type="text" required value="{{old('fullname')}}" title="Please enter your full name">
+                            <input name="fullname" placeholder="{{__('Full Name')}}" class="form-control" type="text" required value="{{old('fullname')}}" data-parsley-required-message="Please enter your full name">
                         </div>
                         <!-- Email input-->
                         <div class="form-group">
-                            <input name="email" placeholder="{{__('Email Address')}}" class="form-control" type="email" required value="{{old('email')}}" title="Please enter your email address" data-msg-email="Ouch, that doesn't look like an email">
+                            <input name="email" placeholder="{{__('Email Address')}}" class="form-control" type="email" required value="{{old('email')}}" data-parsley-required-message="Please enter your email address" data-parsley-type="email" data-parsley-type-message="Ouch, that doesn't look like an email">
                         </div>
 
                         <!-- Phone Number-->
                         <div class="form-group">
-                            <input name="phone" placeholder="{{__('Phone Number')}}" class="form-control" type="text" required data-rule-phoneUS="false" title="Please enter your phone number" value="{{old('phone')}}" data-msg-phoneUS="Ouch, that doesn't look like a valid phone number" >
+                            <input name="phone" placeholder="{{__('Phone Number')}}" class="form-control" type="text" required  value="{{old('phone')}}" data-parsley-required-message="Please enter your phone number" data-parsley-pattern-message="Ouch, that doesn't look like a phone number" data-parsley-pattern="^[+]?([0-9]*[\.\s\-\(\)]|[0-9]+){6,24}$" >
                         </div>
 
                         <!-- Text area -->
                         <div class="form-group">
-                            <textarea class="form-control" name="message" required placeholder="{{__('Message')}}"  data-parsley-minlength="10" data-msg-minlength="Please enter atleast 10 characters"  title="Please enter your message">{{old('message')}}</textarea>
+                            <textarea class="form-control" name="message" required placeholder="{{__('Message')}}"  data-parsley-minlength="10" data-msg-minlength="Please enter atleast 10 characters" data-parsley-maxlength="500" data-parsley-required-message="Please enter your message">{{old('message')}}</textarea>
                         </div>
                         <!-- Button -->
                         <button type="submit" class="btn btn-block btn-warning" > {{__('SEND MESSAGE')}} </button>
