@@ -241,6 +241,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		///////*****Comments********//////
 		Route::get('module/comments','Backend\Comments\CommentController@index')->name('comments.index');
 		Route::get('module/comments/{id}','Backend\Comments\CommentController@show')->name('comments.show');
+		Route::delete('module/comments/{id}','Backend\Comments\CommentController@destroy')->name('comments.destroy');
 
 
 		 Route::get('module/ratings','Backend\Ratings\RatingController@index')->name('ratings.index');

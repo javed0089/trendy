@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-    	$comments = Comment::all();
+    	$comments = Comment::paginate(15);
     	return view('backend.comments.index')->with('comments',$comments);
     }
 
@@ -18,5 +18,12 @@ class CommentController extends Controller
     {
     	$comment = Comment::find($id);
     	return view('backend.comments.show')->with('comment',$comment);
+    }
+
+    public function destroy($id)
+    {
+        $comment = Comment::find($id);
+        $comment->delete();
+        return back()->with('success','Comment deleted succesfully!');
     }
 }

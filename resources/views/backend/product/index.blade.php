@@ -14,6 +14,7 @@
 	<div class="col-md-4" style="">
 		<h3>
 			Products
+
 		</h3>
 	</div>
 	<div class="col-md-4" >
@@ -116,18 +117,19 @@
 				</div>
 			</div>
 		</div>
-	</section>
-	@endsection
+	</div>
+</section>
+@endsection
 
-	@section('scripts')
+@section('scripts')
 
 
-	!-- DataTables -->
-	<script src="{{asset('backend/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-	<script src="{{asset('backend/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+!-- DataTables -->
+<script src="{{asset('backend/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('backend/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
 
-	<!-- page script -->
-	<script>
+<!-- page script -->
+<script>
 	/*$(function () {
 			$('#example2').DataTable({
 				"paging": true,
