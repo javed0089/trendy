@@ -1,11 +1,6 @@
 @extends('backend.layouts.adminmain')
 @section('title','Messages')
 
-@section('styles')
-<!-- DataTables -->
-<link rel="stylesheet" href="{{asset('backend/plugins/datatables/dataTables.bootstrap.css')}}">
-
-@endsection
 
 @section('content')
 
@@ -88,24 +83,10 @@
 
 @section('scripts')
 
-
-!-- DataTables -->
-<script src="{{asset('backend/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('backend/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
-
 <!-- page script -->
 <script>
 	$(function () {
-	/*	$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"searching": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-			"order": [[ 1, "desc" ]]
-		});*/
-		$("#delbutton").on("click", function(){
+	$("#delbutton").on("click", function(){
 			return confirm("Are you sure, you want to delete it?");
 		});
 
