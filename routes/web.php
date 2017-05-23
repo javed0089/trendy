@@ -16,7 +16,7 @@ Route::get('robots.txt', function ()
     if (App::environment() == 'production') {
         // If on the live server, serve a nice, welcoming robots.txt.
         Robots::addUserAgent('*');
-        Robots::addSitemap('sitemap.xml');
+        Robots::addSitemap('http://www.gap-polymers.com/sitemap.xml');
         Robots::addDisallow('/backoffice');
     } else {
         // If you're on any other server, tell everyone to go away.
