@@ -10,6 +10,23 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+
+Route::get('robots.txt', function ()
+{
+    if (App::environment() == 'production') {
+        // If on the live server, serve a nice, welcoming robots.txt.
+        Robots::addUserAgent('*');
+        Robots::addSitemap('sitemap.xml');
+    } else {
+        // If you're on any other server, tell everyone to go away.
+        Robots::addDisallow('*');
+    }
+
+    return Response::make(Robots::generate(), 200, ['Content-Type' => 'text/plain']);
+});
+
+
+
 ////////////////////////*FRONTEND ROUTES*////////////////////////////////////////
  Route::group(
     [

@@ -171,6 +171,7 @@ return [
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
         Buzz\LaravelGoogleCaptcha\CaptchaServiceProvider::class,
+        'EllisTheDev\Robots\RobotsServiceProvider',
 
 
         //
@@ -245,6 +246,7 @@ return [
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         'Analytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
+        'Robots' => 'EllisTheDev\Robots\RobotsFacade',
         
 
     ],
