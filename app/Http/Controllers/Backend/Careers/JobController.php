@@ -84,7 +84,7 @@ class JobController extends Controller
     {
         $job=Job::find($id);
 
-        $jobApplications = JobApplication::where('job_id','=',$id)->paginate(15);
+        $jobApplications = JobApplication::where('job_id','=',$id)->orderBy('created_at','desc')->paginate(15);
 
         return view('backend.jobs.show')->with('job',$job)->with('jobApplications',$jobApplications);
     }
