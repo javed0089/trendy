@@ -133,7 +133,12 @@
                 <tr>
                   <td><a href="{{route('quote-requests.show',$quote->id)}}">{{$quote->quote_no}}</a></td>
                   <td>{{$quote->User->first_name}} {{$quote->User->last_name}}
-                    {!! User::isActivated($quote->user_id)?'<i class="fa fa-flag text-green"></i>':'<i class="fa fa-flag text-red"></i>' !!}</td>
+                    {!! User::isActivated($quote->user_id)?'<i class="fa fa-flag text-green"></i>':'<i class="fa fa-flag text-red"></i>' !!}
+                    @if(count($quote->QuoteComments)>0)
+                    <span class="pull-right badge" style="background: #00c0ef; color: #fff"><i class="fa fa-comments-o"></i> {{count($quote->QuoteComments)}}</span>
+                      
+                    @endif
+                    </td>
                     <td><span class="label label-{{$quote->status==1?'danger':'success'}}">{{$quote->Status->status_en}}</span></td>
                     <td>
                       {{isset($quote->AssignedTo)?$quote->AssignedTo->first_name:''}} {{isset($quote->AssignedTo)?$quote->AssignedTo->last_name:''}}</td>
@@ -177,7 +182,12 @@
                    @foreach($orders as $order)
                    <tr>
                     <td><a href="{{ route('orders.show',$order->id) }}">{{$order->order_no}}</a></td>
-                    <td>{{$order->User->first_name}} {{$order->User->last_name}}</td>
+                    <td>{{$order->User->first_name}} {{$order->User->last_name}}
+                      @if(count($order->OrderComments)>0)
+                    <span class="pull-right badge" style="background: #00c0ef; color: #fff"><i class="fa fa-comments-o"></i> {{count($order->OrderComments)}}</span>
+                      
+                    @endif
+                    </td>
                     <td><span class="label label-{{$order->status==1?'danger':'success'}}">{{$order->Status->status_en}}</span></td>
                     <td>
                      {{isset($order->AssignedTo)?$order->AssignedTo->first_name:''}} {{isset($order->AssignedTo)?$order->AssignedTo->last_name:''}}
