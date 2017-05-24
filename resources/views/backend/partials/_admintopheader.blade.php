@@ -33,7 +33,7 @@
           <ul class="menu">
              @foreach (User::getUser()->unReadNotifications as $notification) 
              <li>
-              <a href="{{route($notification->data['route-name'],$notification->data['Id'])}}"  class="{{$notification->read_at?'':'text-bold'}}">
+              <a href="{{route('notifications.evaluate',$notification->id)}}"  class="{{$notification->read_at?'':'text-bold'}}">
                 <i class="fa fa-pencil-square-o " ></i> {{$notification->data['Title']}}
               </a>
             </li>
