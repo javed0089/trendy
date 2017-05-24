@@ -21,7 +21,9 @@
        <li class="dropdown notifications-menu">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
           <i class="fa fa-bell-o"></i>
+          @if(count(User::getUser()->unReadNotifications)>0)
           <span class="label label-danger">{{count(User::getUser()->unReadNotifications)}}</span>
+          @endif
         </a>
         <ul class="dropdown-menu">
           <li class="header">You have {{count(User::getUser()->unReadNotifications)}} notifications</li>
