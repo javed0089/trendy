@@ -22,7 +22,7 @@
                       <ul class="center-block login-links" >
                        @if(Sentinel::check())
                        <li class="dropdown" style="margin-top: 10px;">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{Sentinel::getUser()->first_name}} {{Sentinel::getUser()->last_name}} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{Sentinel::getUser()->first_name}}<span class="caret"></span></a>
                         <ul class="dropdown-menu" style="margin-top: 0">
                           <li><a href="{{route('user.show',User::getId())}}">{{__('My Account')}}</a></li>
                           <li><a href="{{route('quotes.index')}}">{{__('My Quote Requests')}}</a></li>
