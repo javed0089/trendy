@@ -3724,6 +3724,7 @@ section.page-not-found {
     padding-left: 1.28571429em;
     text-indent: -1.28571429em;
     line-height: 20px;
+    text-align: left;
 }
 
 .styled-list ol li:first-child,
