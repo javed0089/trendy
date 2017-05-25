@@ -172,6 +172,7 @@ return [
         Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
         Buzz\LaravelGoogleCaptcha\CaptchaServiceProvider::class,
         'EllisTheDev\Robots\RobotsServiceProvider',
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
 
         //
@@ -247,6 +248,7 @@ return [
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         'Analytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
         'Robots' => 'EllisTheDev\Robots\RobotsFacade',
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         
 
     ],

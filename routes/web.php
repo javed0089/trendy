@@ -183,6 +183,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 
 		///////*****Customers********//////
 		Route::resource('customers/customers','Backend\Customer\CustomerController');
+		Route::get('customers/export', 'Backend\Customer\CustomerController@exportToExcel')->name('customers.export');
 		
 
 });
@@ -210,8 +211,6 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		Route::post('products/discontinue/{id}','Backend\Product\ProductController@discontinue')->name('products.discontinue');
 		Route::post('products/featured/{id}','Backend\Product\ProductController@featured')->name('products.featured');
 		Route::get('products/search','Backend\Product\ProductController@productSearch')->name('products.search');
-
-		
 		Route::resource('catalog/brands','Backend\Product\BrandController');
 		Route::resource('catalog/categories','Backend\Product\CategoryController');
 		Route::resource('files','Backend\Product\FileController');
@@ -265,6 +264,7 @@ Route::group(['prefix' =>'backoffice', 'middleware' =>'backend'], function(){
 		 Route::get('module/ratings','Backend\Ratings\RatingController@index')->name('ratings.index');
 		
 		Route::get('module/subscribers','Backend\Newsletter\SubscriberController@index')->name('subscribers.index');
+		Route::get('module/subscribers/export', 'Backend\Newsletter\SubscriberController@exportToExcel')->name('subscribers.export');
 		
 	});
 

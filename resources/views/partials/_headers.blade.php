@@ -5,8 +5,8 @@
     <title> @yield('title', 'GAP-Polymers') </title>
     <meta name="description" content="@yield('meta-description', 'GAP Polymers')" />
 
-    <!-- Favicon 
-    <link rel="icon" type="image/png" href="favicon.png">-->
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{asset('favicon.png')}}">
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Mobile Specific Metas -->

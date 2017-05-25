@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Sentinel;
 use Activation;
+use Excel;
 
 class CustomerController extends Controller
 {
@@ -37,6 +38,17 @@ class CustomerController extends Controller
 
 
         return view('backend.customer.index')->with('customers',$customers);
+    }
+
+
+    public function exportToExcel()
+    {
+        $customers = User::where('backend_user','=','0')->select('first_name','last_name','email','company','address','city','country','mobile','telephone','website')->get();
+        Excel::create('Customers', function($excel) use ($customers){
+            $excel->sheet('Sheet 1', function($sheet) use ($customers){
+                $sheet->fromArray($customers);
+            });
+        })->export('xlsx');
     }
 
     /**

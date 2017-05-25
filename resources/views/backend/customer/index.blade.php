@@ -33,20 +33,23 @@
 				@endif
 				<div class="box-header" style="padding: 5px 15px;"> 
 					<div class="row">
-						<form method="get" action="{{url()->current()}}">
-							<div class="form-group col-md-6">
+						<div class="col-xs-6">
+							<form method="get" action="{{url()->current()}}">
 								<label>Search: <small class="text-green"><i>First name,Last name,Country,City,Email</i></small></label>
-								<input type="text" class="form-control" name="term" value="{{Request::get('term')}}">
-							</div> 
+								<div class="input-group">
 
-							<div class="col-md-1 pull-right" style="margin-top: 20px;" >
-								<button class="btn btn-primary btn-md" type="submit">Filter</button>
-							</div>
-						</form>	
+									<input type="text" class="form-control" name="term" value="{{Request::get('term')}}">
+									<div class="input-group-btn">
+										<button class="btn btn-success" type="submit"><i class="fa fa-plus"></i></button>
+									</div> 
+								</div>
+
+							</form>	
+						</div>
 					</div>
 				</div>
 				<div class="box-body table-responsive no-padding">
-
+					<a href="{{route('customers.export')}}" class="btn btn-md btn-primary">Export to Execel</a>
 					<table id="example2" class="table table-hover">
 						<thead>
 							<tr>
@@ -99,7 +102,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 </section>
 @endsection

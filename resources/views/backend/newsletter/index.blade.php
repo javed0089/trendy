@@ -33,6 +33,7 @@
 						<h3 class="box-title" style="line-height: 25px;" >All Subscribers</h3> 
 					</div>
 					<div class="box-body">
+					<a href="{{route('subscribers.export')}}" class="btn btn-md btn-primary">Export to Execel</a>
 						<table id="example2" class="table table-bordered table-hover">
 							<thead>
 								<tr>
