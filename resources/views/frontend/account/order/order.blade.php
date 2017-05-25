@@ -51,7 +51,7 @@
 
 
               </div>
-              <div class="col-md-4 text-right">
+              <div class="col-md-4">
                 <h4>{{__('P. I. Status')}} : {!!$order->pi_confirmed?'<span class="success small">Confirmed</span>' : '<span class="danger small">Not Confirmed</span>'!!} </h4>
                 <h4 >{{__('Payment Status')}} : {!!$order->payment_status?'<span class="success small">Paid</span>' : '<span class="danger small">Not Paid</span>'!!} </h4>
               </div>
@@ -59,49 +59,49 @@
 
           </div>
 
+          <div class="table-responsive"> 
+            <table class="table table-striped">
+              <thead>
+               <tr>
+                <th>{{__('Product')}}</th>
+                <th>{{__('Qty.')}}</th>
+                <th>{{__('Unit')}}</th>
+                <th>{{__('Price')}}</th>
+                <th>{{__('Currency')}}</th>
+                <th>{{__('P.O.D.')}}</th>
+                <th>{{__('D.T.')}}</th>
+                <th>{{__('P.M.')}}</th>
+                <th>{{__('S.D.')}}</th>
+                <th>{{__('Sub Total')}}</th>
 
-          <table class="table table-striped">
-            <thead>
-             <tr>
-              <th>{{__('Product')}}</th>
-              <th>{{__('Qty.')}}</th>
-              <th>{{__('Unit')}}</th>
-              <th>{{__('Price')}}</th>
-              <th>{{__('Currency')}}</th>
-              <th>{{__('P.O.D.')}}</th>
-              <th>{{__('D.T.')}}</th>
-              <th>{{__('P.M.')}}</th>
-              <th>{{__('S.D.')}}</th>
-              <th>{{__('Sub Total')}}</th>
 
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($order->OrderProducts as $product)
+              <tr>
+                <td>{{$product->product_name}}</td>
+                <td>{{$product->quantity}}</td>
+                <td>{{$product->unit}}</td>
+                <td>{{number_format($product->price)}}</td>
+                <td>{{$product->currency}}</td>
+                <td>{{$product->port_of_delivery}}</td>
+                <td>{{$product->delivery_terms}}</td>
+                <td>{{$product->payment_method}}</td>
+                <td>
+                  {{$product->shipping_doc_invoice=='1'?'Invoice,':''}}
+                  {{$product->shipping_doc_packing_list=='1'?'Packing List,':''}}
+                  {{$product->shipping_doc_co=='1'?'CO,':''}}
+                  {{$product->shipping_doc_others=='1'?'Others,':''}}
+                  {{$product->shipping_doc_others_text}}
 
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($order->OrderProducts as $product)
-            <tr>
-              <td>{{$product->product_name}}</td>
-              <td>{{$product->quantity}}</td>
-              <td>{{$product->unit}}</td>
-              <td>{{number_format($product->price)}}</td>
-              <td>{{$product->currency}}</td>
-              <td>{{$product->port_of_delivery}}</td>
-              <td>{{$product->delivery_terms}}</td>
-              <td>{{$product->payment_method}}</td>
-              <td>
-                {{$product->shipping_doc_invoice=='1'?'Invoice,':''}}
-                {{$product->shipping_doc_packing_list=='1'?'Packing List,':''}}
-                {{$product->shipping_doc_co=='1'?'CO,':''}}
-                {{$product->shipping_doc_others=='1'?'Others,':''}}
-                {{$product->shipping_doc_others_text}}
-
-              </td>
-              <td>{{number_format($product->quantity * $product->price,2)}}</td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-
+                </td>
+                <td>{{number_format($product->quantity * $product->price,2)}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
 
         <div class="col-md-4 pull-right text-right">
           <div class="spacer-10"></div>
@@ -136,39 +136,41 @@
                <button type="submit" name="submit" value="uploadDocument" class="btn btn-sm btn-default pull-right">{{__('Upload')}}</button>
              </form>
              <div class="spacer-10"></div>
-             <table class="table table-striped">
-              <thead>
+             <div class="table-responsive"> 
+               <table class="table table-striped">
+                <thead>
 
-               <tr>
-                <th>{{__('Document Type')}}</th>
-                <th>{{__('Uploaded By')}}</th>
-                <th>{{__('Upload Date')}}</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($order->OrderFiles as $orderFile)
-              <tr>
-                <td>{{$orderFile->DocumentType->document_type_en}}</td>
-                <td>{{$orderFile->UploadedBy->first_name}} {{$orderFile->UploadedBy->last_name}} 
-                  @if($orderFile->UploadedBy->UserRole($orderFile->user_id)!='Subscriber')
-                  - ({{$orderFile->UploadedBy->UserRole($orderFile->user_id)}})
-                  @endif
-                </td>
-                <td>{{date('M j, Y H:i',strtotime($orderFile->created_at))}}</td>
-                <td>
-                  @if($orderFile->DocumentType->id==1 && !$order->pi_confirmed)
-                  <form class="form-inline pull-right" role="form"  method="Post"  action="{{route('myorders.update',$order->id)}}">
-                    {{csrf_field()}}
-                    {{ method_field('PATCH') }}
-                    <button type="submit" name="submit" value="confirmPi" class="btn btn-xs btn-success">{{__('Confirm')}}</button>
-                  </form>
-                  @endif
-                  <a href="{{route('myorders.orderfile', [$orderFile->id,$orderFile->original_filename])}}" target="blank" class="btn btn-xs btn-primary">{{__('Download')}}</a></td>
+                 <tr>
+                  <th>{{__('Document Type')}}</th>
+                  <th>{{__('Uploaded By')}}</th>
+                  <th>{{__('Upload Date')}}</th>
+                  <th></th>
                 </tr>
-                @endforeach
-              </tbody>
-            </table>
+              </thead>
+              <tbody>
+                @foreach($order->OrderFiles as $orderFile)
+                <tr>
+                  <td>{{$orderFile->DocumentType->document_type_en}}</td>
+                  <td>{{$orderFile->UploadedBy->first_name}} {{$orderFile->UploadedBy->last_name}} 
+                    @if($orderFile->UploadedBy->UserRole($orderFile->user_id)!='Subscriber')
+                    - ({{$orderFile->UploadedBy->UserRole($orderFile->user_id)}})
+                    @endif
+                  </td>
+                  <td>{{date('M j, Y H:i',strtotime($orderFile->created_at))}}</td>
+                  <td>
+                    @if($orderFile->DocumentType->id==1 && !$order->pi_confirmed)
+                    <form class="form-inline pull-right" role="form"  method="Post"  action="{{route('myorders.update',$order->id)}}">
+                      {{csrf_field()}}
+                      {{ method_field('PATCH') }}
+                      <button type="submit" name="submit" value="confirmPi" class="btn btn-md btn-success">{{__('Confirm')}}</button>
+                    </form>
+                    @endif
+                    <a href="{{route('myorders.orderfile', [$orderFile->id,$orderFile->original_filename])}}" target="blank" class="btn btn-md btn-primary">{{__('Download')}}</a></td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
 
         </div>
@@ -186,7 +188,7 @@
         <div class="row">
 
          <div class="col-md-12">
-          <div class="col-xs-3"> 
+         <div class="col-md-3"> 
             <ul class="nav nav-tabs tabs-left">
               @foreach($order->OrderShipments as $OrderShipment)
               <li  {{{ $loop->first? 'class=active' : '' }}} ><a href="#{{$OrderShipment->id}}tab" data-toggle="tab"><i style="color:{{{$OrderShipment->order_shipment_status_id == '4'?($order->bl_draft_confirmed?'green':'red'):'green'}}} " class="fa fa-check-circle"></i> {{$OrderShipment->OrderShipmentStatus->shipping_status_en}}
@@ -196,20 +198,20 @@
 
             </ul>
           </div>
-          <div class="col-xs-9">
+          <div class="col-md-9">
             <div class="tab-content">
 
 
 
               @foreach($order->OrderShipments as $OrderShipment)
               <div class="tab-pane {{{ $loop->first? 'active' : '' }}}" id="{{$OrderShipment->id}}tab">
-                <div class="col-xs-12">
+              <div class="col-md-12">
                   <div class="row">
-                    <div class="col-xs-6">
+                  <div class="col-md-6">
                       <h4>{{__('Status')}}: <span>{{$OrderShipment->OrderShipmentStatus->shipping_status_en}} </span></h4>
                       <h4>{{__('Dated')}}: <span>{{date('M j, Y H:i',strtotime($OrderShipment->created_at))}}</span></h4>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-md-6">
                       @if($OrderShipment->order_shipment_status_id == 4)
                       <h4>{{__('BL Status')}} : {!! $order->bl_draft_confirmed?'<span class="label label-success">Confirmed</span>':'<span class="label label-danger">Not Confirmed</span>'!!}</h4>
                       @endif
@@ -244,10 +246,10 @@
                      <form class="form-inline pull-right" role="form"  method="Post"  action="{{route('myorders.update',$order->id)}}">
                       {{csrf_field()}}
                       {{ method_field('PATCH') }}
-                      <button type="submit" name="submit" value="confirmBl" class="btn btn-xs btn-success">{{__('Confirm')}}</button>
+                      <button type="submit" name="submit" value="confirmBl" class="btn btn-md btn-success">{{__('Confirm')}}</button>
                     </form>
                     @endif
-                    <a target="_blank" class="btn btn-primary btn-xs" href="{{route('myorders.orderShipmentfile',[$OrderShipmentFile->id,$OrderShipmentFile->original_filename])}}">{{__('Download')}}</a></td>
+                    <a target="_blank" class="btn btn-primary btn-md" href="{{route('myorders.orderShipmentfile',[$OrderShipmentFile->id,$OrderShipmentFile->original_filename])}}">{{__('Download')}}</a></td>
                   </tr>
 
                   @endforeach
@@ -376,8 +378,8 @@
 <!-- parsley JS -->
 <script src="{{asset('js/parsley.min.js')}}"></script>
 @if(LaravelLocalization::getCurrentLocale()=='ar')
-    <script src="{{asset('js/parsley/ar.js')}}"></script>
-    @endif
+<script src="{{asset('js/parsley/ar.js')}}"></script>
+@endif
 
 
 <script type="text/javascript">

@@ -47,12 +47,12 @@
 
             </div>
 
-            <div class="col-md-4 text-right">
+            <div class="col-md-4">
               <h4>{{__('Dated')}} : <span>{{date('M j, Y',strtotime($myquote->created_at))}}</span></h4>
 
               <h4>{{__('Valid Until')}} :<span>{{isset($myquote->quote_validity)?date('M j, Y H:i',strtotime($myquote->quote_validity)):''}}</span></h4>
             </div>
-            <div class="col-md-2 pull-right text-right">
+            <div class="col-md-2 pull-right">
              <div style="margin-bottom: 3px;">
               @if(count($myquote->Order)==0 && $myquote->status == 3)
               <form action="{{route('myorders.makeOrder',$myquote->id)}}" class="single-click-form" method="Post" data-parsley-validate>
@@ -62,7 +62,7 @@
               @endif
             </div>
             @if($myquote->status == 3)
-            <a target="_blank" href="{{route('quotes.download',$myquote->id)}}" class="btn btn-primary btn-sm btn-block">{{__('Download')}}</a>
+            <a target="_blank" href="{{route('quotes.download',$myquote->id)}}" class="btn btn-primary btn-sm btn-block"><i class="fa fa-file-pdf-o"></i>  {{__('Download')}}</a>
             @endif
 
           </div>
@@ -70,50 +70,51 @@
 
       </div>
 
+      <div class="table-responsive"> 
+        <table class="table table-striped">
+          <thead>
+           <tr>
+            <th>{{__('Product')}}</th>
+            <th>{{__('Qty.')}}</th>
+            <th>{{__('Unit')}}</th>
+            <th>{{__('Price')}}</th>
+            <th>{{__('Currency')}}</th>
+            <th>{{__('P.O.D.')}}</th>
+            <th>{{__('D.T.')}}</th>
+            <th>{{__('P.M.')}}</th>
+            <th>{{__('S.D.')}}</th>
+            <th>{{__('Status')}}</th>
 
-      <table class="table table-striped">
-        <thead>
-         <tr>
-          <th>{{__('Product')}}</th>
-          <th>{{__('Qty.')}}</th>
-          <th>{{__('Unit')}}</th>
-          <th>{{__('Price')}}</th>
-          <th>{{__('Currency')}}</th>
-          <th>{{__('P.O.D.')}}</th>
-          <th>{{__('D.T.')}}</th>
-          <th>{{__('P.M.')}}</th>
-          <th>{{__('S.D.')}}</th>
-          <th>{{__('Status')}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($myquote->QuoteDetails as $quote)
+          <tr>
+            <td>{{$quote->Product->name_en}}</td>
+            <td>{{$quote->quantity}}</td>
+            <td>{{$quote->unit}}</td>
+            <td> @if($myquote->status == 3)
+              {{isset($quote->price)?$quote->price:'n/a'}}
+              @endif
+            </td>
+            <td>@if($myquote->status == 3) {{$quote->currency}} @endif</td>
+            <td>{{$quote->port_of_delivery}}</td>
+            <td>{{$quote->delivery_terms}}</td>
+            <td>{{$quote->payment_method}}</td>
+            <td>
+              {{$quote->shipping_doc_invoice=='1'?'Invoice,':''}}
+              {{$quote->shipping_doc_packing_list=='1'?'Packing List,':''}}
+              {{$quote->shipping_doc_co=='1'?'CO,':''}}
+              {{$quote->shipping_doc_others=='1'?'Others,':''}}
+              {{$quote->shipping_doc_others_text}}
 
-        </tr>
-      </thead>
-      <tbody>
-        @foreach($myquote->QuoteDetails as $quote)
-        <tr>
-          <td>{{$quote->Product->name_en}}</td>
-          <td>{{$quote->quantity}}</td>
-          <td>{{$quote->unit}}</td>
-          <td> @if($myquote->status == 3)
-            {{isset($quote->price)?$quote->price:'n/a'}}
-            @endif
-          </td>
-          <td>@if($myquote->status == 3) {{$quote->currency}} @endif</td>
-          <td>{{$quote->port_of_delivery}}</td>
-          <td>{{$quote->delivery_terms}}</td>
-          <td>{{$quote->payment_method}}</td>
-          <td>
-            {{$quote->shipping_doc_invoice=='1'?'Invoice,':''}}
-            {{$quote->shipping_doc_packing_list=='1'?'Packing List,':''}}
-            {{$quote->shipping_doc_co=='1'?'CO,':''}}
-            {{$quote->shipping_doc_others=='1'?'Others,':''}}
-            {{$quote->shipping_doc_others_text}}
-
-          </td>
-          <td>{{$quote->Status->status_en}}</td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
+            </td>
+            <td>{{$quote->Status->status_en}}</td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="spacer-40"></div>
@@ -176,7 +177,7 @@
 <!-- parsley JS -->
 <script src="{{asset('js/parsley.min.js')}}"></script>
 @if(LaravelLocalization::getCurrentLocale()=='ar')
-    <script src="{{asset('js/parsley/ar.js')}}"></script>
-    @endif
+<script src="{{asset('js/parsley/ar.js')}}"></script>
+@endif
 
 @endsection

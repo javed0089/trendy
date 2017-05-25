@@ -18,6 +18,7 @@
        <div class="panel-div">
         <div class="panel-title">{{__('My Orders')}}</div>
         <div class="content">
+        <div class="table-responsive"> 
           <table class="table table-striped">
             <thead>
              <tr>
@@ -30,7 +31,7 @@
           <tbody>
             @foreach($orders as $order)
             <tr>
-              <td>{{$order->order_no}}</td>
+              <td><strong><a href="{{route('myorders.show',$order->id)}}">{{$order->order_no}}</a></strong></td>
               <td>{{date('M j, Y H:i',strtotime($order->created_at))}}</td>
               <td>{{$order->Status->status_en}}</td>
               <td><a href="{{route('myorders.show',$order->id)}}" class="btn btn-xs btn-default">{{__('View')}}</a></td>
@@ -38,6 +39,7 @@
             @endforeach
           </tbody>
         </table>
+        </div>
         <div class="pull-right">
           {{$orders->links()}}
         </div>

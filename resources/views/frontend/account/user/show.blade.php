@@ -37,7 +37,7 @@
 
                   </div>
                   @endif
-           <div class="col-xs-3"> 
+           <div class="col-md-3"> 
             <ul class="nav nav-tabs tabs-left">
               <li class=active><a href="#personalInfo" data-toggle="tab"><i class="fa fa-user-circle"></i> {{__('Personal Info')}}
               </a></li>
@@ -45,10 +45,10 @@
               </a></li>
             </ul>
           </div>
-          <div class="col-xs-9">
+          <div class="col-md-9">
             <div class="tab-content">
               <div class="tab-pane active userinfo" id="personalInfo">
-                <div class="col-xs-6">
+                <div class="col-md-6">
                   <h4>{{__('Full Name')}}: <span>{{$user->first_name}} {{$user->last_name}}</span></h4>
                   <h4>{{__('Address')}}: <span>{{$user->address}}</span></h4>
                   <h4>{{__('City')}}: <span>{{$user->city}}</span></h4>
@@ -57,7 +57,7 @@
                   
 
                 </div>
-                <div class="col-xs-6">
+                <div class="col-md-6">
                   <h4>{{__('Company')}}: <span>{{$user->company}}</span></h4>
                   <h4>{{__('Telephone')}}: <span>{{$user->telephone}}</span></h4>
                   <h4>{{__('Mobile')}}: <span>{{$user->mobile}}</span></h4>

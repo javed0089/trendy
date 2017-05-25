@@ -48,11 +48,11 @@
  										<h4 ><strong>{{$item['item']['name_en']}}</strong></h4>
  									</div>
  									<div class="col-md-4"> 
- 										<div class="col-md-6 text-right">
+ 										<div class="col-md-6 col-xs-6">
  											<h4>{{__('Quantity')}}</h4>
  											<input style="width: 60px" type="number" name="quantity" required min="16.50"  data-parsley-error-message="{{__("Min. value 16.50")}}" step=".25" value="{{ $item['quantity']}}" data-parsley-trigger="keyup">
  										</div>
- 										<div class="col-md-6">
+ 										<div class="col-md-6 col-xs-6">
  											<h4>{{__('Unit')}}</h4>
  											<select name="unit">
  												@foreach($units as $unit)
@@ -85,7 +85,7 @@
  										</select>
  									</div>
  									<div class="col-md-4">
- 										<div>
+ 										<div class="text-left">
  											<h4 style="margin-bottom: 15px;">{{__('Shipping Documents')}}</h4>
  											<div class="checkbox checkbox-inline">
  												<input id="invoice{{$loop->iteration}}" name="invoice" class="styled"  type="checkbox" {{$item['invoice']?'checked':''}}>
