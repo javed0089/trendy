@@ -130,7 +130,7 @@
 
       @if(Sentinel::check())
       <li id="menu-item-3501" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3501 hidden-lg hidden-md">
-        <a href="#">{{Sentinel::getUser()->first_name}} {{Sentinel::getUser()->last_name}}</a>
+        <a href="#">{{Sentinel::getUser()->first_name}}</a>
         <ul class="sub-menu">
           <li id="menu-item-3502" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3502"><a href="{{route('user.show',User::getId())}}">{{__('My Account')}}</a></li>
           <li id="menu-item-3502" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3502"><a href="{{route('quotes.index')}}">{{__('My Quote Requests')}}</a></li>
