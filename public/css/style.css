@@ -3719,10 +3719,11 @@ section.page-not-found {
 
 .styled-list ol li,
 .styled-list ul li {
-    padding: 15px 0;
+    padding: 10px 0;
     border-bottom: 2px solid #f4f5f8;
     padding-left: 1.28571429em;
     text-indent: -1.28571429em;
+    line-height: 20px;
 }
 
 .styled-list ol li:first-child,
