@@ -29,7 +29,7 @@
     <!-- Breadcrumbs -->
     <div class="breadcrumbs">
         <div class="container">
-            <span class="parent"> <i class="fa fa-home"></i> <a href="index.html"> {{__('Home')}} </a> </span>
+            <span class="parent"> <i class="fa fa-home"></i> <a href="/"> {{__('Home')}} </a> </span>
             <i class="fa fa-chevron-right"></i>
             <span class="child"> {{__('REGISTER')}}</span>
         </div>
