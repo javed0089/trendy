@@ -165,7 +165,7 @@
                       <button type="submit" name="submit" value="confirmPi" class="btn btn-md btn-success">{{__('Confirm')}}</button>
                     </form>
                     @endif
-                    <a href="{{route('myorders.orderfile', [$orderFile->id,$orderFile->original_filename])}}" target="blank" class="btn btn-md btn-primary">{{__('Download')}}</a></td>
+                    <a href="{{route('myorders.orderfile', [$orderFile->id,$orderFile->original_filename])}}" target="blank" class="btn btn-sm btn-primary">{{__('Download')}}</a></td>
                   </tr>
                   @endforeach
                 </tbody>
