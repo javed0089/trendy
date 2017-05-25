@@ -2500,6 +2500,7 @@ section.contact-form {
 .well-form {
     padding: 30px;
     background: #f4f5f8;
+    text-align: right;
 }
 
 .help-block {
@@ -3730,6 +3731,10 @@ section.page-not-found {
 .styled-list ul li {
     padding: 15px 0;
     border-bottom: 2px solid #f4f5f8;
+     padding-right: 1.28571429em;
+    text-indent: -1.28571429em;
+    line-height: 20px;
+    text-align: right;
 }
 
 .styled-list ol li:first-child,

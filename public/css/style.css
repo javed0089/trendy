@@ -2491,6 +2491,7 @@ section.contact-form {
 .well-form {
     padding: 30px;
     background: #f4f5f8;
+    text-align: left;
 }
 
 .help-block {
