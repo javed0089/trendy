@@ -316,9 +316,9 @@ table tfoot tr td:first-child {
   </div>
   <div class="row" style="padding-left: 15px;">
     <div>1. Price Valid Till: <span >{{date('M j, Y',strtotime($myquote->quote_validity))}}</span></div>
-    <div>2. Deliery of Material is subject to avaliability</div>
+    <div>2. Delivery of Material is subject to avaliability</div>
 
-    <div style="margin-top: 160px">For: Global Advanced Polymers LLC</div>
+    <div style="margin-top: 160px">For: Global Advanced Polymers</div>
 
     <div style="margin-top: 50px">Authorised Signature 
     </div>
